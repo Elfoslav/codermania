@@ -10,9 +10,15 @@ Add the remote source to your local clone:
 
     git remote add upstream https://github.com/Elfoslav/codermania.git
 
+Go to app, copy and rename `settings-example.json`:
+
+    cd codermania && cp settings-example.json settings.json
+
+If you want to use sending e-mails, you have to create an account on [Mailgun](http://www.mailgun.com/)
+and add it into settings.json as a value of MAIL_URL key.
+
 Start the app:
 
-    cd codermania
     meteor --settings settings.json
 
 To update your clone do a pull:
