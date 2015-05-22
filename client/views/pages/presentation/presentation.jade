@@ -1,0 +1,8 @@
+template(name="presentation")
+  .presentation
+    +Template.dynamic template=slideTemplate
+    if isInRole 'teacher' 'all'
+      hr
+      form.slide-number-form
+        input(type="text" value="{{slide.currentSlideNumber}}" name="slideNumber")
+        button(type="submit") Submit

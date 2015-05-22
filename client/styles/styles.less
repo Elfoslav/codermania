@@ -1,0 +1,181 @@
+@footerHeight: 135px;
+
+html, body {
+  height: 100%;
+}
+img {
+  max-width: 100%;
+}
+#container {
+  min-height: 100%;
+  position: relative;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-break: normal;
+}
+
+pre.unstyled {
+  background: none;
+  border: none;
+}
+
+.unstyled-pre {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.footer {
+  padding-top: 15px;
+  background-color: #222;
+  color: #ddd;
+  a {
+    color: #9d9d9d;
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  #container {
+    padding-bottom: @footerHeight + 15px;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+.nav-tabs-theory-assignment {
+  margin-top: 12px;
+  li a {
+    font-size: 1.4em;
+  }
+}
+
+.tab-content {
+  margin-top: 20px;
+}
+
+#editor {
+  height: 200px;
+}
+
+/*********************
+ * Homepage
+ *********************/
+#homepage {
+  #editor {
+    height: 195px;
+  }
+  iframe {
+    width: 100%;
+  }
+  .learn-to-code-reasons {
+    li {
+      line-height: 2em;
+    }
+  }
+}
+
+/*********************
+ * Code in text
+ *********************/
+.code-in-text {
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+/*********************
+ * Bootstrap overrides
+ *********************/
+.breadcrumb>li+li:before {color: rgba(204, 204, 204, 1); content: "\003E\00a0";}
+.breadcrumb>li.active {
+  a {
+    color: #333;
+  }
+}
+@media (min-width: 768px) {
+  .navbar {
+    border-radius: 0
+  }
+}
+
+/*********************
+ * Animations
+ *********************/
+@-webkit-keyframes tada {
+  0% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  10%, 20% {
+    -webkit-transform: scale(0.9) rotate(-3deg);
+    -ms-transform: scale(0.9) rotate(-3deg);
+    transform: scale(0.9) rotate(-3deg);
+  }
+
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale(1.1) rotate(3deg);
+    -ms-transform: scale(1.1) rotate(3deg);
+    transform: scale(1.1) rotate(3deg);
+  }
+
+  40%, 60%, 80% {
+    -webkit-transform: scale(1.1) rotate(-3deg);
+    -ms-transform: scale(1.1) rotate(-3deg);
+    transform: scale(1.1) rotate(-3deg);
+  }
+
+  100% {
+    -webkit-transform: scale(1) rotate(0);
+    -ms-transform: scale(1) rotate(0);
+    transform: scale(1) rotate(0);
+  }
+}
+@keyframes tada {
+  0% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  10%, 20% {
+    -webkit-transform: scale(0.9) rotate(-3deg);
+    -ms-transform: scale(0.9) rotate(-3deg);
+    transform: scale(0.9) rotate(-3deg);
+  }
+
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale(1.1) rotate(3deg);
+    -ms-transform: scale(1.1) rotate(3deg);
+    transform: scale(1.1) rotate(3deg);
+  }
+
+  40%, 60%, 80% {
+    -webkit-transform: scale(1.1) rotate(-3deg);
+    -ms-transform: scale(1.1) rotate(-3deg);
+    transform: scale(1.1) rotate(-3deg);
+  }
+
+  100% {
+    -webkit-transform: scale(1) rotate(0);
+    -ms-transform: scale(1) rotate(0);
+    transform: scale(1) rotate(0);
+  }
+}
+.tada {
+  -webkit-animation: tada .5s;
+  animation: tada .5s;
+}

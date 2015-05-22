@@ -1,0 +1,102 @@
+template(name="variablesIntroductionTheory")
+  p {{_'Variables are containers for storing temporary data'}}.
+  p {{_'Variables can have various types - Strings, Numbers (integer/float), Arrays, Objects...'}}.
+    |{{_'You will learn more about these types in the next lessons'}}.
+
+  p {{_'We start definition of variable with keyword'}} <i><b>var</b></i>
+    |{{{_'(shortcut of word <i>variable</i>)'}}}.
+  p {{_'Then we define variable name'}}.
+    |{{_'In example below, we define variable with name'}} <i>someText</i>:
+  pre.code-in-text.js
+    |var someText;
+  p {{_'We did not define any value of variable'}}.
+    |{{{_'Default value of undefined variable is <i>undefined</i>'}}}:
+  +codeInText
+    |var someText;
+    br
+    |console.log(someText);
+  p {{_'We assign value to variable with assignment operator'}} <b>=</b> :
+  pre.code-in-text.js
+    |var someText = '...';
+  p {{_'We end every statement with semicolon'}} <b>;</b>
+
+  p {{_'String variables can contain text for example'}}:
+  +codeInText
+    |var someText = 'Lorem ipsum dolor';
+    br
+    |console.log(someText);
+    br
+    br
+    |//{{_'We can change value of variable'}}
+    br
+    |//{{_'Notice we do not have to use var keyword'}}
+    br
+    |someText = 'something else';
+    br
+    |console.log(someText);
+  p {{_'In example above, we define string variable with name '}} <i>someText</i>.
+    |{{_'Then we print it with console.log()'}}.
+    |{{_'Then we change value of already defined variable and print it again'}}.
+  p {{_'You will learn more about string variables in next lessons'}}.
+
+  p {{_'Notice how we write multi-word variable name'}}. {{_'The first word starts with lowercase'}},
+    |{{_'the second word starts with uppercase'}}. {{_'This is called lowerCamelCase'}}.
+    |{{_'It is good practice to use lowerCamelCase in many programming languages'}}.
+
+  p {{_'All JavaScript variables must be identified with unique names'}}.
+    |{{_'The general rules for constructing names for variables (unique identifiers) are'}}:
+
+  ul
+    li {{_'Names can contain letters, digits, underscores, and dollar signs'}}
+    li {{_'Names must begin with a letter'}}
+    li {{_'Names can also begin with $ and _'}}
+    li {{_'Names are case sensitive (y and Y are different variables)'}}
+    li
+      a(href="http://www.w3schools.com/js/js_reserved.asp" target="_blank") {{_'Reserved words'}}
+      |(var, case, for, this...) {{_'cannot be used as names'}}.
+
+  +codeInText
+    |var validVariableName;
+    br
+    |var validVariableName2;
+    br
+    |var _thisIsAlsoOk;
+    br
+    |var $alsoThis;
+    br
+    |var 2ThisIsInvalid;
+
+  p {{{_'We can define multiple variables with one <b>var</b> keyword'}}}.
+    |{{_'Variables must be separated by comma, the last variable must end with semicolon'}}:
+  +codeInText
+    |var validVariableName = 'some value',
+    br
+    |&#09;validVariableName2 = 'some value',
+    br
+    |&#09;_thisIsAlsoOk = 'some value',
+    br
+    |&#09;$alsoThis = 'some value';
+
+  h2 {{_'Conventions'}}
+  p {{_'There must be space before and after assignment operator'}}:
+  +codeInText
+    |//{{_'bad'}}
+    br
+    |var text='Lorem ipsum';
+    br
+    |//{{_'good'}}
+    br
+    |var text = 'Lorem ipsum';
+
+  +conventionsNote
+
+  h2 {{_'Common mistakes'}}
+  p {{_'Common mistake is omitting semicolon'}}:
+  +codeInText
+    |//{{_'bad'}}
+    br
+    |var text = 'Lorem ipsum'
+    br
+    |//{{_'good'}}
+    br
+    |var text = 'Lorem ipsum';

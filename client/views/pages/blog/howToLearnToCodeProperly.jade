@@ -1,0 +1,78 @@
+template(name="howToLearnToCodeProperly")
+  h1 {{_'How to learn to code properly'}}
+  p
+    small 30th March 2015
+
+  p {{> shareit shareData}}
+
+  .row
+    .col-sm-8
+      h2 {{_'How to start'}}
+      p {{_'Many people read books and they think they will learn to code'}}.
+        |{{_'What is wrong with books is that they will not learn you to code'}}.
+        |{{_'They will just give you an overview what coding/programming is and how to do basic things'}}.
+      p
+        b {{_'To learn to code properly you need to practice'}}.
+        |{{_'You need to know how to write code by heart'}}.
+        |{{_'The best way to practice is working on your own projects'}}.
+        |{{_'Once you have some basic knowledge of coding, you should start coding'}}.
+        |{{_'Think about what you could code and do it'}}.
+
+      h2 {{_'Google is your friend'}}
+      p {{_'Google or another search engine can help you to find information'}}.
+        |{{_'If you do not know something, just search it in a search engine'}}.
+        |{{_'You will probably find what you are looking for'}}.
+
+      h2 {{_'What do I need to learn to become a professional coder?'}}
+      p {{{_'If you want to do web applications you need to know <b>HTML</b>, <b>CSS</b> and <b>JavaScript</b>'}}}.
+        |{{_'Then you need to learn some database - MongoDB, Postgre or MySQL'}}.
+        |{{_'MongoDB and JavaScript is good combination'}}.
+        |{{_'You can learn other languages such as PHP, Ruby, Python, etc. but if you want to build your own application, knowledge of HTML, CSS and JavaScript is enough'}}.
+      p
+        a(href="https://developer.chrome.com/devtools" target="_blank") Chrome dev tools
+        |are very important for any web developer. If you use Firefox, you can use
+        a(href="http://getfirebug.com/" target="_blank") Firebug.
+      p {{_'HTML is easy to learn'}}. {{_'You can learn it in 1 week'}}.
+      p {{_'CSS is a bit complicated but you can learn basics in 2-4 weeks'}}.
+      p {{_'JavaScript is easy to learn, you can learn it (properly) in a few months if you do not know any other programming language'}}.
+        |{{_'If you have programming background, you will learn JavaScript easily'}}.
+        |{{_'But what is hard is real programming'}}. {{_'Writing code and thinking of proper algorithms'}}.
+      p {{_'Once you know JavaScript, you will need to learn and choose one of NodeJS frameworks'}}.
+        |{{_'Here are hot candidates'}}:
+        a(href="http://sailsjs.org" target="_blank") Sails.js,
+        a(href="https://meteor.com" target="_blank") Meteor.js,
+        a(href="http://expressjs.com/" target="_blank") Express.js,
+        a(href="https://www.totaljs.com/" target="_blank") Total.js.
+        |{{_'Try all of them to find out which one is the best one for you'}}.
+        |{{_'Just pick one and try to write some small chat application'}}.
+        |{{_'Pick another one and do the same'}}.
+        |{{_'Repeat until you find your favorite'}}.
+      p {{_'If you want to develop applications faster, you should use one of front-end UI frameworks'}}.
+        |{{_'Hot candidates are'}}
+        a(href="http://getbootstrap.com/" target="_blank") Twitter Bootstrap
+        |and
+        a(href="http://semantic-ui.com/" target="_blank") Semantic UI.
+      p {{_'Every web developer should also know '}}
+        a(href="http://jquery.com/" target="_blank") jQuery.
+
+      h2 {{_'Every programmer should know more than 1 language'}}
+      p {{_'It is the same as you were in real world'}}.
+        |{{_'If you want to go to another country, you have to know at least English'}}.
+        |{{_'English is like JavaScript in web development'}}.
+        |{{_'Everyone who wants to do web apps needs to know JavaScript'}}.
+        |{{_'But there are other languages that are widely used for web development such as PHP, Python, Java, Ruby'}}.
+        |{{_'Try old-school languages such as Pascal, C, C++ too'}}.
+        |{{_'Knowledge of multiple programming languages can give you another perspective on programming'}}.
+        |{{_'If you know more programming languages, you can understand jokes about programming languages'}}.
+        |{{_"It is worth it, isn't it?"}}
+
+      p Check out our
+        a(href="{{pathFor 'guide'}}") Ultimate guide for web developer
+        |to learn more.
+
+      br
+      |{{> shareit shareData}}
+
+      br
+      +disqus
+    .col-sm-4 {{> listOfArticles}}

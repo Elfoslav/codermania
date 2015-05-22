@@ -1,0 +1,120 @@
+template(name="lessonLayout")
+  #fb-root
+  #container
+    +navbar
+    .container
+      if unreadMessagesCount
+        .alert.alert-warning.alert-dismissable.notification-alert You have {{unreadMessagesCount}} unread message(s).
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          |Go to
+          a(href="{{pathFor 'messages' lang=lang}}")
+            b messages page.
+      +yield 'levelsMenu'
+      unless loggingIn
+        unless currentUser
+          .alert.alert-warning
+            span.glyphicon.glyphicon-info
+            <b>{{_'Hint'}}:</b> {{_'Sign in to save your progress'}}
+      h2#lesson-title
+        unless isFirstLesson
+          span.small
+            a.glyphicon.glyphicon-chevron-left(href="{{pathFor 'lesson' lessonType=lessonType lang=lang _id=previousLesson.id slug=previousLesson.slug username=username}}")
+        span {{_'Lesson'}} {{lessonNumber}}: {{lesson.title}}
+        if userLesson
+          if isNotUndefined userLesson.success
+            if userLesson.success
+              span.glyphicon.glyphicon-ok.green
+            else
+              span.glyphicon.glyphicon-remove.red
+        if showStudent
+          span.small.pull-right
+            if isInRole 'teacher' 'all'
+              a(href="{{pathFor 'messages' lang=lang username=student.username}}")
+                span.glyphicon.glyphicon-envelope
+              |&nbsp;
+            if student.status.online
+              span.green-dot
+            a(href="{{pathFor 'studentProfile' lang=lang username=student.username}}") {{student.username}}
+
+      if isInAnotherUserLesson
+        .alert.alert-danger You are in
+          if student.username
+            |{{student.username}}'s
+          else
+            |public
+          |lesson.
+          a(href="{{pathFor 'lesson' lang=lang lessonType=lessonType _id=lesson.id slug=lesson.slug username=currentUser.username}}")
+            |Go to your lesson.
+
+      each needHelpList
+        p.alert.alert-info
+          a(href="{{pathFor 'helpDetail' lang=lang id=_id}}") {{this.user.username}} needs help with {{this.lesson.title}}
+            if this.exerciseId
+              |({{getExerciseTitle this.lesson this.exerciseId}})
+            if needHelpNotificationCount _id
+              span.red ({{needHelpNotificationCount _id}} unread comments)
+
+      .row
+        .col-sm-4
+          ul.nav.nav-tabs.nav-tabs-theory-assignment
+            if getTemplateTheoryName
+              li(role="presentation" class="{{activeTab 'theory'}}")
+                a(href="#theory") Theory
+            if getTemplateExerciseName
+              li(role="presentation" class="{{activeTab 'exercise'}}")
+                a(href="#exercise") {{_'Exercise'}}
+            if getTemplateAssignmentName
+              li(role="presentation" class="{{activeTab 'assignment'}}")
+                a(href="#assignment") {{_'Assignment'}}
+
+          .tab-content
+            if getTemplateTheoryName
+              #theory(role="tabpanel" class="tab-pane {{activeTab 'theory'}}")
+                +Template.dynamic template=getTemplateTheoryName
+                if getTemplateExerciseName
+                  a.btn.btn-success(href="#exercise" data-toggle="tab") {{_'Continue to exercise'}}
+                else
+                  a.btn.btn-success(href="#assignment" data-toggle="tab") {{_'Continue to assignment'}}
+            if getTemplateAssignmentName
+              #assignment(role="tabpanel" class="tab-pane {{activeTab 'assignment'}}")
+                +Template.dynamic template=getTemplateAssignmentName
+                hr
+                +needHelp
+            if getTemplateExerciseName
+              #exercise(role="tabpanel" class="tab-pane {{activeTab 'exercise'}}")
+                +exerciseAccordion(exercises=exercises)
+                hr
+                +needHelp
+        .col-sm-5.position-relative
+          h3 {{_'Code editor'}} ({{activeTabName}})
+          #editor-wrapper
+            +sharejsAce(docid=document onRender=config onConnect=setMode id="editor")
+            button.btn.btn-primary.btn-block.done-btn {{_ "Submit"}}
+        .col-sm-3.position-relative
+          h3 Result
+          #result-wrapper
+            pre.output &larr; {{_'Press submit'}}
+            pre.output-error-text.hljs.hidden
+            if lessonSuccess
+              .alert.alert-success {{{successMsg}}}
+              a.btn.btn-lg.btn-block.btn-success(href="{{pathFor 'lesson' lessonType=lessonType _id=nextLesson.id slug=nextLesson.slug username=username}}")
+                |{{_'Next lesson'}} &rarr;
+            if exerciseSuccess
+              .alert.alert-success {{{successMsg}}}
+              if hasNextExercise
+                a.btn.btn-lg.btn-block.btn-success.next-exercise(href="#")
+                  |{{_'Next exercise'}} &rarr;
+              else
+                a.btn.btn-lg.btn-block.btn-success(href="#assignment" data-toggle="tab")
+                  |{{_'Continue to assignment'}} &rarr;
+            hr
+            p {{_'Found a bug? Send us a message what is wrong'}}:
+            form#bug-form
+              p
+                textarea.form-control(name="bugreportMsg" rows="4" placeholder="{{_'your message'}}")
+              p
+                button.btn.btn-primary(type="submit") {{_'Send bug report'}}
+
+    br
+    +appUpdatePrompt
+    +footer

@@ -1,0 +1,109 @@
+template(name="falseyAndTruthyValuesTheory")
+  p <b>{{_'Truthy'}}</b>: {{{_'Something which evaluates to <i>true</i>'}}}.
+  p <b>{{_'Falsey'}}</b>: {{{_'Something which evaluates to <i>false</i>'}}}.
+  p {{_'Falsey values in JavaScript are'}}:
+  ul
+    li undefined
+    li null
+    li NaN ({{_'Not a Number'}})
+    li 0
+    li "" ({{_'empty string'}})
+    li {{{_'and <i>false</i>, of course'}}}
+  +codeInText
+    |var zero = 0;
+    br
+    |if (zero) {
+    br
+    |&#09;console.log('{{_'zero is true'}}');
+    br
+    |} else {
+    br
+    |&#09;console.log('{{_'zero is false'}}');
+    br
+    |}
+
+  p {{_'If we negate zero, we can see value true'}}:
+  +codeInText
+    |var zero = 0;
+    br
+    |console.log(!zero);
+  p {{_'We can do the same with other falsey values'}}:
+  +codeInText
+    |var falsey; //undefined
+    br
+    |console.log(!falsey);
+  +codeInText
+    |var falsey = null;
+    br
+    |console.log(!falsey);
+  +codeInText
+    |var falsey = '';
+    br
+    |console.log(!falsey);
+  +codeInText
+    |var falsey = NaN;
+    br
+    |console.log(!falsey);
+  hr
+
+  p {{_'Truthy values are opposite to falsey values'}}.
+    |{{_'Truthy values evaluate to true'}}.
+    |{{_'Truthy values are'}}:
+  ul
+    li {{_'Non empty strings'}}.
+    li {{_'All numbers except 0'}}.
+    li {{{_'Boolean value <i>true</i>'}}}.
+    li {{{_'Arrays and objects'}}}.
+  +codeInText
+    |var nonEmptyString = 'Non empty string is truthy';
+    br
+    |if (nonEmptyString) {
+    br
+    |&#09;console.log(nonEmptyString);
+    br
+    |}
+  p {{{_'Negate <i>nonEmptyString</i> variable with negation operator <b>!</b> to make false from truthy value'}}}:
+  +codeInText
+    |var nonEmptyString = 'Non empty string is truthy';
+    br
+    |console.log(!nonEmptyString);
+  hr
+  p {{_'What is this all good for?'}}
+    |{{_'We often wanto to check if value is empty (undefined, null, empty string)'}}.
+    |{{_'So we can just write'}}:
+  +codeInText
+    |var emptyVar;
+    br
+    |/*{{_'condition evaluates to true'}}
+    br
+    |{{_'if empty var is truthy'}}
+    br
+    |{{_'it is not truthy in this case'}} */
+    br
+    |if (emptyVar) {
+    br
+    |&#09;console.log('{{_'not empty'}}');
+    br
+    |}
+  p {{_'Try to negate value in condition in example above'}}.
+  p {{_'Play with another examples'}}:
+  +codeInText
+    |var emptyVar = null;
+    br
+    |if (!emptyVar) {
+    br
+    |&#09;console.log('{{_'!emptyVar is true'}}');
+    br
+    |&#09;console.log('{{_'so emptyVar is falsey'}}');
+    br
+    |}
+  +codeInText
+    |var emptyVar = '';
+    br
+    |if (!emptyVar) {
+    br
+    |&#09;console.log('{{_'!emptyVar is true'}}');
+    br
+    |&#09;console.log('{{_'so emptyVar is falsey'}}');
+    br
+    |}

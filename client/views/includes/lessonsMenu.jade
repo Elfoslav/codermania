@@ -1,0 +1,10 @@
+template(name="lessonsMenu")
+  ol.breadcrumb.lessons-menu
+    each lessons
+      if show
+        if isCurrentLesson i
+          li.active
+            a(href="{{pathFor 'lesson' lang=lang lessonType=lessonType _id=id slug=slug username=username}}")= title
+        else
+          li
+            a(href="{{pathFor 'lesson' lang=lang lessonType=lessonType _id=id slug=slug username=username}}")= title

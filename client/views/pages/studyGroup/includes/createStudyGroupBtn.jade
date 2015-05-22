@@ -1,0 +1,4 @@
+template(name="createStudyGroupBtn")
+  if isInRole 'teacher' 'all'
+    p
+      a.btn.btn-primary(href="#" data-target="#study-group-modal" data-toggle="modal") Create a study group

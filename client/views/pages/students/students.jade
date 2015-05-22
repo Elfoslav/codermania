@@ -1,0 +1,5 @@
+template(name="students")
+  ul
+    each students
+      li
+        a(href="{{pathFor 'studentProfile' username=this.username}}") {{this.username}}

@@ -1,0 +1,22 @@
+head
+  title Learn to code | CoderMania
+  meta(name="description" content="Learn to code interactively for free")
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  link(rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
+  link(rel="icon" href="/favicon.ico" type="image/x-icon")
+body
+
+template(name="layout")
+  #fb-root
+  #container
+    +navbar
+    .container
+      if unreadMessagesCount
+        .alert.alert-warning.alert-dismissable.notification-alert You have {{unreadMessagesCount}} unread message(s).
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          |Go to
+          a(href="{{pathFor 'messages' lang=lang}}")
+            b messages page.
+      +yield
+      +appUpdatePrompt
+    +footer

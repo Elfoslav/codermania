@@ -1,0 +1,180 @@
+template(name="loopsTheory")
+  p
+    img(src="/img/bart-simpson-loops.gif" alt="bart-simpson-loops")
+  p
+    span.glyphicon.glyphicon-info-sign
+    |{{_'Understanding of loops is very important for every programmer'}}.
+    |{{_'Please pay attention to this lesson'}}.
+  p {{_'We use loops when we want to repeat some algorithm'}}.
+    span.glyphicon.glyphicon-refresh
+    |{{_'For example, we want to print the same text multiple times'}}.
+    |{{_'We could help Bart to write it for him'}}:
+  +codeInText
+    |for (var i = 0; i &lt; 11; i++) {
+    br
+    |&#09;console.log('I will learn to code. I promise!');
+    br
+    |}
+  p {{_'Amazing, huh?'}} {{_"Let's explain the code"}}.
+    |{{{_'In code above, we use <b>for</b> loop'}}}.
+    |{{{_'We start definition with keyword <b>for</b>'}}}.
+    |{{{_'We use 3 commands inside <b>for</b> loop definition, inside parenthesis'}}}.
+  p {{{_'The first command is definition of variable <i>i</i>'}}}.
+    |{{{_'We define variable <i>i</i> with value 0'}}}.
+    |{{{_'That is value from which the loop starts'}}}.
+    |{{{_'We usually use variable with name <i>i</i> (shortcut for iteration) - it is coding convention'}}}.
+  p {{{_'The second command (i &lt; 11) is condition'}}}.
+    |{{{_'We check if <i>i</i> is lower than 11'}}}.
+    |{{{_'The loop is running while this condition is <i>true</i>'}}}.
+  p {{{_'In the last command (i++), we increment value of the <i>i</i> variable by 1'}}}.
+    |{{{_'The value of variable <i>i</i> is incremented after each iteration of <b>for</b> loop'}}}.
+  p {{{_'Notice, we write semicolon after the first and the second command'}}}.
+    |{{{_'We do not need to write semicolon after the last command'}}}.
+  p {{{_'Look at another example'}}}.
+    |{{{_'We use the same <b>for</b> loop as in the first example, but instead of printing message we print value of variable <i>i</i>'}}}:
+  +codeInText
+    |for (var i = 0; i &lt; 11; i++) {
+    br
+    |&#09;console.log(i);
+    br
+    |}
+  p {{{_'So you can see that <i>i</i> is 0 in the first iteration and it increases up to 10'}}}.
+    |{{{_'You can change value of <i>i</i> variable or change condition'}}}.
+    |{{_'Play with the loop a bit'}}.
+
+  p {{_'Notice that loop runs 11 times and then the code after loop runs'}}:
+  +codeInText
+    |for (var i = 0; i &lt; 11; i++) {
+    br
+    |&#09;console.log(i);
+    br
+    |}
+    br
+    |console.log('{{_'done'}}');
+
+  p {{{_'Notice, we can increment variable <i>i</i> by any value.'}}}
+    |{{{_'In this case, we increment <i>i</i> by 2 so we print even numbers from 0 to 10'}}}:
+  +codeInText
+    |for (var i = 0; i &lt; 11; i = i + 2) {
+    br
+    |&#09;console.log(i);
+    br
+    |}
+
+  p {{{_'We can also decrement value of <i>i</i> variable'}}}:
+  +codeInText
+    |for (var i = 5; i &gt;&equals; 0; i--) {
+    br
+    |&#09;console.log(i);
+    br
+    |}
+
+  p {{{_'If condition inside loop is evaluated to <i>false</i>, the loop never runs'}}}:
+  +codeInText
+    |for (var i = 5; i &lt;&equals; 0; i--) {
+    br
+    |&#09;console.log(i);
+    br
+    |}
+  p {{{_'In code above, we define variable <i>i</i> with value 5'}}}.
+    |{{{_'Then we define condition i &lt;&equals; 0 which is evaluated to <i>false</i> (5 <= 0 is <i>false</i>) so the loop will not start'}}}.
+
+  hr
+  p {{_'Printing text and numbers in loop is not much useful'}}.
+    |{{_'Useful is iterating through arrays'}}:
+  +codeInText
+    |var names = ['Peter', 'Tom', 'Josh'];
+    br
+    |for (var i = 0; i &lt; names.length; i++) {
+    br
+    |&#09;console.log(names[i]);
+    br
+    |}
+  p {{{_'In code above, we iterate through array <i>names</i> and print every item'}}}.
+    |{{{_'Because variable <i>i</i> gains values 0, 1, 2, we can access <i>names[0]</i>, <i>names[1]</i> and <i>names[2]</i>'}}}.
+
+  p {{_'We can print values from array in reverse order'}}:
+  +codeInText
+    |var names = ['Peter', 'Tom', 'Josh'];
+    br
+    |for (var i = names.length - 1; i &gt;&equals; 0; i--) {
+    br
+    |&#09;console.log(names[i]);
+    br
+    |}
+
+  h3 {{_'Infinite loop'}}
+  p {{_'Sometimes, you can accidentally get infinite loop'}}.
+    |{{_'Especially if you are starting to learn loops'}}.
+  p {{_'Below is example of infinite loop'}}.
+    |{{{_'We define variable <i>i</i> with value 5 and condition is <i>i &gt; 1</i> which is initially true'}}}.
+    |{{{_'We increment value of <i>i</i> after each iteration by 1'}}}.
+    |{{{_'So <i>i</i> will have values 5, 6, 7,'}}}...
+    |{{{_'And the loop will never end because the condition <i>i &gt; 1</i> is always true'}}}.
+  p
+    b {{_'Warning'}}: {{_'Do not run this code because your browser will freeze'}}.
+  +codeInText
+    |for (var i = 5; i &gt; 1; i++) {
+    br
+    |&#09;console.log(i);
+    br
+    |}
+
+  h2 {{_'Conventions'}}
+  +codeInText
+    |//{{_'bad'}} - {{_'no space after for'}}
+    br
+    |for(var i = 0; i &lt; 11; i++) {
+    br
+    |&#09;console.log(i);
+    br
+    |}
+    br
+    br
+    |//{{_'bad'}} - {{_'no space between expressions'}}
+    br
+    |for (var i = 0;i &lt; 11;i++) {
+    br
+    |&#09;console.log(i);
+    br
+    |}
+    br
+    br
+    |//{{_'bad'}} - {{_'no space between ) and {'}}
+    br
+    |for (var i = 0; i &lt; 11; i++){
+    br
+    |&#09;console.log(i);
+    br
+    |}
+    br
+    br
+    |//{{_'bad'}} - {{_'missing indentation'}}
+    br
+    |for (var i = 0; i &lt; 11; i++) {
+    br
+    |console.log(i); //{{_'Here is missing indentation'}}
+    br
+    |}
+    br
+    br
+    |//{{_'bad'}} - {{_'{ on new line'}}
+    br
+    |for (var i = 0; i &lt; 11; i++)
+    br
+    |{
+    br
+    |&#09;console.log(i);
+    br
+    |}
+    br
+    br
+    |//{{_'good'}}
+    br
+    |for (var i = 0; i &lt; 11; i++) {
+    br
+    |&#09;console.log(i);
+    br
+    |}
+
+  +conventionsNote

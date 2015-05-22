@@ -1,0 +1,95 @@
+template(name="errorsAndTryCatchTheory")
+  p {{_'JavaScript can throw error if something is wrong with code'}}:
+  +codeInText
+    |var a 'b';
+
+  p {{_'Programmer can throw his own error'}}:
+  +codeInText
+    |throw new Error('Something wrong happened');
+    br
+    |console.log('this will not run');
+  p {{_'Notice that when we throw error, the code stops executing'}}.
+    |{{{_"That's because errors are fatal"}}}.
+    |{{{_"When we throw error, it means that something very bad happened and we want to stop executing the code"}}}.
+
+  p {{_'We can throw Error from function'}}.
+    |{{{_'In function <b>add</b> in code below, we check if parameter <b>a</b> is not a number (isNaN)'}}}.
+    |{{{_'If parameter <b>a</b> is not a number, we throw Error'}}}.
+    |{{{_'The same with parameter <b>b</b>'}}}.
+  +codeInText
+    |function add(a, b) {
+    br
+    |&#09;if (isNaN(a)) {
+    br
+    |&#09;&#09;throw new Error('Parameter "a" is not a number');
+    br
+    |&#09;}
+    br
+    |&#09;if (isNaN(b)) {
+    br
+    |&#09;&#09;throw new Error('Parameter "b" is not a number');
+    br
+    |&#09;}
+    br
+    |&#09;return a + b;
+    br
+    |}
+    br
+    br
+    |add('bad parameter', 'also bad parameter');
+    br
+    |//code on this line won't run
+    br
+    |//if code above throws an Error
+    br
+    |add(5, 'bad parameter');
+
+  h3 Try/Catch
+  p We can catch errors in block <b>try</b>:
+  +codeInText
+    |try {
+    br
+    |&#09;throw new Error('Something wrong happened');
+    br
+    |&#09;console.log('this will not run');
+    br
+    |} catch (err) {
+    br
+    |&#09;console.log('catching error:');
+    br
+    |&#09;console.log(err.message);
+    br
+    |}
+
+  p We can catch errors that are thrown from function:
+  +codeInText
+    |function add(a, b) {
+    br
+    |&#09;if (isNaN(a)) {
+    br
+    |&#09;&#09;throw new Error('Parameter "a" is not a number');
+    br
+    |&#09;}
+    br
+    |&#09;if (isNaN(b)) {
+    br
+    |&#09;&#09;throw new Error('Parameter "b" is not a number');
+    br
+    |&#09;}
+    br
+    |&#09;return a + b;
+    br
+    |}
+    br
+    br
+    |try {
+    br
+    |&#09;add('bad parameter', 'also bad parameter');
+    br
+    |} catch (err) {
+    br
+    |&#09;console.log('catching error:');
+    br
+    |&#09;console.log(err.message);
+    br
+    |}

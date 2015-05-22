@@ -1,0 +1,23 @@
+template(name="blogLayout")
+  #fb-root
+  #container
+    +navbar
+    .container
+      h1 {{title}}
+      p
+        small {{date}}
+
+      p {{> shareit shareData}}
+
+      .row
+        .col-sm-8
+          +yield
+
+          br
+          +shareit shareData
+
+          br
+          +disqus
+        .col-sm-4 {{> listOfArticles}}
+    +appUpdatePrompt
+    +footer

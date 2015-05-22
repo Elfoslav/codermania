@@ -1,0 +1,37 @@
+template(name="whyCoderMania")
+  h1 {{_'Why CoderMania'}}?
+  p
+    small 28th March 2015
+
+  p {{> shareit shareData}}
+
+  .row
+    .col-sm-8
+      h2 {{_'Other e-learning resources'}} vs. CoderMania
+      p {{_'There are many learning resources for learning to program on the internet'}}.
+        |{{_'Many of them are good'}}.
+        |{{_'One of the best resources is'}}
+        a(href="http://www.codecademy.com" target="_blank") Codecademy.
+      p {{_'Codecademy was inspiration for CoderMania'}}.
+        |{{_'The best way to learn is by doing'}}. {{_'Codecademy took this concept and made it well'}}.
+        |{{_'But there is still something missing'}} - {{_'a human factor'}}.
+        |{{_'You can learn from books or from website, but if you do not understand something, you will get stuck'}}.
+        |{{_'And it will take a long time until you understand it properly'}}.
+        |{{_'If you get stuck, you can ask for help on CoderMania'}}.
+        |{{_'Our teachers and other students will help you to understand something new'}}.
+      p <b>{{_'Moreover'}}</b>, {{_'theory on CoderMania is short with practical examples'}}.
+        |<b>{{_'Less text, more examples'}}</b>.
+        |<b>{{_'CoderMania focuses on practical way of teaching'}}</b>.
+        |{{_"If you don't like long boring tutorials, CoderMania is for you"}}.
+      h2 {{_'Books'}} vs. CoderMania
+      p {{_'You can read 600 pages book but it does not mean you will know how to code'}}.
+        |{{_'You need to practice, a lot'}}. {{_'Switching from book to code is not very convenient and efficient'}}.
+        |{{_'On CoderMania, you have everything in one place - theory, assignments, exercises and code editor'}}.
+        |{{_'Plus you have ability to contact teacher if there is something unclear to you'}}.
+
+      br
+      |{{> shareit shareData}}
+
+      br
+      +disqus
+    .col-sm-4 {{> listOfArticles}}

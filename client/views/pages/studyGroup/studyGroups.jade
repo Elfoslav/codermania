@@ -1,0 +1,10 @@
+template(name="studyGroups")
+  h1 {{_'Study Groups'}}
+  +createStudyGroupBtn
+
+  each studyGroups
+    +studyGroupListItem
+  else
+    p No study groups.
+
+  +studyGroupFormModal

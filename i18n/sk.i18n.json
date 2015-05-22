@@ -1,0 +1,55 @@
+{
+  "is a function that prints values in output": "je funkcia, ktorá vypíše hodnotu na výstup",
+  "Let's create our first": "Poďme vytvoriť náš prvý",
+  "Lesson": "Lekcia",
+  "Submit": "Potvrdiť",
+  "Type following code into code editor": "Napíš nasledujúci kód do editora kódu",
+  "Expressions - part 1": "Výrazy - časť 1",
+  "comment out code on line 5": "zakomentuj kód na riadku 5",
+  "Great! You are promising coder. Continue please!": "Skvelé! Si nádejný kodér. Pokračuj!",
+  "Hello stranger": "Ahoj cudzinec",
+  "Welcome to CoderMania": "Vitaj na CoderMania",
+
+  "Why CoderMania": "Prečo CoderMania",
+  "There are many learning resources for learning to program on the internet": "Na internete je veľa zdrojov, z ktorých sa môžete učiť programovať",
+  "Many of them are good": "Veľa z nich je dobrých",
+  "One of the best resources is": "Jeden z najlepších zdrojov je",
+  "Codecademy was inspiration for CoderMania": "Codecademy bolo inšpiráciou pre CoderManiu",
+  "The best way to learn is by doing": "Najlepší spôsob učenia sa je robením/praxou",
+  "Codecademy took this concept and made it well": "Codecademy zobrala tento koncept a zrealizovala ho dobre",
+  "But there is still something missing": "Ale stále tu niečo chýba",
+  "a human factor": "ľudský faktor",
+  "You can learn from books or from website, but when you do not understand something, you will get stuck": "Môžete sa učiť z kníh alebo z webstránky, ale keď niečomu nerozumiete, zaseknete sa",
+
+  "this is one line comment": "toto je jednoriadkový komentár",
+  "Code in this line will not be processed": "Kód na tomto riadku nebude spracovaný",
+  "this": "toto",
+  "is multiline comment": "je viacriadkový komentár",
+  "this will not be processed": "toto nebude spracované",
+  "Comment this line": "Zakomentuj tento riadok",
+
+  "Exercise %s": "Cvičenie %s",
+  "Write exercise %s under this line": "Napíš cvičenie %s pod tento riadok",
+
+  "Precision": "Presnosť",
+  "x will be 999999999999999": "x bude 999999999999999",
+  "y will be 10000000000000000": "y bude 10000000000000000",
+  "Define a variable with name <i>\"name\"</i>": "Definuj premennú s názvom <i>\"name\"</i>",
+
+  "Integers are considered accurate up to 15 digits": "Integery sú presné do 15 číslic",
+
+  "logical and": "logické and (a zároveň)",
+  "logical or": "logické or (alebo)",
+  "logical not": "logické not (negácia)",
+  "Logical <b>\"and\"</b> compares two values and evaluates expression to <i>true</i> or <i>false</i> according to these two values": "Logické <b>\"and\"</b> porovnáva dve hodnoty a vyhodnocuje výraz na <i>true</i> alebo <i>false</i> podľa týchto dvoch hodnôt",
+  "Copy and paste the code above into code editor": "Skopíruj a vlož kód vyššie do editora kódu",
+  "When you change variable <i>isRaining</i> to true": "Ak zmeníš premennú <i>isRaining</i> na true",
+  "will print message": "vypíše správu",
+  "Logical <b>\"and\"</b> evaluates expression to <i>true</i> only if both sides of expression are <i>true</i>": "Logické <b>\"and\"</b> vyhodnotí výraz na <i>true</i> iba ak obe strany výrazu sú <i>true</i>",
+  "Again, copy and paste the code into code editor and play with it": "Znovu, skopíruj a vlož kód do editoru kódu a pohraj sa s ním",
+  "Set both variables to <i>false</i> and the code inside condition will not run": "Nastav obe premenné na <i>false</i> a kód vo vnútri podmienky sa nevykoná",
+
+  "Amazing, huh?": "Skvelé, nie?",
+  "Let's explain the code": "Poďme si vysvetliť kód",
+  "In code above, we use <b>for</b> loop": "V kóde vyššie používame cyklus <b>for</b>"
+}

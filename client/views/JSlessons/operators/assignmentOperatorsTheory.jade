@@ -1,0 +1,41 @@
+template(name="assignmentOperatorsTheory")
+  p {{_'Assignment operators are'}}:
+  ul
+    li =
+    li +=
+    li -=
+    li *=
+    li /=
+    li %=
+  +codeInText
+    |var x = 1; //{{_'assign value 1 to x'}}
+    br
+    |x += 3; //the same as x = x + 3
+    br
+    |console.log(x);
+  +codeInText
+    |var x = 10;
+    br
+    |x -= 3; //the same as x = x - 3
+    br
+    |console.log(x);
+  p {{_'You can do the same with other assignment operators'}}...
+
+  h2 {{_'Conventions'}}
+  +codeInText
+    |//{{_'bad'}} - {{_'no space before and after'}}
+    br
+    |//{{_'operator -='}}
+    br
+    |var x = 10;
+    br
+    |x-=3;
+    br
+    br
+    |//{{_'good'}}
+    br
+    |var x = 10;
+    br
+    |x -= 3;
+
+  +conventionsNote

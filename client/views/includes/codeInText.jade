@@ -1,0 +1,9 @@
+template(name="codeInText")
+  pre.code-in-text.js.no-margin-bottom
+    if code
+      |{{code}}
+    else
+      |{{> Template.contentBlock}}
+  unless code
+    p.copy-code.text-right
+      a(href="#") {{_'Copy & paste to code editor'}}

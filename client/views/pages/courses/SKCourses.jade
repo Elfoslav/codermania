@@ -1,0 +1,29 @@
+template(name="SKCourses")
+  h1 Kodérske a programátorské kurzy
+  p Vyber si jeden z kurzov nižšie:
+  h2 Krátke kurzy:
+  .row
+    .col-sm-4
+      h2
+        a(href="{{pathFor 'basicProgramming'}}") Základy programovania
+      a(href="{{pathFor 'basicProgramming'}}")
+        img(alt="html5 css javascript" src="/img/courses/javascript.png")
+    .col-sm-4
+      h2
+        a(href="{{pathFor 'webPages'}}") Tvorba webových stránok
+      a(href="{{pathFor 'webPages'}}")
+        img(alt="html5 css javascript" src="/img/courses/html5-css.png")
+    .col-sm-4
+      h2
+        a(href="{{pathFor 'webApplications'}}") Tvorba webových aplikácií
+      a(href="{{pathFor 'webApplications'}}")
+        img(alt="html5 css javascript" src="/img/courses/html5-css-javascript.png")
+
+  h2 Dlhodobé kurzy:
+  .row
+    .col-sm-4
+      h2
+        a(href="{{pathFor 'fullstackWebDeveloper'}}") Full-stack Web Developer
+      a(href="{{pathFor 'fullstackWebDeveloper'}}")
+        img(alt="html5 css javascript" src="/img/courses/html5-css-javascript.png")
+    .col-sm-8

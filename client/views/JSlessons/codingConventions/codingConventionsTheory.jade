@@ -1,0 +1,36 @@
+template(name="codingConventionsTheory")
+  p {{_'Conventions are here to make code better, more beautiful'}}.
+  p {{_'If you write nice code according to conventions, other coders will love you'}}.
+  p {{_'If you do not write nice code, other coders will hate you'}}.
+  p
+    b {{_'If you do not write code according to conventions, CoderMania will evaluate your code as incorrect'}}.
+  p {{_'Good practice is to leave space between operators'}}:
+  +codeInText
+    |//{{_'bad'}}
+    br
+    |console.log(1+2);
+    br
+    |console.log(1&lt;=2+5);
+    br
+    |//{{_'good'}}
+    br
+    |console.log(1 + 2);
+    br
+    |console.log(1 &lt;= 2 + 5);
+
+  p {{_'Because code with spaces is easier to read'}}...
+
+  p {{_'There is no space before first bracket in function call'}}:
+  +codeInText
+    |//{{_'bad'}} - notice space after console.log
+    br
+    |console.log ('Hello world');
+    br
+    |//{{_'good'}}
+    br
+    |console.log('Hello world');
+
+  p {{_'Conventions are really important and you will learn more about other conventions in another lessons'}}.
+
+  p {{_'Read more about conventions in JavaScript'}}:
+    a(href="http://javascript.crockford.com/code.html" target="_blank") http://javascript.crockford.com/code.html

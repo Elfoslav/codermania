@@ -1,0 +1,134 @@
+template(name="conditionsTheory")
+  p {{_'Very often when you write code, you want to perform different actions for different decisions'}}.
+    |{{_'You can use conditional statements in your code to do this'}}:
+  +codeInText
+    |var isRaining = true;
+    br
+    |if (isRaining) {
+    br
+    |&#09;console.log('{{_'it is raining'}}');
+    br
+    |}
+  p {{_'Conditions use boolean values (true, false) to decide whether to run the code or not'}}.
+  p {{_'Notice the space after'}} <i>if</i>.
+    |{{_'It is coding standard to write space after if command'}}.
+  +codeInText
+    |//{{_'This is bad'}}
+    br
+    |//{{_'No space after if looks bad'}}
+    br
+    |if(isRaining) {
+    br
+    |&#09;//...
+    br
+    |}
+  p {{_'What if we want to run the code if it is not raining?'}} {{_'We can add negation in our condition'}}:
+  +codeInText
+    |var isRaining = true;
+    br
+    |if (!isRaining) {
+    br
+    |&#09;console.log('{{_'it is not raining'}}');
+    br
+    |}
+  p {{_'We negate boolean value with operator'}} ! {{_'(negation)'}}.
+    |{{_'From true becomes false and our code inside condition is not run'}}.
+    |{{_'Change value of boolean '}} <i>isRaining</i>
+    |{{_'to false and the code inside condition is processed because'}} <i>!isRaining</i>
+    |{{_'is true'}}:
+  +codeInText
+    |var isRaining = false;
+    br
+    |if (!isRaining) {
+    br
+    |&#09;console.log('{{_'it is not raining'}}');
+    br
+    |}
+  p {{_'There is also'}} <b>else</b> {{_'block'}}:
+  +codeInText
+    |var isRaining = false;
+    br
+    |if (isRaining) {
+    br
+    |&#09;console.log('{{_'it is raining'}}');
+    br
+    |} else {
+    br
+    |&#09;console.log('{{_'it is not raining'}}');
+    br
+    |}
+  p {{{_'<b>Else</b> block will run if condition <b>if</b> evaluates to false'}}}.
+  p {{_'We can use any expression that evaluates to true or false'}}:
+  +codeInText
+    |var car = 'Porsche';
+    br
+    |if (car === 'BMW') {
+    br
+    |&#09;console.log('{{_'Car is BMW'}}');
+    br
+    |} else {
+    br
+    |&#09;console.log('{{_'Car is something else than BMW'}}');
+    br
+    |}
+  p {{_'There is also'}} <b>else if</b> {{_'block'}}:
+  +codeInText
+    |var car = 'Porsche';
+    br
+    |if (car === 'BMW') {
+    br
+    |&#09;console.log('{{_'Car is BMW'}}');
+    br
+    |} else if (car === 'Porsche') {
+    br
+    |&#09;console.log('{{_'Car is Porsche'}}');
+    br
+    |} else {
+    br
+    |&#09;console.log('{{_'Car is unknown'}}');
+    br
+    |}
+  p {{{_'<b>Else</b> block will be processed if every of the above conditions (<b>if</b> and <b>else if</b>) will be evaluated to false'}}}.
+    |{{{_'We can use as many <b>else if</b> conditions as we want'}}}.
+    |{{{_'<b>Else</b> block is optional'}}}.
+
+  h2 {{_'Conventions'}}
+  +codeInText
+    |//{{_'bad'}} - {{_'missing space after if'}}
+    br
+    |if(someValue) {
+    br
+    |&#09;//condition code
+    br
+    |}
+    br
+    br
+    |//{{_'bad'}} - {{_'missing space before curly bracket'}}
+    br
+    |if (someValue){
+    br
+    |&#09;//condition code
+    br
+    |}
+    br
+    br
+    |//{{_'bad'}} - {{_'curly bracket on new line'}}
+    br
+    |if (someValue)
+    br
+    |{
+    br
+    |&#09;//condition code
+    br
+    |}
+    br
+    br
+    |//{{_'good'}}
+    br
+    |if (someValue) {
+    br
+    |&#09;//condition code
+    br
+    |}
+
+  +conventionsNote

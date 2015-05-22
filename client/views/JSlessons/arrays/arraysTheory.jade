@@ -1,0 +1,95 @@
+template(name="arraysTheory")
+  p {{_'Arrays are list of values'}}. {{_'Arrays can contain strings, numbers, booleans, functions and objects'}}.
+  p {{_'We define array with square brackets'}} [ ]:
+  +codeInText
+    |var names = ['Josh', 'Peter', 'Tom'];
+    br
+    |console.log(names[0]);
+    br
+    |//{{_'Accessing non existing item'}}
+    br
+    |console.log(names[3]);
+  p {{_'Items of array are separated by comma'}}.
+    |{{_'Notice, we do not add comma after last item'}}.
+  p {{_'We can access values of array with index'}}. {{_'First item of array has index 0, second item has index 1, third 2, etc'}}.
+  p {{_'If we try to access non-existent index, we get undefined value'}}.
+  p {{_'We can add new item into array with function push()'}}:
+  +codeInText
+    |var names = [];
+    br
+    |names.push('Josh'); //{{_'add one item'}}
+    br
+    |names.push('Peter', 'Tom'); //{{_'add more items'}}
+    br
+    |console.log(names[0] + names[1] + names[2]);
+  p {{_'We can also define array on multiple lines'}}:
+  +codeInText
+    |var names = [
+    br
+    |&#09;'Josh',
+    br
+    |&#09;'Peter',
+    br
+    |&#09;'Tom'
+    br
+    |];
+    br
+    |console.log(names[0]);
+  p {{_'We can rewrite existing value'}}:
+  +codeInText
+    |var names = ['Josh', 'Peter', 'Tom'];
+    br
+    |console.log(names[1]);
+    br
+    |//{{_'rename Peter to John'}}
+    br
+    |names[1] = 'John';
+    br
+    |console.log(names[1]);
+  p {{_'We can find out how many items are in array with property'}} <i>length</i>:
+  +codeInText
+    |var names = ['Josh', 'Peter', 'Tom'];
+    br
+    |console.log(names.length);
+  p {{_'We can access the last item of array with length property'}}:
+  +codeInText
+    |var names = ['Josh', 'Peter', 'Tom'];
+    br
+    |var lastItemIndex = names.length - 1;
+    br
+    |console.log(names[lastItemIndex]);
+  p {{_'We need to subtract 1 from length of array to get index of the last item because names.length gives us number 3 but index of the last item is 2'}}.
+  p
+    span.glyphicon.glyphicon-info-sign
+    b
+      |{{_'Remember'}}:
+    |{{_'Array index starts with 0'}}.
+  p {{_'Array can contain numbers'}}:
+  +codeInText
+    |var numbers = [5, 10, 12, 4];
+    br
+    |console.log(numbers[1]);
+  p {{_'Array in JavaScript can contain different types of values (strigngs, numbers, objects,...)'}}:
+  +codeInText
+    |var numbers = ['Josh', 10, 12];
+    br
+    |console.log(numbers[0]);
+    br
+    |console.log(numbers[1]);
+  p {{_'But in most cases it does not make sense to have different types of values in one array'}}.
+    |{{_'We should define array with one type of values'}}.
+
+  h2 {{_'Conventions'}}
+  +codeInText
+    |//{{_'bad'}} - {{_'no space between'}}
+    br
+    |//{{_'items in array'}}
+    br
+    |var names = ['Josh','Peter','Tom'];
+    br
+    br
+    |//{{_'good'}}
+    br
+    |var names = ['Josh', 'Peter', 'Tom'];
+
+  +conventionsNote

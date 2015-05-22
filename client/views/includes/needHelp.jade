@@ -1,0 +1,8 @@
+template(name="needHelp")
+  p.alert.alert-info
+    span.glyphicon.glyphicon-info-sign
+    |{{_'If you do not know the solution and you need help, ask for help via form below'}}:
+  form.need-help-form
+    p
+      textarea.form-control(name="message" placeholder="{{_'Your message (can be empty)'}}" rows="4")
+    button.btn.btn-primary(type="submit") {{_'Ask for help!'}}

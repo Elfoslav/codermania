@@ -1,0 +1,68 @@
+template(name="knowledgeBaseFullStackDeveloper")
+  .row
+    .col-sm-8
+      h1 Who is a Full-stack developer?
+      p
+        small 24th April 2015
+      p A Full-stack developer can build front-end and also back-end.
+        |He has wide knowledge of front-end and back-end technologies.
+        |He knows what technology to use for specific kind of task.
+      p Full-stack developer position is suitable for people who like to build whole application themselves.
+      p He has knowledge of:
+      ul
+        li HTML
+        li CSS
+        li jQuery
+        li JavaScript
+        li Photoshop/Gimp/Illustrator/Inkscape
+        li Front-end JavaScript frameworks like
+          a(href="https://angularjs.org/" target="_blank") Angular
+          |,
+          a(href="http://emberjs.com/" target="_blank") Ember
+          |,
+          a(href="http://www.ractivejs.org/" target="_blank") Ractive
+          |,...
+        li Front-end UI libraries like
+          a(href="http://getbootstrap.com/" target="_blank") Bootstrap
+          |,
+          a(href="http://semantic-ui.com/" target="_blank") Semantic UI
+          |,
+          a(href="http://foundation.zurb.com/" target="_blank") Foundation
+          |,
+          a(href="https://www.polymer-project.org" target="_blank") Polymer
+          |,...
+        li CSS preprocessors -
+          a(href="http://lesscss.org") LESS,
+          a(href="http://sass-lang.com") SASS
+        li JavaScript preprocessors -
+          a(href="http://coffeescript.org/") CoffeeScript,
+          a(href="http://livescript.net/") LiveScript,
+          a(href="http://www.typescriptlang.org/") TypeScript
+        li Back-end languages - PHP, Ruby, Python, Java, JavaScript (Node.js),...
+        li Databases - MySQL, PostgreSQL, MongoDB,...
+
+      p Full-stack web developers mostly develop applications in JavaScript (Node.js).
+        |Switching between back-end language and JavaScript is hard for many developers because,
+        |for example, PHP has different syntax than JavaScript and brain has to switch
+        |between them.
+
+      p Building pure JavaScript applications has these advantages:
+      ul
+        li No need to switch between server-side language and JavaScript.
+        li Isomorphic code - code that can be shared between the client and the server.
+        li Node.js - Very low barrier to entry for developers. It's extremely simple to get up and running.
+
+      h2 Salary
+      p Web developers in the United States pull down an average of $55K per year.
+        |The final incomes of Web developers generally vary between $33K and $84K.
+        |Source:
+        a(href="http://www.payscale.com/research/US/Job=Web_Developer/Salary") Web developer salary (US).
+
+      p Do you want to become a full-stack developer? Check out
+        a(href="{{pathFor 'guide'}}") our guide.
+
+      p {{> shareit shareData}}
+      br
+      +disqus
+    .col-sm-4
+      +knowledgeBaseSidebar

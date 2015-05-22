@@ -1,0 +1,33 @@
+@import "variables.import.less";
+
+.levels-menu {
+  .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-bottom-left-radius: 0;
+  }
+  .btn-group > .btn:last-child:not(:first-child), .btn-group > .dropdown-toggle:not(:first-child) {
+    border-bottom-right-radius: 0;
+  }
+  .breadcrumb {
+    background: #222;
+    padding: 12px 15px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    li {
+      &.active a {
+        color: #fff;
+      }
+      &.done a {
+        color: @lightGreen;
+      }
+      &.incorrect a {
+        color: #d11;
+      }
+    }
+    a {
+      color: #9d9d9d;
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}

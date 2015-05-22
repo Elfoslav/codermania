@@ -1,0 +1,49 @@
+template(name="helpDetail")
+  h2.no-margin-top Help
+    a(href="{{pathFor 'studentProfile' username=needHelp.user.username lang=lang}}") {{trimEmail needHelp.user.username}}
+    if isOnline needHelp.userId
+      +onlineDot
+    |with
+    a(href="{{pathFor 'lessonJS' lang=lang _id=needHelp.lesson.id slug=needHelp.lesson.slug username=needHelp.user.username hash=needHelp.exerciseId}}") {{needHelp.lesson.title}}
+      if needHelp.exerciseId
+        |({{getExerciseTitle needHelp.lesson needHelp.exerciseId}})
+    if needHelp.solved
+      small
+        span.glyphicon.glyphicon-ok.green
+        |(solved)
+    if isInRole 'teacher' 'all'
+      if needHelp.solved
+        a.btn.btn-default.mark-need-help-unsolved(href="#") Mark as unsolved
+      else
+        a.btn.btn-default.mark-need-help-solved(href="#") Mark as solved
+  if needHelp.message
+    pre.unstyled {{needHelp.message}}
+  if needHelp.lessonCode
+    p
+      +codeInText(code=needHelp.lessonCode)
+  +Template.dynamic template=getAssignmentTemplate
+  p
+    a.btn.btn-default(href="{{pathFor 'help' lang=lang}}") &larr; Back to list
+    a.btn.btn-primary(href="{{pathFor 'lessonJS' lang=lang _id=needHelp.lesson.id slug=needHelp.lesson.slug username=needHelp.user.username hash=needHelp.exerciseId}}") Go to lesson
+  hr
+  each needHelp.comments
+    |{{makeCommentRead ../needHelp._id ../needHelp.userId}}
+    p
+      a(href="{{pathFor 'studentProfile' lang=lang username=this.username}}") {{this.username}}
+      if isOnline this.userId
+        +onlineDot
+      |{{formatDate timestamp}}
+      if isUnreadByUser ../needHelp.userId
+        |(unread)
+      |:
+    pre.unstyled {{formatMessage text}}
+  form.comment-form
+    .form-group
+      textarea.form-control(name="text" placeholder="{{_'Write comment'}}" rows="5")
+    unless isNeedHelpUser
+      .checkbox
+        label
+          input(type="checkbox" name="sendEmail")
+          |Send e-mail about new message to {{trimEmail needHelp.user.username}}
+    .form-group
+      button.btn.btn-primary(type="submit") {{_'Submit comment'}}

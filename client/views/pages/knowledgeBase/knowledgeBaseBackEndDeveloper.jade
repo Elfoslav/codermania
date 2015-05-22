@@ -1,0 +1,40 @@
+template(name="knowledgeBaseBackEndDeveloper")
+
+  .row
+    .col-sm-8
+      h1 Who is a Back-end developer?
+      p
+        small 24th April 2015
+      p He has knowledge of databases, servers, server-side languages and scaling.
+      p He has knowledge of:
+      ul
+        li HTML
+        li CSS
+        li jQuery
+        li JavaScript
+        li Front-end UI libraries like
+          a(href="http://getbootstrap.com/" target="_blank") Bootstrap
+          |,
+          a(href="http://semantic-ui.com/" target="_blank") Semantic UI
+          |,
+          a(href="http://foundation.zurb.com/" target="_blank") Foundation
+          |,
+          a(href="https://www.polymer-project.org" target="_blank") Polymer
+          |,...
+        li Back-end languages - PHP, Ruby, Python, Java, JavaScript (Node.js),...
+        li Databases - MySQL, PostgreSQL, MongoDB, Redis,...
+        li Scaling an application and/or its hosting environment to support increases in traffic.
+        li Best practices for securing web applications.
+
+      h2 Salary
+      p The average salary for a Back-end developer/engineer the United States is
+        a(href="http://www.payscale.com/research/US/Job=Front_End_Developer_%2f_Engineer/Salary") $65,000 per year.
+
+      p Do you want to become a back-end developer? Check out
+        a(href="{{pathFor 'guide'}}") our guide.
+
+      p {{> shareit shareData}}
+      br
+      +disqus
+    .col-sm-4
+      +knowledgeBaseSidebar

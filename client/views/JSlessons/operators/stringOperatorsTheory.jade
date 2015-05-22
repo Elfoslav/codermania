@@ -1,0 +1,77 @@
+template(name="stringOperatorsTheory")
+  h3 {{_'JavaScript String Operators'}}
+  p {{_'Operator'}} + {{_'concatenates strings'}}:
+  +codeInText
+    |console.log('Hello ' + 'world');
+  p {{_'We can concatenate strings stored in variables'}}:
+  +codeInText
+    |var txt1 = "What a very";
+    br
+    |var txt2 = "nice day";
+    br
+    |var txt3 = txt1 + txt2;
+    br
+    |console.log(txt3);
+  p {{_'You noticed there is no space between words'}} <i>very</i> {{_'and'}} <i>nice</i>.
+    |{{_"We can fix it two ways"}}.
+  p {{_'We can add space after word'}} <i>very</i> {{_'or before word'}} <i>nice</i>:
+  +codeInText
+    |var txt1 = "What a very ";
+    br
+    |var txt2 = "nice day";
+    br
+    |var txt3 = txt1 + txt2;
+    br
+    |console.log(txt3);
+  p {{_'Or we can add space between variable'}} <i>txt1</i> {{_'and variable'}} <i>txt2</i>
+    |{{_'when concatenating'}}:
+  +codeInText
+    |var txt1 = "What a very";
+    br
+    |var txt2 = "nice day";
+    br
+    |var txt3 = txt1 + ' ' + txt2;
+    br
+    |console.log(txt3);
+  p {{_'The += operator can also be used to concatenate strings'}}:
+  +codeInText
+    |var txt1 = "What a very ";
+    br
+    |txt1 += "nice day";
+    br
+    |console.log(txt1);
+
+  h3 {{_'Adding Strings and Numbers'}}
+  p {{_'Adding two numbers, will return sum, but adding a number and a string will return string'}}:
+  +codeInText
+    |var x = 5 + 5;
+    br
+    |var y = 5 + "5";
+    br
+    |var z = "Hello" + 5;
+    br
+    |console.log(x);
+    br
+    |console.log(y);
+    br
+    |console.log(z);
+  p {{_'If you add a number and a string, the result will be a string'}}.
+
+  h2 {{_'Conventions'}}
+  +codeInText
+    |//{{_'bad'}} - {{_'no space before and after'}}
+    br
+    |//{{_'operator plus'}}
+    br
+    |var hello = 'Hello';
+    br
+    |console.log(hello+' world');
+    br
+    br
+    |//{{_'good'}}
+    br
+    |var hello = 'Hello';
+    br
+    |console.log(hello + ' world');
+
+  +conventionsNote

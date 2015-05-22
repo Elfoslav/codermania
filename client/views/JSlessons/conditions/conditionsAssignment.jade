@@ -1,0 +1,10 @@
+template(name="conditionsAssignment")
+  p <b>Line 1</b>: {{{_'Define variable with name <i>age</i>'}}}.
+    |{{{_'Value of variable <i>age</i> will be your age (number)'}}}.
+  p <b>Line 2, 3, 4, 5, 6</b>: {{{_'Write condition which compares your age with number 18'}}}.
+    |{{_'If your age is greater than or equal to 18, write with console log'}}:
+  pre.code-in-text.js
+    |console.log('{{_'You are an adult'}}');
+  p {{{_'Then use <b>else</b> block and write with console log in it'}}}:
+  pre.code-in-text.js
+    |console.log('{{_'You are a child'}}');

@@ -1,0 +1,36 @@
+template(name="booleanVariablesTheory")
+  p {{_'Very often, in programming, you will need a data type that can only have one of two values, like'}}:
+  ul
+    li ON / OFF
+    li {{_'YES'}} / {{_'NO'}}
+    li {{_'TRUE'}} / {{_'FALSE'}}
+  p {{_'Boolean variables can contain only two values'}} (true/false):
+  +codeInText
+    |var isRaining = false;
+    br
+    |var hasDog = true;
+  p {{_'Notice that we define variable names with prefix'}} <i>is</i>
+    |{{_'and'}} <i>has</i>.
+    |{{_'Adding prefix to boolean variable is a good practice'}}.
+  p {{_'If we compare values, we get true or false'}}:
+  +codeInText
+    |console.log(9 &lt; 10);
+    br
+    |console.log(9 &gt; 10);
+    br
+    |console.log(10 &lt;&equals; 9);
+    br
+    |console.log(10 &gt;&equals; 9);
+    br
+    |console.log(10 &equals;&equals;&equals; 10);
+    br
+    |console.log('Porsche' === 'BMW');
+  p {{_'We can store boolean value into variable'}}:
+  +codeInText
+    |var carName = 'Porsche';
+    br
+    |var isPorsche = carName === 'Porsche';
+    br
+    |console.log(isPorsche);
+  p {{_'The difference between = and === is that = is operator of assignment and === is operator of comparison'}}.
+  p {{_'We use booleans in'}} <a href="{{pathFor 'lessonJS' lang=lang _id='1k' slug='conditions' username=username}}">{{_'conditions'}}</a>.

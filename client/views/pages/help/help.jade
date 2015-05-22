@@ -1,0 +1,21 @@
+template(name="help")
+  .list-group
+    each needHelp
+      .list-group-item
+        h4
+          a(href="{{pathFor 'studentProfile' username=this.user.username lang=lang}}") {{trimEmail this.user.username}}
+          |is asking for help:
+          a(href="{{pathFor 'helpDetail' lang=lang id=_id}}") {{this.lesson.title}}
+            if exerciseId
+              |({{getExerciseTitle this.lesson exerciseId}})
+          if isUnread this._id
+            span.pull-right.red (unread)
+        if message
+          pre.unstyled {{message}}
+        if lessonCode
+          p
+            +codeInText(code=lessonCode)
+        p.list-group-item-text
+          a.btn.btn-primary(href="{{pathFor 'helpDetail' lang=lang id=_id}}") Help {{trimEmail this.user.username}} now!
+    else
+      p No help needed.

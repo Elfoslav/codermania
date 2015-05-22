@@ -1,0 +1,57 @@
+template(name="studentProfile")
+  ol.breadcrumb
+    li
+      a(href="{{pathFor 'main' lang=lang}}") {{_'Home'}}
+    li
+      a(href="{{pathFor 'leaderboard' lang=lang}}") {{_'Leaderboard'}}
+    li.active {{trimEmail student.username}}
+
+  h2
+    if student.status.online
+      +onlineDot
+    |{{trimEmail student.username}}
+    if isInRole 'teacher' 'all'
+      a(href="{{pathFor 'messages' lang=lang username=student.username}}")
+        span.glyphicon.glyphicon-envelope
+
+  if showCreateStudyGroupBtn
+    +createStudyGroupBtn
+
+  if studyGroups.count
+    h2 Study groups
+    each studyGroups
+      +studyGroupListItem
+
+  .row
+    .col-sm-4
+      h3 JavaScript lessons
+      if student.lessons
+        ul.list-unstyled
+          each arrayify student.lessons
+            li
+              if canSeeUserExercises
+                a(href="{{pathFor 'lessonJS' lang=lang _id=value.id slug=getLessonSlug username=../student.username}}") {{getLessonTitle}}
+              else
+                span {{getLessonTitle}}
+              if isNotUndefined value.success
+                if value.success
+                  span.glyphicon.glyphicon-ok.green
+                else
+                  span.glyphicon.glyphicon-remove.red
+
+              if value.exercises
+                ul
+                  each arrayify value.exercises
+                    li {{getExerciseTitle ../value.id value.id}}
+                      if value.success
+                        span.glyphicon.glyphicon-ok.green
+                      else
+                        span.glyphicon.glyphicon-remove.red
+                  each restExercises value.id
+                    li {{title}}
+    .col-sm-4
+      h3 HTML lessons
+    .col-sm-4
+      h3 CSS lessons
+
+  +studyGroupFormModal

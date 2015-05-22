@@ -1,0 +1,101 @@
+template(name="loopsWhileTheory")
+  p {{{_'There is another loop'}}}. {{{_'<b>while</b> loop'}}}.
+  p {{{_"The loop must repeat until a certain \"condition\" is met"}}}.
+    |{{{_"If the \"condition\" is <i>false</i> at the beginning of the loop, the loop is never executed"}}}.
+  +codeInText
+    |var i = 0;
+    br
+    |while (i &lt; 10) {
+    br
+    |&#09;console.log(i);
+    br
+    |&#09;i++;
+    br
+    |}
+  p {{{_'Be careful! If you forget to increment variable <i>i</i> inside <b>while</b> loop, you will get infinite loop because 0 is always lower than 10'}}}.
+
+  p {{_'While loop above does exactly the same as this for loop'}}:
+  +codeInText
+    |for (var i = 0; i &lt; 10; i++) {
+    br
+    |&#09;console.log(i);
+    br
+    |}
+
+  p {{{_'When to use <b>while</b> and when to use <b>for</b> loop?'}}}
+  p {{{_'We use <b>while</b> loop if we do not know how many times the loop will be executed'}}}:
+  +codeInText
+    |var result;
+    br
+    |while (result != 3) {
+    br
+    |&#09;result = prompt('1 + 2 = ?');
+    br
+    |}
+    br
+    |console.log('Correct! 1 + 2 is 3');
+
+  p {{{_'We use <b>for</b> if we know how many times loop will be executed'}}}.
+    |{{_'For example, we know how many items array has'}}:
+  +codeInText
+    |var names = ['Peter', 'Tom', 'Josh'];
+    br
+    |for (var i = 0; i &lt; names.length; i++) {
+    br
+    |&#09;console.log(names[i]);
+    br
+    |}
+
+  p {{{_'We can use <b>while</b> loop for iterating through array too, but <b>for</b> is preferred'}}}:
+  +codeInText
+    |var names = ['Peter', 'Tom', 'Josh'];
+    br
+    |var i = 0;
+    br
+    |while (i &lt; names.length) {
+    br
+    |&#09;console.log(names[i]);
+    br
+    |&#09;//{{_'Do not forget to increment i'}}
+    br
+    |&#09;i++;
+    br
+    |}
+
+  hr
+  p {{{_'There is also <b>do while</b> loop but it is not much used in real programming world'}}}:
+  +codeInText
+    |var i = 5;
+    br
+    |do {
+    br
+    |&#09;console.log('{{_'This runs at least once'}}');
+    br
+    |}
+    br
+    |while (i &lt; 3);
+    br
+    |console.log('end');
+
+  p {{{_'Code inside <b>do</b> block will run at least once'}}}.
+    |{{{_'Then it checks condition (i < 3)'}}}.
+    |{{{_'If the condition is evaluated to <i>true</i>, <b>do</b> block runs again'}}}.
+    |{{{_'If the condition is evaluated to <i>false</i>, <b>do while</b> loop ends'}}}.
+
+  h3 {{_'Infinite loop'}}
+  p {{_'Sometimes, you can accidentally get infinite loop'}}.
+    |{{_'Especially if you are starting to learn loops'}}.
+  p {{_'Below is example of infinite loop'}}.
+    |{{{_'We define variable <i>i</i> with value 0 and condition is <i>i &lt; 10</i> which is initially true'}}}.
+    |{{{_'We forgot to increment value of <i>i</i> inside while loop'}}}.
+    |{{{_'The loop will never end because the condition <i>i &lt; 10</i> (<i>0 &lt; 10</i>) is always true'}}}.
+  p
+    b {{_'Warning'}}: {{_'Do not run this code because your browser will freeze'}}.
+  +codeInText
+    |var i = 0;
+    br
+    |while (i &lt; 10) {
+    br
+    |&#09;console.log(i);
+    br
+    |}

@@ -1,0 +1,13 @@
+template(name="userSettings")
+  h1 User Settings
+  .row
+    .col-sm-3
+      h3 Email notifications
+      .form-group
+        label Notify me about new messages in my study groups:
+        select.form-control#study-group-notifications
+          option(value="turn-off" selected="{{studyGroupNotifOptionSelected 'turn-off'}}") Turn off
+          option(value="daily" selected="{{studyGroupNotifOptionSelected 'daily'}}") Daily
+          option(value="weekly" selected="{{studyGroupNotifOptionSelected 'weekly'}}") Weekly
+          option(value="monthly" selected="{{studyGroupNotifOptionSelected 'monthly'}}") Monthly
+        .help-block.green.fade#study-group-notifications-help-block

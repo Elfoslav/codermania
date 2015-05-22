@@ -1,0 +1,60 @@
+template(name="knowledgeBaseFrontEndDeveloper")
+  .row
+    .col-sm-8
+      h1 Who is a Front-end developer?
+      p
+        small 24th April 2015
+
+      p He is responsible for user interface - elements of a website that the user sees and interacts with directly.
+        |He implements graphic design and he has to have feeling for design.
+        |He knows differences of interpretation of CSS in browsers.
+
+      p He has knowledge of:
+      ul
+        li HTML
+        li CSS
+        li jQuery
+        li JavaScript
+        li Photoshop/Gimp/Illustrator/Inkscape
+        li Front-end JavaScript frameworks like
+          a(href="https://angularjs.org/" target="_blank") Angular
+          |,
+          a(href="http://emberjs.com/" target="_blank") Ember
+          |,
+          a(href="http://www.ractivejs.org/" target="_blank") Ractive
+          |,...
+        li Front-end UI libraries like
+          a(href="http://getbootstrap.com/" target="_blank") Bootstrap
+          |,
+          a(href="http://semantic-ui.com/" target="_blank") Semantic UI
+          |,
+          a(href="http://foundation.zurb.com/" target="_blank") Foundation
+          |,
+          a(href="https://www.polymer-project.org" target="_blank") Polymer
+          |,...
+        li Front-end package managers and task runners -
+          a(href="http://bower.io/" target="_blank") Bower
+          |,
+          a(href="http://gruntjs.com/" target="_blank") Grunt
+          |,
+          a(href="http://gulpjs.com/" target="_blank") Gulp
+        li CSS preprocessors -
+          a(href="http://lesscss.org") LESS,
+          a(href="http://sass-lang.com") SASS
+        li JavaScript preprocessors -
+          a(href="http://coffeescript.org/") CoffeeScript,
+          a(href="http://livescript.net/") LiveScript,
+          a(href="http://www.typescriptlang.org/") TypeScript
+
+      h2 Salary
+      p The average pay for a Front-end developer in the United States is
+        a(href="http://www.payscale.com/research/US/Job=Front_End_Developer_%2f_Engineer/Salary") $66,610 per year.
+
+      p Do you want to become a front-end developer? Check out
+        a(href="{{pathFor 'guide'}}") our guide.
+
+      p {{> shareit shareData}}
+      br
+      +disqus
+    .col-sm-4
+      +knowledgeBaseSidebar

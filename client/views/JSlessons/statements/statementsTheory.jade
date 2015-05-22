@@ -1,0 +1,62 @@
+template(name="statementsTheory")
+  p Each piece of code ending with <b>;</b> (semicolon) is statement.
+  +codeInText
+    |console.log('I am statement');
+    br
+    |console.log('I am also statement');
+
+  p Statements are executed, one by one, in the same order as they are written.
+  p Multiple statements can be on one line, but it's recommended to write each statement on new line
+    |because it's more readable.
+  +codeInText
+    |console.log('statement1'); console.log('statement2');
+
+  p  Ending statements with semicolon in JavaScript is not required, but highly recommended.
+  +codeInText
+    |console.log('statement 1 without semicolon')
+    br
+    |console.log('statement 2 without semicolon')
+
+  h2 Keywords
+  p JavaScript statements often start with a <b>keyword</b> to identify the JavaScript action to be performed.
+  p Here is a list of some of the keywords you will learn about in this tutorial:
+
+  html
+  body
+    table.table.table-striped.table-bordered
+      tbody
+        tr
+          th(style='height: 25px') Keyword
+          th(style='height: 25px') Description
+        tr
+          td break
+          td Terminates a switch or a loop
+        tr
+          td continue
+          td Jumps out of a loop and starts at the top
+        tr
+          td do ... while
+          td
+            | Executes a block of statements, and repeats the block, while a condition is
+            | true
+        tr
+          td for
+          td Marks a block of statements to be executed, as long as a condition is true
+        tr
+          td function
+          td Declares a function
+        tr
+          td if ... else
+          td Marks a block of statements to be executed, depending on a condition
+        tr
+          td return
+          td Exits a function
+        tr
+          td switch
+          td Marks a block of statements to be executed, depending on different cases
+        tr
+          td try ... catch
+          td Implements error handling to a block of statements
+        tr
+          td var
+          td Declares a variable

@@ -1,0 +1,107 @@
+template(name="stringVariablesTheory")
+  p {{_'String variables contain text'}}.
+  p {{_'We can define strings with single or double quotes'}}. {{_'Final effect is the same'}}:
+  +codeInText
+    |var firstName = 'John'; //{{_'single quotes'}}
+    br
+    |var lastName = "Doe"; //{{_'double quotes'}}
+    br
+    |var fullName = firstName + ' ' + lastName;
+    br
+    |console.log(fullName); //John Doe
+  p {{_'In example above, we define string variable with name'}} <i>firstName</i> {{_'and value'}} 'John'.
+    |{{_'Then we define string variable with name'}} <i>lastName</i> {{_'and value'}} "Doe".
+    |{{_'We define variable'}} <i>fullName</i> {{_'and assign to it values from'}} <i>firstName</i> {{_'and'}} <i>lastName</i>
+    |{{_'with space between them'}}.
+  p {{_'We can merge multiple strings with plus operator'}}:
+  +codeInText
+    |var merged = 'First str. ' + 'second str.';
+    br
+    |merged = merged + ' third str.';
+    br
+    |merged += ' fourth str.';
+    br
+    |console.log(merged);
+  p {{_'This code'}}:
+  pre.code-in-text.js
+    |merged = merged + ' third str.';
+  p {{_'does exactly the same thing as this code'}}:
+  pre.code-in-text.js
+    |merged += ' fourth str.';
+  p {{_'The second one is just shortcut, commonly used by programmers'}}.
+  p {{_'Many programmers prefer single quotes to double quotes'}}. {{_'There are a few use cases'}}:
+  +codeInText
+    |var text = 'I\'m happy';
+    br
+    |var text2 = "I'm happy";
+    br
+    |console.log(text);
+    br
+    |console.log(text2);
+  p {{_'We need to escape single quote in'}} <i>text</i> {{_'variable with backslash'}}.
+    |{{_'You can write string with double quotes if you do not want to escape single quote (text2)'}}.
+  p {{_'We can also use double quotes inside single quotes string'}}:
+  +codeInText
+    |var text = 'He said: "I\'m happy"';
+    br
+    |console.log(text);
+  p {{_'We could rewrite string above to string with double quotes'}}:
+  +codeInText
+    |var text = "He said: \"I'm happy\"";
+    br
+    |console.log(text);
+  hr
+  p {{{_'If we want to find out length of string, we use <i>length</i> property'}}}:
+  +codeInText
+    |var name = 'John';
+    br
+    |console.log('Hi ' + name + '.');
+    br
+    |console.log('Your name contains ' + name.length + ' characters.');
+  p {{_'We access properties with dot, following the name of property'}}.
+  hr
+  p {{_'Strings have a lot of methods that we can use'}}.
+    |{{{_'For example, we can use <i>replace()</i> method to replace text in string'}}}:
+  +codeInText
+    |var text = 'What a nice day';
+    br
+    |//{{_"replace 'nice' with 'bad'"}}
+    br
+    |var text2 = text.replace('nice', 'bad');
+    br
+    |console.log(text);
+    br
+    |console.log(text2);
+  p {{{_'Value of variable <i>text</i> remained unchanged'}}}.
+    |{{{_'We used <i>replace()</i> method and stored result in <i>text2</i> variable'}}}.
+  p {{_'Notice, strings are case sensitive'}}.
+    |{{_"If we try to replace \"Nice\" instead of \"nice\" it will not replace anything"}}:
+  +codeInText
+    |var text = 'What a nice day';
+    br
+    |var text2 = text.replace('Nice', 'bad');
+    br
+    |console.log(text);
+    br
+    |console.log(text2);
+  p {{_'For more info, see'}}
+    a(href="http://www.w3schools.com/js/js_string_methods.asp" target="_blank") {{_'string methods'}}.
+
+  h2 {{_'Conventions'}}
+  +codeInText
+    |//{{_'bad'}} - {{_'no space before and after'}}
+    br
+    |//{{_'operator plus'}}
+    br
+    |var hello = 'Hello';
+    br
+    |console.log(hello+' world');
+    br
+    br
+    |//{{_'good'}}
+    br
+    |var hello = 'Hello';
+    br
+    |console.log(hello + ' world');
+
+  +conventionsNote

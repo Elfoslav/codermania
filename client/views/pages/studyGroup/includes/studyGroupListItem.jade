@@ -1,0 +1,12 @@
+template(name="studyGroupListItem")
+  p
+    if joined
+      span.glyphicon.glyphicon-user.green(title="You are a member of this group")
+    else
+      span.glyphicon.glyphicon-user(title="Number of students")
+    sup(title="Number of students") {{studentsCount _id}}
+    a(href="{{pathFor 'studyGroup' _id=_id}}") {{title}}
+    if topics
+      |({{topics}})
+    if unreadStudyGroupMessagesCount _id
+      sup.red {{unreadStudyGroupMessagesCount _id}} new messages

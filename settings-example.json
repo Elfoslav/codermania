@@ -1,0 +1,10 @@
+{
+  "public": {
+    "disqus": {
+      "shortname": "codermania"
+    }
+  },
+  "env": {
+    "MAIL_URL": "Create Mailgun account and generate MAIL_URL: http://www.mailgun.com/"
+  }
+}

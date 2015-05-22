@@ -1,0 +1,201 @@
+template(name="guide")
+  .guide
+    h1#page-title Ultimate guide for web developer
+    p
+      small 5th May 2015
+
+    p
+      +shareit shareData
+    p You will find everything you need to learn to become a web developer in this guide.
+    p This curriculum is for everyone who wants to learn to code web applications.
+    p If you are not sure what path to choose,
+      a(href="mailto:tomas@codermania.com?subject=What to learn to become a web developer?") Contact me!
+    p
+      span.glyphicon.glyphicon-info-sign
+      |This is just the first version (1.0) of this guide. This guide will be more complete in the future.
+      |There will be more info, more tutorials for each technology.
+
+    h2.margin-bottom-20 Choose your path:
+    .row.choose-your-path
+      .col-sm-2
+        p
+          a.btn.btn-default.btn-block(href="#path-of-front-end-developer") Path of front-end developer
+      .col-sm-2
+        p
+          a.btn.btn-default.btn-block(href="#path-of-full-stack-javascript-developer") Path of full-stack JavaScript developer
+      .col-sm-2
+        p
+          a.btn.btn-default.btn-block(href="#path-of-back-end-javascript-developer") Path of back-end JavaScript developer
+      .col-sm-2
+        p
+          a.btn.btn-default.btn-block(href="#path-of-back-end-php-developer") Path of back-end PHP developer
+      .col-sm-2
+        p
+          a.btn.btn-default.btn-block(href="#path-of-back-end-ruby-developer") Path of back-end Ruby developer
+      .col-sm-2
+        p
+          a.btn.btn-default.btn-block(href="#path-of-back-end-python-developer") Path of back-end Python developer
+
+    hr
+    .guide-tree.center-text
+      h2#guide-root Web
+      .bubble.common-path-web
+        a(href="{{pathFor 'lessonHTML' lang=lang _id='1a' slug='hello-world' username=username}}") HTML
+        |,
+        a(href="{{pathFor 'lessonCSS' lang=lang _id='1a' slug='hello-world' username=username}}") CSS
+        |,
+        a(href="{{pathFor 'lessonJS' lang=lang _id='1a' slug='hello-world' username=username}}") JavaScript
+      .row
+        .col-xs-6.col-sm-5
+          h3#front-end-heading.inline-block Front-end
+          h4.margin-top-20 JavaScript frameworks/libraries
+          p Pick one:
+          .bubble.front-end-path.front-end-frameworks
+            a(href="https://jquery.com/") jQuery
+            |,
+            a(href="https://angularjs.org") Angular
+            |,
+            a(href="http://emberjs.com") Ember
+            |,
+            a(href="http://backbonejs.org") Backbone
+            |,
+            a(href="https://knockoutjs.com") Knockout
+            |,
+            a(href="https://facebook.github.io/react/") React
+          h4.margin-top-20 UI frameworks/libraries
+          p Pick one:
+          .bubble.front-end-path.ui-frameworks
+            a(href="http://getbootstrap.com/") Bootstrap
+            |,
+            a(href="http://semantic-ui.com") Semantic UI
+            |,
+            a(href="http://foundation.zurb.com") Foundation
+            |,
+            a(href="https://www.polymer-project.org") Polymer
+          h4.margin-top-20 Front-end Tools
+          .bubble.front-end-path
+            a(href="http://gruntjs.com") Grunt
+            |,
+            a(href="http://gulpjs.com") Gulp
+            |,
+            a(href="http://bower.io") Bower
+          h4.margin-top-20 CSS preprocessors
+          p Recommended.
+          p Pick one:
+          .bubble.front-end-path.css-preprocessors
+            a(href="http://lesscss.org") LESS
+            |,
+            a(href="http://sass-lang.com") SASS
+          h4.margin-top-20 JavaScript preprocessors
+          p Recommended.
+          p Pick one:
+          .bubble.front-end-path.javascript-preprocessors
+            a(href="http://coffeescript.org") CoffeeScript
+            |,
+            a(href="http://livescript.net") LiveScript
+            |,
+            a(href="http://typescriptlang.org") TypeScript
+
+        .col-xs-6.col-sm-5.col-sm-offset-2
+          h3#back-end-heading.inline-block Back-end
+          br
+          .bubble.databases-path.margin-bottom-20
+            h3.no-margin-top
+              a(href="http://en.wikipedia.org/wiki/Database") Databases
+            p Pick one:
+            .bubble
+              a(href="http://mysql.com") MySQL
+            .bubble
+              a(href="http://postgresql.org") PostgreSQL
+            .bubble
+              a(href="http://mongodb.org") MongoDB
+          .bubble.back-end-path-javascript.margin-bottom-20
+            h3.no-margin-top
+              a(href="https://nodejs.org") Node.js
+            p Pick one:
+            .bubble
+              a(href="http://meteor.com") Meteor
+            .bubble
+              a(href="http://expressjs.com") Express
+            .bubble
+              a(href="http://sails.org") Sails
+            .bubble
+              a(href="http://totaljs.com") Total
+            .bubble
+              a(href="http://codecall.net/2014/02/23/10-best-node-js-mvc-frameworks-for-javascript-developers/") other...
+          .bubble.back-end-path-php.margin-bottom-20
+            h3.no-margin-top
+              a(href="http://php.net") PHP
+            p Pick one:
+            .bubble
+              a(href="http://nette.org") Nette
+            .bubble
+              a(href="http://symfony.com") Symfony
+            .bubble
+              a(href="http://framework.zend.com") Zend
+            .bubble
+              a(href="http://laravel.com") Laravel
+            .bubble
+              a(href="http://codeigniter.com") CodeIgniter
+            .bubble
+              a(href="http://mashable.com/2014/04/04/php-frameworks-build-applications/") other...
+          .bubble.back-end-path-ruby.margin-bottom-20
+            h3.no-margin-top
+              a(href="https://www.ruby-lang.org") Ruby
+            .bubble
+              a(href="http://rubyonrails.org") Ruby on Rails
+          br
+          .bubble.back-end-path-python
+            h3.no-margin-top
+              a(href="https://www.python.org/") Python
+            .bubble
+              a(href="https://www.djangoproject.com") Django
+
+      .row
+        .col-sm-6.col-sm-offset-3
+          h3#full-stack-heading Full-stack
+          p Pick one:
+          .bubble.full-stack-path
+            a(href="https://www.meteor.com") Meteor.js
+            |,
+            a(href="http://mean.io") MEAN
+
+    hr
+    .center-text
+      h2 Common-path
+      p Every developer should know:
+      .bubble
+        a(href="http://git-scm.com/") Git
+        |,
+        a(href="https://developer.chrome.com/devtools") Chrome dev tools
+        |,
+        a(href="http://en.wikipedia.org/wiki/Bash_%28Unix_shell%29") BASH
+        |,
+        a(href="http://en.wikipedia.org/wiki/Web_application_security") Security
+        |,
+        a(href="http://en.wikipedia.org/wiki/Test-driven_development") TDD
+        |,
+        a(href="http://en.wikipedia.org/wiki/Unified_Modeling_Language") UML Diagrams
+        |,
+        a(href="http://en.wikipedia.org/wiki/Search_engine_optimization") SEO
+        |,
+        a(href="http://en.wikipedia.org/wiki/Application_programming_interface") API
+        |,
+        a(href="http://en.wikipedia.org/wiki/Agile_software_development") Agile methods
+
+      h2 Good to know
+      p At least know they exist
+      .bubble
+        a(href="https://developer.mozilla.org/en-US/docs/WebSockets") WebSockets
+        |,
+        a(href="http://www.w3schools.com/html/html5_webstorage.asp") LocalStorage
+        |,
+        a(href="http://www.webrtc.org/") WebRTC
+
+      br
+      br
+      p
+        +shareit shareData
+
+      br
+      +disqus

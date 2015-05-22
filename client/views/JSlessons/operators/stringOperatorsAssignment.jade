@@ -1,0 +1,8 @@
+template(name="stringOperatorsAssignment")
+  p <b>{{_'Line'}} 1</b>: {{{_"Define variable with name <i>text</i> and value <b>'Hello'</b>"}}}.
+  p <b>{{_'Line'}} 2</b>: {{{_"Append string <b>' world'</b> to variable <i>text</i> using operator +="}}}.
+  p <b>{{_'Line'}} 3</b>: {{{_'Print variable <i>text</i> with '}}} console.log().
+
+  p {{_'The result should be'}}:
+  pre.code-in-text
+    |Hello world

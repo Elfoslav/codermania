@@ -1,0 +1,25 @@
+template(name="code")
+
+  .row
+    .col-sm-6
+      h2 HTML
+      pre {{htmlCode}}
+    .col-sm-6
+      if isInRole 'teacher' 'all'
+        form.html-code-form
+          p
+            textarea.form-control(rows="20" name="code") {{htmlCode}}
+          p
+            button.btn.btn-primary(type="submit") Submit
+  hr
+  .row
+    .col-sm-6
+      h2 JavaScript
+      pre {{jsCode}}
+    .col-sm-6
+      if isInRole 'teacher' 'all'
+        form.js-code-form
+          p
+            textarea.form-control(rows="20" name="code") {{jsCode}}
+          p
+            button.btn.btn-primary(type="submit") Submit

@@ -1,0 +1,37 @@
+template(name="floatVariablesTheory")
+  p {{_'Float variables are numbers with decimal point'}}:
+  pre.code-in-text.js
+    |var pi = 3.14;
+  p {{_'We can use mathematical operations like with integer variables'}}.
+  p {{_'You can get unexpected results sometimes'}}:
+  +codeInText
+    |var somethingWeird = 0.1 + 0.2;
+    <br>
+    |//{{_"this won't print 0.3"}}
+    <br>
+    |console.log(somethingWeird);
+  p {{{_'To fix this issue with precision, we can use <i>toFixed()<i> method which will round the result'}}}:
+  +codeInText
+    |var somethingWeird = 0.1 + 0.2;
+    <br>
+    |//{{_"this will print 0.3"}}
+    <br>
+    |console.log(somethingWeird.toFixed(1));
+  p {{_'We can round to two decimal places with'}} <i>toFixed(2)</i>.
+  p
+    b {{_'But'}} toFixed() {{_'returns string'}}:
+  +codeInText
+    |var somethingWeird = 0.1 + 0.2;
+    <br>
+    |//{{_"this will print 0.32"}}
+    <br>
+    |console.log(somethingWeird.toFixed(1) + 2);
+  p somethingWeird.toFixed(1) returns "0.3" and then we try to add number 2 so the result is: "0.3" + 2, thus "0.32".
+  p {{_'If we want to use plus operator after using toFixed() we need to convert string to number with parseFloat() function'}}:
+  +codeInText
+    |var somethingWeird = 0.1 + 0.2;
+    <br>
+    |//{{_"this will print 2.3"}}
+    <br>
+    |console.log(parseFloat(somethingWeird.toFixed(1)) + 2);
+  p parseFloat("0.3") makes number 0.3 from string "0.3".

@@ -1,0 +1,14 @@
+template(name="commentsAssignment")
+  p {{_'Copy & paste following code in code Editor'}}:
+  +codeInText
+   |//this is one line comment. Code in this line will not be processed
+   br
+   |/* this
+   br
+   |is multiline comment
+   br
+   |this will not be processed */
+   br
+   |console.log('Comment this line');
+  p {{_'Comment line 5 in code editor'}}.
+    |<b>Use one line comment.</b>

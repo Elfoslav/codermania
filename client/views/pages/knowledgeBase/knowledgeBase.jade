@@ -1,0 +1,35 @@
+template(name="knowledgeBase")
+  h1 Knowledge Base
+  p There are various web development positions:
+  .row
+    .col-sm-4
+      h2
+        a(href="{{pathFor 'knowledgeBaseFrontEndDeveloper' lang=lang}}") Front-end Developer
+      p Front-end developer builds user interface. He has solid knowledge of HTML, CSS, jQuery
+        |and at least basics of JavaScript. He is often required to be familiar with back-end
+        |technologies.
+      p
+        a.btn.btn-default(href="{{pathFor 'knowledgeBaseFrontEndDeveloper' lang=lang}}") Read more
+
+    .col-sm-4
+      h2
+        a(href="{{pathFor 'knowledgeBaseBackEndDeveloper' lang=lang}}") Back-end Developer
+      p Back-end developer works with data. He has deep knowledge of databases, servers, etc.
+      p
+        a.btn.btn-default(href="{{pathFor 'knowledgeBaseBackEndDeveloper' lang=lang}}") Read more
+
+    .col-sm-4
+      h2
+        a(href="{{pathFor 'knowledgeBaseFullStackDeveloper' lang=lang}}") Full-stack Developer
+      p Full-stack developer can build front-end and also back-end.
+        |He has wide knowledge of front-end and back-end technologies.
+        |He knows what technology to use for specific kind of task.
+      p
+        a.btn.btn-default(href="{{pathFor 'knowledgeBaseFullStackDeveloper' lang=lang}}") Read more
+
+  .row
+    .col-sm-6
+      h2 Do you want to become a web developer?
+      p If you want to become a web developer you need to study a lot.
+      p
+        a.btn.btn-danger(href="{{pathFor 'guide'}}") Check out Ultimate guide for web developer

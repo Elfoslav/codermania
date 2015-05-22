@@ -1,0 +1,37 @@
+template(name="footer")
+  .footer
+    .container
+      .row
+        .col-sm-4
+          h4.no-margin-top {{_'Similar websites'}}:
+          ul.list-unstyled
+            li
+              a(href="http://bento.io" target="_blank") Bento
+            li
+              a(href="http://code.org" target="_blank") Code.org
+            li
+              a(href="http://www.codecademy.com" target="_blank") Codecademy
+            li
+              a(href="http://www.codecombat.com" target="_blank") CodeCombat
+        .col-sm-4
+          ul.list-unstyled
+            li
+              a(href="{{pathFor 'whyCoderMania' lang=lang}}") {{_'Why CoderMania?'}}
+            li
+              a(href="{{pathFor 'whyJavaScript' lang=lang}}") {{_'Why JavaScript?'}}
+            li
+              a(href="{{pathFor 'whyLearnToCode' lang=lang}}") {{_'Why learn to code?'}}
+            li
+              a(href="{{pathFor 'contact' lang=lang}}") {{_'Want to join as a teacher?'}}
+        .col-sm-4
+           ul.list-unstyled
+            li
+              a(href="https://facebook.com/codermania" target="_blank") {{_'Our'}} Facebook
+            li
+              a(href="https://twitter.com/codermania_com" target="_blank") {{_'Our'}} Twitter
+            li
+              a(href="{{pathFor 'contact' lang=lang}}") Contact
+            li
+              a(href="https://www.patreon.com/elfoslav") Support CoderMania
+            li
+              a(href="https://trello.com/b/h3c4Il6k/codermania" target="_blank") Help us develop CoderMania

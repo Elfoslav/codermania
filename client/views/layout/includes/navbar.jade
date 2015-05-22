@@ -1,0 +1,56 @@
+template(name="navbar")
+  .navbar.navbar-inverse
+    .container
+      .navbar-header
+        button.navbar-toggle.collapsed(type="button" data-toggle="collapse" data-target="#main-nav")
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href="{{pathFor 'main' lang=lang}}") CoderMania
+          small.red(style="position: relative; top: 5px;") beta
+      #main-nav.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            a(href="#" data-toggle="dropdown") {{_'Lessons'}}
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href="{{pathFor 'lessonJS' lang=lang _id='1a' slug='hello-world' username=username}}") JavaScript
+              li
+                a(href="{{pathFor 'lessonHTML' lang=lang _id='1a' slug='hello-world' username=username}}") HTML
+              li
+                a(href="{{pathFor 'lessonCSS' lang=lang _id='1a' slug='hello-world' username=username}}") CSS
+          li
+            a(href="{{pathFor 'help' lang=lang}}") {{_'Help'}}
+              if needHelpCount
+                sup.red {{needHelpCount}}
+          li
+            a(href="#" data-toggle="dropdown") {{_'Reading'}}
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href="{{pathFor 'blog'}}") {{_'Blog'}}
+              li
+                a(href="{{pathFor 'guide' lang=lang}}") Guide
+              li
+                a(href="{{pathFor 'knowledgeBase' lang=lang}}") {{_'Knowledge Base'}}
+          li
+            a(href="{{pathFor 'leaderboard' lang=lang}}") {{_'Leaderboard'}}
+          li
+            a(href="{{pathFor 'studyGroups' lang=lang}}") {{_'Study Groups'}}
+              if getPublishedCount 'unreadStudyGroupMessagesCount'
+                sup.red {{getPublishedCount 'unreadStudyGroupMessagesCount'}}
+        ul.nav.navbar-nav.navbar-right
+          if currentUser
+            li
+              a(href="{{pathFor 'messages' lang=lang}}")
+                if unreadMessagesCount
+                  span.red.glyphicon.glyphicon-envelope
+                  |&nbsp;
+                  span.red {{unreadMessagesCount}}
+                else
+                  span.glyphicon.glyphicon-envelope
+                  |&nbsp;
+                  span {{unreadMessagesCount}}
+          |{{> loginButtons}}

@@ -1,0 +1,18 @@
+template(name="exerciseAccordion")
+  p {{{_'<b>Line x</b> means that you should write code on that line'}}}.
+  #accordion.panel-group(role='tablist', aria-multiselectable='true')
+    each exercises
+      .panel.panel-default
+        .panel-heading(role='tab' id='{{id}}heading')
+          h4.panel-title
+            a(data-toggle='collapse', data-parent='#accordion', href='#{{id}}', aria-controls='{{id}}')
+              | {{title}}
+              if doneExercise
+                span.glyphicon.glyphicon-ok.green
+              if wrongExercise
+                span.glyphicon.glyphicon-remove.red
+        div(id='{{id}}' role='tabpanel', aria-labelledby='{{id}}heading' class='panel-collapse collapse {{#if expand}}in{{/if}}')
+          .panel-body
+            +Template.dynamic template=id
+    else
+      p {{_'No exercises'}}.

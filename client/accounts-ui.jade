@@ -1,0 +1,3 @@
+template(name="_loginButtonsAdditionalLoggedInDropdownActions")
+  a.btn.btn-default.btn-block(href="{{pathFor 'studentProfile' lang=lang username=loggedInUserUsername}}") {{_'Profile'}}
+  a.btn.btn-default.btn-block(href="{{pathFor 'userSettings' lang=lang}}") {{_'Settings'}}

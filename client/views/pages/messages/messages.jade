@@ -1,0 +1,41 @@
+template(name="messages")
+  h1.no-margin-top {{_'Messages'}}
+
+  .row#messages
+    .col-sm-4
+      form.message-form
+        .form-group
+          select.form-control.usernames-select(name="usernames")
+            option(value="") {{_'Select username'}}...
+            each usernames
+              option(value=this selected=selectedUsername)= this
+        .form-group
+          textarea.message.form-control(rows="5" placeholder="{{_'write a message'}}")
+        .checkbox
+          label
+            input(type="checkbox" name="sendEmail")
+            |Send e-mail about new message to receiver
+        .form-group
+          button.btn.btn-primary.btn-block(type="submit") {{_'Send'}}
+
+      if sendersList.count
+        hr
+        h4 {{_'Unread messages from'}}:
+      each sendersList
+        p
+          a(href="{{pathFor 'messages' lang=lang username=this.username}}")
+            |{{this.username}}
+            span.badge {{unreadMsgCount}}
+    .col-sm-8
+      each messages
+        |{{makeRead}}
+        p {{formatDate timestamp}}
+          if isOnline senderId
+            +onlineDot
+          a(href="{{pathFor 'studentProfile' lang=lang username=getUsername}}")
+            b {{showUsername receiverId}}
+          |{{getRole}} {{getIsRead}}:
+          br
+          pre {{linkify text}}
+      else
+        p {{_'No messages'}}.

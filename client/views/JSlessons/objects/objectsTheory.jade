@@ -1,0 +1,249 @@
+template(name="objectsTheory")
+  p {{_'Objects in programming languages simulates objects in real life - animals, cars, people'}},...
+  p {{_'Each object can have attributes/properties, methods (what object can do) and they can inherit attributes and methods from other objects'}}.
+
+  h3 {{_'Syntax'}}
+  p This syntax is called JSON (JavaScript Object Notation):
+  pre
+    |var objectName = {
+    |   propertyA: valueA,
+    |   propertyB: valueB,
+    |   methodX: function(param1, param2) {
+    |     ...
+    |   },
+    |   methodY: function() {
+    |     ...
+    |   }
+    |};
+  p {{_'We define object name as variable name'}}.
+    |{{_'Then we open object with {'}}.
+    |{{{_'We assign value to properties with colon'}}}.
+    |{{{_'We separate properties and methods by coma'}}}.
+    |{{{_'Methods are classic functions that can take parameters'}}}.
+    |{{{_"We don't write coma after the last property/method"}}}.
+    |{{{_"We end definition of object with } and semicolon"}}}.
+
+  p {{{_'We define object with name <i>person</i>, properties <i>name</i> and <i>age</i> and method <i>sayHello()</i>'}}}:
+  +codeInText
+    |var person = {
+    br
+    |&#09;name: 'Thomas',
+    br
+    |&#09;age: 28,
+    br
+    |&#09;sayHello: function() {
+    br
+    |&#09;&#09;console.log('Hi, my name is ' + this.name);
+    br
+    |&#09;&#09;console.log('And my age is ' + this.age);
+    br
+    |&#09;}
+    br
+    |};
+    br
+    br
+    |person.sayHello();
+    br
+    |console.log('Name of object person is ' + person.name);
+
+  p {{_'We can access properties and methods via dot'}}.
+  p {{{_'Notice, we can access properties inside method via keyword <b>this</b>'}}}.
+    |<b>this</b> refers to the current object.
+
+  p You can imagine methods as actions. A person can say hello with method <i>sayHello</i>.
+    |Or we could define a method <i>bark</i> for object <i>dog</i>:
+  +codeInText
+    |var dog = {
+    br
+    |&#09;name: 'Charlie',
+    br
+    |&#09;bark: function() {
+    br
+    |&#09;&#09;console.log('wof wof!');
+    br
+    |&#09;}
+    br
+    |};
+    br
+    br
+    |dog.bark();
+
+  hr
+
+  p {{_'We can access properties in two ways - via dot or via string identifier'}}:
+  +codeInText
+    |var person = {
+    br
+    |&#09;name: 'Thomas',
+    br
+    |&#09;age: 28
+    br
+    |};
+    br
+    br
+    |//accessing property name
+    br
+    |//via dot
+    br
+    |console.log('Name of the object person is ' + person.name);
+    br
+    |//accessing property age
+    br
+    |//via string key/identifier
+    br
+    |console.log('Age of the object person is ' + person['age']);
+
+  hr
+
+  p {{_'We can define empty object without properties and methods'}}:
+  +codeInText
+    |var emptyObject = {};
+    br
+    |console.log(emptyObject);
+
+  p {{_'We can define empty object without properties and methods and add properties/methods later'}}:
+  +codeInText
+    |//Object definition
+    br
+    |var person = {};
+    br
+    |//definition of properties
+    br
+    |person.name = 'Thomas';
+    br
+    |person.age = 28;
+    br
+    |//definition of method sayHello()
+    br
+    |person.sayHello = function() {
+    br
+    |&#09;console.log('Hi, my name is ' + this.name);
+    br
+    |&#09;console.log('And my age is ' + this.age);
+    br
+    |};
+    br
+    br
+    |person.sayHello();
+    br
+    br
+    |//we can insert new value
+    br
+    |//into property
+    br
+    |person.name = 'John';
+    br
+    |person.sayHello();
+
+  h3 Object as a function
+  p There is a thing called constructor in OOP (Object Oriented Programming).
+    |The constructor can take parameters and we can set them to the object via <b>this</b> keyword and property name.
+    |When we define object as a function the first letter is uppercase.
+    |When we create instance of object, the instance name is lowercase.
+    |We don't need to write semicolon after function definition.
+  +codeInText
+    |function Animal(name) {
+    br
+    |&#09;this.name = name;
+    br
+    |&#09;this.sayHello = function() {
+    br
+    |&#09;&#09;console.log('Hello ' + this.name);
+    br
+    |&#09;};
+    br
+    |}
+    br
+    br
+    |var rabbit = new Animal('rabbit');
+    br
+    |rabbit.sayHello();
+    br
+    |var dog = new Animal('dog');
+    br
+    |dog.sayHello();
+
+  p We create new instance of object with keyword <b>new</b> following with object name and parameters.
+    |We can create multiple instances of the object. Each instance has its own properties.
+
+  p OOP in JavaScript is a bit complicated topic. You can learn more in
+    a(href="http://javascript.info/tutorial/oop" target="_blank") OOP tutorial.
+    |For now, we just need to know how to create and use object.
+
+  h2 {{_'Conventions'}}
+  p Object as JSON:
+  +codeInText
+    |//bad - no indentation of property
+    br
+    |var obj = {
+    br
+    |prop1: 'val1' //missing indentation
+    br
+    |};
+    br
+    br
+    |//bad - missing semicolon
+    br
+    |var obj = {
+    br
+    |&#09;prop1: 'val1'
+    br
+    |} //here is missing semicolon
+    br
+    br
+    |//bad - no space after colon
+    br
+    |//when defining property value
+    br
+    |var obj = {
+    br
+    |&#09;prop1:'val1' //no space after colon
+    br
+    |};
+    br
+    br
+    |//bad - comma after the last property
+    br
+    |var obj = {
+    br
+    |&#09;prop1: 'val1',
+    br
+    |&#09;prop2: 'val2', //there should not be comma
+    br
+    |};
+    br
+    br
+    |//good
+    br
+    |var obj = {
+    br
+    |&#09;prop1: 'val1',
+    br
+    |&#09;method1: function() {
+    br
+    |&#09;&#09;//code
+    br
+    |&#09;}
+    br
+    |};
+
+  p Object as a function:
+  +codeInText
+    |//bad - lowercase first letter
+    br
+    |function person(name) {
+    br
+    |&#09;this.name = name;
+    br
+    |}
+    br
+    br
+    |//good
+    br
+    |function Person(name) {
+    br
+    |&#09;this.name = name;
+    br
+    |}
+
+  +conventionsNote

@@ -1,0 +1,10 @@
+template(name="helloWorldAssignment")
+  p <i>console.log()</i> {{_'is a function that prints values in output'}}.
+  p {{_"Let's create our first"}} "Hello world" program.
+  p {{_'Type following code into the code editor and press submit button'}}:
+  pre.code-in-text.js
+    |console.log('Hello world');
+
+  p
+    span.glyphicon.glyphicon-info-sign
+    |<b>{{_'Note'}}:</b> {{_'Your code must look exactly like above'}}.

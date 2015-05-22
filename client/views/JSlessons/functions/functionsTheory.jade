@@ -1,0 +1,241 @@
+template(name="functionsTheory")
+  p {{_'Function is a block of code designed to perform a particular task'}}.
+
+  p Function is defined with the <b>function</b> keyword, followed by a <b>function name</b>, followed by parentheses <b>()</b>.
+  p Function names can contain letters, digits, underscores, and dollar signs (same rules as variables).
+  p The parentheses may include parameter names separated by commas: <b>(parameter1,  parameter2, ...)</b>
+  p The code to be executed, by the function, is placed inside curly brackets: <b>{}</b>.
+  p We can call/execute function with function name and parenthesis. Do not forget semicolon: funcName();
+
+  h3 {{_'Syntax'}}:
+  +codeInText
+    |function funcName(parameter1, parameter2) {
+    br
+    |&#09;//code to be executed
+    br
+    |}
+    br
+    br
+    |//{{_'function call'}}:
+    br
+    |funcName();
+
+  h3 {{_'Why Functions?'}}
+  p {{_'You can reuse code'}}: {{_'Define the code once, and use it many times'}}.
+  p {{_'For example we can define function printArray which takes one parameter of type array and print items of the parameter'}}:
+  +codeInText
+    |//we define function
+    br
+    |function printArray(arr) {
+    br
+    |&#09;for (var i = 0; i &lt; arr.length; i++) {
+    br
+    |&#09;&#09;console.log(arr[i]);
+    br
+    |&#09;}
+    br
+    |}
+    br
+    br
+    |//we can call function with array parameter
+    br
+    |printArray(['Josh', 'John', 'Peter']);
+    br
+    br
+    |//we can define array variable and pass
+    br
+    |//the variable as function parameter
+    br
+    |var fruits = ['orange', 'banana'];
+    br
+    |printArray(fruits);
+
+  p {{_'Copy & paste code above into the code editor and play with it'}}.
+
+  p {{_'What if we do not provide parameter for this function?'}}:
+
+  +codeInText
+    |function printArray(arr) {
+    br
+    |&#09;for (var i = 0; i &lt; arr.length; i++) {
+    br
+    |&#09;&#09;console.log(arr[i]);
+    br
+    |&#09;}
+    br
+    |}
+    br
+    br
+    |//if we don't provide parameter
+    br
+    |//function call will end up with error
+    br
+    |printArray();
+
+  p {{{_'Function call above will end up with error because we do not provide parameter, thus parameter <i>arr</i> is undefined and we cannot call undefined.length'}}}.
+
+  +codeInText
+    |function printArray(arr) {
+    br
+    |&#09;for (var i = 0; i &lt; arr.length; i++) {
+    br
+    |&#09;&#09;console.log(arr[i]);
+    br
+    |&#09;}
+    br
+    |}
+    br
+    br
+    |//we can provide string
+    br
+    |//try what will happen
+    br
+    |printArray('some other value than array');
+
+  p {{_'You can provide other values such as numbers or booleans and watch what will happen'}}.
+    |{{{_'Nothing will happen because <i>arr.length</i> will return undefined'}}}.
+    |{{{_'Condition in <b>for</b> loop will be <b>0 &lt; undefined</b> and it evaluates to <i>false</i>'}}}.
+    |{{{_'You will learn how to check parameters and handle errors in Errors lesson'}}}.
+
+  h3 {{_'Functions can return values'}}
+  p {{{_'There is a keyword <b>return</b> that can be used inside function to return value'}}}.
+  +codeInText
+    |function sum(a, b) {
+    br
+    |&#09;return a + b;
+    br
+    |}
+    br
+    br
+    |//we can just print returned
+    br
+    |//value with console.log
+    br
+    |console.log(sum(2, 3));
+    br
+    br
+    |//or we can store returned value
+    br
+    |//into variable
+    br
+    |var result = sum(6, 2);
+    br
+    |console.log(result);
+
+  p Keyword <b>return</b> means that it returns from function some value and ends function execution.
+  p Function <i>isEven</i> below returns <i>true</i> if parameter <i>num</i> is even, otherwise returns <i>false</i>:
+  +codeInText
+    |function isEven(num) {
+    br
+    |&#09;if (num % 2 === 0) {
+    br
+    |&#09;&#09;return true;
+    br
+    |&#09;}
+    br
+    |&#09;return false;
+    br
+    |}
+    br
+    |console.log('isEven(2) ' + isEven(2));
+    br
+    |console.log('isEven(3) ' + isEven(3));
+
+  p If division reminder of <i><b>num / 2</b></i> is <b>0</b>, then <i>num</i> is even number and we return <i>true</i> and end function execution.
+    |<i>return false;</i> is never reached for even numbers.
+
+  p Beauty of programming is that you can solve the same problem in many ways. We can simplify our <i>isEven</i> function:
+
+  +codeInText
+    |function isEven(num) {
+    br
+    |&#09;return num % 2 === 0;
+    br
+    |}
+    br
+    |console.log('isEven(2) ' + isEven(2));
+    br
+    |console.log('isEven(3) ' + isEven(3));
+
+  h3 {{_'Built in functions'}}
+  p {{_'Many programming languages have built in functions'}}.
+    |{{_'JavaScript has these for example'}}:
+  +codeInText
+    |alert('Hello world');
+
+  +codeInText
+    |var name = prompt('What is your name?');
+    br
+    |alert('Hello ' + name);
+
+  p {{_'Notice that prompt and alert functions stop execution of code'}}:
+  +codeInText
+    |console.log('start');
+    br
+    |alert('Hello world');
+    br
+    |console.log('continue');
+    br
+    |var name = prompt('What is your name?');
+    br
+    |console.log('Hello ' + name);
+
+  h2 {{_'Conventions'}}
+  +codeInText
+    |//{{_'bad'}} - {{_'space after function name'}}
+    br
+    |function sum (a, b) {
+    br
+    |&#09;//function code
+    br
+    |}
+    br
+    br
+    |//{{_'bad'}} - {{_'no space before curly bracket'}}
+    br
+    |function sum(a, b){
+    br
+    |&#09;//function code
+    br
+    |}
+    br
+    br
+    |//{{_'bad'}} - {{_'no space between parameters'}}
+    br
+    |function sum(a,b) {
+    br
+    |&#09;//function code
+    br
+    |}
+    br
+    br
+    |//{{_'good'}}
+    br
+    |function sum(a, b) {
+    br
+    |&#09;//function code
+    br
+    |}
+
+  p Calling function:
+  +codeInText
+    |//bad - no space between parameters
+    br
+    |sum(a,b);
+    br
+    br
+    |//good
+    br
+    |sum(a, b);
+    br
+    br
+    |//bad - space between parenthesis
+    br
+    |sum( );
+    br
+    br
+    |//good
+    br
+    |sum();
+
+  +conventionsNote

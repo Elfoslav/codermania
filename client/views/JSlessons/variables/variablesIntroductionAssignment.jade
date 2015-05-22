@@ -1,0 +1,12 @@
+template(name="variablesIntroductionAssignment")
+  p <b>Line 1</b>: {{_'Define empty variable (without value) with name'}} <i>emptyVariable</i>.
+  p <b>Line 2</b>: {{{_'Print <i>emptyVariable</i> with'}}} console.log().
+
+  hr
+  p
+    span.glyphicon.glyphicon-info-sign
+    <b>{{_'Hint'}}</b>:
+    |{{{_'We define empty variable with name <i>hello</i> and print it with'}}} console.log():
+  pre.code-in-text.js
+    |var hello;
+    |console.log(hello);

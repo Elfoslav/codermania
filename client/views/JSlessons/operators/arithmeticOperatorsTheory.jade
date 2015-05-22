@@ -1,0 +1,63 @@
+template(name="arithmeticOperatorsTheory")
+  p {{_'We know classic arithmetic operators like'}} +, - , *, /
+  +codeInText
+    |console.log(1 + 2);
+    br
+    |console.log(1 - 2);
+    br
+    |console.log(5 * 3);
+    br
+    |console.log(5 / 2);
+  p {{_'We have special operators in programming languages like'}}:
+  ul
+    li % ({{_'Modulus'}})
+    li ++ ({{_'Increment'}})
+    li -- ({{_'Decrement'}})
+  p {{_'The modular operator (%) returns division reminder'}}.
+  p {{_'Try code below in code editor'}}:
+  +codeInText
+    |console.log(5 % 2);
+    br
+    |console.log(6 % 2);
+    br
+    |console.log(11 % 4);
+  p {{_"Let's explain modulo operator"}}.
+  p {{_'5 / 2 is 2 and division reminder is 1'}}.
+  p {{_'6 / 2 is 3 and division reminder is 0'}}.
+  p {{_'11 / 4 is 2 and division reminder is 3'}}.
+  p {{_'The increment operator (++) increments value'}}:
+  +codeInText
+    |var x = 1;
+    br
+    |x++;
+    br
+    |console.log(x);
+  p {{_'Code above does exactly the same like code below'}}:
+  +codeInText
+    |var x = 1;
+    br
+    |//{{_'x++ is just shorcut of this expression'}}
+    br
+    |x = x + 1;
+    br
+    |console.log(x);
+  p x++ vs. ++x:
+  +codeInText
+    |var x = 1;
+    br
+    |var y = x++;
+    br
+    |console.log(x);
+    br
+    |console.log(y);
+  p {{_'Notice the difference between x++ and ++x'}}:
+  +codeInText
+    |var x = 1;
+    br
+    |var y = ++x;
+    br
+    |console.log(x);
+    br
+    |console.log(y);
+  p {{_'x++ first returs value and then increments value'}}.
+  p {{_'++x first increments value and then returns value'}}.

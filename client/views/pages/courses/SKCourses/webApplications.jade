@@ -1,0 +1,39 @@
+template(name="webApplications")
+  .row
+    .col-sm-8
+      h1 Tvorba webových aplikácií
+
+      h2 Pre koho je kurz určený?
+      p Pre ľudí, ktorí si chcú zrealizovať vlastný webový projekt.
+
+      h2 Čo musím vedieť?
+      ul
+        li
+          a(href="{{pathFor 'webPages'}}") Základy HTML
+        li
+          a(href="{{pathFor 'webPages'}}")  Základy CSS
+        li Dobrá znalosť JavaScriptu (polia, funkcie, objekty, ...)
+
+      h2 V kurze sa naučíš
+      ul
+        li Naprogramovať webovú aplikáciu, ktorá bude komunikovať s databázou a zobrazovať zmeny v reálnom čase (napr. chat).
+        li Základy Meteor.js
+        li Ako dostať aplikáciu z Tvojho počítača na internet (deploy).
+        li Rozdiel medzi aplikáciou v JavaScripte versus v ostatných jazykoch.
+
+      h2 Trvanie kurzu
+      p 2 hodiny
+
+      h2 Miesta kurzu
+      p Dubnica nad Váhom, Brno, po dohode aj iné.
+      p Presnejšie miesto a termín budú upresnené neskôr.
+
+      h2 Cena
+      p <b>Dobrovoľná</b>. Krátke kurzy sú za dobrovoľný príspevok, aby sa ich mohol zúčastniť každý a vyskúšať si, či sa chce programovaniu/kódovaniu venovať ďalej.
+
+      +SKCourseInfo
+
+      +SKCoursesBackBtn
+    .col-sm-4
+      h2 Ďalšie kurzy
+      +listOfCourses

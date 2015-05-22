@@ -1,0 +1,37 @@
+template(name="studyGroupFormModal")
+  #study-group-modal.modal.fade.in(aria-hidden='false', role='dialog', tabindex='-1')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(data-dismiss='modal', type='button')
+            span(aria-hidden='true') &times;
+            span.sr-only Close
+          h4.modal-title Create/Edit study group
+        .modal-body
+          form#study-group-form
+            .row
+              .col-sm-6
+                .form-group
+                  label Group name *:
+                  input.form-control(type='text', value='', name='title')
+              .col-sm-6
+                .form-group
+                  label Topics (divided by comma):
+                  input.form-control(type='text', value='', name="topics", placeholder="HTML, CSS, JavaScript")
+            .row
+              .col-sm-6
+                .form-group
+                  label Capacity:
+                  input.form-control(type='text', name='capacity', placeholder="9999")
+              .col-sm-6
+            .form-group
+              label Description:
+              textarea.form-control(name='description' rows="5")
+            .form-group
+              label(for='study-group-is-public')
+                input#study-group-is-public(type='checkbox', name='isPublic')
+                | Public study group
+            input.invisible(type='submit', value='Submit', name='_submit')
+        .modal-footer
+          button.btn.btn-default(data-dismiss='modal', type='button') Close
+          button#study-group-form-submit-btn.btn.btn-primary(type='button') Submit

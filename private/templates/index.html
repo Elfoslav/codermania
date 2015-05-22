@@ -1,0 +1,64 @@
+{{{getDocType}}}
+<head>
+  <meta name="google-site-verification" content="E8SuEujveRTFPnAGeez3bmPWF3nlKpbUD4AhUVS4bbg"/>
+  <title>Learn to code | CoderMania</title>
+  <meta name="description" content="Learn to code interactively for free"/>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+
+<div id="container">
+  <div class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" data-toggle="collapse" data-target="#main-nav" class="navbar-toggle collapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span><span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="navbar-brand">CoderMania<small style="position: relative; top: 5px;" class="red">beta</small></a>
+      </div>
+      <div id="main-nav" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/javascript/lesson/1a/hello-world">Lessons</a></li>
+          <li><a href="/javascript/exercise/1c/expressions">Exercises</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+        </ul>
+        <div class="navbar-text navbar-right"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    {{> Template.dynamic template=template data=data}}
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <h4 class="no-margin-top">{{_'Similar websites'}}:</h4>
+          <ul class="list-unstyled">
+            <li><a href="http://code.org" target="_blank">Code.org</a></li>
+            <li><a href="http://www.codecademy.com" target="_blank">Codecademy</a></li>
+            <li><a href="http://www.codecombat.com" target="_blank">CodeCombat</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <ul class="list-unstyled">
+            <li><a href="/why-codermania">{{_'Why CoderMania?'}}</a></li>
+            <li><a href="/why-javascript">{{_'Why JavaScript?'}}</a></li>
+            <li><a href="/why-learn-to-code">{{_'Why learn to code?'}}</a></li>
+            <li><a href="/contact">{{_'Want to join as a teacher?'}}</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <ul class="list-unstyled">
+            <li><a href="https://facebook.com/codermania" target="_blank">{{_'Our'}} Facebook</a></li>
+            <li><a href="https://twitter.com/codermania_com" target="_blank">{{_'Our'}} Twitter</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

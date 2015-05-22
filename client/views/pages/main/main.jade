@@ -1,0 +1,117 @@
+template(name="main")
+  #homepage
+    .row
+      .col-sm-6
+        +sharejsAce(docid=document onRender=config onConnect=setMode id="editor")
+      .col-sm-6
+        h2.no-margin-top {{_'Learn to code on CoderMania'}}
+        ul.list-unstyled.bigger-font
+          li
+            span.green.glyphicon.glyphicon-ok
+            | &nbsp;{{_'Learn to code interactively'}}
+          li
+            span.green.glyphicon.glyphicon-ok
+            | &nbsp;{{_'Many exercises'}}
+          li
+            span.green.glyphicon.glyphicon-ok
+            | &nbsp;{{_'Mentoring'}} ({{_'after registration'}})
+          li
+            span.green.glyphicon.glyphicon-ok
+            | &nbsp;{{_'Tutorial for becoming professional coder'}}
+        .row
+          .col-sm-6
+            p
+              a.btn.btn-primary.btn-block.btn-lg.sign-up-btn(href="#") {{_ "Sign up"}}
+          .col-sm-6
+            p
+              a.btn.btn-default.btn-block.btn-lg(href="{{pathFor 'lessonJS' _id='1a' slug='hello-world'}}") {{_ "Try now!"}}
+    .row
+      .col-sm-4.center-text
+        h2
+          a(href="{{pathFor 'lessonJS' _id='1a' slug='hello-world'}}") Learn
+        a(href="{{pathFor 'lessonJS' _id='1a' slug='hello-world'}}")
+          img(alt="html5 css javascript" src="/img/courses/javascript-logo.png")
+      .col-sm-4.center-text
+        h2
+          a(href="{{pathFor 'lessonHTML' _id='1a' slug='hello-world'}}") Learn
+        a(href="{{pathFor 'lessonHTML' _id='1a' slug='hello-world'}}")
+          img(alt="html5 css javascript" src="/img/courses/html5-logo.png")
+      .col-sm-4.center-text
+        h2
+          a(href="{{pathFor 'lessonCSS' _id='1a' slug='hello-world'}}") Learn
+        a(href="{{pathFor 'lessonCSS' _id='1a' slug='hello-world'}}")
+          img(alt="html5 css javascript" src="/img/courses/css3-logo.png")
+    hr
+
+    h2 Join study groups
+    .row
+      each homepageStudyGroups
+        .col-sm-4
+          h3
+            a(href="{{pathFor 'studyGroup' _id=_id}}") {{title}}
+          pre.unstyled-pre {{linkify description}}
+    br
+    .row
+      .col-sm-4.col-sm-offset-4
+        a.btn.btn-default.btn-lg.btn-block(href="{{pathFor 'studyGroups' lang=lang}}") See all study groups
+
+    hr
+    .row
+      .col-sm-6
+        h2.no-margin-top {{_'Why you should learn to code'}}
+        br
+        ul.list-unstyled.bigger-font.learn-to-code-reasons
+          li
+            span.glyphicon.glyphicon-cog
+            | &nbsp;{{_'You can build something that does not exist yet'}}
+          li
+            span.glyphicon.glyphicon-home
+            | &nbsp;{{_'You can work from home'}}
+          li
+            span.glyphicon.glyphicon-usd
+            | &nbsp;{{_'You can earn much money'}}
+          li
+            span.glyphicon.glyphicon-user
+            | &nbsp;{{_'You can become your own boss'}}
+          li
+            span.glyphicon.glyphicon-globe
+            | &nbsp;{{_'You can change the world'}}
+          li
+            span.glyphicon.glyphicon-briefcase
+            | &nbsp;{{_'You do not need a degree to become a coder'}}
+          li
+            span.glyphicon.glyphicon-time
+            | &nbsp;{{_'You can become a professional coder in 1 year'}}
+          li
+            span.glyphicon.glyphicon-plus
+            | &nbsp;{{_'Add your own reason'}}...
+      .col-sm-6
+        h2.no-margin-top {{_'How and why CoderMania was born'}}
+        p.bigger-font Support CoderMania on
+          a(href="https://www.patreon.com/elfoslav") Patreon.
+        br
+        iframe(height="315" src="https://www.youtube.com/embed/WIb0VHn8_Dw" frameborder="0" allowfullscreen)
+    hr
+    .row
+      .col-sm-6
+        h2.no-margin-top {{_'JavaScript video tutorial'}}
+        iframe(width="560" height="315" src="https://www.youtube.com/embed/HNiegbdH2_8?list=PLoy-bs-bDKTigt6H1AFOdfNeR3Fy9nyLM" frameborder="0" allowfullscreen)
+      .col-sm-6
+        h2.no-margin-top CoderMania's goal for 2015
+        p CoderMania will be
+          a(href="{{pathFor 'guide' lang=lang}}") <b>Ultimate guide for web developer</b>.
+        p You will learn
+          a(href="{{pathFor 'lessonJS' _id='1a' slug='hello-world'}}") JavaScript,
+          a(href="{{pathFor 'lessonHTML' _id='1a' slug='hello-world'}}") HTML,
+          a(href="{{pathFor 'lessonCSS' _id='1a' slug='hello-world'}}") CSS
+          |and
+          a(href="{{pathFor 'guide' lang=lang}}") more.
+        p You will find useful advices and links for advanced stuff for learning.
+        br
+        .row
+          .col-sm-6
+            p
+              a.btn.btn-primary.btn-block.btn-lg(href="{{pathFor 'lessonJS' _id='1a' slug='hello-world'}}") {{_ "Try CoderMania"}}
+          .col-sm-6
+            p
+              a.btn.btn-default.btn-block.btn-lg(href="{{pathFor 'guide' lang=lang}}") {{_ "Check out our guide"}}

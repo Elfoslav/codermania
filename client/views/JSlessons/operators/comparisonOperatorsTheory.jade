@@ -1,0 +1,112 @@
+template(name="comparisonOperatorsTheory")
+  p {{_'Comparison operators are following'}}:
+  table.table.table-striped.table-bordered
+    thead
+      tr
+        th {{_'Operator'}}
+        th {{_'Description'}}
+    tbody
+      tr
+        th &lt;
+        td {{_'less than'}}
+      tr
+        th &gt;
+        td {{_'greater than'}}
+      tr
+        th &lt;&equals;
+        td {{_'less than or equal to'}}
+      tr
+        th &gt;&equals;
+        td {{_'greater than or equal to'}}
+      tr
+        th &equals;&equals;
+        td {{_'equal to'}}
+      tr
+        th &equals;&equals;&equals;
+        td {{_'equal value and equal type'}}
+      tr
+        th !&equals;
+        td {{_'not equal'}}
+      tr
+        th !&equals;&equals;
+        td {{_'not equal value or not equal type'}}
+  p {{_'They compare two values and return boolean result (true or false)'}}.
+    |{{_'You will learn about booleans in another lessons'}}.
+    |{{{_'For now, you just need to know that <i>true</i> is true and <i>false</i> is false'}}}.
+  p {{{_'Operator <b>less than (&lt;)</b> compares two values and returns true if the first value is less than the second value'}}}:
+  +codeInText
+    |console.log(1 &lt; 2);
+    br
+    |console.log(2 &lt; 1);
+    br
+    |console.log(1 &lt; 1);
+  p {{{_'Operator <b>greater than (&gt;)</b> compares two values and returns true if the first value is greater than the second value'}}}:
+    +codeInText
+      |console.log(1 &gt; 2);
+      br
+      |console.log(2 &gt; 1);
+      br
+      |console.log(1 &gt; 1);
+  p {{{_'Operator <b>less than or equal to (&lt;=)</b> compares two values and returns true if the first value is less or equal to the second value'}}}:
+    +codeInText
+      |console.log(1 &lt;= 2);
+      br
+      |console.log(2 &lt;= 1);
+      br
+      |console.log(1 &lt;= 1);
+  p {{{_'Operator <b>greater than or equal to (&gt;=)</b> compares two values and returns true if the first value is greater or equal to the second value'}}}:
+    +codeInText
+      |console.log(1 &gt;= 2);
+      br
+      |console.log(2 &gt;= 1);
+      br
+      |console.log(2 &gt;= 1);
+  hr
+  p {{_'The first four comparison operators are easy to understand'}}.
+    |{{{_"Let's look at operator <b>equals</b>"}}}:
+  +codeInText
+    |console.log(5 == 4);
+    br
+    |console.log(5 == 5);
+    br
+    |console.log(5 === 4);
+    br
+    |console.log(5 === 5);
+  p {{{_'Operator <b>==</b> and operator <b>===</b> seems to be the same at first sight'}}}.
+    |{{_'But they are not the same'}}.
+  p {{{_'Operator <b>==</b> compares only values'}}}.
+  p {{{_'Operator <b>===</b> compares values <b>and</b> types'}}}.
+  +codeInText
+    |console.log(5 == 5);
+    br
+    |console.log(5 == "5");
+    br
+    |console.log(5 === 5);
+    br
+    |console.log(5 === "5");
+  p {{_'We have different types of values in programming languages'}}.
+    |{{{_"Value <b>5</b> has type \"number\" and value <b>\"5\"</b> has type \"string\" (text)"}}}.
+  p {{{_'If we compare different types with operator <b>==</b> we get <i>true</i>'}}}:
+  +codeInText
+    |console.log(5 == "5");
+  p {{{_'If we compare different types with operator <b>===</b> we get <i>false</i> because type number is not equal to type string'}}}:
+  +codeInText
+    |console.log(5 === "5");
+  hr
+
+  p {{{_'Operator <b>!= (not equal)</b> is negation of operator <b>==</b>'}}}:
+  +codeInText
+    |//{{_"It is not true that 5 != 5"}}
+    br
+    |console.log(5 != 5);
+    br
+    |console.log(5 != "5");
+  p {{{_'Operator <b>!== (not equal value or not equal type)</b> is negation of operator <b>===</b>'}}}:
+  +codeInText
+    |//{{_"It is not true that 5 !== 5"}}
+    br
+    |console.log(5 !== 5);
+    br
+    |//{{_"It is true that 5 !== \"5\""}}
+    br
+    |console.log(5 !== "5");

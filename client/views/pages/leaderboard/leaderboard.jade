@@ -1,0 +1,11 @@
+template(name="leaderboard")
+  ol
+    each students
+      li
+        if status.online
+          span.green-dot
+        a(href="{{pathFor 'studentProfile' lang=lang username=this.username}}") {{trimEmail this.username}}
+          if points
+            span.badge {{points}} pts
+          else
+            span.badge 0 pts

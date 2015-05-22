@@ -1,0 +1,75 @@
+template(name="integerVariablesTheory")
+  p {{_'Integer variables are numbers'}}:
+  +codeInText
+    |var x = 1;
+    br
+    |var y = 2;
+    br
+    |var z = x + y;
+    br
+    |console.log(z);
+  p {{_'We can use mathematical operations like plus, minus,...'}}
+  p {{_'In example above, we define variables x, y, z with integer values'}}.
+    |{{{_'Variable <i>z</i> contains result of 1 + 2, because <i>x</i> is 1 and <i>y</i> is 2'}}}.
+    |{{_'Try the code in Code editor and print values with console.log()'}}.
+  p {{_'We can multiply integers'}}:
+  +codeInText
+    |var x = 2;
+    br
+    |var y = 3;
+    br
+    |var z = x * y;
+    br
+    |console.log(z);
+  p {{_'We can divide integers'}}:
+  +codeInText
+    |var x = 5;
+    br
+    |var y = 2;
+    br
+    |var z = x / y;
+    br
+    |console.log(z);
+  p {{_'And we can also use minus operator'}}:
+  +codeInText
+    |var x = 2;
+    br
+    |var y = 3;
+    br
+    |var z = x - y;
+    br
+    |console.log(z);
+  hr
+  h3 {{_'Precision'}}
+  p {{_'Integers are considered accurate up to 15 digits'}}:
+  +codeInText
+    |//{{_'x will be 999999999999999'}}
+    br
+    |var x = 999999999999999;
+    br
+    |//{{_'y will be 10000000000000000'}}
+    br
+    |var y = 9999999999999999;
+    br
+    |console.log(x);
+    br
+    |console.log(y);
+
+  h2 {{_'Conventions'}}
+  +codeInText
+    |//{{_'bad'}} - {{_'no space before and after'}}
+    br
+    |//{{_'operators'}}
+    br
+    |var x = 2;
+    br
+    |console.log(x+4*2);
+    br
+    br
+    |//{{_'good'}}
+    br
+    |var x = 2;
+    br
+    |console.log(x + 4 * 2);
+
+  +conventionsNote

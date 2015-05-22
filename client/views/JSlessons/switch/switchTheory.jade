@@ -1,0 +1,114 @@
+template(name="switchTheory")
+  p {{{_'<b>Switch</b> is something like condition'}}}.
+  p {{{_'<b>Switch...case</b> controls the flow of programs by allowing programmers to specify different code that should be executed in various conditions'}}}.
+
+  p {{_'Imagine, we want to check which button user pressed'}}.
+    |{{_'Each button has number 1,2,3'}},...
+  p {{_'In example bellow, we check if variable button is 1, 2 or something else'}}:
+  +codeInText
+    |var button = 2;
+    br
+    |switch (button) {
+    br
+    |&#09;case 1:
+    br
+    |&#09;&#09;console.log('{{_'Button 1 pressed'}}');
+    br
+    |&#09;&#09;//{{_'process button 1 functionality here'}}
+    br
+    br
+    |&#09;&#09;//{{_'we have to break switch'}}
+    br
+    |&#09;&#09;break;
+    br
+    |&#09;case 2:
+    br
+    |&#09;&#09;console.log('{{_'Button 2 pressed'}}');
+    br
+    |&#09;&#09;//{{_'process button 2 functionality here'}}
+    br
+    br
+    |&#09;&#09;//{{_'we have to break switch'}}
+    br
+    |&#09;&#09;break;
+    br
+    |&#09;default:
+    br
+    |&#09;&#09;console.log('{{_'Unknown button pressed'}}');
+    br
+    |}
+
+  p {{_'The syntax is'}}:
+  pre
+    |switch ({{_'value'}}) {
+    |   case <i>{{_'value'}}1</i>:
+    |      //{{_'statements'}}
+    |      break;
+    |   case <i>{{_'value'}}2</i>:
+    |      //{{_'statements'}}
+    |      break;
+    |   ... {{_'more case blocks'}}
+    |   //{{_'optional default block'}}
+    |   default:
+    |      //{{_'statements'}}
+    |}
+
+  p {{{_'<b>Break</b> command is important'}}}.
+    |{{{_'If you omit <b>break</b>, code execution will continue until it finds next <b>break</b>'}}}:
+
+  +codeInText
+    |var button = 1;
+    br
+    |switch (button) {
+    br
+    |&#09;case 1:
+    br
+    |&#09;&#09;console.log('{{_'Button 1 pressed'}}');
+    br
+    |&#09;&#09;//{{_'process button 1 functionality here'}}
+    br
+    |&#09;&#09;//{{_'Ouch! We forgot to break switch'}}
+    br
+    |&#09;case 2:
+    br
+    |&#09;&#09;console.log('{{_'Button 2 pressed'}}');
+    br
+    |&#09;&#09;//{{_'process button 2 functionality here'}}
+    br
+    br
+    |&#09;&#09;//{{_'we have to break switch'}}
+    br
+    |&#09;&#09;break;
+    br
+    |&#09;default:
+    br
+    |&#09;&#09;console.log('{{_'Unknown button pressed'}}');
+    br
+    |}
+
+  p.bold {{{_'So, do not forget <b>break</b> statement'}}}.
+  p {{{_'<b>Default</b> statement is optional and it is processed only when none of <b>cases</b> match given value in <b>switch</b> statement'}}}.
+
+  p {{{_'<b>Switch</b> statement can be written as multiple <b>else if</b> conditions'}}}:
+  +codeInText
+    |var button = 1;
+    br
+    |if (button === 1) {
+    br
+    |&#09;console.log('{{_'Button 1 pressed'}}');
+    br
+    |&#09;//{{_'process button 1 functionality here'}}
+    br
+    |} else if (button === 2) {
+    br
+    |&#09;console.log('{{_'Button 2 pressed'}}');
+    br
+    |&#09;//{{_'process button 2 functionality here'}}
+    br
+    |} else {
+    br
+    |&#09;console.log('{{_'Unknown button pressed'}}');
+    br
+    |}
+
+  p {{{_'If you have code that can have multiple cases based on certain value, use <b>switch</b> statement'}}}.
