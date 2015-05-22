@@ -37,6 +37,12 @@ only if you want to fix a bug.
 If you have local MongoDB installed, you can run this project with `run.sh` script: `./run.sh`.
 Otherwise run app with `meteor --settings settings.json`
 
+###CoffeeScript
+
+If you don't know [CoffeeScript](http://coffeescript.org/),
+you can use [js2.coffee](http://js2.coffee/) to translate
+JS to Coffee and Coffee to JS. See my workflow: https://youtu.be/ghYWuUaD3rc
+
 ###Feature requests
 
 I don't know what is the best for feature requests. [Trello](https://trello.com/b/h3c4Il6k/codermania) or [Github issues](https://github.com/Elfoslav/codermania/issues)?
