@@ -268,21 +268,46 @@ Router.route '/:lang?/blog',
 
 Router.route '/:lang?/blog/how-to-learn-to-code-properly',
   name: 'howToLearnToCodeProperly'
+  layoutTemplate: 'blogLayout'
+  data: ->
+    title: 'How to learn to code properly'
+    date: '30th March 2015'
   onAfterAction: ->
     App.setPageTitle('How to learn to code properly')
 
+Router.route '/:lang?/blog/introducing-study-groups',
+  name: 'introducingStudyGroups'
+  layoutTemplate: 'blogLayout'
+  data: ->
+    title: 'Introducing study groups'
+    date: '24th May 2015'
+  onAfterAction: ->
+    App.setPageTitle('Why CoderMania?')
+
 Router.route '/:lang?/blog/why-codermania',
   name: 'whyCoderMania'
+  layoutTemplate: 'blogLayout'
+  data: ->
+    title: 'Why Codermania?'
+    date: '28th March 2015'
   onAfterAction: ->
     App.setPageTitle('Why CoderMania?')
 
 Router.route '/:lang?/blog/why-javascript',
   name: 'whyJavaScript'
+  layoutTemplate: 'blogLayout'
+  data: ->
+    title: 'Why JavaScript?'
+    date: '26th March 2015'
   onAfterAction: ->
     App.setPageTitle('Why JavaScript?')
 
 Router.route '/:lang?/blog/why-learn-to-code',
   name: 'whyLearnToCode'
+  layoutTemplate: 'blogLayout'
+  data: ->
+    title: 'Why learn to code?'
+    date: '24th March 2015'
   onAfterAction: ->
     App.setPageTitle('Why learn to code?')
 

@@ -12,12 +12,6 @@ template(name="blogLayout")
       .row
         .col-sm-8
           +yield
-
-          br
-          +shareit shareData
-
-          br
-          +disqus
         .col-sm-4 {{> listOfArticles}}
     +appUpdatePrompt
     +footer

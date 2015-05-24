@@ -1,40 +1,31 @@
 template(name="whyLearnToCode")
-  h1 {{_'Why learn to code'}}?
+  h2 {{_'Above-average salary'}}
+  p {{_'Many of you already know that coders have above-average salary'}}.
+  p {{_'For example JavaScript developers earn'}}
+    a(href="http://www.indeed.com/salary/q-Javascript-Developer-l-United-States.html" target="_blank")
+      |{{_'more than $90,000/year in USA'}}.
+
+  h2 {{_'Many open job positions'}}
   p
-    small 24th March 2015
+    a(href="https://code.org/stats" target="_blank") Code.org {{_'infographic'}}
+    |{{_'says that there will be more than 1,000,000 open job positions in year 2020 in USA'}}.
+    |{{_'This is huge number and huge opportunity for you if you will learn to code'}}.
+    |{{_'This opportunity is not just in USA but anywhere in the world'}}.
 
-  p {{> shareit shareData}}
+  h2 {{_'Coding is fun'}}
+  p {{_'Believe or not, coding is fun'}}.
+    |{{_'Progress of technology is fast'}}.
+    |{{_'You can code your watches, drones'}}, arduino,...
 
-  .row
-    .col-sm-8
-      h2 {{_'Above-average salary'}}
-      p {{_'Many of you already know that coders have above-average salary'}}.
-      p {{_'For example JavaScript developers earn'}}
-        a(href="http://www.indeed.com/salary/q-Javascript-Developer-l-United-States.html" target="_blank")
-          |{{_'more than $90,000/year in USA'}}.
+  h2 {{_'Coders get paid while learning something new'}}
+  p {{_'Yes'}}. {{_'Coders always learn something new and get paid for it'}}.
 
-      h2 {{_'Many open job positions'}}
-      p
-        a(href="https://code.org/stats" target="_blank") Code.org {{_'infographic'}}
-        |{{_'says that there will be more than 1,000,000 open job positions in year 2020 in USA'}}.
-        |{{_'This is huge number and huge opportunity for you if you will learn to code'}}.
-        |{{_'This opportunity is not just in USA but anywhere in the world'}}.
+  h2 {{_'Coders change life'}}
+  p {{_'Back in 2005 there was no Facebook and almost none of apps that we know today'}}.
+    |{{_'Applications can change our lives'}}. {{_'And applications are made by coders'}}.
 
-      h2 {{_'Coding is fun'}}
-      p {{_'Believe or not, coding is fun'}}.
-        |{{_'Progress of technology is fast'}}.
-        |{{_'You can code your watches, drones'}}, arduino,...
+  br
+  +shareit shareData
 
-      h2 {{_'Coders get paid while learning something new'}}
-      p {{_'Yes'}}. {{_'Coders always learn something new and get paid for it'}}.
-
-      h2 {{_'Coders change life'}}
-      p {{_'Back in 2005 there was no Facebook and almost none of apps that we know today'}}.
-        |{{_'Applications can change our lives'}}. {{_'And applications are made by coders'}}.
-
-      br
-      +shareit shareData
-
-      br
-      +disqus
-    .col-sm-4 {{> listOfArticles}}
+  br
+  +disqus

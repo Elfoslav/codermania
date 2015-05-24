@@ -1,46 +1,37 @@
 template(name="whyJavaScript")
-  h1 {{_'Why JavaScript'}}?
+  h2 {{_'JavaScript dominates the web'}}
   p
-    small 26th March 2015
+    a(href="http://www.code2014.com/" target="_blank") {{_'Code2014'}}
+    |{{{_"website asked <b>\"What programming languages did you use during 2014?\"</b>"}}}.
+    |{{_'The most used langauge is JavaScript'}}.
+    |{{_'It is because JavaScript is necessary for building any web application'}}.
+    |{{_'JavaScript, HTML and CSS are necessary tools for building web apps'}}.
+  p {{_'You can also read interesting answers on'}}
+    a(href="http://www.quora.com/Which-language-is-going-to-dominate-the-future-of-web-development-JavaScript-PHP-Ruby-Java-Scala-or-Python" target="_blank")
+      |Quora
+    |{{_'where JavaScript gets mentioned frequently'}}.
 
-  p {{> shareit shareData}}
+  h2 {{_'You do not need to install anything'}}
+  p {{_'You do not need to install anything if you want to start programming in JavaScript'}}.
+    |{{_'Everything you need is browser and text editor'}}.
 
-  .row
-    .col-sm-8
-      h2 {{_'JavaScript dominates the web'}}
-      p
-        a(href="http://www.code2014.com/" target="_blank") {{_'Code2014'}}
-        |{{{_"website asked <b>\"What programming languages did you use during 2014?\"</b>"}}}.
-        |{{_'The most used langauge is JavaScript'}}.
-        |{{_'It is because JavaScript is necessary for building any web application'}}.
-        |{{_'JavaScript, HTML and CSS are necessary tools for building web apps'}}.
-      p {{_'You can also read interesting answers on'}}
-        a(href="http://www.quora.com/Which-language-is-going-to-dominate-the-future-of-web-development-JavaScript-PHP-Ruby-Java-Scala-or-Python" target="_blank")
-          |Quora
-        |{{_'where JavaScript gets mentioned frequently'}}.
+  h2 {{_'JavaScript as the only language you need to know'}}
+  p {{_'JavaScript is one of the most universal programming languages in the world'}}.
+    |{{_'You can build web applications, mobile applications and desktop applications'}}.
+    |{{_'But the main advantage of JavaScript is on the web'}}.
+    |{{_'You can write'}} <a href="http://nodejs.org/" target="_blank">{{_'server-side'}}</a> JavaScript
+    |{{_'and classic client-side JavaScript'}}.
+    |{{_'You can write whole application in one language'}}.
+    |{{_'You do not need to learn other programming languages such as PHP, Ruby or Java'}}.
+    |{{_'But it is true that you should try more than 1 language'}}.
+    |{{_'It will give you another perspective for programming'}}.
+  p {{_'You can also build'}} <a href="http://cordova.apache.org/" target="_blank">{{_'mobile applications'}}</a>
+    |{{_'in JavaScript'}}.
+  p
+    img(src="http://dberkholz-media.redmonk.com/dberkholz/files/2014/04/github_new_repos-custom.png" alt="JS graph")
 
-      h2 {{_'You do not need to install anything'}}
-      p {{_'You do not need to install anything if you want to start programming in JavaScript'}}.
-        |{{_'Everything you need is browser and text editor'}}.
+  br
+  +shareit shareData
 
-      h2 {{_'JavaScript as the only language you need to know'}}
-      p {{_'JavaScript is one of the most universal programming languages in the world'}}.
-        |{{_'You can build web applications, mobile applications and desktop applications'}}.
-        |{{_'But the main advantage of JavaScript is on the web'}}.
-        |{{_'You can write'}} <a href="http://nodejs.org/" target="_blank">{{_'server-side'}}</a> JavaScript
-        |{{_'and classic client-side JavaScript'}}.
-        |{{_'You can write whole application in one language'}}.
-        |{{_'You do not need to learn other programming languages such as PHP, Ruby or Java'}}.
-        |{{_'But it is true that you should try more than 1 language'}}.
-        |{{_'It will give you another perspective for programming'}}.
-      p {{_'You can also build'}} <a href="http://cordova.apache.org/" target="_blank">{{_'mobile applications'}}</a>
-        |{{_'in JavaScript'}}.
-      p
-        img(src="http://dberkholz-media.redmonk.com/dberkholz/files/2014/04/github_new_repos-custom.png" alt="JS graph")
-
-      br
-      |{{> shareit shareData}}
-
-      br
-      +disqus
-    .col-sm-4 {{> listOfArticles}}
+  br
+  +disqus

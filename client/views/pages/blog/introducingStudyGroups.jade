@@ -1,25 +1,11 @@
 template(name="introducingStudyGroups")
-  h1 {{_'Introducing study groups'}}
+  h2 {{_'What are study groups?'}}
   p
-    small 18th May 2015
+    a(href="{{pathFor 'group'}}") Study group.
+  p TODO
 
-  p {{> shareit shareData}}
+  br
+  +shareit shareData
 
-  .row
-    .col-sm-8
-      h2 {{_'Study with other students'}}
-      p
-        a(href="http://www.codecademy.com" target="_blank") Codecademy.
-
-      h2 {{_'Books'}} vs. CoderMania
-      p {{_'You can read 600 pages book but it does not mean you will know how to code'}}.
-        |{{_'You need to practice, a lot'}}. {{_'Switching from book to code is not very convenient and efficient'}}.
-        |{{_'On CoderMania, you have everything in one place - theory, assignments, exercises and code editor'}}.
-        |{{_'Plus you have ability to contact teacher if there is something unclear to you'}}.
-
-      br
-      |{{> shareit shareData}}
-
-      br
-      +disqus
-    .col-sm-4 {{> listOfArticles}}
+  br
+  +disqus
