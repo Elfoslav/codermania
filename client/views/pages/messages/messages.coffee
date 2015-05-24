@@ -16,7 +16,9 @@ Template.messages.helpers
       )
     return usernames
   sendersList: ->
-    SendersList.find()
+    SendersList.find {},
+      sort:
+        msgTimestamp: -1
   selectedUsername: ->
     Router.current().params.username == @toString()
   showUsername: (receiverId) ->

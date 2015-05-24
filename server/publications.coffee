@@ -31,14 +31,31 @@ Meteor.publish 'sendersList', ->
       'roles.all': 1
       'username': 1
       'status': 1
-  }).fetch().map (user)->
+    limit: 50
+  }).fetch().map (user) ->
     unreadMsgCount = Messages.find({
       senderId: user._id
       receiverId: self.userId
       isRead: false
     }).count()
+
+    msgCount = Messages.find({
+      senderId: user._id
+      receiverId: self.userId
+    }).count()
+
+    firstMsg = Messages.findOne
+      senderId: user._id
+      receiverId: self.userId
+    ,
+      fields:
+        timestamp: 1
+      sort:
+        timestamp: -1
+
     user.unreadMsgCount = unreadMsgCount
-    unless unreadMsgCount is 0
+    user.msgTimestamp = firstMsg?.timestamp
+    if msgCount
       self.added('sendersList', user._id, user)
     return user
   @ready()

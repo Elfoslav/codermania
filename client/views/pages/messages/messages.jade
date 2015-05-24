@@ -20,12 +20,13 @@ template(name="messages")
 
       if sendersList.count
         hr
-        h4 {{_'Unread messages from'}}:
+        h4 {{_'Messages from'}}:
       each sendersList
         p
           a(href="{{pathFor 'messages' lang=lang username=this.username}}")
             |{{this.username}}
-            span.badge {{unreadMsgCount}}
+            if unreadMsgCount
+              span.badge(title="Unread messages") {{unreadMsgCount}}
     .col-sm-8
       each messages
         |{{makeRead}}
