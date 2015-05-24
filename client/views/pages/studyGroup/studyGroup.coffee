@@ -51,7 +51,7 @@ Template.studyGroup.events
       if err
         bootbox.alert err.reason
         console.log err
-  'submit .study-group-chat-form': (evt) ->
+  'submit #study-group-chat-form': (evt) ->
     evt.preventDefault()
     textarea = evt.target.text
     return bootbox.alert('Write something') if $.trim(textarea.value) is ''

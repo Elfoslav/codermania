@@ -183,7 +183,9 @@ Meteor.publish 'userStudyGroups', (username) ->
 Meteor.reactivePublish 'studyGroup', (id) ->
   studyGroup = StudyGroups.findOne(id)
   messagesCursor = StudyGroupMessages.find { studyGroupId: id },
-    limit: 500
+    limit: 120
+    sort:
+      timestamp: 1
     reactive: true #required for reactive-publish package
   userIds = studyGroup?.userIds || []
   #this is not reactive by default, there is a package for reactivity: https://atmospherejs.com/lepozepo/reactive-publish

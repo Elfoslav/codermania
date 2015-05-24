@@ -83,7 +83,7 @@
 #}
 @StudyGroups = new Mongo.Collection 'studyGroups',
   transform: (doc) ->
-    doc.messages = StudyGroupMessages.find({ studyGroupId: doc._id }, { sort: { timestamp: -1 } })
+    doc.messages = StudyGroupMessages.find({ studyGroupId: doc._id }, { sort: { timestamp: 1 } })
     return doc
 
 #studyGroupId: String

@@ -20,13 +20,10 @@ template(name="studyGroup")
         a.btn.btn-default(href="{{pathFor 'studyGroups'}}") &larr; All study groups
       hr
       h3 Chat
-      .row
-        .col-sm-6
-          form.study-group-chat-form
-            .form-group
-              textarea.message.form-control(rows="5" name="text" placeholder="{{_'write a message'}}")
-            .form-group
-              button.btn.btn-primary.btn-block(type="submit") {{_'Send'}}
+        small
+          |(
+          a(href="#study-group-chat-form") Write a message
+          |)
       each studyGroup.messages
         |{{makeRead}}
         p {{formatDate timestamp}}
@@ -39,6 +36,12 @@ template(name="studyGroup")
           |{{linkify text}}
       else
         p No messages, yet.
+
+      form#study-group-chat-form
+        .form-group
+          textarea.message.form-control(rows="5" name="text" placeholder="{{_'write a message'}}")
+        .form-group
+          button.btn.btn-primary.btn-block(type="submit") {{_'Send'}}
     .col-sm-4
       h3 Other study groups
       each studyGroups
