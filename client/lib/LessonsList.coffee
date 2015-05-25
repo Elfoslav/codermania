@@ -5,6 +5,8 @@ class @LessonsList
       return HTMLLessonsList.getLessons()
     if Router.current()?.route.getName() is 'lessonCSS'
       return CSSLessonsList.getLessons()
+    if Router.current()?.route.getName() is 'lessonWebDeveloper'
+      return WebDeveloperLessonsList.getLessons()
     return JSLessonsList.getLessons()
 
   @getLesson: (number) ->

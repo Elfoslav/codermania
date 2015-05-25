@@ -59,7 +59,6 @@ Router.route '/:lang?/html/lesson/:_id/:slug/:username?',
   onBeforeAction: ->
     Session.set('lessonSuccess', false)
     Session.set('exerciseSuccess', false)
-    Session.set('activeTab', 'theory')
     lesson = HTMLLessonsList._collection.findOne({ id: @params._id })
     if lesson
       Session.set('levelNumber', HTMLLessonsList.getLevelNum(lesson.num))
@@ -89,6 +88,24 @@ Router.route '/:lang?/css/lesson/:_id/:slug/:username?',
     @next()
   data: ->
     lessonType: 'css'
+
+Router.route '/:lang?/web-developer/lesson/:_id/:slug/:username?',
+  name: 'lessonWebDeveloper'
+  layoutTemplate: 'lessonLayout'
+  yieldTemplates:
+    'webDeveloperLevelsMenu': { to: 'levelsMenu' }
+  onBeforeAction: ->
+    Session.set('lessonSuccess', false)
+    Session.set('exerciseSuccess', false)
+    lesson = WebDeveloperLessonsList._collection.findOne({ id: @params._id })
+    if lesson
+      Session.set('levelNumber', WebDeveloperLessonsList.getLevelNum(lesson.num))
+      Session.set('lessonNumber', lesson.num)
+    else
+      Session.set('lessonNumber', 1)
+    @next()
+  data: ->
+    lessonType: 'web-developer'
 
 #this route needs to be defined after other lesson routes
 Router.route '/:lang?/:lessonType/lesson/:_id/:slug/:username?',
