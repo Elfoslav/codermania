@@ -1,51 +1,50 @@
 template(name="fullstackWebDeveloper")
-  .row
-    .col-sm-8
-      h1 Full-stack Web Developer
+  h1 Full-stack Web Developer
 
-      h2 Pre koho je kurz určený?
-      p Pre ľudí, ktorí sa chcú naučiť vytvoriť svoju vlastnú webovú stránku, alebo aplikáciu.
+  h2 Pre koho je kurz určený?
+  p Pre ľudí, ktorí sa chcú naučiť vytvoriť svoju vlastnú webovú stránku, alebo aplikáciu.
 
-      h2 Čo musím vedieť?
-      ul
-        li Znalosť angličtiny aspoň na úrovni porozumenia čítanému textu.
-          |Programátor sa len ťažko zaobíde bez angličtiny.
+  h2 Čo musím vedieť?
+  ul
+    li Znalosť angličtiny aspoň na úrovni porozumenia čítanému textu.
+      |Programátor sa len ťažko zaobíde bez angličtiny.
+    li Nie je potrebná predošlá skúsenosť s programovaním ani s tvorbou webu.
 
-      h2 V kurze sa naučíš:
-      ul
-        li HTML, CSS, JavaScript na dobrej úrovni
-        li Základy Wordpress
-        li Základy verzovacieho systému GIT
-        li Pracovať v príkazovom riadku
-        li Základy Twitter Bootstrap
-        li MongoDB a Meteor.js pre vývoj vlastných aplikácií
-        li Prehľad webových technológií
+  h2 V kurze sa naučíš:
+  ul
+    li HTML, CSS, JavaScript na dobrej úrovni
+    li Základy Wordpress
+    li Základy verzovacieho systému GIT
+    li Pracovať v príkazovom riadku
+    li Základy Twitter Bootstrap
+    li MongoDB a Meteor.js pre vývoj vlastných aplikácií
+    li Prehľad webových technológií
+    li Pracovné postupy
+    li Hľadať informácie
+    li A mnoho iných vecí...
 
-      h2 Cieľ kurzu
-      p Cieľom kurzu je odovzdať moje know-how ako vytvoriť jednoduché weby, blogy a webové aplikácie.
+  h2 Cieľ kurzu
+  p Cieľom kurzu je odovzdať moje know-how ako vytvoriť jednoduché weby, blogy a webové aplikácie.
 
-      h2 Trvanie kurzu
-      p Kurz trvá 5 týždňov v celkovej dĺžke 30 hodín.
-        |Lekcie prebiehajú 2x do týždňa vo večerných hodinách (17:00 - 20:00). 1 lekcia trvá 3 hodiny.
+  h2 Trvanie kurzu
+  p Kurz trvá 5 týždňov v celkovej dĺžke 30 hodín.
+    |Lekcie prebiehajú 2x do týždňa vo večerných hodinách (17:00 - 20:00). 1 lekcia trvá 3 hodiny.
 
-      h2 Miesta kurzu
-      p Brno, po dohode aj iné.
+  h2 Miesta kurzu
+  p Brno, po dohode aj iné.
 
-      each courses
-        p {{{description}}}
-      else
-        p Presnejšie miesto a termín budú upresnené neskôr.
+  each courses
+    p {{{description}}}
+  else
+    p Presnejšie miesto a termín budú upresnené neskôr.
 
-      h2 Cena
-      p <b>Dobrovoľná</b>. Kurz je za dobrovoľný príspevok. Je to môj experiment, nakoľko si ľudia vážia nadobudnuté vedomosti.
+  h2 Cena
+  p Bude upresnená.
+  //
+    p <b>Dobrovoľná</b>. Kurz je za dobrovoľný príspevok. Je to môj experiment, nakoľko si ľudia vážia nadobudnuté vedomosti.
 
-      +SKCourseInfo
+  +SKCourseInfo
 
-      //
-        p
-          a.btn.btn-success(data-target="#basic-programming-course-modal" data-toggle="modal" href="#") Prihlásiť sa na kurz
-
-      +SKCoursesBackBtn
-    .col-sm-4
-      h2 Ďalšie kurzy
-      +listOfCourses
+  //
+    p
+      a.btn.btn-success(data-target="#basic-programming-course-modal" data-toggle="modal" href="#") Prihlásiť sa na kurz

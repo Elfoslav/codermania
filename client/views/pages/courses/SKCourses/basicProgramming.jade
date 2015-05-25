@@ -1,85 +1,79 @@
 template(name="basicProgramming")
-  .row
-    .col-sm-8
-      h1 Základy programovania
+  h1 Základy programovania
 
-      h2 Pre koho je kurz určený?
-      p Pre ľudí, ktorí nemajú žiadne skúsenosti s programovaním a chcú zistiť, či by ich programovanie bavilo.
-      p V kurze sa naučíš:
+  h2 Pre koho je kurz určený?
+  p Pre ľudí, ktorí nemajú žiadne skúsenosti s programovaním a chcú zistiť, či by ich programovanie bavilo.
+  p V kurze sa naučíš:
 
-      ul
-        li Základné príkazy, bez ktorých sa neobíde žiadny programátor
-        li Základy JavaScriptu
-        li Že JavaScript nie je Java
+  ul
+    li Základné príkazy, bez ktorých sa neobíde žiadny programátor
+    li Základy JavaScriptu
+    li Že JavaScript nie je Java
 
-      p Na kurze sa budú preberať lekcie JavaScriptu z CoderManie (z tejto stránky).
-        |Ak dokážeš prejsť lekcie sám, nemusíš chodiť na kurz.
+  p Na kurze sa budú preberať lekcie JavaScriptu z CoderManie (z tejto stránky).
+    |Ak dokážeš prejsť lekcie sám, nemusíš chodiť na kurz.
 
-      h2 Trvanie kurzu
-      p 2 hodiny
+  h2 Trvanie kurzu
+  p 2 hodiny
 
-      h2 Miesta kurzu
-      p Dubnica nad Váhom, Brno, po dohode aj iné.
+  h2 Miesta kurzu
+  p Dubnica nad Váhom, Brno, po dohode aj iné.
 
-      each courses
-        p {{{description}}}
-      else
-        p Presnejšie miesto a termín budú upresnené neskôr.
+  each courses
+    p {{{description}}}
+  else
+    p Presnejšie miesto a termín budú upresnené neskôr.
 
-      h2 Cena
-      p <b>Dobrovoľná</b>. Krátke kurzy sú za dobrovoľný príspevok, aby sa ich mohol zúčastniť každý a vyskúšať si, či sa chce programovaniu/kódovaniu venovať ďalej.
+  h2 Cena
+  p <b>Dobrovoľná</b>. Krátke kurzy sú za dobrovoľný príspevok, aby sa ich mohol zúčastniť každý a vyskúšať si, či sa chce programovaniu/kódovaniu venovať ďalej.
 
-      +SKCourseInfo
+  +SKCourseInfo
 
-      //
-        p
-          a.btn.btn-success(data-target="#basic-programming-course-modal" data-toggle="modal" href="#") Prihlásiť sa na kurz
+  //
+    p
+      a.btn.btn-success(data-target="#basic-programming-course-modal" data-toggle="modal" href="#") Prihlásiť sa na kurz
 
-      #basic-programming-course-modal.modal.fade.in(aria-hidden='false', role='dialog', tabindex='-1')
-        .modal-dialog
-          .modal-content
-            .modal-header
-              button.close(data-dismiss='modal', type='button')
-                span(aria-hidden='true') &times;
-                span.sr-only Close
-              h4#myModalLabel.modal-title M&aacute;m z&aacute;ujem o kurz - z&aacute;klady programovania
-            .modal-body
-              form#frm-signUpForm(method='post', action='/zaklady-programovania', novalidate='')
-                .row
-                  .col-sm-6
-                    .form-group
-                      label(for='frm-signUpForm-firstname') Meno:
-                      input#frm-signUpForm-firstname.form-control(type='text', value='', name='firstname')
-                  .col-sm-6
-                    .form-group
-                      label(for='frm-signUpForm-lastname') Priezvisko:
-                      input#frm-signUpForm-lastname.form-control(type='text', value='', name="lastname")
-                .row
-                  .col-sm-6
-                    .form-group
-                      label(for='frm-signUpForm-email') E-mail:
-                      input#frm-signUpForm-email.form-control(type='email', value='', name='email')
-                  .col-sm-6
-                    .form-group
-                      label(for='frm-signUpForm-city') Miesto kurzu:
-                      select#frm-signUpForm-city.form-control(name='city')
-                        option(value='Dubnica') Dubnica
-                        option(value='Brno') Brno
+  #basic-programming-course-modal.modal.fade.in(aria-hidden='false', role='dialog', tabindex='-1')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(data-dismiss='modal', type='button')
+            span(aria-hidden='true') &times;
+            span.sr-only Close
+          h4#myModalLabel.modal-title M&aacute;m z&aacute;ujem o kurz - z&aacute;klady programovania
+        .modal-body
+          form#frm-signUpForm(method='post', action='/zaklady-programovania', novalidate='')
+            .row
+              .col-sm-6
                 .form-group
-                  label(for='frm-signUpForm-text') Pozn&aacute;mka:
-                  textarea#frm-signUpForm-text.form-control(name='text')
+                  label(for='frm-signUpForm-firstname') Meno:
+                  input#frm-signUpForm-firstname.form-control(type='text', value='', name='firstname')
+              .col-sm-6
                 .form-group
-                  label(for='frm-signUpForm-sendNews')
-                    input#frm-signUpForm-sendNews(type='checkbox', checked='', name='sendNews')
-                    | Prajem si dost&aacute;va&tcaron; novinky o aktu&aacute;lnych kurzoch e-mailom.
-                input#frm-signUpForm-courseName(type='hidden', value='Základy programovania', name='courseName')
-                input#frm-signUpForm-submit.invisible(type='submit', value='Odoslať', name='_submit')
-                div
-                  input(type='hidden', value='signUpForm-submit', name='do')
-            .modal-footer
-              button.btn.btn-default(data-dismiss='modal', type='button') Zru&scaron;i&tcaron;
-              button#sign-up-send-btn.btn.btn-primary(type='button') Odosla&tcaron;
-      +SKCoursesBackBtn
-    .col-sm-4
-      h2 Ďalšie kurzy
-      +listOfCourses
+                  label(for='frm-signUpForm-lastname') Priezvisko:
+                  input#frm-signUpForm-lastname.form-control(type='text', value='', name="lastname")
+            .row
+              .col-sm-6
+                .form-group
+                  label(for='frm-signUpForm-email') E-mail:
+                  input#frm-signUpForm-email.form-control(type='email', value='', name='email')
+              .col-sm-6
+                .form-group
+                  label(for='frm-signUpForm-city') Miesto kurzu:
+                  select#frm-signUpForm-city.form-control(name='city')
+                    option(value='Dubnica') Dubnica
+                    option(value='Brno') Brno
+            .form-group
+              label(for='frm-signUpForm-text') Pozn&aacute;mka:
+              textarea#frm-signUpForm-text.form-control(name='text')
+            .form-group
+              label(for='frm-signUpForm-sendNews')
+                input#frm-signUpForm-sendNews(type='checkbox', checked='', name='sendNews')
+                | Prajem si dost&aacute;va&tcaron; novinky o aktu&aacute;lnych kurzoch e-mailom.
+            input#frm-signUpForm-courseName(type='hidden', value='Základy programovania', name='courseName')
+            input#frm-signUpForm-submit.invisible(type='submit', value='Odoslať', name='_submit')
+            div
+              input(type='hidden', value='signUpForm-submit', name='do')
+        .modal-footer
+          button.btn.btn-default(data-dismiss='modal', type='button') Zru&scaron;i&tcaron;
+          button#sign-up-send-btn.btn.btn-primary(type='button') Odosla&tcaron;
