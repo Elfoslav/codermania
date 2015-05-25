@@ -20,6 +20,8 @@ Router.route '/:lang?/javascript/lesson/:_id/:slug/:username?',
       Session.set('lessonNumber', lesson.num)
       exercise = JSLessonsList.getFirstExercise(lesson.num)
       Session.set('exerciseId', exercise?.id)
+      if lesson.hasTheory
+        Session.set('activeTab', 'theory')
     else
       Session.set('lessonNumber', 1)
     @next()
@@ -63,6 +65,8 @@ Router.route '/:lang?/html/lesson/:_id/:slug/:username?',
     if lesson
       Session.set('levelNumber', HTMLLessonsList.getLevelNum(lesson.num))
       Session.set('lessonNumber', lesson.num)
+      if lesson.hasTheory
+        Session.set('activeTab', 'theory')
     else
       Session.set('lessonNumber', 1)
     @next()
@@ -83,6 +87,8 @@ Router.route '/:lang?/css/lesson/:_id/:slug/:username?',
     if lesson
       Session.set('levelNumber', CSSLessonsList.getLevelNum(lesson.num))
       Session.set('lessonNumber', lesson.num)
+      if lesson.hasTheory
+        Session.set('activeTab', 'theory')
     else
       Session.set('lessonNumber', 1)
     @next()
