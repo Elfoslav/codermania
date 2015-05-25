@@ -389,10 +389,6 @@ Router.route '/:lang?/',
   name: 'main'
   waitOn: ->
     Meteor.subscribe 'homepageStudyGroups'
-  onBeforeAction: ->
-    if Meteor.userId()
-      Router.go('lesson', { _id: '1a', slug: 'hello-world', username: App.getCurrentUsername() })
-    @next()
   onAfterAction: ->
     App.setPageTitle('Learn to code')
   data: ->
