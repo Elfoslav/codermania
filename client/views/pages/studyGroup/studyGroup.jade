@@ -3,7 +3,7 @@ template(name="studyGroup")
     if isJoined
       a.btn.btn-danger.leave-group-btn(href="#") Leave this group
     else
-      a.btn.btn-default.join-group-btn(href="#") Join this group
+      a.btn.btn-success.join-group-btn(href="#") Join this group
     if canEdit
       a.btn.btn-default(href="#" data-target="#study-group-modal" data-toggle="modal") Edit
 
@@ -15,6 +15,7 @@ template(name="studyGroup")
             small {{topics}}
         if capacity
           p Capacity: {{capacity}}
+            |(free {{freeSpotsCount}})
         pre.unstyled-pre {{linkify description}}
       p
         a.btn.btn-default(href="{{pathFor 'studyGroups'}}") &larr; All study groups
@@ -49,6 +50,15 @@ template(name="studyGroup")
       h3 FAQ
       p Coming soon. For now check out our
         a(href="{{pathFor 'guide'}}") Ultimate guide for web developer
+
+      h3 Teachers ({{teachers.count}})
+      each teachers
+        a(href="{{pathFor 'studentProfile' username=this.username}}")
+          span.badge
+            if this.status.online
+              +onlineDot
+            |{{trimEmail this.username}}
+        |&nbsp;
 
       h3 Students ({{students.count}})
       each students

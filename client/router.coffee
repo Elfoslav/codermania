@@ -379,8 +379,12 @@ Router.route '/:lang?/kurzy/full-stack-web-developer',
 Router.route '/:lang?/kurzy/letna-web-developerska-skola',
   name: 'summerWebDevelopmentSchool'
   layoutTemplate: 'courseLayout'
+  waitOn: ->
+    Meteor.subscribe 'summerWebDevSchoolStudyGroup'
   onAfterAction: ->
     App.setPageTitle('Kurzy - Letná web developerská škola')
+  data: ->
+    group: StudyGroups.findOne()
 
 #realtime code used for meteor workshop
 Router.route '/:lang?/code',

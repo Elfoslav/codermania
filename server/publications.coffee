@@ -173,12 +173,23 @@ Meteor.publish 'needHelpForLessonAndUser', (lessonId, username) ->
 
 Meteor.publish 'userStudyGroups', (username) ->
   user = Meteor.users.findOne({ username: username })
+  loggedInUser = Meteor.users.findOne @userId
   return this.ready() unless user
-  StudyGroups.find
-    $or: [
-      { userId: user._id }
-      { userIds: { $in: [ user._id ] }}
-    ]
+  if username == loggedInUser.username
+    #created or joined groups
+    StudyGroups.find
+      $or: [
+        { userId: user._id }
+        { userIds: { $in: [ user._id ] }}
+      ]
+  else
+    #public joined groups
+    StudyGroups.find
+      isPublic: true
+      $or: [
+        { userId: user._id }
+        { userIds: { $in: [ user._id ] }}
+      ]
 
 Meteor.reactivePublish 'studyGroup', (id) ->
   studyGroup = StudyGroups.findOne(id)
@@ -205,6 +216,10 @@ Meteor.publish 'studyGroups', ->
       { isPublic: true }
       { userIds: $in: [ @userId ] }
     ]
+
+Meteor.publish 'summerWebDevSchoolStudyGroup', ->
+  StudyGroups.find
+    title: 'Letná web developerská škola 2015'
 
 Meteor.publish 'homepageStudyGroups', ->
   StudyGroups.find { isPublic: true },

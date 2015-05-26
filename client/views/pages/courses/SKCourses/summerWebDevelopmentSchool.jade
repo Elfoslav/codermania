@@ -26,18 +26,23 @@ template(name="summerWebDevelopmentSchool")
     li Hľadať informácie
     li Párové programovanie
     li A mnoho iných vecí...
+  p V tejto škole sa naučíte ako základy tvorby webu, tak aj pokročilé techniky tvorby aplikácií
+    |a sami si minimálne jednu aplikáciu vytvoríte. Škola sa zameriava čo najviac na praktické veci,
+    |budete robiť cvičenia a projekty od začiatku školy až po koniec. Teórie bude len toľko, koľko je potreba.
 
   h2 Miesto konania
-  p Primárne sa zameriavam na študentov v Brne a v Dubnici, kde budú prebiehať osobné stretnutia.
+  p Primárne sa zameriavam na študentov <b>v Brne a v Dubnici</b>, kde budú prebiehať osobné stretnutia.
     |Ak nie si z Brna ani z Dubnice, ponúkam online verziu školy za zvýhodnenú cenu.
 
   h2 Priebeh a trvanie?
-  p Letná web developerská škola začína 1.7.2015 a končí 30.9.2015.
+  p Letná web developerská škola <b>začína 1.7.2015 a končí 30.9.2015</b>.
     |3 mesiace je doba na naučenie sa základov. Ak budú mať študenti záujem,
     |ponúkam možnosť predĺženia školy o 1 - 2 mesiace.
     |Študent robí väčšinu práce online.
-    |Prvé 3 - 4 týždne sa budeme osobne stretávať 1x do týždňa vo večerných hodinách (17:00 - 20:00),
+    |Prvé 4 týždne sa budeme osobne stretávať 1x do týždňa (v Brne utorky, v Dubnici stredy)
+    |vo večerných hodinách (17:00 - 20:00),
     |aby sme sa lepšie spoznali a vysvetlili si základné veci.
+    |Ostatné dva mesiace sa budeme stretávať každý druhý týždeň a konzultovať lekcie online.
     |Študenti pracujú počas týždňa na domácich úlohách, ktoré môžu konzultovať s ostatnými študentami
     |alebo vyučujúcim. Radenie sa medzi študentami je povolené. Študenti si tak navzájom môžu pomáhať a učiť sa.
 
@@ -49,14 +54,32 @@ template(name="summerWebDevelopmentSchool")
     |Získaš nové kontakty a priateľov. Získaš znalosti, ktoré by si sám dosiahol za oveľa dlhší čas ako len 3 mesiace.
 
   h2 Cena
-  p Bude upresnená do 15.6.
-  p Prosím o vyplnenie dotazníka:
-    a(href="https://docs.google.com/forms/d/1fAPfbad4NQrXhv64zHgPAgSoeU_r1cw2Mf6BCe8d2nU/" target="_blank")
-      |https://docs.google.com/forms/d/1fAPfbad4NQrXhv64zHgPAgSoeU_r1cw2Mf6BCe8d2nU/
-  //
-    p <b>Dobrovoľná</b>. Kurz je za dobrovoľný príspevok. Je to môj experiment, nakoľko si ľudia vážia nadobudnuté vedomosti.
+  h3 Osobná škola:
+  p
+    b Neštudent:
+    |9 000 Kč / 330 € (možnosť splátok)
+  p
+    b Študent:
+    |6 500 Kč / 240 € (možnosť splátok)
+  ul
+    li 25 hodín mentoringu osobne + 14 hodín online (chat)
+    li Nespočetne hodín pri vypracovávaní domácich úloh, projektov a skupinových projektov (práca v tíme)
+  h3 Online škola:
+  p
+    b Študent aj neštudent:
+    |5 500 Kč / 200 €
+  ul
+    li 16 hodín mentoringu online cez video + 14 hodín cez chat
+    li Nespočetne hodín pri vypracovávaní domácich úloh, projektov a skupinových projektov (práca v tíme)
 
   h2 Prihláška
-  p Prihlasovať sa môžeš na Facebooku tak, že sa zúčastníš udalosti. Následne sa ti ozvem a dohodneme detaily.
-  p Prihlasuj sa tu:
-    a(href="https://www.facebook.com/events/960881193956187/") https://www.facebook.com/events/960881193956187/
+  p Prihlásiš sa tak, že si vytvoríš účet na tejto stránke (ak ešte nemáš),
+    |pôjdeš do študijnej skupiny
+    a(href="{{pathFor 'studyGroup' _id=group._id}}") "Letná web developerská škola 2015"
+    |a v nej klikneš na tlačidlo "Join this group".
+  p
+    b {{freeSpots}}
+  p Ak máš otázky alebo nejasnosti, napíš mi na
+    a(href="https://www.facebook.com/elfoslav") Facebooku
+    |alebo na
+    a(href="mailto:tomas@codermania.com") e-mail.

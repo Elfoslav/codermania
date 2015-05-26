@@ -21,7 +21,15 @@ Template.studyGroup.helpers
   getRole: ->
     if Roles.userIsInRole(@user?._id, 'teacher', 'all') then '(teacher)' else ''
   students: ->
-    Meteor.users.find({ _id: { $in: @studyGroup?.userIds || [] }})
+    Meteor.users.find
+      _id: { $in: @studyGroup?.userIds || [] }
+      'roles.all': { $in: [ 'student' ]}
+  teachers: ->
+    Meteor.users.find
+      _id: { $in: @studyGroup?.userIds || [] }
+      'roles.all': { $in: [ 'teacher' ]}
+  freeSpotsCount: ->
+    @capacity - @userIds?.length
 
 Template.studyGroup.events
   'click [data-target="#study-group-modal"]': (evt) ->
@@ -35,6 +43,9 @@ Template.studyGroup.events
   'click .join-group-btn': (evt) ->
     evt.preventDefault()
     return bootbox.alert('To join this group you have to be signed in') unless Meteor.userId()
+    studyGroup = StudyGroups.findOne Router.current().params._id
+    if studyGroup.capacity and studyGroup.capacity == studyGroup.userIds?.length
+      return bootbox.alert('This group is already full')
     data =
       studyGroupId: Router.current().params._id
     Meteor.call 'joinStudyGroup', data, (err, result) ->
