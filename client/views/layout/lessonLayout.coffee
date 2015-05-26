@@ -243,9 +243,6 @@ Template.lessonLayout.events
         lessonPoints = Lesson.getLessonPoints(Session.get('lessonNumber'))
         user = Meteor.user()
 
-        if lesson.id is '1a'
-          bootbox.alert(TAPi18n.__ 'Great! You are promising coder. Continue please!')
-
         if user
           setSuccessMsg(lessonPoints, lesson, user)
         else
