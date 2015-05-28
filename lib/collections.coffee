@@ -73,6 +73,29 @@
 #}
 
 #{
+#  id: String
+#  userId: String
+#  changedBy: String (userId)
+#  code: String
+#  success: Boolean
+#  pointsAdded: Boolean
+#  points: Number
+#  timestamp: Number
+#  exercises: {
+#    id: String
+#    changedBy: String (userId)
+#    code: String
+#    success: Boolean
+#    pointsAdded: Boolean
+#    points: Number
+#    timestamp: Number
+#  }
+#}
+@UserHTMLLessons = new Mongo.Collection 'userHTMLLessons'
+#UserCSSLessons may differ from UserHTMLLessons in the future
+@UserCSSLessons = new Mongo.Collection 'userCSSLessons'
+
+#{
 #  title: String
 #  topics: String
 #  studentsCount: Number

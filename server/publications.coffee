@@ -76,6 +76,28 @@ Meteor.publish 'usernames', (query, limit) ->
     limit: limit || 1000,
     fields: { username: 1, roles: 1, status: 1 }
 
+Meteor.publish 'userHTMLLessons', (data) ->
+  check data,
+    username: String
+    lessonId: Match.Optional String
+  user = Meteor.users.findOne { username: data.username }
+  qry = {}
+  qry.userId = user?._id
+  if data.lessonId
+    qry.id = data.lessonId
+  UserHTMLLessons.find qry
+
+Meteor.publish 'userCSSLessons', (data) ->
+  check data,
+    username: String
+    lessonId: Match.Optional String
+  user = Meteor.users.findOne { username: data.username }
+  qry = {}
+  qry.userId = user?._id
+  if data.lessonId
+    qry.id = data.lessonId
+  UserCSSLessons.find qry
+
 Meteor.publish 'unreadMessagesCount', ->
   user = Meteor.users.findOne(@userId)
 

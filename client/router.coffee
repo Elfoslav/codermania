@@ -70,6 +70,22 @@ Router.route '/:lang?/html/lesson/:_id/:slug/:username?',
     else
       Session.set('lessonNumber', 1)
     @next()
+  subscriptions: ->
+    @subscribe 'needHelpForLessonAndUser',
+      lessonId: @params._id
+      lessonType: 'html'
+      username: @params.username
+    if @params.username
+      @subscribe 'userHTMLLessons', { username: @params.username, lessonId: @params._id }, ->
+        lessons = HTMLLessonsList.getLessons()
+        console.log 'userHtmlLessons num:', Session.get('lessonNumber')
+        #lesson result depends on user so set lesson again on ready subscription
+        Lesson.setLesson(Session.get('lessonNumber'), lessons, ace.edit('editor'))
+  onAfterAction: ->
+    lessons = HTMLLessonsList.getLessons()
+    lesson = HTMLLessonsList._collection.findOne({ id: @params._id })
+    if lesson
+      App.setPageTitle(lesson.title)
   data: ->
     lessonType: 'html'
 
@@ -92,6 +108,21 @@ Router.route '/:lang?/css/lesson/:_id/:slug/:username?',
     else
       Session.set('lessonNumber', 1)
     @next()
+  subscriptions: ->
+    @subscribe 'needHelpForLessonAndUser',
+      lessonId: @params._id
+      lessonType: 'css'
+      username: @params.username
+    if @params.username
+      @subscribe 'userCSSLessons', { username: @params.username, lessonId: @params._id }, ->
+        lessons = CSSLessonsList.getLessons()
+        #lesson result depends on user so set lesson again on ready subscription
+        Lesson.setLesson(Session.get('lessonNumber'), lessons, ace.edit('editor'))
+  onAfterAction: ->
+    lessons = CSSLessonsList.getLessons()
+    lesson = CSSLessonsList._collection.findOne({ id: @params._id })
+    if lesson
+      App.setPageTitle(lesson.title)
   data: ->
     lessonType: 'css'
 

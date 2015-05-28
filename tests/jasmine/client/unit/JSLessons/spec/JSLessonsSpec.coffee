@@ -1,4 +1,4 @@
-describe "Lesson.checkAssignment", ->
+describe "JSLesson.checkAssignment", ->
   #arithmetic operators
   Meteor.startup ->
     Meteor.setTimeout(
@@ -11,7 +11,7 @@ describe "Lesson.checkAssignment", ->
             console.log('statement 1');
             console.log(\"statement 2\");
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -24,7 +24,7 @@ describe "Lesson.checkAssignment", ->
           code = """
             console.log(8 + 2 <= 11);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -34,7 +34,7 @@ describe "Lesson.checkAssignment", ->
           code = """
             console.log( (8 + 2) <= 11 );
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -48,7 +48,7 @@ describe "Lesson.checkAssignment", ->
             var emptyVariable;
             console.log(emptyVariable);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -59,7 +59,7 @@ describe "Lesson.checkAssignment", ->
             var emptyVariable = 'lol';
             console.log(emptyVariable);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -70,7 +70,7 @@ describe "Lesson.checkAssignment", ->
             var emptyVariable;
             console.log(emptyVariable)
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -81,7 +81,7 @@ describe "Lesson.checkAssignment", ->
             var emptyVariable
             console.log(emptyVariable);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -96,7 +96,7 @@ describe "Lesson.checkAssignment", ->
             console.log(1 + 2);
             console.log(4 <= 5);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -108,7 +108,7 @@ describe "Lesson.checkAssignment", ->
             console.log(1+2);
             console.log(4<= 5);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -121,7 +121,7 @@ describe "Lesson.checkAssignment", ->
           code = """
             console.log(5 % 3);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -131,7 +131,7 @@ describe "Lesson.checkAssignment", ->
           code = """
             console.log(11 % 3)
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -141,7 +141,7 @@ describe "Lesson.checkAssignment", ->
           code = """
             console.log(11 % 4);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -157,7 +157,7 @@ describe "Lesson.checkAssignment", ->
             console.log(6 === "6");
             console.log(1 != "1");
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -170,7 +170,7 @@ describe "Lesson.checkAssignment", ->
             console.log(6 == "6");
             console.log(1 == "1");
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -183,7 +183,7 @@ describe "Lesson.checkAssignment", ->
             console.log(6 !== "6");
             console.log(1 !== "1");
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -196,7 +196,7 @@ describe "Lesson.checkAssignment", ->
             console.log(6 == "6");
             console.log(1 !== "1");
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -209,7 +209,7 @@ describe "Lesson.checkAssignment", ->
             console.log(6 !== "6");
             console.log(1 == "1");
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -224,7 +224,7 @@ describe "Lesson.checkAssignment", ->
             number *= 2;
             console.log(number);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -238,7 +238,7 @@ describe "Lesson.checkAssignment", ->
             var name = 'Josh';
             console.log(name);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -255,7 +255,7 @@ describe "Lesson.checkAssignment", ->
             var z = 10;
             console.log(x * y + z);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -270,7 +270,7 @@ describe "Lesson.checkAssignment", ->
             text += ' world';
             console.log(text);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -286,7 +286,7 @@ describe "Lesson.checkAssignment", ->
             var circumference = 2 * pi * r;
             console.log(circumference);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -300,7 +300,7 @@ describe "Lesson.checkAssignment", ->
             var isCoderMan = false;
             console.log(isCoderMan);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -311,7 +311,7 @@ describe "Lesson.checkAssignment", ->
             var isCoderMan = true;
             console.log(isCoderMan);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -322,7 +322,7 @@ describe "Lesson.checkAssignment", ->
             var isCoderMan = 20 == 30;
             console.log(isCoderMan);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -333,7 +333,7 @@ describe "Lesson.checkAssignment", ->
             var isCoderMan = 20 === 30;
             console.log(isCoderMan);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -344,7 +344,7 @@ describe "Lesson.checkAssignment", ->
             var isCoderMan = 20 <= 30;
             console.log(isCoderMan);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -355,7 +355,7 @@ describe "Lesson.checkAssignment", ->
             var isCoderMan = '';
             console.log(isCoderMan);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -369,7 +369,7 @@ describe "Lesson.checkAssignment", ->
             var fruits = ['apple', 'orange', 'banana'];
             console.log(fruits[1]);
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -387,7 +387,7 @@ describe "Lesson.checkAssignment", ->
               console.log('You are a child');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -413,7 +413,7 @@ describe "Lesson.checkAssignment", ->
                 console.log('Unknown letter');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -430,7 +430,7 @@ describe "Lesson.checkAssignment", ->
               console.log('Pika pika... Pikachu!');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -444,7 +444,7 @@ describe "Lesson.checkAssignment", ->
               console.log('Pika pika... Pikachu!');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -458,7 +458,7 @@ describe "Lesson.checkAssignment", ->
               console.log('Pika pika... Pikachu!');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -472,7 +472,7 @@ describe "Lesson.checkAssignment", ->
               console.log('Pika pika... Pikachu!');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -486,7 +486,7 @@ describe "Lesson.checkAssignment", ->
               console.log('Pika pika... Pikachu!');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -503,7 +503,7 @@ describe "Lesson.checkAssignment", ->
               console.log('You understand falsey values');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -517,7 +517,7 @@ describe "Lesson.checkAssignment", ->
               console.log('You understand falsey values');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -531,7 +531,7 @@ describe "Lesson.checkAssignment", ->
               console.log('You understand falsey values');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -545,7 +545,7 @@ describe "Lesson.checkAssignment", ->
               console.log('You understand falsey values');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -559,7 +559,7 @@ describe "Lesson.checkAssignment", ->
               console.log('You understand falsey values');
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -575,7 +575,7 @@ describe "Lesson.checkAssignment", ->
               console.log(fruits[i]);
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -588,7 +588,7 @@ describe "Lesson.checkAssignment", ->
               console.log(fruits[i]);
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -607,7 +607,7 @@ describe "Lesson.checkAssignment", ->
               i++;
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -623,7 +623,7 @@ describe "Lesson.checkAssignment", ->
               i++;
             }
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -643,7 +643,7 @@ describe "Lesson.checkAssignment", ->
             }
             console.log(sum([2, 3, 6]));
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -660,7 +660,7 @@ describe "Lesson.checkAssignment", ->
             }
             console.log(sum([2, 3, 6]));
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -677,7 +677,7 @@ describe "Lesson.checkAssignment", ->
             }
             console.log(sum([2, 3, 6]));
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -694,7 +694,7 @@ describe "Lesson.checkAssignment", ->
             }
             console.log(sum([2, 3, 6]));
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )
@@ -716,7 +716,7 @@ describe "Lesson.checkAssignment", ->
             var peter = new Person('Peter', 31);
             peter.sayHello();
           """
-          result = Lesson.checkAssignment(
+          result = JSLesson.checkAssignment(
             lesson: lesson
             code: code
           )

@@ -87,7 +87,10 @@ Template.lessonLayout.helpers
     return (editor) ->
       # Set some reasonable options on the editor
       editor.setTheme('ace/theme/monokai')
-      editor.getSession().setMode('ace/mode/javascript')
+      if Lesson.isJSLesson()
+        editor.getSession().setMode('ace/mode/javascript')
+      else
+        editor.getSession().setMode('ace/mode/html')
       editor.setShowPrintMargin(false)
       editor.getSession().setUseWrapMode(true)
       editor.getSession().setTabSize(2);
@@ -205,7 +208,9 @@ Template.lessonLayout.events
       editor = Editor.getEditor()
       code = editor.getValue()
       #evaluate can throw exception
-      Editor.evaluate()
+      Editor.evaluate() if Lesson.isJSLesson()
+      unless Lesson.isJSLesson()
+        $('.output').html(code)
     catch e
       console.log(e)
       codeError = true
@@ -219,17 +224,17 @@ Template.lessonLayout.events
     #check exercise only if assignment tab is active
     if isAssignmentTab and !codeError
 
-      result = Lesson.checkAssignment(
+      result = Lesson.checkAssignment
         lessonNumber: lessonNum
         lesson: lesson
         code: code
-      )
 
       ###
       # Save lesson always if user is logged in
       ###
       userId = App.getCurrentUserId()
       lessonToSave = {}
+      lessonToSave.type = Lesson.getType()
       lessonToSave.number = parseInt lessonNum
       lessonToSave.id = lesson.id
       lessonToSave.code = code
@@ -284,7 +289,7 @@ Template.lessonLayout.events
       exerciseToSave.success = (if result == true then true else false)
       exerciseToSave.code = code
       if userId
-        Meteor.call 'saveUserExercise', userId, lessonToSave, exerciseToSave, (err, result) ->
+        Meteor.call 'saveUserJSExercise', userId, lessonToSave, exerciseToSave, (err, result) ->
           console.log(err) if err
           console.log('result', result)
 

@@ -18,7 +18,7 @@ class @Editor
     $('.output').text('')
     code = editor.getValue()
     code = code.replace(/console.log/g, 'document.write');
-    #eval might throw exception
+    #eval might throw an exception
     eval code
 
   @highlightCodeInText: (type) ->

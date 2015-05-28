@@ -6,6 +6,7 @@ Template.needHelp.events
     if Meteor.user()
       lesson = LessonsList.getLesson(Session.get('lessonNumber'))
       lesson.url = Router.url 'lesson',
+        lessonType: Lesson.getType()
         _id: lesson.id
         slug: lesson.slug
         username: Meteor.user()?.username

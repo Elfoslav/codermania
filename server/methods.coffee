@@ -3,6 +3,7 @@ Meteor.methods
     check(userId, String)
     check(lesson, {
       id: String
+      type: String #javascript|html|css
       number: Number
       code: String
       success: Boolean
@@ -11,43 +12,90 @@ Meteor.methods
     unless userId == @userId or Roles.userIsInRole(@userId, 'teacher', 'all')
       throw new Meteor.Error(401, 'Access denied')
 
-    lessonPoints = Lesson.getLessonPoints(lesson.number)
+    lessonPoints = Lesson.getLessonPoints(lesson.number, lesson.type)
+
     qry = {}
-    qry["lessons.#{lesson.id}.id"] = lesson.id
-    qry["lessons.#{lesson.id}.code"] = lesson.code
-    qry["lessons.#{lesson.id}.success"] = lesson.success
-    qry["lessons.#{lesson.id}.date"] = new Date()
-    qry["lessons.#{lesson.id}.timestamp"] = new Date().getTime()
-    qry["lessons.#{lesson.id}.changedBy"] = @userId
-    qry["lessons.#{lesson.id}.points"] = lessonPoints
+    #this if is from historical reason
+    #we used JS lessons in user collection before
+    if lesson.type is 'javascript'
+      qry["lessons.#{lesson.id}.id"] = lesson.id
+      qry["lessons.#{lesson.id}.code"] = lesson.code
+      qry["lessons.#{lesson.id}.success"] = lesson.success
+      qry["lessons.#{lesson.id}.date"] = new Date()
+      qry["lessons.#{lesson.id}.timestamp"] = new Date().getTime()
+      qry["lessons.#{lesson.id}.changedBy"] = @userId
+      qry["lessons.#{lesson.id}.points"] = lessonPoints
+    else
+      lesson.date = new Date()
+      lesson.timestamp = Date.now()
+      lesson.changedBy = @userId
+      lesson.points = lessonPoints
 
     user = Meteor.users.findOne(userId)
-    userLesson = user?.lessons?[lesson.id]
-    qry["lessons.#{lesson.id}.pointsAdded"] = userLesson?.pointsAdded
+    if lesson.type is 'javascript'
+      userLesson = user?.lessons?[lesson.id]
+      qry["lessons.#{lesson.id}.pointsAdded"] = userLesson?.pointsAdded
+    else if lesson.type is 'html'
+      userLesson = UserHTMLLessons.findOne
+        id: lesson.id
+        userId: @userId
+      lesson.pointsAdded = userLesson?.pointsAdded
+    else if lesson.type is 'css'
+      userLesson = UserHTMLLessons.findOne
+        id: lesson.id
+        userId: @userId
+      lesson.pointsAdded = userLesson?.pointsAdded
+    else
+      throw new Error 'Unknown lesson type', 'Unknown lesson type: ' + lesson.type
+
 
     #add points before updating user
     if lesson.success
-      if (userLesson is undefined) or !userLesson.pointsAdded
+      if (userLesson is undefined) or !userLesson?.pointsAdded
         Meteor.users.update(userId, {
           $inc: { points: lessonPoints }
         })
-        qry["lessons.#{lesson.id}.pointsAdded"] = true
+        if lesson.type is 'javascript'
+          qry["lessons.#{lesson.id}.pointsAdded"] = true
+        else
+          lesson.pointsAdded = true
         console.log 'lesson after points added: ', user.points
       console.log "updating need help for lesson #{lesson.id} and user #{user.username}"
-      NeedHelp.update { lessonId: lesson.id, username: user.username, exerciseId: null },
-        $set: { solved: true }
+      needHelpSolved = true
 
-    NeedHelp.update { lessonId: lesson.id, username: user.username, exerciseId: null },
-      $set: { lessonCode: lesson.code }
+    needHelpQry =
+      lessonId: lesson.id
+      username: user.username
+      exerciseId: null
+    #there was not lesson type for javascript need help
+    unless lesson.type is 'javascript'
+      needHelpQry.type = lesson.type
+    NeedHelp.update needHelpQry,
+      $set:
+        lessonCode: lesson.code
+        solved: needHelpSolved
 
-    console.log 'qry', qry
     if userId == @userId
       qry["lastLesson"] = lesson
     Meteor.users.update(userId, {
       $set: qry
     })
 
-  saveUserExercise: (userId, lesson, exercise) ->
+    if lesson.type is 'html'
+      return UserHTMLLessons.upsert
+        userId: @userId
+        id: lesson.id
+      ,
+        $set: lesson
+
+    if lesson.type is 'css'
+      return UserCSSLessons.upsert
+        userId: @userId
+        id: lesson.id
+      ,
+        $set: lesson
+
+  saveUserJSExercise: (userId, lesson, exercise) ->
     check(userId, String)
     check(lesson, {
       id: String
