@@ -82,7 +82,6 @@ Router.route '/:lang?/html/lesson/:_id/:slug/:username?',
         #lesson result depends on user so set lesson again on ready subscription
         Lesson.setLesson(Session.get('lessonNumber'), lessons, ace.edit('editor'))
   onAfterAction: ->
-    lessons = HTMLLessonsList.getLessons()
     lesson = HTMLLessonsList._collection.findOne({ id: @params._id })
     if lesson
       App.setPageTitle(lesson.title)
@@ -119,12 +118,40 @@ Router.route '/:lang?/css/lesson/:_id/:slug/:username?',
         #lesson result depends on user so set lesson again on ready subscription
         Lesson.setLesson(Session.get('lessonNumber'), lessons, ace.edit('editor'))
   onAfterAction: ->
-    lessons = CSSLessonsList.getLessons()
     lesson = CSSLessonsList._collection.findOne({ id: @params._id })
     if lesson
       App.setPageTitle(lesson.title)
   data: ->
     lessonType: 'css'
+
+Router.route '/:lang?/programming-challenge/lesson/:_id/:slug/:username?',
+  name: 'lessonProgrammingChallenge'
+  layoutTemplate: 'lessonLayout'
+  yieldTemplates:
+    'programmingChallengeLevelsMenu': { to: 'levelsMenu' }
+  onBeforeAction: ->
+    Session.set('lessonSuccess', false)
+    Session.set('exerciseSuccess', false)
+    Session.setDefault('activeTab', 'assignment')
+    lesson = ProgrammingChallengeLessonsList._collection.findOne({ id: @params._id })
+    console.log 'lesson in router: ', lesson
+    if lesson
+      Session.set('levelNumber', ProgrammingChallengeLessonsList.getLevelNum(lesson.num))
+      Session.set('lessonNumber', lesson.num)
+    else
+      Session.set('lessonNumber', 1)
+    @next()
+  subscriptions: ->
+    if @params.username
+      @subscribe 'userProgrammingChallengeLessons',
+        lessonId: @params._id
+        username: @params.username
+  onAfterAction: ->
+    lesson = ProgrammingChallengeLessonsList._collection.findOne({ id: @params._id })
+    if lesson
+      App.setPageTitle(lesson.title)
+  data: ->
+    lessonType: 'programming-challenge'
 
 Router.route '/:lang?/web-developer/lesson/:_id/:slug/:username?',
   name: 'lessonWebDeveloper'

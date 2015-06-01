@@ -94,6 +94,7 @@
 @UserHTMLLessons = new Mongo.Collection 'userHTMLLessons'
 #UserCSSLessons may differ from UserHTMLLessons in the future
 @UserCSSLessons = new Mongo.Collection 'userCSSLessons'
+@UserProgrammingChallengeLessons = new Mongo.Collection 'userProgrammingChallengeLessons'
 
 #{
 #  title: String

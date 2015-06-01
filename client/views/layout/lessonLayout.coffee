@@ -30,8 +30,6 @@ document.write = () ->
   output += '<br>';
   $('.output').append(output);
 
-Session.setDefault('activeTab', 'theory')
-
 loadCode = (href) ->
   currentLesson = LessonsList.getLesson(Session.get('lessonNumber'))
   exercise = LessonsList.getFirstExercise(Session.get('lessonNumber'))
@@ -87,7 +85,7 @@ Template.lessonLayout.helpers
     return (editor) ->
       # Set some reasonable options on the editor
       editor.setTheme('ace/theme/monokai')
-      if Lesson.isJSLesson()
+      if Lesson.isJSLesson() or Lesson.isProgrammingChallengeLesson()
         editor.getSession().setMode('ace/mode/javascript')
       else
         editor.getSession().setMode('ace/mode/html')
@@ -191,13 +189,12 @@ setExerciseSuccessMsg = (lesson, exercise) ->
   unless Meteor.user()?.lessons?[lesson.id]?.exercises?[exercise.id]?.pointsAdded
     totalPoints += 2
   if totalPoints
-    Session.set('successMsg',
+    Session.set 'successMsg',
       """
       #{TAPi18n.__('Congratluations! You have earned <b>2</b> points!')}
       #{TAPi18n.__('You have %s points in total', totalPoints)}
       #{TAPi18n.__('Do another exercise or go to assignment')}.
       """
-    )
   else
     Session.set('successMsg', TAPi18n.__('Correct!'))
 
@@ -208,8 +205,8 @@ Template.lessonLayout.events
       editor = Editor.getEditor()
       code = editor.getValue()
       #evaluate can throw exception
-      Editor.evaluate() if Lesson.isJSLesson()
-      unless Lesson.isJSLesson()
+      Editor.evaluate() if Lesson.isJSLesson() or Lesson.isProgrammingChallengeLesson()
+      if Lesson.isHTMLLesson() or Lesson.isCSSLesson()
         $('.output').html(code)
     catch e
       console.log(e)

@@ -31,6 +31,10 @@ Meteor.startup ->
   for lesson in WebDeveloperLessonsList.getLessons()
     lesson.num = num++
     WebDeveloperLessonsList._collection.insert(lesson)
+  num = 1
+  for lesson in ProgrammingChallengeLessonsList.getLessons()
+    lesson.num = num++
+    ProgrammingChallengeLessonsList._collection.insert(lesson)
 
 Template.onRendered ->
   Editor.highlightCodeInText()

@@ -1,0 +1,13 @@
+template(name="programmingChallengeLevelsMenu")
+  .levels-menu
+    .btn-group.btn-group-justified.btn-group-lg
+      if isCurrentLevel 1
+        a.btn.btn-default.btn-dark.btn-active(href="{{getLevelLink 1}}") Level 1
+      else
+        a.btn.btn-default.btn-dark(href="{{getLevelLink 1}}") Level 1
+      //
+        if isCurrentLevel 2
+          a.btn.btn-default.btn-dark.btn-active(href="{{getLevelLink 2}}") Level 2
+        else
+          a.btn.btn-default.btn-dark(href="{{getLevelLink 2}}") Level 2
+    +lessonsMenu

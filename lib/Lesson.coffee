@@ -31,6 +31,12 @@ class @Lesson
         'This method can be only called from the client')
     Router.current().route.getName() is 'lessonCSS'
 
+  @isProgrammingChallengeLesson: ->
+    unless Meteor.isClient
+      throw new Meteor.Error('not-allowed-call',
+        'This method can be only called from the client')
+    Router.current().route.getName() is 'lessonProgrammingChallenge'
+
   @getType: ->
     unless Meteor.isClient
       throw new Meteor.Error('not-allowed-call',
@@ -46,21 +52,22 @@ class @Lesson
   @setLesson: (num, lessons, editor) ->
     Session.set('lessonNumber', num)
     lesson = lessons[num - 1]
-    console.log 'lesson: ', lesson
     userLesson = Lesson.getUserLesson(lesson.id)
-    console.log 'setLesson userLesson: ', userLesson
     if Router.current().params.username and userLesson
       editor.setValue(userLesson.code)
     else
       editor.setValue(lesson.initCode)
     editor.selection.clearSelection()
-    $('.nav a[href="#theory"]').tab('show')
+    if $('.nav a[href="#theory"]').hasClass 'active'
+      $('.nav a[href="#theory"]').tab('show')
 
   @getUserLesson: (lessonId) ->
     if Lesson.isHTMLLesson()
       return UserHTMLLessons.findOne({ id: lessonId })
     if Lesson.isCSSLesson()
       return UserCSSLessons.findOne({ id: lessonId })
+    if Lesson.isProgrammingChallengeLesson()
+      return UserProgrammingChallengeLessons.findOne({ id: lessonId })
     username = Router.current().params.username
     user = Meteor.users.findOne({ username: username })
     user?.lessons?[lessonId]

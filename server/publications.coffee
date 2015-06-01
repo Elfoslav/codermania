@@ -98,6 +98,17 @@ Meteor.publish 'userCSSLessons', (data) ->
     qry.id = data.lessonId
   UserCSSLessons.find qry
 
+Meteor.publish 'userProgrammingChallengeLessons', (data) ->
+  check data,
+    username: String
+    lessonId: Match.Optional String
+  user = Meteor.users.findOne { username: data.username }
+  qry = {}
+  qry.userId = user?._id
+  if data.lessonId
+    qry.id = data.lessonId
+  UserProgrammingChallengeLessons.find qry
+
 Meteor.publish 'unreadMessagesCount', ->
   user = Meteor.users.findOne(@userId)
 
