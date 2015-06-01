@@ -31,7 +31,6 @@ Meteor.publish 'sendersList', ->
       'roles.all': 1
       'username': 1
       'status': 1
-    limit: 50
   }).fetch().map (user) ->
     unreadMsgCount = Messages.find({
       senderId: user._id
@@ -174,7 +173,7 @@ Meteor.publish 'needHelpForLessonAndUser', (lessonId, username) ->
 Meteor.publish 'userStudyGroups', (username) ->
   user = Meteor.users.findOne({ username: username })
   loggedInUser = Meteor.users.findOne @userId
-  return this.ready() unless user
+  return this.ready() if !user || !loggedInUser
   if username == loggedInUser.username
     #created or joined groups
     StudyGroups.find
