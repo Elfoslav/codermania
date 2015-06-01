@@ -1,0 +1,7 @@
+template(name="summerWebDevSchoolApplicationInstructions")
+  p Prihlásiš sa tak, že si vytvoríš účet na tejto stránke (ak ešte nemáš),
+    |klikneš na tlačidlo "Idem do toho!", ktoré ti zobrazí študijnú skupinu a
+    |v nej klikneš na tlačidlo "Join this group".
+    b {{freeSpots}}
+  p
+    a.btn.btn-primary(href="{{pathFor 'studyGroup' _id=this._id}}") Idem do toho!

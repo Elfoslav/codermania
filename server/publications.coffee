@@ -249,9 +249,12 @@ Meteor.publish 'studyGroups', ->
       { userIds: $in: [ @userId ] }
     ]
 
-Meteor.publish 'summerWebDevSchoolStudyGroup', ->
+Meteor.publish 'summerWebDevSchoolStudyGroups', ->
   StudyGroups.find
-    title: 'Letná web developerská škola 2015'
+    $or: [
+      { title: 'Letná web developerská škola 2015' }
+      { title: 'Online letná web developerská škola 2015' }
+    ]
 
 Meteor.publish 'homepageStudyGroups', ->
   StudyGroups.find { isPublic: true },

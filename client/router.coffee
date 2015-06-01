@@ -438,11 +438,12 @@ Router.route '/:lang?/kurzy/letna-web-developerska-skola',
   name: 'summerWebDevelopmentSchool'
   layoutTemplate: 'courseLayout'
   waitOn: ->
-    Meteor.subscribe 'summerWebDevSchoolStudyGroup'
+    Meteor.subscribe 'summerWebDevSchoolStudyGroups'
   onAfterAction: ->
     App.setPageTitle('Kurzy - Letná web developerská škola')
   data: ->
-    group: StudyGroups.findOne()
+    studyGroup: StudyGroups.findOne({ title: 'Letná web developerská škola 2015' })
+    onlineStudyGroup: StudyGroups.findOne({ title: 'Online letná web developerská škola 2015' })
 
 #realtime code used for meteor workshop
 Router.route '/:lang?/code',

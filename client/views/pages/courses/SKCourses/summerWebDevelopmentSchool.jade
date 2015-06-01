@@ -26,10 +26,10 @@ template(name="summerWebDevelopmentSchool")
     li Hľadať informácie
     li Párové programovanie
     li A mnoho iných vecí...
-  p V tejto škole sa naučíte ako základy tvorby webu, tak aj pokročilé techniky tvorby aplikácií
-    |a sami si minimálne jednu aplikáciu vytvoríte. Škola sa zameriava čo najviac na praktické veci,
-    |budete robiť cvičenia a projekty od začiatku školy až po koniec. Teórie bude len toľko, koľko je potreba.
-    |Dozviete sa o veľmi veľa technológiách. Je už len na vás niektoré z nich si vybrať a naučiť sa poriadne.
+  p V tejto škole sa naučíš ako základy tvorby webu, tak aj pokročilé techniky tvorby aplikácií
+    |a minimálne jednu aplikáciu si vytvoríš. Škola sa zameriava čo najviac na praktické veci,
+    |budeš robiť cvičenia a projekty od začiatku školy až po koniec. Teórie bude len toľko, koľko je potreba.
+    |Dozvieš sa o veľmi veľa technológiách. Je už len na tebe niektoré z nich si vybrať a naučiť sa poriadne.
     |S výberom technológie samozrejme poradím.
 
   h2 Miesto konania
@@ -58,19 +58,22 @@ template(name="summerWebDevelopmentSchool")
   p
     b Neštudent:
     br
-    |&nbsp;&nbsp;Pôvodná cena: <del>18 000 Kč / 656 €</del>
+    |&nbsp;&nbsp;Pôvodná cena: <del>18 000 Kč / 660 €</del>
     br
     |&nbsp;&nbsp;Akciová cena <b>9 000 Kč / 330 €</b> (možnosť splátok)
   p
     b Študent:
     br
-    |&nbsp;&nbsp;Pôvodná cena: <del>12 000 Kč / 438 €</del>
+    |&nbsp;&nbsp;Pôvodná cena: <del>12 000 Kč / 440 €</del>
     br
     |&nbsp;&nbsp;Akciová cena <b>6 500 Kč / 240 €</b> (možnosť splátok)
   ul
     li 45 hodín mentoringu osobne + približne 15 hodín online (chat)
     li Nespočetne hodín pri vypracovávaní domácich úloh, projektov a skupinových projektov (práca v tíme)
     li Mentoring aj po ukončení kurzu
+  with studyGroup
+    +summerWebDevSchoolApplicationInstructions
+
   h3 Online škola:
   p
     b Študent aj neštudent:
@@ -83,16 +86,14 @@ template(name="summerWebDevelopmentSchool")
     li Nespočetne hodín pri vypracovávaní domácich úloh, projektov a skupinových projektov (práca v tíme)
     li Mentoring aj po ukončení kurzu
 
-  p
-    b Ak si nemôžeš kurz dovoliť, <a href="mailto:tomas@codermania.com">napíš mi</a> a niečo vymyslíme.
+  with onlineStudyGroup
+    +summerWebDevSchoolApplicationInstructions
+    p
+      b {{freeSpots}}
 
-  h2 Prihláška
-  p Prihlásiš sa tak, že si vytvoríš účet na tejto stránke (ak ešte nemáš),
-    |pôjdeš do študijnej skupiny
-    a(href="{{pathFor 'studyGroup' _id=group._id}}") "Letná web developerská škola 2015"
-    |a v nej klikneš na tlačidlo "Join this group".
   p
-    b {{freeSpots}}
+    b.bigger-font Ak nemáš na školu peniaze, <a href="mailto:tomas@codermania.com">napíš mi</a> a niečo vymyslíme.
+
   p Ak máš otázky alebo nejasnosti, napíš mi na
     a(href="https://www.facebook.com/elfoslav") Facebooku
     |alebo na
