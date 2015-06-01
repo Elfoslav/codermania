@@ -67,6 +67,14 @@ Meteor.publish 'student', (username) ->
       services: 0
       settings: 0
 
+Meteor.publish 'studentLessonData', (username) ->
+  check(username, String)
+  Meteor.users.find { username: username },
+    fields:
+      points: 1
+      username: 1
+      status: 1
+
 Meteor.publish 'usernames', (query, limit) ->
   check(query, String)
   check(limit, Match.Optional Number)

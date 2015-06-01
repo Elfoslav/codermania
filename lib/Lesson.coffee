@@ -12,6 +12,8 @@ class @Lesson
       return HTMLLesson.checkAssignment opts
     if Lesson.isCSSLesson()
       return CSSLesson.checkAssignment opts
+    if Lesson.isProgrammingChallengeLesson()
+      return ProgrammingChallengeLesson.checkAssignment opts
 
   @isJSLesson: ->
     unless Meteor.isClient
@@ -44,6 +46,7 @@ class @Lesson
     return 'javascript' if Lesson.isJSLesson()
     return 'html' if Lesson.isHTMLLesson()
     return 'css' if Lesson.isCSSLesson()
+    return 'programming-challenge' if Lesson.isProgrammingChallengeLesson()
 
   ###
   # @param num Integer

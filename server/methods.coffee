@@ -1,15 +1,17 @@
 Meteor.methods
-  saveUserLesson: (userId, lesson) ->
-    check(userId, String)
-    check(lesson, {
+  saveUserLesson: (username, lesson) ->
+    check username, String
+    check lesson,
       id: String
-      type: String #javascript|html|css
+      type: String #javascript|html|css|programming-challenge
+      slug: String
       number: Number
       code: String
       success: Boolean
-    })
 
-    unless userId == @userId or Roles.userIsInRole(@userId, 'teacher', 'all')
+    console.log 'saving lesson for user ', username, lesson
+    user = Meteor.users.findOne({ username: username })
+    unless user?._id == @userId or Roles.userIsInRole(@userId, 'teacher', 'all')
       throw new Meteor.Error(401, 'Access denied')
 
     lessonPoints = Lesson.getLessonPoints(lesson.number, lesson.type)
@@ -31,7 +33,6 @@ Meteor.methods
       lesson.changedBy = @userId
       lesson.points = lessonPoints
 
-    user = Meteor.users.findOne(userId)
     if lesson.type is 'javascript'
       userLesson = user?.lessons?[lesson.id]
       qry["lessons.#{lesson.id}.pointsAdded"] = userLesson?.pointsAdded
@@ -45,14 +46,19 @@ Meteor.methods
         id: lesson.id
         userId: @userId
       lesson.pointsAdded = userLesson?.pointsAdded
+    else if lesson.type is 'programming-challenge'
+      userLesson = UserProgrammingChallengeLessons.findOne
+        id: lesson.id
+        userId: @userId
+      lesson.pointsAdded = userLesson?.pointsAdded
     else
-      throw new Error 'Unknown lesson type', 'Unknown lesson type: ' + lesson.type
+      throw new Meteor.Error 'Unknown lesson type', 'Unknown lesson type: ' + lesson.type
 
 
     #add points before updating user
     if lesson.success
       if (userLesson is undefined) or !userLesson?.pointsAdded
-        Meteor.users.update(userId, {
+        Meteor.users.update(user._id, {
           $inc: { points: lessonPoints }
         })
         if lesson.type is 'javascript'
@@ -75,9 +81,9 @@ Meteor.methods
         lessonCode: lesson.code
         solved: needHelpSolved
 
-    if userId == @userId
+    if user._id == @userId
       qry["lastLesson"] = lesson
-    Meteor.users.update(userId, {
+    Meteor.users.update(user._id, {
       $set: qry
     })
 
@@ -90,6 +96,26 @@ Meteor.methods
 
     if lesson.type is 'css'
       return UserCSSLessons.upsert
+        userId: @userId
+        id: lesson.id
+      ,
+        $set: lesson
+
+    if lesson.type is 'programming-challenge'
+      elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
+      username = user.username.replace(' ', '%20')
+      if user._id != elfoslav._id
+        App.insertMessage
+          senderId: user._id
+          senderUsername: user.username
+          receiverId: elfoslav._id
+          receiverUsername: elfoslav.username
+          text: """
+            I have finished programming challenge lesson
+            #{Meteor.absoluteUrl()}programming-challenge/lesson/#{lesson.id}/#{lesson.slug}/#{username}
+          """
+
+      return UserProgrammingChallengeLessons.upsert
         userId: @userId
         id: lesson.id
       ,

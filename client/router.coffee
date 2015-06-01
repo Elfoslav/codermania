@@ -3,7 +3,7 @@ Router.onBeforeAction(->
     Router.go('main')
   @next()
 , {
-  only: [ 'messages', 'userSettings' ]
+  only: [ 'messages', 'userSettings', 'lessonProgrammingChallenge' ]
 })
 
 Router.route '/:lang?/javascript/lesson/:_id/:slug/:username?',
@@ -76,6 +76,7 @@ Router.route '/:lang?/html/lesson/:_id/:slug/:username?',
       lessonType: 'html'
       username: @params.username
     if @params.username
+      @subscribe 'studentLessonData', @params.username
       @subscribe 'userHTMLLessons', { username: @params.username, lessonId: @params._id }, ->
         lessons = HTMLLessonsList.getLessons()
         console.log 'userHtmlLessons num:', Session.get('lessonNumber')
@@ -113,6 +114,7 @@ Router.route '/:lang?/css/lesson/:_id/:slug/:username?',
       lessonType: 'css'
       username: @params.username
     if @params.username
+      @subscribe 'studentLessonData', @params.username
       @subscribe 'userCSSLessons', { username: @params.username, lessonId: @params._id }, ->
         lessons = CSSLessonsList.getLessons()
         #lesson result depends on user so set lesson again on ready subscription
@@ -132,9 +134,8 @@ Router.route '/:lang?/programming-challenge/lesson/:_id/:slug/:username?',
   onBeforeAction: ->
     Session.set('lessonSuccess', false)
     Session.set('exerciseSuccess', false)
-    Session.setDefault('activeTab', 'assignment')
+    Session.set('activeTab', 'assignment')
     lesson = ProgrammingChallengeLessonsList._collection.findOne({ id: @params._id })
-    console.log 'lesson in router: ', lesson
     if lesson
       Session.set('levelNumber', ProgrammingChallengeLessonsList.getLevelNum(lesson.num))
       Session.set('lessonNumber', lesson.num)
@@ -143,9 +144,14 @@ Router.route '/:lang?/programming-challenge/lesson/:_id/:slug/:username?',
     @next()
   subscriptions: ->
     if @params.username
+      @subscribe 'studentLessonData', @params.username
       @subscribe 'userProgrammingChallengeLessons',
         lessonId: @params._id
         username: @params.username
+      , ->
+        lessons = ProgrammingChallengeLessonsList.getLessons()
+        #lesson result depends on user so set lesson again on ready subscription
+        Lesson.setLesson(Session.get('lessonNumber'), lessons, ace.edit('editor'))
   onAfterAction: ->
     lesson = ProgrammingChallengeLessonsList._collection.findOne({ id: @params._id })
     if lesson

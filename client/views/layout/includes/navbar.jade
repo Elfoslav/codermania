@@ -21,8 +21,9 @@ template(name="navbar")
                 a(href="{{pathFor 'lessonHTML' lang=lang _id='1a' slug='hello-world' username=username}}") HTML
               li
                 a(href="{{pathFor 'lessonCSS' lang=lang _id='1a' slug='hello-world' username=username}}") CSS
-              li
-                a(href="{{pathFor 'lessonProgrammingChallenge' lang=lang _id='1a' slug='programming-challenge' username=username}}") Programming challenges
+              if currentUser
+                li
+                  a(href="{{pathFor 'lessonProgrammingChallenge' lang=lang _id='1a' slug='star-triangle' username=username}}") Programming challenges
           li
             a(href="{{pathFor 'help' lang=lang}}") {{_'Help'}}
               if needHelpCount

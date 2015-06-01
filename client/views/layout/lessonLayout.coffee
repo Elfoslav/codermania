@@ -175,12 +175,17 @@ setSuccessMsg = (lessonPoints, lesson, user) ->
   unless Meteor.user()?.lessons?[lesson.id]?.pointsAdded
     totalPoints += lessonPoints
   if totalPoints
-    Session.set('successMsg',
-      """
-      #{TAPi18n.__('Congratluations! You have earned <b>%s</b> points!', lessonPoints)}
-      #{TAPi18n.__('You have %s points in total', totalPoints)}.
-      """
-    )
+    if Lesson.isProgrammingChallengeLesson()
+      Session.set 'successMsg',
+        """
+        Congratluations! The output seems to be correct.
+        """
+    else
+      Session.set 'successMsg',
+        """
+        #{TAPi18n.__('Congratluations! You have earned <b>%s</b> points!', lessonPoints)}
+        #{TAPi18n.__('You have %s points in total', totalPoints)}.
+        """
   else
     Session.set('successMsg', TAPi18n.__('Correct!'))
 
@@ -229,15 +234,16 @@ Template.lessonLayout.events
       ###
       # Save lesson always if user is logged in
       ###
-      userId = App.getCurrentUserId()
+      username = App.getCurrentUsername()
       lessonToSave = {}
       lessonToSave.type = Lesson.getType()
       lessonToSave.number = parseInt lessonNum
       lessonToSave.id = lesson.id
       lessonToSave.code = code
+      lessonToSave.slug = lesson.slug
       lessonToSave.success = (if result == true then true else false)
-      if userId
-        Meteor.call 'saveUserLesson', userId, lessonToSave, (err, result) ->
+      if Meteor.user()?.username is username
+        Meteor.call 'saveUserLesson', username, lessonToSave, (err, result) ->
           console.log(err) if err
           console.log('result', result)
 
