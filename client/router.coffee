@@ -36,7 +36,7 @@ Router.route '/:lang?/javascript/lesson/:_id/:slug/:username?',
     lessons = JSLessonsList.getLessons()
     lesson = JSLessonsList._collection.findOne({ id: @params._id })
     if lesson
-      App.setPageTitle(lesson.title)
+      App.setPageTitle('JavaScript ' + lesson.title)
     Meteor.setTimeout ->
       hash = window.location.hash
       if hash
@@ -85,7 +85,7 @@ Router.route '/:lang?/html/lesson/:_id/:slug/:username?',
   onAfterAction: ->
     lesson = HTMLLessonsList._collection.findOne({ id: @params._id })
     if lesson
-      App.setPageTitle(lesson.title)
+      App.setPageTitle('HTML ' + lesson.title)
   data: ->
     lessonType: 'html'
 
@@ -122,7 +122,7 @@ Router.route '/:lang?/css/lesson/:_id/:slug/:username?',
   onAfterAction: ->
     lesson = CSSLessonsList._collection.findOne({ id: @params._id })
     if lesson
-      App.setPageTitle(lesson.title)
+      App.setPageTitle('CSS ' + lesson.title)
   data: ->
     lessonType: 'css'
 
