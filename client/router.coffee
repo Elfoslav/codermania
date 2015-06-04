@@ -3,7 +3,7 @@ Router.onBeforeAction(->
     Router.go('main')
   @next()
 , {
-  only: [ 'messages', 'userSettings', 'lessonProgrammingChallenge' ]
+  only: [ 'messages', 'userSettings' ]
 })
 
 Router.route '/:lang?/javascript/lesson/:_id/:slug/:username?',
