@@ -67,8 +67,11 @@ template(name="summerWebDevelopmentSchool")
     |&nbsp;&nbsp;Pôvodná cena: <del>12 000 Kč / 440 €</del>
     br
     |&nbsp;&nbsp;Akciová cena <b>6 500 Kč / 240 €</b> (možnosť splátok)
+  p
+    b.bigger-font Ak nemáš na školu peniaze, nezúfaj. Vyškolím ťa a keď si nájdeš prácu, tak školu zaplatíš.
+    |Dôležitá je chuť a motivácia sa naučiť kódiť.
   ul
-    li 45 hodín mentoringu osobne + približne 15 hodín online (chat)
+    li 45 hodín mentoringu osobne + online konzultácie (chat)
     li Nespočetne hodín pri vypracovávaní domácich úloh, projektov a skupinových projektov (práca v tíme)
     li Mentoring aj po ukončení kurzu
   with studyGroup
@@ -82,17 +85,12 @@ template(name="summerWebDevelopmentSchool")
     br
     |&nbsp;&nbsp;Akciová cena <b>5 500 Kč / 199 €</b>
   ul
-    li 30 hodín mentoringu online cez video + približne 15 hodín cez chat
+    li 30 hodín mentoringu online cez video  + konzultácie cez chat
     li Nespočetne hodín pri vypracovávaní domácich úloh, projektov a skupinových projektov (práca v tíme)
     li Mentoring aj po ukončení kurzu
 
   with onlineStudyGroup
     +summerWebDevSchoolApplicationInstructions
-    p
-      b {{freeSpots}}
-
-  p
-    b.bigger-font Ak nemáš na školu peniaze, <a href="mailto:tomas@codermania.com">napíš mi</a> a niečo vymyslíme.
 
   p Ak máš otázky alebo nejasnosti, napíš mi na
     a(href="https://www.facebook.com/elfoslav") Facebooku
