@@ -242,7 +242,7 @@ Template.lessonLayout.events
       lessonToSave.code = code
       lessonToSave.slug = lesson.slug
       lessonToSave.success = (if result == true then true else false)
-      if Meteor.user()?.username is username
+      if Meteor.user() and Meteor.user()?.username is username
         Meteor.call 'saveUserLesson', username, lessonToSave, (err, result) ->
           console.log(err) if err
           console.log('result', result)
