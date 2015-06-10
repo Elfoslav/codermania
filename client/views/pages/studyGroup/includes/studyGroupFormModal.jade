@@ -24,6 +24,12 @@ template(name="studyGroupFormModal")
                   label Capacity:
                   input.form-control(type='text', name='capacity', placeholder="9999")
               .col-sm-6
+                label Curriculum:
+                if curriculums.count
+                  select(name="curriculum")
+                    each curriculums
+                      option(value=_id) title
+                a.btn.btn-default(href="#" data-target="#curriculum-form-modal" data-toggle="modal") Add a curriculum
             .form-group
               label Description:
               textarea.form-control(name='description' rows="5")
@@ -35,3 +41,5 @@ template(name="studyGroupFormModal")
         .modal-footer
           button.btn.btn-default(data-dismiss='modal', type='button') Close
           button#study-group-form-submit-btn.btn.btn-primary(type='button') Submit
+
+  +curriculumFormModal

@@ -1,0 +1,25 @@
+template(name="curriculumFormModal")
+  #curriculum-form-modal.modal.fade.in(aria-hidden='false', role='dialog', tabindex='-1')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(data-dismiss='modal', type='button')
+            span(aria-hidden='true') &times;
+            span.sr-only Close
+          h4.modal-title Add/Edit a curriculum
+        .modal-body
+          form#curriculum-form
+            input(type="hidden" name="_id")
+            .row
+              .col-sm-6
+                .form-group
+                  label Title:
+                  input.form-control(type="text" name="title" placeholder="title")
+              .col-sm-6
+            .form-group
+              label Description/Text:
+              textarea.form-control(name="text" rows="5" placeholder="what will students learn?")
+            input.invisible(type="submit", value="Submit", name="_submit")
+        .modal-footer
+          button.btn.btn-default(data-dismiss='modal', type='button') Close
+          button#curriculum-form-submit-btn.btn.btn-primary(type='button') Add/Edit a curriculum

@@ -30,9 +30,25 @@ processForm = (form) ->
         $("#study-group-modal input[type=text]").val('')
         $('#study-group-modal textarea').val('')
 
+Template.studyGroupFormModal.onCreated = ->
+  @subscribe('curriculums')
+
+Template.studyGroupFormModal.helpers
+  curriculums: ->
+    StudyGroupCurriculums.find()
+
 Template.studyGroupFormModal.events
   'submit form': (evt) ->
     evt.preventDefault()
     processForm(evt.target)
   'click #study-group-form-submit-btn': (evt) ->
     processForm(document.getElementById('study-group-form'))
+  'click [data-target="#curriculum-form-modal"]': (evt) ->
+    curriculum = StudyGroupCurriculums.findOne($('study-group-form [name="curriculum"]').val())
+    console.log curriculum
+    if curriculum
+      for key, value of curriculum
+        $el = $('#curriculum-form-modal [name="' + key + '"]')
+        if $el[0]?.type is 'checkbox'
+          $el.prop('checked', value)
+        $el.val(value)

@@ -113,12 +113,19 @@
 #studyGroupId: String
 #text: String
 #userId: String
-#timestamp: Date.now()
+#timestamp: Number
 #isReadBy: [ { userId: String} ]
+#curriculumId: String
 @StudyGroupMessages = new Mongo.Collection 'studyGroupMessages',
   transform: (doc) ->
     doc.user = Meteor.users.findOne doc.userId
     return doc
+
+#title: String
+#text: String
+#createdBy: String (userId)
+#timestamp: Number
+@StudyGroupCurriculums = new Mongo.Collection 'studyGroupCurriculums'
 
 @Slides = new Mongo.Collection('slides')
 

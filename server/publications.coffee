@@ -301,6 +301,12 @@ Meteor.publish 'unreadStudyGroupMessagesCount', (studyGroupId) ->
     Counts.publish(this, 'unreadStudyGroupMessagesCount', messagesCursor)
   @ready()
 
+Meteor.publish 'curriculums', (id) ->
+  check id, Match.Optional String
+  if id
+    return StudyGroupCurriculums.findOne(id)
+  StudyGroupCurriculums.find({ createdBy: @userId })
+
 Meteor.publish 'userSettings', ->
   Meteor.users.find { _id: @userId },
     fields:

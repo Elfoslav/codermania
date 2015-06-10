@@ -36,7 +36,7 @@ Template.studyGroup.events
     route = Router.current()
     studyGroup = StudyGroups.findOne(route.params._id)
     for key, value of studyGroup
-      $el = $('[name="' + key + '"]')
+      $el = $('#study-group-form [name="' + key + '"]')
       if $el[0]?.type is 'checkbox'
         $el.prop('checked', value)
       $el.val(value)
