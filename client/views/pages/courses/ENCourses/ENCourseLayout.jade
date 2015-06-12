@@ -1,0 +1,35 @@
+template(name="ENCourseLayout")
+  #container
+    +navbar
+    .container
+      .row
+        .col-sm-8
+          +yield
+        .col-sm-4
+          h2 Lector
+          p
+            img(src="/img/codermania-elfoslav.jpg" alt="elfoslav")
+          p My name is Tomas "Elfoslav" Hromnik.
+            |{{_'I made my first website in 2005'}}. {{_'I started to learn programming in 2008'}}.
+            |{{_'I studied Information technologies at FI MUNI in Brno (2009 - 2012)'}}.
+            |{{_'I have been building web pages and web applications professionaly since 2012'}}.
+            |{{_'I discovered strong need to teach in 2014'}}.
+            |{{_'I started to do programming courses that I do till now'}}.
+            |There is a
+            a(href="http://blog.hromnik.com/en/2014/09/10/alarming-lack-of-programmers-solution/")
+              |shortage of (good quality) people in IT
+            |and I believe my courses will help to increase quantity and quality of people in IT.
+          p {{_'If you have questions, you can ping me on'}}
+            a(href="https://www.facebook.com/elfoslav") Facebook
+            |{{_'or'}}
+            a(href="mailto:tomas@codermania.com") e-mail.
+          p {{_'If you like what I do and you want me to do in the future, you can support me'}}:
+          p
+            +paypalDonateButton
+          p
+            +patreonLink
+          p You can check out my portfolio:
+            a(href="http://hromnik.com") hromnik.com
+
+    +appUpdatePrompt
+    +footer

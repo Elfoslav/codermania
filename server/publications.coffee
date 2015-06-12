@@ -257,7 +257,10 @@ Meteor.publish 'studyGroups', ->
       { userIds: $in: [ @userId ] }
     ]
 
-Meteor.publish 'summerWebDevSchoolStudyGroups', ->
+Meteor.publish 'summerWebDevSchoolStudyGroups', (lang) ->
+  if lang is 'en'
+    return StudyGroups.find
+        title: 'Web development school 2015'
   StudyGroups.find
     $or: [
       { title: 'Letná web developerská škola 2015' }
