@@ -418,31 +418,34 @@ Router.route '/:lang?/kurzy',
 
 Router.route '/:lang?/kurzy/zaklady-programovania',
   name: 'basicProgramming'
-  layoutTemplate: 'courseLayout'
+  layoutTemplate: 'SKCourseLayout'
   onAfterAction: ->
     App.setPageTitle('Kurzy - Základy programovania')
 
 Router.route '/:lang?/kurzy/tvorba-webovych-stranok',
   name: 'webPages'
-  layoutTemplate: 'courseLayout'
+  layoutTemplate: 'SKCourseLayout'
   onAfterAction: ->
     App.setPageTitle('Kurzy - Tvorba webových stránok')
 
 Router.route '/:lang?/kurzy/tvorba-webovych-aplikacii',
   name: 'webApplications'
-  layoutTemplate: 'courseLayout'
+  layoutTemplate: 'SKCourseLayout'
   onAfterAction: ->
     App.setPageTitle('Kurzy - Tvorba webových aplikácií')
 
 Router.route '/:lang?/kurzy/full-stack-web-developer',
   name: 'fullstackWebDeveloper'
-  layoutTemplate: 'courseLayout'
+  layoutTemplate: 'SKCourseLayout'
   onAfterAction: ->
     App.setPageTitle('Kurzy - Full-stack Web Developer')
 
 Router.route '/:lang?/kurzy/letna-web-developerska-skola',
   name: 'summerWebDevelopmentSchool'
-  layoutTemplate: 'courseLayout'
+  layoutTemplate: 'SKCourseLayout'
+  onBeforeAction: ->
+    TAPi18n.setLanguage('sk')
+    @next()
   waitOn: ->
     Meteor.subscribe 'summerWebDevSchoolStudyGroups'
   onAfterAction: ->
@@ -450,6 +453,19 @@ Router.route '/:lang?/kurzy/letna-web-developerska-skola',
   data: ->
     studyGroup: StudyGroups.findOne({ title: 'Letná web developerská škola 2015' })
     onlineStudyGroup: StudyGroups.findOne({ title: 'Online letná web developerská škola 2015' })
+
+Router.route '/:lang?/courses/web-development-school',
+  name: 'webDevelopmentSchool'
+  layoutTemplate: 'ENCourseLayout'
+  onBeforeAction: ->
+    TAPi18n.setLanguage('en')
+    @next()
+  waitOn: ->
+    Meteor.subscribe 'summerWebDevSchoolStudyGroups', 'en'
+  onAfterAction: ->
+    App.setPageTitle('Courses - Web development school')
+  data: ->
+    studyGroup: StudyGroups.findOne({ title: 'Web development school 2015' })
 
 #realtime code used for meteor workshop
 Router.route '/:lang?/code',

@@ -67,6 +67,7 @@ mongo@1.1.0
 mongo-livedata@1.0.8
 mquandalle:jade@0.4.3
 mquandalle:jade-compiler@0.4.3
+mrt:facebook-sdk@0.0.44
 msavin:jetsetter@1.0.13
 npm-bcrypt@0.7.8_2
 observe-sequence@1.0.6

@@ -1,0 +1,39 @@
+template(name="SKCourseLayout")
+  #container
+    +navbar
+    .container
+      .row
+        .col-sm-8
+          +yield
+          +SKCoursesBackBtn
+        .col-sm-4
+          h2 {{_'Ďalšie kurzy'}}
+          +listOfCourses
+          h2 Lektor
+          p
+            img(src="/img/codermania-elfoslav.jpg" alt="elfoslav")
+          p Volám sa Tomáš "Elfoslav" Hromník.
+            |{{_'Prvú webovú stránku som spravil v roku 2005'}}. {{_'Programovaniu sa venujem od roku 2008'}}.
+            |{{_'2009 - 2012 som študoval na FI MUNI v Brne'}}.
+            |{{_'Od roku 2012 som sa venoval profesionálne tvorbe webom a neskôr webových aplikácií'}}.
+            |{{_'V roku 2014 som objavil silnú potrebu učiť ľudí'}}.
+            |{{_'Začal som robiť programátorské kurzy, ktoré robím doteraz'}}.
+            |(Kvalitných) Ľudí v IT je
+            a(href="http://blog.hromnik.com/2015/04/27/zvysenie-kvality-a-kvantity-web-developerov/")
+              |akútny nedostatok
+            |a ja verím, že moje kurzy pomôžu zlepšiť kvalitu a kvantitu ľudí v IT'}}.
+          p {{_'Ak máš otázky, môžeš ma kontaktovať cez'}}
+            a(href="https://www.facebook.com/elfoslav") Facebook.
+          p Ak náhodou nemáš Facebook, na stránke
+            a(href="{{pathFor 'contact'}}") kontakt
+            |nájdeš môj e-mail.
+          p {{_'Ak sa vám páči čo robím a chcete, aby som to robil aj naďalej, môžete ma podporiť'}}:
+          p
+            +paypalDonateButton
+          p
+            +patreonLink
+          p Môžeš si pozrieť moje portfolio:
+            a(href="http://hromnik.com") hromnik.com
+
+    +appUpdatePrompt
+    +footer

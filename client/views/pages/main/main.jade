@@ -25,6 +25,18 @@ template(name="main")
           .col-sm-6
             p
               a.btn.btn-default.btn-block.btn-lg(href="{{pathFor 'lessonJS' _id='1a' slug='hello-world'}}") {{_ "Try now!"}}
+    if showWebDevSchool
+      .row
+        .col-sm-12
+          h2 Web development school - oh, that is cool!
+          p Don't miss an opportunity to become a web developer.
+          p Our teacher
+            a(href="http://hromnik.com") Elfoslav
+            |will give you his know-how for building web applications.
+          p For more information, click the button below:
+          p
+            a.btn.btn-primary.btn-lg(href="{{pathFor 'webDevelopmentSchool'}}") I want to know more about this cool web dev school
+      hr
     .row
       .col-sm-4.center-text
         h2
@@ -115,3 +127,9 @@ template(name="main")
           .col-sm-6
             p
               a.btn.btn-default.btn-block.btn-lg(href="{{pathFor 'guide' lang=lang}}") {{_ "Check out our guide"}}
+    hr
+    .row
+      .col-sm-6
+        .fb-page(data-href="https://facebook.com/codermania" data-width="500" data-hide-cover="false" data-show-facepile="true" data-show-posts="false")
+      .col-sm-6
+        <a class="twitter-timeline" href="https://twitter.com/codermania_com" data-widget-id="609268623199350784">Tweets by @codermania_com</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>

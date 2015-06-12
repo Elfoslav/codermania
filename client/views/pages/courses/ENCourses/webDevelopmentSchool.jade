@@ -1,0 +1,69 @@
+template(name="webDevelopmentSchool")
+  h1 Web development school
+
+  h2 Who is it for?
+  ul
+    li It's for people who want to learn to build their own web application(s).
+    li It's for people who want to know what technologies are used in web development field.
+    li It's for people who want to do something for themselves - to learn a new skill.
+    li It's for people who have at least 10 hours for per week for studying.
+
+  h2 What do I have to know?
+  ul
+    li English. Every developer needs to know English. At least on basic level of communication (writing, listening).
+    li There is no need for previous experience in programming or web development.
+
+  h2 You will learn:
+  ul
+    li HTML, CSS, JavaScript
+    li Basics of Wordpress
+    li Basics of version control system GIT
+    li Work in command line (BASH)
+    li MongoDB and Meteor.js for building real-time applications
+    li Broad view of web technologies
+    li Workflow
+    li Search for information
+    li Pair programming
+    li And a lot more stuff...
+  p This school aims for practical things. You will do exercises and projects from the start to
+    |the end of the school. You will learn many things about web technologies.
+    |It's up to you which technologie you will choose. I will advise what technology to choose to you.
+
+  h2 Term and duration:
+  p Web development school starts on <b>1st July 2015 and ends on 1st November 2015</b>.
+    |You will learn through video lessons, video calls and chat.
+    |I offer support/mentoring during and after school.
+    |I can teach you unless you have motivation and passion to learn.
+    |I want to work with people who are eager to learn something new.
+
+  h2 Price
+  p I want education to be free. There is
+    a(href="http://blog.hromnik.com/en/2014/09/10/alarming-lack-of-programmers-solution/")
+      |lack of (good quality) programmers and web developers
+    |and I want to solve this problem.
+    |You can give me any amount money if you feel I helped you to learn something useful.
+  p I know that many people don't appreciate if they get something for free.
+    |That's why I recommend you to donate this course in advance to keep you motivated.
+    |You can donate monthly on
+    a(href="https://patreon.com/elfoslav") Patreon
+    |or make one payment through Paypal:
+  p
+    +paypalDonateButton
+  p Remember, I cannot teach roundly if I get out of money.
+
+  with studyGroup
+    h2 How to apply?
+    p Press "I want to learn!" button below, that will show you a study group
+      |and click "Join this group" button inside the study group. Please join only
+      |if you have <b>serious</b> interest to learn to build web pages and web applications.
+      b {{freeSpots}}
+    p
+      a.btn.btn-default(href="{{pathFor 'studyGroup' _id=this._id}}") I want to learn!
+
+  h2 More information
+  p If you want to know more, just ping me on
+    a(href="https://www.facebook.com/elfoslav") Facebook
+    |or
+    a(href="mailto:tomas@codermania.com") e-mail.
+  p If you are from Slovakia or Czech republic, there is
+    a(href="{{pathFor 'summerWebDevelopmentSchool'}}") web development school in Slovak language.

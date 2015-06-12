@@ -32,17 +32,9 @@ template(name="summerWebDevelopmentSchool")
     |Dozvieš sa o veľmi veľa technológiách. Je už len na tebe niektoré z nich si vybrať a naučiť sa poriadne.
     |S výberom technológie samozrejme poradím.
 
-  h2 Miesto konania
-  p Primárne sa zameriavam na študentov <b>v Brne a v Dubnici</b>, kde budú prebiehať osobné stretnutia.
-    |Ak nie si z Brna ani z Dubnice, ponúkam online verziu školy za zvýhodnenú cenu.
-
   h2 Priebeh a trvanie?
-  p Letná web developerská škola <b>začína 1.7.2015 a končí 14.10.2015</b>.
-    |15 týždňov je doba na naučenie sa základov. Ak budú mať študenti záujem,
-    |ponúkam možnosť predĺženia školy o 1 - 2 mesiace.
+  p Letná web developerská škola <b>začína 1.7.2015 a končí 1.11.2015</b>.
     |Študent robí väčšinu práce doma.
-    |Budeme sa osobne stretávať 1x do týždňa (v Brne utorky, v Dubnici stredy)
-    |vo večerných hodinách (17:00 - 20:00).
     |Študenti pracujú počas týždňa na domácich úlohách, ktoré môžu konzultovať s ostatnými študentami
     |alebo vyučujúcim. Radenie sa medzi študentami je povolené a podporované. Študenti si tak navzájom môžu pomáhať a učiť sa.
 
@@ -51,46 +43,45 @@ template(name="summerWebDevelopmentSchool")
     a(href="http://hromnik.com") moje
     |skúsenosti najlepšie ako viem.
   p Po absolvovaní letnej web developerskej školy získaš možnosť pohovorov a nahliadnutia do fungovania rôznych firiem.
-    |Získaš nové kontakty a priateľov. Získaš znalosti, ktoré by si sám dosiahol za oveľa dlhší čas ako len 3 mesiace.
+    |Získaš nové kontakty a priateľov. Získaš znalosti, ktoré by si sám dosiahol za oveľa dlhší čas ako len 4 mesiace.
 
   h2 Cena
+  p Pôvodne mala byť škola za akciovú cenu <b>9 000 Kč / 330 €</b> pre neštudentov a za
+    |akciovú cenu pre študentov <b>6 500 Kč / 240 €</b>. Lenže, čo ak som študent, alebo pracujúci,
+    |ktorý prežíva zo dňa na deň a nemôže si školu dovoliť?
+    |Nový model financovania je založený na dobrovoľných príspevkoch.
+    |Ak budete mať pocit, že vám škola niečo dala, môžete ma podporiť.
+  p Zvolil som tento model preto, lebo na svete je nedostatok kvalitných web developerov a celkovo
+    |ľudí v IT. Mojim cieľom je
+    a(href="http://blog.hromnik.com/2015/04/27/zvysenie-kvality-a-kvantity-web-developerov/")
+      |zvýšiť počet a kvalitu web developerov.
+  p Viem, že veľa ľudí si neváži to, čo dostanú zadarmo.
+    |Preto odporúčam, aby študenti darovali vopred ľubovoľnú čiastku, aby mali motiváciu školu dokončiť.
+    |Prispievať môžeš každý mesiac na
+    a(href="https://patreon.com/elfoslav") Patreone
+    |alebo jednorázovo cez Paypal:
+  p
+    +paypalDonateButton
+  p Pamätajte, nemôžem učiť naplno ak budem bez peňazí.
+
+  h2 Prihlášky
   h3 Osobná škola:
-  p
-    b Neštudent:
-    br
-    |&nbsp;&nbsp;Pôvodná cena: <del>18 000 Kč / 660 €</del>
-    br
-    |&nbsp;&nbsp;Akciová cena <b>9 000 Kč / 330 €</b> (možnosť splátok)
-  p
-    b Študent:
-    br
-    |&nbsp;&nbsp;Pôvodná cena: <del>12 000 Kč / 440 €</del>
-    br
-    |&nbsp;&nbsp;Akciová cena <b>6 500 Kč / 240 €</b> (možnosť splátok)
-  p
-    b.bigger-font Ak nemáš na školu peniaze, nezúfaj. Vyškolím ťa a keď si nájdeš prácu, tak školu zaplatíš.
-    |Dôležitá je chuť a motivácia sa naučiť kódiť.
-  ul
-    li 45 hodín mentoringu osobne + online konzultácie (chat)
-    li Nespočetne hodín pri vypracovávaní domácich úloh, projektov a skupinových projektov (práca v tíme)
-    li Mentoring aj po ukončení kurzu
+  p Osobná škola je pre ľudí, v okolí Brna a Dubnice nad Váhom.
+    |Môžem sa so študentami stretávať raz za týždeň po 2 - 3 hodiny.
   with studyGroup
     +summerWebDevSchoolApplicationInstructions
 
   h3 Online škola:
-  p
-    b Študent aj neštudent:
-    br
-    |&nbsp;&nbsp;Pôvodná cena: <del>11 000 Kč / 399 €</del>
-    br
-    |&nbsp;&nbsp;Akciová cena <b>5 500 Kč / 199 €</b>
-  ul
-    li 30 hodín mentoringu online cez video  + konzultácie cez chat
-    li Nespočetne hodín pri vypracovávaní domácich úloh, projektov a skupinových projektov (práca v tíme)
-    li Mentoring aj po ukončení kurzu
-
+  p Online škola je pre ľudí, ktorí nemôžu dochádzať do Brna, alebo Dubnice.
+    |Výuka prebieha cez video hovory raz týždenne po 2 - 3 hodiny.
   with onlineStudyGroup
     +summerWebDevSchoolApplicationInstructions
+
+  h2 Dostaneš
+  ul
+    li 50+ hodín mentoringu osobne alebo cez video + online konzultácie (chat)
+    li Nespočetne hodín pri vypracovávaní domácich úloh, projektov a skupinových projektov (práca v tíme)
+    li Mentoring aj po ukončení kurzu
 
   p Ak máš otázky alebo nejasnosti, napíš mi na
     a(href="https://www.facebook.com/elfoslav") Facebooku

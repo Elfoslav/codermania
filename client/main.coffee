@@ -101,3 +101,6 @@ Handlebars.registerHelper 'getExerciseTitle', (lesson, exerciseId) ->
 
 Handlebars.registerHelper 'isOnline', (userId) ->
   Meteor.users.findOne(userId)?.status?.online
+
+Handlebars.registerHelper 'equals', (param1, param2) ->
+  return param1 is param2
