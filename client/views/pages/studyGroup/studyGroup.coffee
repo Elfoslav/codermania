@@ -30,6 +30,10 @@ Template.studyGroup.helpers
       'roles.all': { $in: [ 'teacher' ]}
   freeSpotsCount: ->
     @capacity - @userIds?.length
+  curriculum: ->
+    route = Router.current()
+    studyGroup = StudyGroups.findOne(route.params._id)
+    StudyGroupCurriculums.findOne(studyGroup?.curriculumId)
 
 Template.studyGroup.events
   'click [data-target="#study-group-modal"]': (evt) ->

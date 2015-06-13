@@ -16,7 +16,12 @@ template(name="studyGroup")
         if capacity
           p Capacity: {{capacity}}
             |(free {{freeSpotsCount}})
-        pre.unstyled-pre {{linkify description}}
+        if description
+          pre.unstyled-pre {{linkify description}}
+        if curriculumId
+          p
+            b Curriculum:
+          pre.unstyled-pre {{linkify curriculum.text}}
       p
         a.btn.btn-default(href="{{pathFor 'studyGroups'}}") &larr; All study groups
       hr

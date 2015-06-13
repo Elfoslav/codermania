@@ -322,6 +322,7 @@ Meteor.methods
       capacity: Match.Optional Number
       description: Match.Optional String
       isPublic: Boolean
+      curriculumId: Match.Optional String
 
     if !Roles.userIsInRole(@userId, 'teacher', 'all')
       throw new Meteor.Error(401, 'Unauthorized!')
@@ -346,6 +347,7 @@ Meteor.methods
       capacity: Match.Optional Number
       description: Match.Optional String
       isPublic: Boolean
+      curriculumId: Match.Optional String
 
     if !Roles.userIsInRole(@userId, 'teacher', 'all')
       throw new Meteor.Error(401, 'Unauthorized!')
@@ -366,3 +368,23 @@ Meteor.methods
       $addToSet: isReadBy: @userId
     ,
       multi: true
+
+  addOrEditCurriculum: (data, studyGroupId) ->
+    check data,
+      _id: Match.Optional String
+      title: String
+      text: String
+    check studyGroupId, Match.Optional String
+
+    data.createdBy = @userId
+    data.timestamp = Date.now()
+
+    if data._id
+      id = data._id
+      delete data._id
+      StudyGroupCurriculums.update(id, { $set: data })
+    else
+      delete data._id
+      curriculumId = StudyGroupCurriculums.insert(data)
+      if studyGroupId
+        StudyGroups.update studyGroupId, { $set: { curriculumId: curriculumId }}

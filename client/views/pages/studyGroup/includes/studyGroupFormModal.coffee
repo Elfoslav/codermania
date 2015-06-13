@@ -30,7 +30,7 @@ processForm = (form) ->
         $("#study-group-modal input[type=text]").val('')
         $('#study-group-modal textarea').val('')
 
-Template.studyGroupFormModal.onCreated = ->
+Template.studyGroupFormModal.onCreated ->
   @subscribe('curriculums')
 
 Template.studyGroupFormModal.helpers
@@ -43,8 +43,11 @@ Template.studyGroupFormModal.events
     processForm(evt.target)
   'click #study-group-form-submit-btn': (evt) ->
     processForm(document.getElementById('study-group-form'))
-  'click [data-target="#curriculum-form-modal"]': (evt) ->
-    curriculum = StudyGroupCurriculums.findOne($('study-group-form [name="curriculum"]').val())
+  'click [href="#add-curriculum"]': (evt) ->
+    $('#curriculum-form-modal input').val('')
+    $('#curriculum-form-modal textarea').val('')
+  'click [href="#edit-curriculum"]': (evt) ->
+    curriculum = StudyGroupCurriculums.findOne($('#study-group-form [name="curriculumId"]').val())
     console.log curriculum
     if curriculum
       for key, value of curriculum

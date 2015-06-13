@@ -104,6 +104,7 @@
 #  isPublic: Boolean
 #  userId: String
 #  userIds: [ String ]
+#  curriculumId: String
 #}
 @StudyGroups = new Mongo.Collection 'studyGroups',
   transform: (doc) ->
@@ -115,7 +116,6 @@
 #userId: String
 #timestamp: Number
 #isReadBy: [ { userId: String} ]
-#curriculumId: String
 @StudyGroupMessages = new Mongo.Collection 'studyGroupMessages',
   transform: (doc) ->
     doc.user = Meteor.users.findOne doc.userId

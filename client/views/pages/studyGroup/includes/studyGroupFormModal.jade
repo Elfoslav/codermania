@@ -26,10 +26,15 @@ template(name="studyGroupFormModal")
               .col-sm-6
                 label Curriculum:
                 if curriculums.count
-                  select(name="curriculum")
+                  select.form-control(name="curriculumId")
+                    option(value='') None
                     each curriculums
-                      option(value=_id) title
-                a.btn.btn-default(href="#" data-target="#curriculum-form-modal" data-toggle="modal") Add a curriculum
+                      option(value=_id) {{title}}
+                br
+                p
+                  a.btn.btn-default(href="#add-curriculum" data-target="#curriculum-form-modal" data-toggle="modal") Add a curriculum
+                p
+                  a.btn.btn-default(href="#edit-curriculum" data-target="#curriculum-form-modal" data-toggle="modal") Edit selected curriculum
             .form-group
               label Description:
               textarea.form-control(name='description' rows="5")

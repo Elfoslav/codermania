@@ -1,8 +1,10 @@
 processForm = (form) ->
-  throw new Error('Expected form with ID study-group-form') unless form.id is 'study-group-form'
+  unless form.id is 'curriculum-form'
+    throw new Error('Expected form with ID curriculum-form. ' + form?.id + ' given')
   data = $(form).serializeJSON()
+  studyGroupId = Router.current().params._id
 
-  Meteor.call 'addOrEditCurriculum', data, (err, result) ->
+  Meteor.call 'addOrEditCurriculum', data, studyGroupId, (err, result) ->
     if err
       bootbox.alert err.message
       console.log err
