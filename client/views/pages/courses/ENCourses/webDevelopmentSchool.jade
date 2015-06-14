@@ -49,13 +49,14 @@ template(name="webDevelopmentSchool")
     |or make one payment through Paypal:
   p
     +paypalDonateButton
-  p Remember, I cannot teach roundly if I get out of money.
+  p Remember, I cannot teach roundly if I run out of money.
 
   with studyGroup
     h2 How to apply?
     p Press "I want to learn!" button below, that will show you a study group
       |and click "Join this group" button inside the study group. Please join only
       |if you have <b>serious</b> interest to learn to build web pages and web applications.
+    p
       b {{freeSpots}}
     p
       a.btn.btn-default(href="{{pathFor 'studyGroup' _id=this._id}}") I want to learn!
