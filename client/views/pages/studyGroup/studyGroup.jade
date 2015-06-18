@@ -1,14 +1,15 @@
 template(name="studyGroup")
   h1 Study group - {{studyGroup.title}}
-    if isJoined
-      a.btn.btn-danger.leave-group-btn(href="#") Leave this group
-    else
-      a.btn.btn-success.join-group-btn(href="#") Join this group
     if canEdit
       a.btn.btn-default(href="#" data-target="#study-group-modal" data-toggle="modal") Edit
 
   .row
     .col-sm-8
+      p
+        if isJoined
+          a.btn.btn-danger.leave-group-btn(href="#") Leave this group
+        else
+          a.btn.btn-success.join-group-btn(href="#") Join this group
       with studyGroup
         if topics
           p
