@@ -250,6 +250,9 @@ Meteor.reactivePublish 'studyGroup', (id) ->
       fields: { username: 1, roles: 1, status: 1 }
   ]
 
+Meteor.publish 'studyGroupByName', (title) ->
+  StudyGroups.find({ title: title })
+
 Meteor.publish 'studyGroups', ->
   StudyGroups.find
     $or: [

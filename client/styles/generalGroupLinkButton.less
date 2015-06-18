@@ -1,0 +1,33 @@
+@keyframes shake {
+	0% { transform: rotate(0); }
+  33% { transform: rotate(7deg) }
+	66% { transform: rotate(-7deg) }
+	100% { transform: rotate(0) }
+}
+
+@keyframes emerge {
+  0% { bottom: -55px; }
+  100% { bottom: -2px; }
+}
+
+@keyframes hidden {
+  0% { bottom: -55px; }
+  100% { bottom: -55px; }
+}
+
+.general-group-link-button {
+  position: fixed;
+  bottom: -2px;
+  right: 6%;
+  z-index: 2;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  -webkit-box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.75);
+  animation-name: hidden, emerge, shake;
+  animation-delay: 0s, 2s, 2.6s;
+	animation-duration: 2s, 600ms, 300ms;
+	animation-iteration-count: 1, 1, 2;
+	animation-timing-function: linear;
+}
