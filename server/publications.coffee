@@ -16,7 +16,7 @@ Meteor.publish 'studentsList', ->
       'roles.all': 1
       'username': 1
       'points': 1
-      'status': 1
+      'status.online': 1
 
 Meteor.publish 'sendersList', ->
   user = Meteor.users.findOne(@userId)
@@ -30,7 +30,7 @@ Meteor.publish 'sendersList', ->
     fields:
       'roles.all': 1
       'username': 1
-      'status': 1
+      'status.online': 1
   }).fetch().map (user) ->
     unreadMsgCount = Messages.find({
       senderId: user._id
@@ -73,7 +73,7 @@ Meteor.publish 'studentLessonData', (username) ->
     fields:
       points: 1
       username: 1
-      status: 1
+      status.online: 1
 
 Meteor.publish 'usernames', (query, limit) ->
   check(query, String)
@@ -81,7 +81,7 @@ Meteor.publish 'usernames', (query, limit) ->
   regex = new RegExp("^" + query);
   Meteor.users.find { username: { $regex: regex } },
     limit: limit || 1000,
-    fields: { username: 1, roles: 1, status: 1 }
+    fields: { username: 1, roles: 1, status.online: 1 }
 
 Meteor.publish 'userHTMLLessons', (data) ->
   check data,
@@ -247,7 +247,7 @@ Meteor.reactivePublish 'studyGroup', (id) ->
     StudyGroups.find({ _id: id })
     messagesCursor
     Meteor.users.find { _id: $in : userIds },
-      fields: { username: 1, roles: 1, status: 1 }
+      fields: { username: 1, roles: 1, status.online: 1 }
   ]
 
 Meteor.publish 'studyGroupByName', (title) ->
