@@ -90,7 +90,7 @@ Handlebars.registerHelper 'trimEmail', (val) ->
   return val.replace(/@.+/, '')
 
 Handlebars.registerHelper 'linkify', (text) ->
-  return new Spacebars.SafeString linkify(text)
+  return new Spacebars.SafeString linkify(text || '')
 
 Handlebars.registerHelper 'formatDate', (timestamp) ->
   date = new Date(timestamp)
