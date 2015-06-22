@@ -140,9 +140,6 @@ Meteor.publish('messages', (options) ->
   })
 
   unless user
-    console.log('messages user: ', user)
-    console.log('messages senderUsername: ', options.senderUsername)
-    console.log('messages receiverUsername: ', options.receiverUsername)
     @ready()
     return []
 

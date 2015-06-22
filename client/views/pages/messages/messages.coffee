@@ -1,19 +1,12 @@
 Template.messages.helpers
   usernames: ->
-    usernames = []
-    if Roles.userIsInRole(Meteor.userId(), 'teacher', 'all')
-      usernames = Meteor.users.find({
-        username: { $ne: Meteor.user()?.username }
-      }).fetch().map((user)->
-        return user.username
-      )
-    else
-      usernames = Meteor.users.find({
-        username: { $ne: Meteor.user()?.username }
-        'roles.all': { $in: ['teacher'] }
-      }).fetch().map((user)->
-        return user.username
-      )
+    usernames = Meteor.users.find({
+      username: { $ne: Meteor.user()?.username }
+    })
+    .fetch()
+    .map((user) ->
+      return user.username
+    )
     return usernames
   sendersList: ->
     SendersList.find {},
