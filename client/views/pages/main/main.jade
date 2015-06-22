@@ -128,8 +128,11 @@ template(name="main")
             p
               a.btn.btn-default.btn-block.btn-lg(href="{{pathFor 'guide' lang=lang}}") {{_ "Check out our guide"}}
     hr
-    .row
-      .col-sm-6
-        .fb-page(data-href="https://facebook.com/codermania" data-width="500" data-hide-cover="false" data-show-facepile="true" data-show-posts="false")
-      .col-sm-6
-        <a class="twitter-timeline" href="https://twitter.com/codermania_com" data-widget-id="609268623199350784">Tweets by @codermania_com</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    .center-text
+      h2 Social CoderMania
+      a(href="https://facebook.com/codermania")
+        img(src="/img/social-media/facebook-logo.jpeg" alt="Facebook")
+      a(href="https://twitter.com/codermania_com")
+        img(src="/img/social-media/twitter-logo.jpeg" alt="Twitter")
+      a(href="https://www.youtube.com/channel/UCOFLvJbZv8Q-yhFYd9SrHOw/playlists")
+        img(src="/img/social-media/youtube-logo.jpeg" alt="Youtube")
