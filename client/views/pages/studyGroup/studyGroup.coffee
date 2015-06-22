@@ -1,3 +1,6 @@
+Template.studyGroup.onCreated ->
+  @shownCurriculum = new ReactiveVar(false)
+
 Template.studyGroup.helpers
   canEdit: ->
     route = Router.current()
@@ -34,6 +37,8 @@ Template.studyGroup.helpers
     route = Router.current()
     studyGroup = StudyGroups.findOne(route.params._id)
     StudyGroupCurriculums.findOne(studyGroup?.curriculumId)
+  shownCurriculum: ->
+    return Template.instance().shownCurriculum.get()
 
 Template.studyGroup.events
   'click [data-target="#study-group-modal"]': (evt) ->
@@ -79,3 +84,6 @@ Template.studyGroup.events
         bootbox.alert err.reason
         console.log err
         textarea.value = message
+  'click .toggle-curriculum': (evt, tpl) ->
+    evt.preventDefault()
+    tpl.shownCurriculum.set(!tpl.shownCurriculum.get())
