@@ -139,12 +139,33 @@ Meteor.methods
     unless @userId
       throw new Meteor.Error(401, 'To perform this action, you have to be logged in')
 
-    studyGroup = StudyGroups.findOne
+    userStudyGroup = StudyGroups.findOne
       _id: data.studyGroupId
       userIds: $in: [ @userId ]
 
-    if studyGroup
+    if userStudyGroup
       throw new Meteor.Error('already-joined', 'You already are in this group')
+
+    studyGroup = StudyGroups.findOne
+      _id: data.studyGroupId
+
+    if studyGroup.capacity <= studyGroup.userIds.length
+      studyGroupCreator = Meteor.users.findOne(studyGroup.userId)
+      user = Meteor.users.findOne(@userId)
+      username = user.username.replace(' ', '%20')
+      if user._id != studyGroupCreator._id
+        App.insertMessage
+          senderId: user._id
+          senderUsername: user.username
+          receiverId: studyGroupCreator._id
+          receiverUsername: studyGroupCreator.username
+          text: """
+            Hi, I am interested in joining
+            #{Meteor.absoluteUrl()}study-groups/#{studyGroup._id}
+            study group.
+          """
+      throw new Meteor.Error('group-capacity',
+        'Sorry, this group is already full. We have noticed teacher about your interest.')
 
     StudyGroups.update data.studyGroupId,
       $push: userIds: @userId

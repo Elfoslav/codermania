@@ -47,9 +47,6 @@ Template.studyGroup.events
   'click .join-group-btn': (evt) ->
     evt.preventDefault()
     return bootbox.alert('To join this group you have to be signed in') unless Meteor.userId()
-    studyGroup = StudyGroups.findOne Router.current().params._id
-    if studyGroup.capacity and studyGroup.capacity == studyGroup.userIds?.length
-      return bootbox.alert('This group is already full')
     data =
       studyGroupId: Router.current().params._id
     Meteor.call 'joinStudyGroup', data, (err, result) ->
