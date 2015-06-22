@@ -63,20 +63,12 @@ template(name="studyGroup")
 
       h3 Teachers ({{teachers.count}})
       each teachers
-        a(href="{{pathFor 'studentProfile' username=this.username}}")
-          span.badge
-            if this.status.online
-              +onlineDot
-            |{{trimEmail this.username}}
+        +studyGroupUserListItem
         |&nbsp;
 
       h3 Students ({{students.count}})
       each students
-        a(href="{{pathFor 'studentProfile' username=this.username}}")
-          span.badge
-            if this.status.online
-              +onlineDot
-            |{{trimEmail this.username}}
+        +studyGroupUserListItem
         |&nbsp;
       else
         |No students, yet.

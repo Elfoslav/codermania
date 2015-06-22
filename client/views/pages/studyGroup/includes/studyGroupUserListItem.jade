@@ -1,0 +1,15 @@
+template(name="studyGroupUserListItem")
+  span.dropdown
+    a(data-toggle="dropdown" class="dropdown-toggle badge {{#if this.status.online}}green-bg{{/if}}")
+      {{trimEmail this.username}}
+      b.caret
+    ul.dropdown-menu
+      li
+        a(href="{{pathFor 'studentProfile' lang=lang username=this.username}}")
+          span.glyphicon.glyphicon-eye-open
+          |User profile
+      unless equals this.username username
+        li
+          a(href="{{pathFor 'messages' username=this.username}}")
+            span.glyphicon.glyphicon-envelope
+            |Message
