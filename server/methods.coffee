@@ -9,7 +9,6 @@ Meteor.methods
       code: String
       success: Boolean
 
-    console.log 'saving lesson for user ', username, lesson
     user = Meteor.users.findOne({ username: username })
     unless user?._id == @userId or Roles.userIsInRole(@userId, 'teacher', 'all')
       throw new Meteor.Error(401, 'Access denied')
@@ -66,6 +65,20 @@ Meteor.methods
         else
           lesson.pointsAdded = true
         console.log 'lesson after points added: ', user.points
+
+        if lesson.type is 'programming-challenge'
+          elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
+          username = user.username.replace(' ', '%20')
+          if user._id != elfoslav._id
+            App.insertMessage
+              senderId: user._id
+              senderUsername: user.username
+              receiverId: elfoslav._id
+              receiverUsername: elfoslav.username
+              text: """
+                I have finished programming challenge lesson
+                #{Meteor.absoluteUrl()}programming-challenge/lesson/#{lesson.id}/#{lesson.slug}/#{username}
+              """
       console.log "updating need help for lesson #{lesson.id} and user #{user.username}"
       needHelpSolved = true
 
@@ -102,19 +115,6 @@ Meteor.methods
         $set: lesson
 
     if lesson.type is 'programming-challenge'
-      elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
-      username = user.username.replace(' ', '%20')
-      if user._id != elfoslav._id
-        App.insertMessage
-          senderId: user._id
-          senderUsername: user.username
-          receiverId: elfoslav._id
-          receiverUsername: elfoslav.username
-          text: """
-            I have finished programming challenge lesson
-            #{Meteor.absoluteUrl()}programming-challenge/lesson/#{lesson.id}/#{lesson.slug}/#{username}
-          """
-
       return UserProgrammingChallengeLessons.upsert
         userId: @userId
         id: lesson.id
