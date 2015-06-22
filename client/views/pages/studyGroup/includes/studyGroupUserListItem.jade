@@ -1,7 +1,7 @@
 template(name="studyGroupUserListItem")
   span.dropdown
-    a(data-toggle="dropdown" class="dropdown-toggle badge {{#if this.status.online}}green-bg{{/if}}")
-      {{trimEmail this.username}}
+    a(data-toggle="dropdown" class="dropdown-toggle badge badge-large {{#if this.status.online}}green-bg{{/if}}")
+      |{{trimEmail this.username}}
       b.caret
     ul.dropdown-menu
       li
