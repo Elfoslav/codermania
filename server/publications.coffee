@@ -250,12 +250,15 @@ Meteor.reactivePublish 'studyGroup', (id) ->
 Meteor.publish 'studyGroupByName', (title) ->
   StudyGroups.find({ title: title })
 
-Meteor.publish 'studyGroups', ->
+Meteor.publish 'studyGroups', (limit) ->
+  check(limit, Match.Optional Number)
   StudyGroups.find
     $or: [
       { isPublic: true }
       { userIds: $in: [ @userId ] }
     ]
+  ,
+    limit: limit || 0
 
 Meteor.publish 'summerWebDevSchoolStudyGroups', (lang) ->
   if lang is 'en'

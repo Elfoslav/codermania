@@ -271,7 +271,7 @@ Router.route '/:lang?/study-groups',
 Router.route '/:lang?/study-groups/:_id',
   name: 'studyGroup'
   waitOn: ->
-    Meteor.subscribe('studyGroups')
+    Meteor.subscribe('studyGroups', 5)
     Meteor.subscribe('studyGroup', @params._id)
   onAfterAction: ->
     studyGroup = StudyGroups.findOne(@params._id)
