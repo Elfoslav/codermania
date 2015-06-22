@@ -184,6 +184,7 @@ Meteor.methods
     check data,
       studyGroupId: String
       text: String
+      sendNotifications: Boolean
     unless @userId
       throw new Meteor.Error(401, 'To perform this action, you have to be logged in')
 
@@ -193,6 +194,30 @@ Meteor.methods
       userId: @userId
       timestamp: Date.now()
       isReadBy: [ @userId ]
+
+    if data.sendNotifications and Meteor.isServer
+      studyGroup = StudyGroups.findOne(data.studyGroupId)
+      currentUser = Meteor.users.findOne(@userId)
+      emails = []
+      users = Meteor.users.find({ _id: { $in: studyGroup.userIds }})
+      users.forEach (user) ->
+        if currentUser._id != user._id
+          emails.push(user.emails?[0]?.address)
+      studyGroupUrl = Meteor.absoluteUrl() + 'study-groups/' + studyGroup._id
+      msg = """
+        <p>
+          Hi,<br><br>
+          #{currentUser.username} has posted a message in study group.
+          Go to <a href='#{studyGroupUrl}'>#{studyGroupUrl}</a> to see the message.
+        </p>
+        <p>If you don't want to receive these e-mails, leave the study group.</p>
+      """
+      @unblock()
+      Email.send
+        from: 'info@codermania.com'
+        bcc: emails
+        subject: "New message in a study group on CoderMania"
+        html: msg
 
   updateUserSettings: (data) ->
     check data,

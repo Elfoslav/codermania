@@ -47,6 +47,10 @@ template(name="studyGroup")
       form#study-group-chat-form
         .form-group
           textarea.message.form-control(rows="5" name="text" placeholder="{{_'write a message'}}")
+        .checkbox
+          label
+            input(type="checkbox" name="sendNotifications")
+            |Send notification about new message to all members of this group
         .form-group
           button.btn.btn-primary.btn-block(type="submit") {{_'Send'}}
     .col-sm-4

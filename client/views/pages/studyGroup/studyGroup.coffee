@@ -66,13 +66,16 @@ Template.studyGroup.events
   'submit #study-group-chat-form': (evt) ->
     evt.preventDefault()
     textarea = evt.target.text
-    return bootbox.alert('Write something') if $.trim(textarea.value) is ''
+    message = textarea.value
+    textarea.value = ''
+    sendNotifications = evt.target.sendNotifications.checked
+    return bootbox.alert('Write something') if $.trim(message) is ''
     data =
       studyGroupId: Router.current().params._id
-      text: textarea.value
+      text: message
+      sendNotifications: sendNotifications
     Meteor.call 'saveStudyGroupMessage', data, (err, result) ->
       if err
         bootbox.alert err.reason
         console.log err
-      else
-        textarea.value = ''
+        textarea.value = message
