@@ -36,6 +36,7 @@ Template.helpDetail.events
   'submit .comment-form': (evt) ->
     evt.preventDefault()
     msg = evt.target.text.value
+    evt.target.text.value = ''
     lang = TAPi18n.getLanguage()
     unless $.trim(msg)
       return bootbox.alert(TAPi18n.__('Write something!'))
@@ -50,8 +51,7 @@ Template.helpDetail.events
       if err
         bootbox.alert("Error: #{err.message}")
         console.log err
-      else
-        evt.target.text.value = ''
+        evt.target.text.value = msg
 
   'click .mark-need-help-solved': (evt) ->
     evt.preventDefault()
