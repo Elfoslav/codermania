@@ -37,7 +37,7 @@ Template.helpDetail.events
     evt.preventDefault()
     msg = evt.target.text.value
     lang = TAPi18n.getLanguage()
-    unless msg
+    unless $.trim(msg)
       return bootbox.alert(TAPi18n.__('Write something!'))
     opts =
       needHelpId: @needHelp._id
