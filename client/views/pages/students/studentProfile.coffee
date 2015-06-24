@@ -19,6 +19,7 @@ Template.studentProfile.helpers
         restExercises.push value
     return restExercises
   studyGroups: ->
-    StudyGroups.find({}, { sort: { timestamp: 1 } })
+    user = Meteor.users.findOne({ username: Router.current().params.username })
+    StudyGroups.find({ userIds: { $in: [ user?._id ] }}, { sort: { timestamp: 1 } })
   showCreateStudyGroupBtn: ->
     @student.username is Meteor.user()?.username

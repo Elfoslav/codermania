@@ -1,7 +1,7 @@
 Meteor.publish 'userData', ->
   qry = {_id: @userId}
   Meteor.users.find qry,
-    fields: 
+    fields:
       'points': 1
 
 Meteor.publish 'userLesson', (userId, lessonId) ->
@@ -219,8 +219,10 @@ Meteor.publish 'needHelpForLessonAndUser', (lessonId, username) ->
 Meteor.publish 'userStudyGroups', (username) ->
   user = Meteor.users.findOne({ username: username })
   loggedInUser = Meteor.users.findOne @userId
-  return this.ready() if !user || !loggedInUser
-  if username == loggedInUser.username
+  console.log 'user: ', user
+  console.log 'username == loggedInUser?.username', username == loggedInUser?.username
+  return this.ready() if !user
+  if username == loggedInUser?.username
     #created or joined groups
     StudyGroups.find
       $or: [
