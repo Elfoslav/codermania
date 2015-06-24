@@ -165,7 +165,7 @@ Meteor.methods
             study group.
           """
       throw new Meteor.Error('group-capacity',
-        'Sorry, this group is already full. We have noticed teacher about your interest.')
+        'Sorry, this group is already full. We have notified the teacher about your interest.')
 
     StudyGroups.update data.studyGroupId,
       $push: userIds: @userId
