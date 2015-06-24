@@ -241,6 +241,7 @@ Meteor.reactivePublish 'studyGroup', (id) ->
     if userIds.indexOf(message.userId) is -1
       userIds.push message.userId
   [
+    StudyGroupCurriculums.find({ _id: studyGroup.curriculumId })
     StudyGroups.find({ _id: id })
     messagesCursor
     Meteor.users.find { _id: $in : userIds },
@@ -248,7 +249,11 @@ Meteor.reactivePublish 'studyGroup', (id) ->
   ]
 
 Meteor.publish 'studyGroupByName', (title) ->
-  StudyGroups.find({ title: title })
+  studyGroup = StudyGroups.findOne({ title: title })
+  return [
+    StudyGroupCurriculums.find({ _id: studyGroup.curriculumId })
+    StudyGroups.find({ title: title })
+  ]
 
 Meteor.publish 'studyGroups', (limit) ->
   check(limit, Match.Optional Number)
