@@ -12,12 +12,13 @@ template(name="layout")
   #container
     +navbar
     .container
-      if unreadMessagesCount
-        .alert.alert-warning.alert-dismissable.notification-alert You have {{unreadMessagesCount}} unread message(s).
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          |Go to
-          a(href="{{pathFor 'messages' lang=lang}}")
-            b messages page.
+      unless isMessagesPage
+        if unreadMessagesCount
+          .alert.alert-warning.alert-dismissable.notification-alert You have {{unreadMessagesCount}} unread message(s).
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            |Go to
+            a(href="{{pathFor 'messages' lang=lang}}")
+              b messages page.
       +yield
       +appUpdatePrompt
     +footer

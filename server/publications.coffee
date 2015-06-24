@@ -26,7 +26,7 @@ Meteor.publish 'studentsList', ->
       'points': 1
       'status.online': 1
 
-Meteor.publish 'sendersList', ->
+Meteor.reactivePublish 'sendersList', ->
   user = Meteor.users.findOne(@userId)
   throw new Meteor.Error(401, 'Not authorized') unless user
 
@@ -49,6 +49,8 @@ Meteor.publish 'sendersList', ->
     msgCount = Messages.find({
       senderId: user._id
       receiverId: self.userId
+    }, {
+      reactive: true
     }).count()
 
     firstMsg = Messages.findOne
@@ -64,6 +66,8 @@ Meteor.publish 'sendersList', ->
     user.msgTimestamp = firstMsg?.timestamp
     if msgCount
       self.added('sendersList', user._id, user)
+      #self.changed is required for reactive changes
+      self.changed('sendersList', user._id, user)
     return user
   @ready()
 

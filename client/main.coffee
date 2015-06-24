@@ -40,9 +40,6 @@ Meteor.startup ->
 Template.onRendered ->
   Editor.highlightCodeInText()
 
-Template.layout.rendered = ->
-  console.log 'layout rendered'
-
 Handlebars.registerHelper 'arrayify', (obj) ->
   result = []
   for key, value of obj
@@ -80,9 +77,10 @@ Handlebars.registerHelper 'loggedInUserUsername', ->
   Meteor.user()?.username
 
 Handlebars.registerHelper 'unreadMessagesCount', ->
-  if Router.current().route.getName() is 'messages'
-    return 0
   Counts.get('unreadMessagesCount')
+
+Handlebars.registerHelper 'isMessagesPage', ->
+  Router.current().route.getName() is 'messages'
 
 Handlebars.registerHelper 'isNotUndefined', (val) ->
   typeof val != 'undefined'
