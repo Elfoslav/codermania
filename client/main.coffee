@@ -8,6 +8,7 @@ Meteor.startup ->
     lessonsIds.push(lesson.id)
   #empty array
   lessonsIds = null
+  Meteor.subscribe 'userData'
   Meteor.subscribe 'unreadMessagesCount'
   Meteor.subscribe 'unreadStudyGroupMessagesCount'
 

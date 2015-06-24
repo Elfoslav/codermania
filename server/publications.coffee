@@ -1,3 +1,9 @@
+Meteor.publish 'userData', ->
+  qry = {_id: @userId}
+  Meteor.users.find qry,
+    fields: 
+      'points': 1
+
 Meteor.publish 'userLesson', (userId, lessonId) ->
   qry = { _id: userId }
   qry["lessons.#{lessonId}.id"] = lessonId
@@ -11,6 +17,8 @@ Meteor.publish 'studentsList', ->
     'roles.all': 'student'
 
   Meteor.users.find qry,
+    sort:
+      'points': -1
     limit: 250
     fields:
       'roles.all': 1
