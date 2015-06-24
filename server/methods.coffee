@@ -79,7 +79,6 @@ Meteor.methods
                 I have finished programming challenge lesson
                 #{Meteor.absoluteUrl()}programming-challenge/lesson/#{lesson.id}/#{lesson.slug}/#{username}
               """
-      console.log "updating need help for lesson #{lesson.id} and user #{user.username}"
       needHelpSolved = true
 
     needHelpQry =

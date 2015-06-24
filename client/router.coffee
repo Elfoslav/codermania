@@ -7,9 +7,13 @@ Router.onBeforeAction(->
 })
 
 Router.onBeforeAction ->
-  if Meteor.user() and Meteor.user().username?.indexOf('@') != -1
-    Router.go('changeUsername')
-  @next()
+    if Meteor.user() and Meteor.user().username?.indexOf('@') != -1
+      Router.go('changeUsername')
+    @next()
+  ,
+    #this is important because this onBeforeAction causes problem on lessonJS page
+    #it's because js lessons are stored in user object
+    except: [ 'lessonJS' ]
 
 Router.route '/:lang?/change-username',
   name: 'changeUsername'
