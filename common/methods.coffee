@@ -231,12 +231,40 @@ Meteor.methods
 
   changeUsername: (username) ->
     check username, String
+    unless @userId
+      throw new Meteor.Error(401, 'To perform this action, you have to be logged in')
     unless username
       throw new Meteor.Error('empty username', 'Username cannot be empty')
     existingUser = Meteor.users.findOne({ username: username })
     if existingUser
       throw new Meteor.Error('user already exists',
         'User with given username already exists, choose another username')
+
+    user = Meteor.users.findOne(@userId)
+    Messages.update
+      receiverUsername: user.username
+    ,
+      $set:
+        receiverUsername: username
+    ,
+      multi: true
+
+    Messages.update
+      senderUsername: user.username
+    ,
+      $set:
+        senderUsername: username
+    ,
+      multi: true
+
+    NeedHelpComments.update
+      username: user.username
+    ,
+      $set:
+        username: username
+    ,
+      multi: true
+
     Meteor.users.update(@userId, {
       $set:
         username: username

@@ -17,12 +17,14 @@ Accounts.onCreateUser (options, user) ->
     }
 
   elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
-  App.insertMessage
-    senderId: elfoslav._id
-    senderUsername: elfoslav.username
-    receiverId: user._id
-    receiverUsername: user.username
-    text: App.getWelcomeMessage()
-  user.welcomeMessageSent = true
+  console.log user
+  unless Messages.findOne({ receiverId: user._id })
+    App.insertMessage
+      senderId: elfoslav._id
+      senderUsername: elfoslav.username
+      receiverId: user._id
+      receiverUsername: user.username
+      text: App.getWelcomeMessage()
+    user.welcomeMessageSent = true
 
   return user
