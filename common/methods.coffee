@@ -149,7 +149,7 @@ Meteor.methods
     studyGroup = StudyGroups.findOne
       _id: data.studyGroupId
 
-    if studyGroup.capacity <= studyGroup.userIds.length
+    if studyGroup.capacity != 0 and studyGroup.capacity <= studyGroup.userIds.length
       studyGroupCreator = Meteor.users.findOne(studyGroup.userId)
       user = Meteor.users.findOne(@userId)
       username = user.username.replace(' ', '%20')
