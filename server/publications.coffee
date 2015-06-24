@@ -11,6 +11,8 @@ Meteor.publish 'studentsList', ->
     'roles.all': 'student'
 
   Meteor.users.find qry,
+    sort:
+      'points': -1
     limit: 250
     fields:
       'roles.all': 1
