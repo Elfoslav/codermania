@@ -228,3 +228,16 @@ Meteor.methods
     ,
       $set:
         'settings.emailNotifications.studyGroupNotifications': data.studyGroupNotifications
+
+  changeUsername: (username) ->
+    check username, String
+    unless username
+      throw new Meteor.Error('empty username', 'Username cannot be empty')
+    existingUser = Meteor.users.findOne({ username: username })
+    if existingUser
+      throw new Meteor.Error('user already exists',
+        'User with given username already exists, choose another username')
+    Meteor.users.update(@userId, {
+      $set:
+        username: username
+    })

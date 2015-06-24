@@ -6,6 +6,16 @@ Router.onBeforeAction(->
   only: [ 'messages', 'userSettings' ]
 })
 
+Router.onBeforeAction ->
+  if Meteor.user() and Meteor.user().username?.indexOf('@') != -1
+    Router.go('changeUsername')
+  @next()
+
+Router.route '/:lang?/change-username',
+  name: 'changeUsername'
+  onAfterAction: ->
+    App.setPageTitle('Change username')
+
 Router.route '/:lang?/javascript/lesson/:_id/:slug/:username?',
   name: 'lessonJS'
   layoutTemplate: 'lessonLayout'
@@ -463,7 +473,7 @@ Router.route '/:lang?/courses/web-development-school',
   waitOn: ->
     Meteor.subscribe 'summerWebDevSchoolStudyGroups', 'en'
   onAfterAction: ->
-    App.setPageTitle('Courses - Web development school')
+    App.setPageTitle('Web development school')
   data: ->
     studyGroup: StudyGroups.findOne({ title: 'Web development school 2015' })
 

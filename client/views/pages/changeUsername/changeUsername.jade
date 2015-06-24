@@ -1,0 +1,17 @@
+template(name="changeUsername")
+  h1 Change username
+  .row
+    .col-sm-4
+      if usernameIsEmail
+        form.change-username-form
+          .forn-group
+            label Your username is {{currentUser.username}}. Your username cannot contain @.
+              |Please change your username:
+          .form-group
+            input.form-control(type="text" name="username" placeholder="Your new username")
+          .form-group
+            button.btn.btn-primary(type="submit") Submit
+      else
+        p Your username is OK.
+        p
+          a.btn.btn-default(href="/") Continue to homepage
