@@ -40,66 +40,66 @@ Meteor.startup ->
 Template.onRendered ->
   Editor.highlightCodeInText()
 
-Handlebars.registerHelper 'arrayify', (obj) ->
+Template.registerHelper 'arrayify', (obj) ->
   result = []
   for key, value of obj
     result.push({ key:key,value: value })
   return result
 
-Handlebars.registerHelper 'lesson', (id) ->
+Template.registerHelper 'lesson', (id) ->
   lesson = LessonsList._collection.findOne({ id: id })
   return lesson if lesson
   lesson = LessonsList._collection.findOne({ id: @key })
   return lesson
 
-Handlebars.registerHelper 'lessonTitle', (id) ->
+Template.registerHelper 'lessonTitle', (id) ->
   return LessonsList._collection.findOne({ id: id })?.title
 
-Handlebars.registerHelper 'lessonId', ->
+Template.registerHelper 'lessonId', ->
   lessons = LessonsList.getLessons()
   return lessons[Session.get('lessonNumber')]?.id
 
-Handlebars.registerHelper 'lessonSlug', ->
+Template.registerHelper 'lessonSlug', ->
   lessons = LessonsList.getLessons()
   return lessons[Session.get('lessonNumber')]?.slug
 
-Handlebars.registerHelper 'lang', (id) ->
+Template.registerHelper 'lang', (id) ->
   lang = TAPi18n.getLanguage()
   return if (lang == 'en') then '' else lang
 
-Handlebars.registerHelper 'userId', ->
+Template.registerHelper 'userId', ->
   Meteor.userId() || undefined
 
-Handlebars.registerHelper 'username', ->
+Template.registerHelper 'username', ->
   App.getCurrentUsername()
 
-Handlebars.registerHelper 'loggedInUserUsername', ->
+Template.registerHelper 'loggedInUserUsername', ->
   Meteor.user()?.username
 
-Handlebars.registerHelper 'unreadMessagesCount', ->
+Template.registerHelper 'unreadMessagesCount', ->
   Counts.get('unreadMessagesCount')
 
-Handlebars.registerHelper 'isMessagesPage', ->
+Template.registerHelper 'isMessagesPage', ->
   Router.current().route.getName() is 'messages'
 
-Handlebars.registerHelper 'isNotUndefined', (val) ->
+Template.registerHelper 'isNotUndefined', (val) ->
   typeof val != 'undefined'
 
-Handlebars.registerHelper 'trimEmail', (val) ->
+Template.registerHelper 'trimEmail', (val) ->
   return val.replace(/@.+/, '')
 
-Handlebars.registerHelper 'linkify', (text) ->
+Template.registerHelper 'linkify', (text) ->
   return new Spacebars.SafeString linkify(text || '')
 
-Handlebars.registerHelper 'formatDate', (timestamp) ->
+Template.registerHelper 'formatDate', (timestamp) ->
   date = new Date(timestamp)
   date.toDateString() + ' ' + date.toLocaleTimeString()
 
-Handlebars.registerHelper 'getExerciseTitle', (lesson, exerciseId) ->
+Template.registerHelper 'getExerciseTitle', (lesson, exerciseId) ->
   lesson.exercises[exerciseId].title
 
-Handlebars.registerHelper 'isOnline', (userId) ->
+Template.registerHelper 'isOnline', (userId) ->
   Meteor.users.findOne(userId)?.status?.online
 
-Handlebars.registerHelper 'equals', (param1, param2) ->
+Template.registerHelper 'equals', (param1, param2) ->
   return param1 is param2
