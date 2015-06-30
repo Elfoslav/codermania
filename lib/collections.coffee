@@ -106,10 +106,13 @@
 #  userIds: [ String ]
 #  curriculumId: String
 #}
-@StudyGroups = new Mongo.Collection 'studyGroups',
-  transform: (doc) ->
-    doc.messages = StudyGroupMessages.find({ studyGroupId: doc._id }, { sort: { timestamp: 1 } })
-    return doc
+@StudyGroups = new Mongo.Collection 'studyGroups'
+
+StudyGroups.helpers
+  isAMember: (userId) ->
+    @userIds?.indexOf(userId) != -1
+  messages: () ->
+    StudyGroupMessages.find({ studyGroupId: @_id }, { sort: { timestamp: 1 } })
 
 #studyGroupId: String
 #text: String

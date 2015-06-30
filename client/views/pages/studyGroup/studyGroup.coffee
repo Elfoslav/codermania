@@ -16,7 +16,9 @@ Template.studyGroup.helpers
   makeRead: ->
     if @isReadBy?.indexOf(Meteor.userId()) is -1
       studyGroupId = Router.current().params._id
-      Meteor.call('markStudyGroupMessagesAsRead', studyGroupId)
+      studyGroup = StudyGroups.findOne(studyGroupId)
+      if studyGroup.isAMember(Meteor.userId())
+        Meteor.call('markStudyGroupMessagesAsRead', studyGroupId)
   getUsername: ->
     Meteor.users.findOne(@userId)?.username
   isUserOnline: ->

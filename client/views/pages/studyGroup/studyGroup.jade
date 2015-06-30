@@ -45,6 +45,8 @@ template(name="studyGroup")
           a(href="{{pathFor 'studentProfile' username=getUsername}}")
             b {{getUsername}}
           |{{getRole}}:
+          span.pull-right(title="Read by {{isReadBy.length}} members")
+            small {{isReadBy.length}}x read
         pre.unstyled
           |{{linkify text}}
       else

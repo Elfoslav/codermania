@@ -336,6 +336,11 @@ Meteor.methods
     unless @userId
       throw new Meteor.Error(401, 'To perform this action, you have to be logged in')
 
+    studyGroup = StudyGroups.findOne(studyGroupId)
+    unless studyGroup.isAMember(@userId)
+      throw new Meteor.Error('not a member',
+        "Currently logged in user (#{@userId}) is not a member of the group with id #{studyGroupId}")
+
     StudyGroupMessages.update
       studyGroupId: studyGroupId
       isReadBy: $nin: [ @userId ]

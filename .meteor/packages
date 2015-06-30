@@ -38,3 +38,4 @@ percolate:synced-cron
 mrt:facebook-sdk
 ongoworks:spiderable
 reactive-var
+dburles:collection-helpers
