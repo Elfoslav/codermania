@@ -26,6 +26,13 @@ Meteor.publish 'studentsList', ->
       'points': 1
       'status.online': 1
 
+Meteor.publish 'studentsCount', ->
+  qry =
+    'roles.all': 'student'
+  students = Meteor.users.find qry
+  Counts.publish(this, 'studentsCount', students)
+  @ready()
+
 Meteor.reactivePublish 'sendersList', ->
   user = Meteor.users.findOne(@userId)
   throw new Meteor.Error(401, 'Not authorized') unless user

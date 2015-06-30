@@ -237,9 +237,13 @@ Router.route '/:lang?/help/:id',
 Router.route '/:lang?/leaderboard',
   name: 'leaderboard'
   waitOn: ->
-    Meteor.subscribe('studentsList')
+    [
+      Meteor.subscribe('studentsList')
+      Meteor.subscribe('studentsCount')
+    ]
   data: ->
     students: Meteor.users.find({ 'roles.all': 'student'}, { sort: { points: -1 } })
+    restStudentsCount: if (Counts.get('studentsCount') - 250 > 0) then Counts.get('studentsCount') - 250 else 0
   onAfterAction: ->
     App.setPageTitle('Leaderboard')
 
