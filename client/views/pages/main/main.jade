@@ -27,15 +27,25 @@ template(name="main")
               a.btn.btn-default.btn-block.btn-lg(href="{{pathFor 'lessonJS' _id='1a' slug='hello-world'}}") {{_ "Try now!"}}
     if showWebDevSchool
       .row
-        .col-sm-12
+        .col-sm-6
           h2 Web development school - oh, that is cool!
           p Don't miss an opportunity to become a web developer.
           p Our teacher
             a(href="http://hromnik.com") Elfoslav
             |will give you his know-how for building web applications.
-          p For more information, click the button below:
+          p Learn <b>online</b> by watching videos, reading articles and tutorials,
+            |doing exercises and homeworks.
+          p For more information
+            a(href="https://www.youtube.com/playlist?list=PLoy-bs-bDKTgQYc39H9SpxuWUMitdGhtf") watch the video
+            |or click the button below.
+          br
+          br
           p
             a.btn.btn-primary.btn-lg(href="{{pathFor 'webDevelopmentSchool'}}") I want to know more about this cool web dev school
+        .col-sm-6
+          br
+          p
+            iframe(width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLoy-bs-bDKTgQYc39H9SpxuWUMitdGhtf" frameborder="0" allowfullscreen)
       hr
     .row
       .col-sm-4.center-text
@@ -130,9 +140,12 @@ template(name="main")
     hr
     .center-text
       h2 Social CoderMania
-      a(href="https://facebook.com/codermania")
-        img(src="/img/social-media/facebook-logo.jpeg" alt="Facebook")
-      a(href="https://twitter.com/codermania_com")
-        img(src="/img/social-media/twitter-logo.jpeg" alt="Twitter")
-      a(href="https://www.youtube.com/channel/UCOFLvJbZv8Q-yhFYd9SrHOw/playlists")
-        img(src="/img/social-media/youtube-logo.jpeg" alt="Youtube")
+      p
+        a(href="https://facebook.com/codermania")
+          img(src="/img/social-media/facebook-logo.jpeg" alt="Facebook")
+        a(href="https://twitter.com/codermania_com")
+          img(src="/img/social-media/twitter-logo.jpeg" alt="Twitter")
+        a(href="https://plus.google.com/+CoderMania_com/posts")
+          img(src="/img/social-media/google-plus-logo.jpg" alt="G+")
+        a(href="https://www.youtube.com/channel/UCOFLvJbZv8Q-yhFYd9SrHOw/playlists")
+          img(src="/img/social-media/youtube-logo.jpeg" alt="Youtube")
