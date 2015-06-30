@@ -269,3 +269,27 @@ Meteor.methods
       $set:
         username: username
     })
+
+  sendMessage: (options) ->
+    check(options, {
+      username: String #receiver's username
+      sendEmail: Boolean
+      message: String
+    })
+
+    throw new Meteor.Error(401, 'Unauthorized!') unless @userId
+
+    sender = Meteor.users.findOne(Meteor.userId())
+    receiver = Meteor.users.findOne({ username: options.username })
+    App.insertMessage
+      senderId: Meteor.userId()
+      senderUsername: sender.username
+      receiverId: receiver._id
+      receiverUsername: receiver.username
+      text: options.message
+
+    if options.sendEmail and Meteor.isServer
+      @unblock()
+      App.sendEmailAboutMessage
+        sender: sender
+        receiver: receiver
