@@ -1234,14 +1234,31 @@ class @JSExercise
       line12Expected = /car\.accelerate\(\);/
       line13Expected = /console\.log\( {0,1}car\.toString\(\) {0,1}\);/
 
+      unless CodeChecker.hasIndentation(line2)
+        return TAPi18n.__ 'Error on line 2, you are missing indentation - tabulator or 2 spaces'
+      unless CodeChecker.hasIndentation(line3)
+        return TAPi18n.__ 'Error on line 3, you are missing indentation - tabulator or 2 spaces'
+      unless CodeChecker.hasIndentation(line4)
+        return TAPi18n.__ 'Error on line 4, you are missing indentation - tabulator or 2 spaces'
+      unless CodeChecker.hasIndentation(line5, 4)
+        return TAPi18n.__ 'Error on line 5, you are missing indentation - 2x tabulator or 4 spaces'
+      unless CodeChecker.hasIndentation(line6)
+        return TAPi18n.__ 'Error on line 6, you are missing indentation - tabulator or 2 spaces'
+      unless CodeChecker.hasIndentation(line7)
+        return TAPi18n.__ 'Error on line 8, you are missing indentation - tabulator or 2 spaces'
+      unless CodeChecker.hasIndentation(line8)
+        return TAPi18n.__ 'Error on line 8, you are missing indentation - 2x tabulator or 4 spaces'
+      unless CodeChecker.hasIndentation(line9)
+        return TAPi18n.__ 'Error on line 9, you are missing indentation - tabulator or 2 spaces'
+
       if !line1Expected.test(line1)
         return TAPi18n.__ 'Error on line 1, check if variable has name car'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, check if property has name <i>name</i> and value is string, are you missing comma?'
+        return TAPi18n.__ 'Error on line 2, check if property has name <i>name</i> and its value is string, are you missing comma?'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, check if property has name <i>speed</i> and value is integer, are you missing comma?'
+        return TAPi18n.__ 'Error on line 3, check if property has name <i>speed</i> and its value is integer, are you missing comma?'
 
       if !line4Expected.test(line4)
         return TAPi18n.__ 'Error on line 4, check if method has name <i>accelerate</i>'
@@ -1287,11 +1304,14 @@ class @JSExercise
       line5Expected = /person\.name = ["'].+['"];/
       line6Expected = /console\.log\(person\.name\);/
 
+      unless CodeChecker.hasIndentation(line2)
+        return TAPi18n.__ 'Error on line 2, you are missing indentation - tabulator or 2 spaces'
+
       if !line1Expected.test(line1)
         return TAPi18n.__ 'Error on line 1, check if variable has name person'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, check if property has name <i>name</i> and value is string, are you missing comma?'
+        return TAPi18n.__ 'Error on line 2, check if property has name <i>name</i> and its value is string, are you missing comma?'
 
       if !line3Expected.test(line3)
         return TAPi18n.__ 'Error on line 3, close object with };'
@@ -1307,6 +1327,109 @@ class @JSExercise
 
       success = true
 
+    if exercise.id is '1re3'
+      lines = opts.code.split('\n')
+      line1 = $.trim(lines[0]); line2 = lines[1]; line3 = lines[2]
+      line4 = lines[3]; line5 = lines[4]; line6 = lines[5]
+      line7 = lines[6]; line8 = lines[7];
+
+      line1Expected = /var dog = {/
+      line2Expected = /name: ["'].+['"],/
+      line3Expected = /bark: function\(\) {/
+      line4Expected = /console\.log\(["']wof wof["']\);/
+      line5Expected = /}/
+      line6Expected = /};/
+      line7Expected = /console\.log\(dog\.name\);/
+      line8Expected = /dog\.bark\(\);/
+
+      unless CodeChecker.hasIndentation(line2)
+        return TAPi18n.__ 'Error on line 2, you are missing indentation - tabulator or 2 spaces'
+      unless CodeChecker.hasIndentation(line3)
+        return TAPi18n.__ 'Error on line 3, you are missing indentation - tabulator or 2 spaces'
+      unless CodeChecker.hasIndentation(line4, 4)
+        return TAPi18n.__ 'Error on line 4, you are missing indentation - 2x tabulator or 4 spaces'
+      unless CodeChecker.hasIndentation(line5)
+        return TAPi18n.__ 'Error on line 5, you are missing indentation - tabulator or 2 spaces'
+
+      if !line1Expected.test(line1)
+        return TAPi18n.__ 'Error on line 1, check if variable has name dog'
+
+      if !line2Expected.test(line2)
+        return TAPi18n.__ 'Error on line 2, check if property has name <i>name</i> and its value is string, are you missing comma?'
+
+      if !line3Expected.test(line3)
+        return TAPi18n.__ 'Error on line 3, define method with name <i>bark</i>'
+
+      if !line4Expected.test(line4)
+        return TAPi18n.__ 'Error on line 4, print "wof wof" with console.log(), are you missing semicolon?'
+
+      if !line5Expected.test(line5)
+        return TAPi18n.__ 'Error on line 5, close method with }'
+
+      if !line6Expected.test(line6)
+        return TAPi18n.__ 'Error on line 6, close object with };'
+
+      if !line7Expected.test(line7)
+        return TAPi18n.__ 'Error on line 7, print name of the dog with console.log()'
+
+      if !line8Expected.test(line8)
+        return TAPi18n.__ 'Error on line 8, call method bark(), are you missing semicolon?'
+
+      success = true
+
+    if exercise.id is '1re4'
+      lines = opts.code.split('\n')
+      line1 = $.trim(lines[0]); line2 = lines[1]; line3 = lines[2]
+      line4 = lines[3]; line5 = lines[4]; line6 = lines[5]
+      line7 = lines[6]; line8 = lines[7]; line9 = lines[8]
+
+      line1Expected = /var Dog = function\(name\) {/
+      line2Expected = /this\.name = name;/
+      line3Expected = /this\.bark = function\(\) {/
+      line4Expected = /console\.log\(["']wof wof["']\);/
+      line5Expected = /};/
+      line6Expected = /}/
+      line7Expected = /var dog = new Dog\(["'].+['"]\);/
+      line8Expected = /console\.log\(dog\.name\);/
+      line9Expected = /dog\.bark\(\);/
+
+      unless CodeChecker.hasIndentation(line2)
+        return TAPi18n.__ 'Error on line 2, you are missing indentation - tabulator or 2 spaces'
+      unless CodeChecker.hasIndentation(line3)
+        return TAPi18n.__ 'Error on line 3, you are missing indentation - tabulator or 2 spaces'
+      unless CodeChecker.hasIndentation(line4, 4)
+        return TAPi18n.__ 'Error on line 4, you are missing indentation - 2x tabulator or 4 spaces'
+      unless CodeChecker.hasIndentation(line5)
+        return TAPi18n.__ 'Error on line 5, you are missing indentation - tabulator or 2 spaces'
+
+      if !line1Expected.test(line1)
+        return TAPi18n.__ 'Error on line 1, check if variable has name dog'
+
+      if !line2Expected.test(line2)
+        return TAPi18n.__ 'Error on line 2, check if property has name <i>name</i> and its value is parameter <i>name</i>, are you missing semicolon?'
+
+      if !line3Expected.test(line3)
+        return TAPi18n.__ 'Error on line 3, define method with name <i>bark</i>'
+
+      if !line4Expected.test(line4)
+        return TAPi18n.__ 'Error on line 4, print "wof wof" with console.log(), are you missing semicolon?'
+
+      if !line5Expected.test(line5)
+        return TAPi18n.__ 'Error on line 5, close method with };'
+
+      if !line6Expected.test(line6)
+        return TAPi18n.__ 'Error on line 6, close object definition with }'
+
+      if !line7Expected.test(line7)
+        return TAPi18n.__ 'Error on line 7, read assignment for line 7 and try again'
+
+      if !line8Expected.test(line8)
+        return TAPi18n.__ 'Error on line 8, print name of the dog with console.log()'
+
+      if !line9Expected.test(line9)
+        return TAPi18n.__ 'Error on line 9, call method bark(), are you missing semicolon?'
+
+      success = true
 
     unless resultMsg or success
       resultMsg = TAPi18n.__ 'Read assignment and try again, you can ask for help if you are lost'

@@ -18,9 +18,9 @@ template(name="objectsTheory")
   p {{_'We define object name as variable name'}}.
     |{{_'Then we open object with {'}}.
     |{{{_'We assign value to properties with colon'}}}.
-    |{{{_'We separate properties and methods by coma'}}}.
+    |{{{_'We separate properties and methods by comma'}}}.
     |{{{_'Methods are classic functions that can take parameters'}}}.
-    |{{{_"We don't write coma after the last property/method"}}}.
+    |{{{_"We don't write comma after the last property/method"}}}.
     |{{{_"We end definition of object with } and semicolon"}}}.
 
   p {{{_'We define object with name <i>person</i>, properties <i>name</i> and <i>age</i> and method <i>sayHello()</i>'}}}:
@@ -136,12 +136,16 @@ template(name="objectsTheory")
     |person.sayHello();
 
   h3 Object as a function
-  p There is a thing called constructor in OOP (Object Oriented Programming).
-    |The constructor can take parameters and we can set them to the object via <b>this</b> keyword and property name.
-    |When we define object as a function the first letter is uppercase.
-    |When we create instance of object, the instance name is lowercase.
+  p There is a thing called <b>constructor</b> in OOP (Object Oriented Programming).
+    |The <b>constructor</b> can take parameters and we can set them to the object via <b>this</b> keyword and property name.
+    |When we define an object as a function <b>the first letter is uppercase</b>.
+    |When we create an instance of an object, name of the instance is lowercase.
     |We don't need to write semicolon after function definition.
   +codeInText
+    |//Constructor with name Animal
+    br
+    |//and parameter name
+    br
     |function Animal(name) {
     br
     |&#09;this.name = name;
@@ -155,20 +159,79 @@ template(name="objectsTheory")
     |}
     br
     br
+    //create an instance of the Animal object
+    br
     |var rabbit = new Animal('rabbit');
     br
     |rabbit.sayHello();
+    br
     br
     |var dog = new Animal('dog');
     br
     |dog.sayHello();
 
-  p We create new instance of object with keyword <b>new</b> following with object name and parameters.
+  p We create new instance of an object with keyword <b>new</b> following with object name and parameters.
     |We can create multiple instances of the object. Each instance has its own properties.
+
+  h3 Object inside another object
+  p One object can contain another objects. For example this object <i>person</i> can contain object address:
+  +codeInText
+    |var person = {
+    br
+    |&#09;name: 'Josh',
+    br
+    |&#09;address: {
+    br
+    |&#09;&#09;city: 'Prague',
+    br
+    |&#09;&#09;street: 'Karlova',
+    br
+    |&#09;&#09;zip: 12390
+    br
+    |&#09;}
+    br
+    |};
+    br
+    |console.log(person.address.city);
+
+  h3 Object properties can contain any values
+  p Object properties can contain strings, numbers, arrays, objects,...
+    |Property of type function is called <i>method</i>.
+  +codeInText
+    |var person = {
+    br
+    |&#09;name: 'Josh',
+    br
+    |&#09;age: 50,
+    br
+    |&#09;phoneNumbers: ['+390 392 981 999', '+520 931 901 590'],
+    br
+    |&#09;address: {
+    br
+    |&#09;&#09;city: 'Prague',
+    br
+    |&#09;&#09;street: 'Karlova',
+    br
+    |&#09;&#09;zip: 12390
+    br
+    |&#09;},
+    br
+    |&#09;//method sayHello
+    br
+    |&#09;sayHello: function() {
+    br
+    |&#09;&#09;console.log('Hello, my name is ' + this.name + ' and I am ' + this.age + ' years old');
+    br
+    |&#09;}
+    br
+    |};
+    br
+    |person.sayHello();
+
 
   p OOP in JavaScript is a bit complicated topic. You can learn more in
     a(href="http://javascript.info/tutorial/oop" target="_blank") OOP tutorial.
-    |For now, we just need to know how to create and use object.
+    |For now, we just need to know how to create and use objects.
 
   h2 {{_'Conventions'}}
   p Object as JSON:

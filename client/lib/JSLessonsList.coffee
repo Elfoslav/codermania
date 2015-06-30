@@ -360,6 +360,12 @@ class @JSLessonsList
         '1re2':
           id: '1re2'
           title: TAPi18n.__ 'Exercise 2'
+        '1re3':
+          id: '1re3'
+          title: TAPi18n.__ 'Exercise 3'
+        '1re4':
+          id: '1re4'
+          title: TAPi18n.__ 'Exercise 4'
     ,
       id: '1x'
       title: TAPi18n.__ 'Errors and Try/Catch'

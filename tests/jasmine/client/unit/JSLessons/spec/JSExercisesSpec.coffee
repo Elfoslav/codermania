@@ -1121,4 +1121,41 @@ describe "JSExercises.checkExercise", ->
           )
           expect(result).toBe(true)
 
+        it "should return true for Exercise 3 correct code", ->
+          code = """
+            var dog = {
+              name: 'Benny',
+              bark: function() {
+                console.log('wof wof');
+              }
+            };
+            console.log(dog.name);
+            dog.bark();
+          """
+          result = JSExercise.checkExercise(
+            lesson: lesson
+            exercise: lesson.exercises['1re3']
+            code: code
+          )
+          expect(result).toBe(true)
+
+        it "should return true for Exercise 4 correct code", ->
+          code = """
+            var Dog = function(name) {
+              this.name = name;
+              this.bark = function() {
+                console.log('wof wof');
+              };
+            }
+            var dog = new Dog('Ben');
+            console.log(dog.name);
+            dog.bark();
+          """
+          result = JSExercise.checkExercise(
+            lesson: lesson
+            exercise: lesson.exercises['1re4']
+            code: code
+          )
+          expect(result).toBe(true)
+
     , 2000)

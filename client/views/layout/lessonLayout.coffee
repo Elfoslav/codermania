@@ -197,7 +197,7 @@ setExerciseSuccessMsg = (lesson, exercise) ->
     Session.set 'successMsg',
       """
       #{TAPi18n.__('Congratluations! You have earned <b>2</b> points!')}
-      #{TAPi18n.__('You have %s points in total', totalPoints)}
+      #{TAPi18n.__('You have %s points in total', totalPoints)}.
       #{TAPi18n.__('Do another exercise or go to assignment')}.
       """
   else
