@@ -356,13 +356,13 @@ class @JSLesson
       line11 = lines[10]
 
       if line5.indexOf('break;') == -1
-        return TAPi18n.__ 'Add break command after first case'
+        return TAPi18n.__ 'Add break command after the first case'
 
       if line8.indexOf('break;') == -1
-        return TAPi18n.__ 'Add break command after second case'
+        return TAPi18n.__ 'Add break command after the second case'
 
       if line11.indexOf('break;') == -1
-        return TAPi18n.__ 'Add break command after third case'
+        return TAPi18n.__ 'Add break command after the third case'
 
       if line5.indexOf('break;') != -1 and
         line8.indexOf('break;') != -1 and
