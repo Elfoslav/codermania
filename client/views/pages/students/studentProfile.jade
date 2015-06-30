@@ -27,28 +27,31 @@ template(name="studentProfile")
       h3 JavaScript lessons
       if student.lessons
         ul.list-unstyled
-          each arrayify student.lessons
+          each lessons
             li
               if canSeeUserExercises
-                a(href="{{pathFor 'lessonJS' lang=lang _id=value.id slug=getLessonSlug username=../student.username}}") {{getLessonTitle}}
+                a(href="{{pathFor 'lessonJS' lang=lang _id=this.id slug=this.slug username=../student.username}}") {{title}}
               else
-                span {{getLessonTitle}}
-              if isNotUndefined value.success
-                if value.success
+                span {{title}}
+
+              if studentLesson
+                if studentLesson.success
                   span.glyphicon.glyphicon-ok.green
                 else
                   span.glyphicon.glyphicon-remove.red
-
-              if value.exercises
-                ul
-                  each arrayify value.exercises
-                    li {{getExerciseTitle ../value.id value.id}}
-                      if value.success
+              ul
+                each exercisesArray
+                  li
+                    if canSeeUserExercises
+                      a(href="{{pathFor 'lessonJS' lang=lang _id=../id slug=../slug hash=this.id username=../../student.username}}") {{this.title}}
+                    else
+                      span {{title}}
+                    if studentExercise
+                      if getStudentExercise.success
                         span.glyphicon.glyphicon-ok.green
                       else
                         span.glyphicon.glyphicon-remove.red
-                  each restExercises value.id
-                    li {{title}}
+
     .col-sm-4
       h3 HTML lessons
     .col-sm-4
