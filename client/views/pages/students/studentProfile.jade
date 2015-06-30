@@ -47,7 +47,7 @@ template(name="studentProfile")
                     else
                       span {{title}}
                     if studentExercise
-                      if getStudentExercise.success
+                      if studentExercise.success
                         span.glyphicon.glyphicon-ok.green
                       else
                         span.glyphicon.glyphicon-remove.red
