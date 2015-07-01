@@ -7,5 +7,5 @@ Template.codeInText.events({
       Editor.evaluate()
     catch e
       console.log(e)
-      $('.output').html(e.message)
+      $('.output').html('Error: ' + e.message)
 })

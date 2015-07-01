@@ -1,5 +1,4 @@
 class @LessonsList
-  @_collection = new Mongo.Collection(null)
   @getLessons: ->
     if Router.current()?.route.getName() is 'lessonHTML'
       return HTMLLessonsList.getLessons()
@@ -13,6 +12,9 @@ class @LessonsList
 
   @getLesson: (number) ->
     LessonsList.getLessons()[number - 1]
+
+  @getCurrentLesson: ->
+    JSLessonsList._collection.findOne({ id: Router.current().params._id })
 
   #@number - lesson number
   @getFirstExercise: (number) ->

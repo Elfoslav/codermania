@@ -607,6 +607,40 @@ class @JSLesson
 
       success = true
 
+    #Errors
+    if lesson.id is '1x'
+      lines = opts.code.split('\n')
+      line1 = lines[0]; line2 = lines[1]; line3 = lines[2]; line4 = lines[3]
+      line5 = lines[4];
+
+      line1Expected = /var boat = ["']Titanic["'];/
+      line2Expected = /var obstruction = ["']glacier["'];/
+      line3Expected = /if \(boat ={2,3} ["']Titanic["'] && obstruction ={2,3} ["']glacier["']\)/
+      line4Expected = /throw new Error\(["']Captain, we have a problem!["']\);/
+      line5Expected = /}/
+
+      if !line1Expected.test(line1)
+        return TAPi18n.__ 'Error on line 1, check if variable has name <i>boat</i> and value <b>\'Titanic\'</b>'
+
+      if !line2Expected.test(line2)
+        return TAPi18n.__ 'Error on line 2, check if variable has name <i>obstruction</i> and value <b>\'glacier\'</b'
+
+      if !line3Expected.test(line3)
+        return TAPi18n.__ 'Error on line 3, write a condition that will compare if variable <i>boat</i>
+          is equal to <b>\'Titanic\'</b> and variable <i>obstruction</i> is equal to <b>\'glacier\'</b>.
+          check if your condition is according to conventions.'
+
+      if !line4Expected.test(line4)
+        return TAPi18n.__ 'Error on line 4, read assignment for line 4 and try again, are you missing semicolon?'
+
+      unless CodeChecker.hasIndentation(line4)
+        return TAPi18n.__ 'Error on line 4, you are missing indentation - tabulator or 2 spaces'
+
+      if !line5Expected.test(line5)
+        return TAPi18n.__ 'Error on line 5, read assignment for line 5 and try again'
+
+      success = true
+
     unless resultMsg or success
       resultMsg = TAPi18n.__ 'Read assignment and try again, you can ask for help if you are lost'
 

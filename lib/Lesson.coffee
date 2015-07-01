@@ -114,8 +114,8 @@ class @Lesson
     if lessonNum >= Lesson.getJSLevelStartLessonNum(3)
       return 3 == levelNum
 
-  @getLessonPoints: (lessonNum, lessonType) ->
-    if lessonType is 'javascript'
+  @getLessonPoints: (lessonNum) ->
+    if @getType() is 'javascript'
       return lessonNum * 2
     else
       return lessonNum

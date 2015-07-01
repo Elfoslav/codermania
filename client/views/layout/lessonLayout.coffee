@@ -214,9 +214,9 @@ Template.lessonLayout.events
       if Lesson.isHTMLLesson() or Lesson.isCSSLesson()
         $('.output').html(code)
     catch e
-      console.log(e)
-      codeError = true
-      $('.output').html(e.message)
+      if LessonsList.getCurrentLesson().id != '1x'
+        codeError = true
+      $('.output').html('Error: ' + e.message)
 
     lesson = LessonsList.getLesson(Session.get('lessonNumber'))
     lessonNum = Session.get('lessonNumber')

@@ -10,11 +10,11 @@ template(name="errorsAndTryCatchTheory")
     |console.log('this will not run');
   p {{_'Notice that when we throw error, the code stops executing'}}.
     |{{{_"That's because errors are fatal"}}}.
-    |{{{_"When we throw error, it means that something very bad happened and we want to stop executing the code"}}}.
+    |{{{_"When we throw an error, it means that something very bad happened and we want to stop executing the code"}}}.
 
-  p {{_'We can throw Error from function'}}.
+  p {{_'We can throw an Error from a function'}}.
     |{{{_'In function <b>add</b> in code below, we check if parameter <b>a</b> is not a number (isNaN)'}}}.
-    |{{{_'If parameter <b>a</b> is not a number, we throw Error'}}}.
+    |{{{_'If parameter <b>a</b> is not a number, we throw an error'}}}.
     |{{{_'The same with parameter <b>b</b>'}}}.
   +codeInText
     |function add(a, b) {

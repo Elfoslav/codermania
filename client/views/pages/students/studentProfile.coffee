@@ -18,4 +18,4 @@ Template.studentProfile.helpers
     Template.parentData(1).student.lessons?[@id]
   studentExercise: ->
     lesson = Template.parentData(1)
-    Template.parentData(2).student.lessons?[lesson.id]?.exercises[@id]
+    Template.parentData(2).student.lessons?[lesson.id]?.exercises?[@id]
