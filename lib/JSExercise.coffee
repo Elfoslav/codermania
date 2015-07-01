@@ -683,7 +683,7 @@ class @JSExercise
       line8Expected = '}'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "isHappy" and value true, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name <i>name</i> and value <b>\'Josh\'</b>, check spaces before and after assignment operator, are you missing semicolon?'
 
       if !line2Expected.test(line2)
         return TAPi18n.__ 'Error on line 2, write condition which compares variable name with value \'Peter\', do you have space after if?'
@@ -1383,13 +1383,14 @@ class @JSExercise
       line4 = lines[3]; line5 = lines[4]; line6 = lines[5]
       line7 = lines[6]; line8 = lines[7]; line9 = lines[8]
 
-      line1Expected = /var Dog = function\(name\) {/
+      line1Expected = /function Dog\(name\) {/
       line2Expected = /this\.name = name;/
       line3Expected = /this\.bark = function\(\) {/
       line4Expected = /console\.log\(["']wof wof["']\);/
       line5Expected = /};/
       line6Expected = /}/
-      line7Expected = /var dog = new Dog\(["'].+['"]\);/
+      #accepts new Dog(), new Dog(''), new Dog('asdf...')
+      line7Expected = /var dog = new Dog\((["'].*['"]){0,1}\);/
       line8Expected = /console\.log\(dog\.name\);/
       line9Expected = /dog\.bark\(\);/
 
@@ -1403,7 +1404,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 5, you are missing indentation - tabulator or 2 spaces'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name dog'
+        return TAPi18n.__ 'Error on line 1, check if function has name <i>Dog</i>. Check if it\'s written according to conventions.'
 
       if !line2Expected.test(line2)
         return TAPi18n.__ 'Error on line 2, check if property has name <i>name</i> and its value is parameter <i>name</i>, are you missing semicolon?'

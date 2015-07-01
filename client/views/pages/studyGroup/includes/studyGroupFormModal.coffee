@@ -1,8 +1,12 @@
 processForm = (form) ->
   throw new Error('Expected form with ID study-group-form') unless form.id is 'study-group-form'
-  data = $(form).serializeJSON()
-  console.log 'data.isPublic: ', data.isPublic
-  data.isPublic = data.isPublic == 'on' or !!data.isPublic
+  #we would normally use $(form).serializeJSON() but inside form can be another form (in description)
+  data =
+    title: form.title.value
+    topics: form.topics.value
+    capacity: form.capacity.value
+    curriculumId: form.curriculumId.value
+    isPublic: form.isPublic.checked
   if isNaN data.capacity
     return bootbox.alert 'Capacity must be a number'
   if data.capacity
@@ -10,6 +14,7 @@ processForm = (form) ->
   else
     data.capacity = 0
   console.log(data)
+  data.description = Template.instance().$('#summernote-description').code()
 
   route = Router.current()
   if route.route.getName() is 'studyGroup' and route.params._id
@@ -33,6 +38,9 @@ processForm = (form) ->
 Template.studyGroupFormModal.onCreated ->
   @subscribe('curriculums')
 
+Template.studyGroupFormModal.onRendered ->
+  @$('#summernote-description').summernote().code(@data.studyGroup.description)
+
 Template.studyGroupFormModal.helpers
   curriculums: ->
     StudyGroupCurriculums.find()
@@ -48,7 +56,6 @@ Template.studyGroupFormModal.events
     $('#curriculum-form-modal textarea').val('')
   'click [href="#edit-curriculum"]': (evt) ->
     curriculum = StudyGroupCurriculums.findOne($('#study-group-form [name="curriculumId"]').val())
-    console.log curriculum
     if curriculum
       for key, value of curriculum
         $el = $('#curriculum-form-modal [name="' + key + '"]')

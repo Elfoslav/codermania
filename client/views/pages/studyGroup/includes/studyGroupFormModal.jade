@@ -37,7 +37,7 @@ template(name="studyGroupFormModal")
                   a.btn.btn-default(href="#edit-curriculum" data-target="#curriculum-form-modal" data-toggle="modal") Edit selected curriculum
             .form-group
               label Description:
-              textarea.form-control(name='description' rows="5")
+              #summernote-description
             .form-group
               label(for='study-group-is-public')
                 input#study-group-is-public(type='checkbox', name='isPublic')

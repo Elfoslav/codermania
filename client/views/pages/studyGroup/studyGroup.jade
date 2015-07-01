@@ -18,7 +18,7 @@ template(name="studyGroup")
           p Capacity: {{capacity}}
             |(free {{freeSpotsCount}})
         if description
-          pre.unstyled-pre {{linkify description}}
+          pre.unstyled-pre {{{description}}}
         if curriculumId
           p
             a.btn.btn-primary.toggle-curriculum(href="#")
