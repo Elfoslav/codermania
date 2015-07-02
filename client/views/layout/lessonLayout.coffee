@@ -248,7 +248,7 @@ Template.lessonLayout.events
           console.log('result', result)
 
       if result == true
-        lessonPoints = Lesson.getLessonPoints(Session.get('lessonNumber'))
+        lessonPoints = Lesson.getLessonPoints(Session.get('lessonNumber'), Lesson.getType())
         user = Meteor.user()
 
         if user
@@ -297,7 +297,6 @@ Template.lessonLayout.events
           console.log('result', result)
 
       if result == true
-        lessonPoints = Lesson.getLessonPoints(Session.get('lessonNumber'))
         user = Meteor.user()
 
         setExerciseSuccessMsg(lesson, exercise)
