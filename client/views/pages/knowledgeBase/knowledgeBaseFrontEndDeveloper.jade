@@ -1,7 +1,7 @@
 template(name="knowledgeBaseFrontEndDeveloper")
   .row
     .col-sm-8
-      h1 Who is a Front-end developer?
+      h1 Who is a Front-End Developer?
       p
         small 24th April 2015
 
@@ -53,7 +53,8 @@ template(name="knowledgeBaseFrontEndDeveloper")
       p Do you want to become a front-end developer? Check out
         a(href="{{pathFor 'guide'}}") our guide.
 
-      p {{> shareit shareData}}
+      p
+        +shareit shareData
       br
       +disqus
     .col-sm-4

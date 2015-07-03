@@ -1,8 +1,7 @@
 template(name="knowledgeBaseBackEndDeveloper")
-
   .row
     .col-sm-8
-      h1 Who is a Back-end developer?
+      h1 Who is a Back-End Developer?
       p
         small 24th April 2015
       p He has knowledge of databases, servers, server-side languages and scaling.
@@ -33,7 +32,8 @@ template(name="knowledgeBaseBackEndDeveloper")
       p Do you want to become a back-end developer? Check out
         a(href="{{pathFor 'guide'}}") our guide.
 
-      p {{> shareit shareData}}
+      p
+        +shareit shareData
       br
       +disqus
     .col-sm-4

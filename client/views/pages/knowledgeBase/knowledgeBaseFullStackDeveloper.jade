@@ -1,7 +1,7 @@
 template(name="knowledgeBaseFullStackDeveloper")
   .row
     .col-sm-8
-      h1 Who is a Full-stack developer?
+      h1 Who is a Full-Stack Developer?
       p
         small 24th April 2015
       p A Full-stack developer can build front-end and also back-end.
@@ -61,7 +61,8 @@ template(name="knowledgeBaseFullStackDeveloper")
       p Do you want to become a full-stack developer? Check out
         a(href="{{pathFor 'guide'}}") our guide.
 
-      p {{> shareit shareData}}
+      p
+        +shareit shareData
       br
       +disqus
     .col-sm-4
