@@ -373,8 +373,14 @@ class @JSLessonsList
       template: 'errorsAndTryCatch'
       hasTheory: true
       hasExercise: true
+    ,
+      id: '1z'
+      title: TAPi18n.__ 'End'
+      slug: 'end'
+      template: 'endJSLessons'
+      hasTheory: true
     ]
-    #last id 1y
+    #last id 1z
 
   @getLesson: (number) ->
     JSLessonsList.getLessons()[number - 1]
