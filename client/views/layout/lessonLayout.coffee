@@ -301,7 +301,7 @@ Template.lessonLayout.events
         Session.set('exerciseSuccess', true)
         $('.output-error-text').addClass('hidden');
 
-    if result != false and result != true
+    if typeof result is 'string'
       result += '.<br/><br/>Check if your code is written according to conventions.'
       $('.output-error-text').removeClass('hidden').html(TAPi18n.__('Error') + ':\n' + result)
 
