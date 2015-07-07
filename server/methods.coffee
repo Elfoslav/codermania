@@ -258,11 +258,6 @@ Meteor.methods
       multi: true
     })
 
-  getNeedHelpCount: ->
-    NeedHelp.find
-      solved: false
-    .count()
-
   getNeedHelpCommentsCounter: (needHelpId) ->
     if needHelpId
       return NeedHelpComments.find

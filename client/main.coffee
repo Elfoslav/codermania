@@ -9,6 +9,7 @@ Meteor.startup ->
   #empty array
   lessonsIds = null
   Meteor.subscribe 'userData'
+  Meteor.subscribe 'needHelpCount'
   Meteor.subscribe 'unreadMessagesCount'
   Meteor.subscribe 'unreadStudyGroupMessagesCount'
 
