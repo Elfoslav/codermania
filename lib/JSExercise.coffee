@@ -72,12 +72,20 @@ class @JSExercise
       line2 = $.trim(lines[1])
       line3 = $.trim(lines[2])
 
-      if line1 is 'var i = 5;' and
-        (line2 is 'i++;' or line2 is '++i;') and
-        line3 is 'console.log(i);'
-          success = true
-      else
-        return resultMsg = TAPi18n.__ 'Read assignment and try again, you can ask for help if you are lost'
+      line1Expected = /var i = 5;/
+      line2Expected = /(i\+\+;|\+\+i;)/
+      line3Expected = /console\.log\(i\);/
+
+      if !line1Expected.test(line1)
+        return TAPi18n.__ 'Error on line 1, check if the variable name is <i>i</i> and value is 5, check if the statement ends with semicolon'
+
+      if !line2Expected.test(line2)
+        return TAPi18n.__ 'Error on line 2, check if you increment variable <i>i</i> with operator ++, check if the statement ends with semicolon'
+
+      if !line3Expected.test(line3)
+        return TAPi18n.__ 'Error on line 3, read assignment for line 3 and try again, check if the statement ends with semicolon'
+
+      success = true
 
     if exercise.id is '1ie2'
       lines = opts.code.split('\n')
@@ -85,12 +93,20 @@ class @JSExercise
       line2 = $.trim(lines[1])
       line3 = $.trim(lines[2])
 
-      if line1 is 'var i = 5;' and
-        (line2 is 'i--;' or line2 is '--i;') and
-        line3 is 'console.log(i);'
-          success = true
-      else
-        return resultMsg = TAPi18n.__ 'Read assignment and try again, you can ask for help if you are lost'
+      line1Expected = /var i = 5;/
+      line2Expected = /(i--;|--i;)/
+      line3Expected = /console\.log\(i\);/
+
+      if !line1Expected.test(line1)
+        return TAPi18n.__ 'Error on line 1, check if the variable name is <i>i</i> and value is 5, check if the statement ends with semicolon'
+
+      if !line2Expected.test(line2)
+        return TAPi18n.__ 'Error on line 2, check if you decrement variable <i>i</i> with operator --, check if the statement ends with semicolon'
+
+      if !line3Expected.test(line3)
+        return TAPi18n.__ 'Error on line 3, read assignment for line 3 and try again, check if the statement ends with semicolon'
+
+      success = true
 
     if exercise.id is '1ie3'
       #"x % y"
@@ -193,10 +209,10 @@ class @JSExercise
       line2Expected = 'console.log(number);'
 
       if line1 != line1Expected
-        return TAPi18n.__ 'Error on line 1, check if variable has name "number", check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "number", check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if line2 != line2Expected
-        return TAPi18n.__ 'Error on line 2, print variable number with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, print variable number with console.log(), check if the statement ends with semicolon'
 
       if line1 is line1Expected and
         line2 is line2Expected
@@ -215,13 +231,13 @@ class @JSExercise
       line3Expected = 'console.log(number);'
 
       if line1 != line1Expected
-        return TAPi18n.__ 'Error on line 1, check if variable has name "number" and value 2, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "number" and value 2, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if line2 != line2Expected
-        return TAPi18n.__ 'Error on line 2, add number 5 to variable number using operator +=, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, add number 5 to variable number using operator +=, check if the statement ends with semicolon'
 
       if line3 != line3Expected
-        return TAPi18n.__ 'Error on line 3, print variable number with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print variable number with console.log(), check if the statement ends with semicolon'
 
       if line1 is line1Expected and
         line2 is line2Expected and
@@ -241,13 +257,13 @@ class @JSExercise
       line3Expected = 'console.log(number);'
 
       if line1 != line1Expected
-        return TAPi18n.__ 'Error on line 1, check if variable has name "number" and value 3, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "number" and value 3, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if line2 != line2Expected
-        return TAPi18n.__ 'Error on line 2, subtract number 1 from variable number using operator -=, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, subtract number 1 from variable number using operator -=, check if the statement ends with semicolon'
 
       if line3 != line3Expected
-        return TAPi18n.__ 'Error on line 3, print variable number with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print variable number with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -262,13 +278,13 @@ class @JSExercise
       line3Expected = 'console.log(number);'
 
       if line1 != line1Expected
-        return TAPi18n.__ 'Error on line 1, check if variable has name "number" and value 4, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "number" and value 4, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if line2 != line2Expected
-        return TAPi18n.__ 'Error on line 2, multiply variable number by 2 using operator *=, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, multiply variable number by 2 using operator *=, check if the statement ends with semicolon'
 
       if line3 != line3Expected
-        return TAPi18n.__ 'Error on line 3, print variable number with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print variable number with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -283,13 +299,13 @@ class @JSExercise
       line3Expected = 'console.log(number);'
 
       if line1 != line1Expected
-        return TAPi18n.__ 'Error on line 1, check if variable has name "number" and value 4, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "number" and value 4, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if line2 != line2Expected
-        return TAPi18n.__ 'Error on line 2, divide variable number by 2 using operator /=, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, divide variable number by 2 using operator /=, check if the statement ends with semicolon'
 
       if line3 != line3Expected
-        return TAPi18n.__ 'Error on line 3, print variable number with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print variable number with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -307,13 +323,13 @@ class @JSExercise
       line3Expected = 'console.log(someText);'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "someText" and value "Lorem ipsum", check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "someText" and value "Lorem ipsum", check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, add text " dolor sit amet" to variable someText using operator +=, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, add text " dolor sit amet" to variable someText using operator +=, check if the statement ends with semicolon'
 
       if line3 != line3Expected
-        return TAPi18n.__ 'Error on line 3, print variable someText with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print variable someText with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -330,16 +346,16 @@ class @JSExercise
       line4Expected = 'console.log(appleAndBanana);'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "fruit1" and value "apple", check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "fruit1" and value "apple", check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, check if variable has name "fruit2" and value "banana", are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, check if variable has name "fruit2" and value "banana", check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
         return TAPi18n.__ 'Error on line 3, read assignment on Line 3 and try again.'
 
       if line4 != line4Expected
-        return TAPi18n.__ 'Error on line 4, print variable appleAndBanana with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, print variable appleAndBanana with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -359,16 +375,16 @@ class @JSExercise
       line4Expected = 'console.log(result);'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "number1" and value 45, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "number1" and value 45, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, check if variable has name "number2" and value 100, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, check if variable has name "number2" and value 100, check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 2, check if variable has name "result" and value number1 + number2, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, check if variable has name "result" and value number1 + number2, check if the statement ends with semicolon'
 
       if line4 != line4Expected
-        return TAPi18n.__ 'Error on line 4, print variable result with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, print variable result with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -388,16 +404,16 @@ class @JSExercise
       line4Expected = 'console.log(result);'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "number1" and value 0.55, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "number1" and value 0.55, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, check if variable has name "number2" and value 0.199, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, check if variable has name "number2" and value 0.199, check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, check if variable has name "result" and value number1 + number2, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, check if variable has name "result" and value number1 + number2, check if the statement ends with semicolon'
 
       if line4 != line4Expected
-        return TAPi18n.__ 'Error on line 4, print variable result with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, print variable result with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -414,16 +430,16 @@ class @JSExercise
       line4Expected = 'console.log(result.toFixed(2));'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "number1" and value 0.55, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "number1" and value 0.55, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, check if variable has name "number2" and value 0.199, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, check if variable has name "number2" and value 0.199, check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, check if variable has name "result" and value number1 + number2, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, check if variable has name "result" and value number1 + number2, check if the statement ends with semicolon'
 
       if line4 != line4Expected
-        return TAPi18n.__ 'Error on line 4, round variable result to 2 decimal places and print it with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, round variable result to 2 decimal places and print it with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -442,19 +458,19 @@ class @JSExercise
       line5Expected = 'console.log(roundedResult + 3);'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "number1" and value 0.55, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "number1" and value 0.55, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, check if variable has name "number2" and value 0.199, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, check if variable has name "number2" and value 0.199, check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, check if variable has name "result" and value number1 + number2, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, check if variable has name "result" and value number1 + number2, check if the statement ends with semicolon'
 
       if line4 != line4Expected
-        return TAPi18n.__ 'Error on line 4, check if variable has name "roundedResult" and value of rounded variable "result" to 2 decimal places, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, check if variable has name "roundedResult" and value of rounded variable "result" to 2 decimal places, check if the statement ends with semicolon'
 
       if line5 != line5Expected
-        return TAPi18n.__ 'Error on line 5, print roundedResult + 3 with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 5, print roundedResult + 3 with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -473,19 +489,19 @@ class @JSExercise
       line5Expected = 'console.log(parseFloat(roundedResult) + 3);'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "number1" and value 0.55, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "number1" and value 0.55, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, check if variable has name "number2" and value 0.199, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, check if variable has name "number2" and value 0.199, check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, check if variable has name "result" and value number1 + number2, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, check if variable has name "result" and value number1 + number2, check if the statement ends with semicolon'
 
       if line4 != line4Expected
-        return TAPi18n.__ 'Error on line 4, check if variable has name "roundedResult" and value of rounded variable "result" to 2 decimal places, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, check if variable has name "roundedResult" and value of rounded variable "result" to 2 decimal places, check if the statement ends with semicolon'
 
       if line5 != line5Expected
-        return TAPi18n.__ 'Error on line 5, parse value of roundedResult and add 3 to the result. Print it with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 5, parse value of roundedResult and add 3 to the result. Print it with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -505,16 +521,16 @@ class @JSExercise
       line4Expected = 'console.log(numbers[0]);'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "numbers" and is array, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "numbers" and is array, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, add value 1 to variable numbers with method push(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, add value 1 to variable numbers with method push(), check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, add value 2 to variable numbers with method push(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, add value 2 to variable numbers with method push(), check if the statement ends with semicolon'
 
       if line4 != line4Expected
-        return TAPi18n.__ 'Error on line 4, print value 1 from array numbers with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, print value 1 from array numbers with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -531,16 +547,16 @@ class @JSExercise
       line4Expected = 'console.log(bands[2]);'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "bands" and is array and you have space after comas, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "bands" and is array and you have space after comas, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, add value \'AC/DC\' to array bands with method push(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, add value \'AC/DC\' to array bands with method push(), check if the statement ends with semicolon'
 
       if line3Expected != line3
-        return TAPi18n.__ 'Error on line 3, print the first item from array bands with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print the first item from array bands with console.log(), check if the statement ends with semicolon'
 
       if line4 != line4Expected
-        return TAPi18n.__ 'Error on line 4, print the last item from array bands with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, print the last item from array bands with console.log(), check if the statement ends with semicolon'
 
       success = true
 
@@ -553,10 +569,10 @@ class @JSExercise
       line2Expected = 'console.log(numbers[0] + numbers[1] + numbers[2]);'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "numbers" and you have space after comas, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "numbers" and you have space after comas, check if the statement ends with semicolon'
 
       if line2 != line2Expected
-        return TAPi18n.__ 'Error on line 2, first add number with index 0, then 1, then 2, check if you have space before and after + operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, first add number with index 0, then 1, then 2, check if you have space before and after + operator, check if the statement ends with semicolon'
 
       success = true
 
@@ -576,13 +592,13 @@ class @JSExercise
       line4Expected = '}'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "fruit" and value \'banana\', check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "fruit" and value \'banana\', check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
         return TAPi18n.__ 'Error on line 2, write condition which compares variable fruit with value \'banana\', do you have space after if?'
 
       if line3 != line3Expected
-        return TAPi18n.__ 'Error on line 3, print \'variable fruit has value banana\' with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print \'variable fruit has value banana\' with console.log(), check if the statement ends with semicolon'
 
       if line4 != line4Expected
         return TAPi18n.__ 'Error on line 4, close if condition with }'
@@ -618,19 +634,19 @@ class @JSExercise
       line6Expected = '}'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name "isHappy" and value true, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name "isHappy" and value true, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
         return TAPi18n.__ 'Error on line 2, write condition using variable isHappy, do you have space after if?'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, print \'He is happy\' with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print \'He is happy\' with console.log(), check if the statement ends with semicolon'
 
       if line4 != line4Expected
         return TAPi18n.__ 'Error on line 4, you do not have correct else block, check how it is written in theory'
 
       if !line5Expected.test(line5)
-        return TAPi18n.__ 'Error on line 5, print \'He is not happy\' with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 5, print \'He is not happy\' with console.log(), check if the statement ends with semicolon'
 
       if line6 != line6Expected
         return TAPi18n.__ 'Error on line 6, close if condition with }'
@@ -683,25 +699,25 @@ class @JSExercise
       line8Expected = '}'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name <i>name</i> and value <b>\'Josh\'</b>, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name <i>name</i> and value <b>\'Josh\'</b>, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
         return TAPi18n.__ 'Error on line 2, write condition which compares variable name with value \'Peter\', do you have space after if?'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, print \'Hello Peter\' with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print \'Hello Peter\' with console.log(), check if the statement ends with semicolon'
 
       if !line4Expected.test(line4)
         return TAPi18n.__ 'Error on line 4, you do not have correct else if block, check how it is written in theory'
 
       if !line5Expected.test(line5)
-        return TAPi18n.__ 'Error on line 5, print \'Hello John\' with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 5, print \'Hello John\' with console.log(), check if the statement ends with semicolon'
 
       if line6 != line6Expected
         return TAPi18n.__ 'Error on line 6, you do not have correct else block, check how it is written in theory'
 
       if !line7Expected.test(line7)
-        return TAPi18n.__ "Error on line 7, print 'Hello stranger' with console.log(), are you missing semicolon?"
+        return TAPi18n.__ "Error on line 7, print 'Hello stranger' with console.log(), check if the statement ends with semicolon"
 
       if line8 != line8Expected
         return TAPi18n.__ 'Error on line 8, close if condition with }'
@@ -728,13 +744,13 @@ class @JSExercise
       line4Expected = '}'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name isHappy and value true, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name isHappy and value true, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
         return TAPi18n.__ 'Error on line 2, write condition using variable isHappy and negation operator, do you have space after if?'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, print \'He is unhappy\' with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print \'He is unhappy\' with console.log(), check if the statement ends with semicolon'
 
       if line4 != line4Expected
         return TAPi18n.__ 'Error on line 4, close if condition with }'
@@ -760,16 +776,16 @@ class @JSExercise
       line5Expected = '}'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name isHappy and value true, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name isHappy and value true, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, check if variable has name isHuman and value true, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, check if variable has name isHuman and value true, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
         return TAPi18n.__ 'Error on line 3, write condition with variables isHappy and isHuman using operator &&, do you have space after if?'
 
       if !line4Expected.test(line4)
-        return TAPi18n.__ 'Error on line 4, print \'Hello happy human\' with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, print \'Hello happy human\' with console.log(), check if the statement ends with semicolon'
 
       if line5 != line5Expected
         return TAPi18n.__ 'Error on line 5, close if condition with }'
@@ -795,16 +811,16 @@ class @JSExercise
       line5Expected = '}'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name isHappy and value true, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name isHappy and value true, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, check if variable has name isHuman and value false, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, check if variable has name isHuman and value false, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
         return TAPi18n.__ 'Error on line 3, write condition with variables isHappy and isHuman using operator ||, do you have space after if?'
 
       if !line4Expected.test(line4)
-        return TAPi18n.__ 'Error on line 4, print \'You are happy or you are a human\' with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, print \'You are happy or you are a human\' with console.log(), check if the statement ends with semicolon'
 
       if line5 != line5Expected
         return TAPi18n.__ 'Error on line 5, close if condition with }'
@@ -831,13 +847,13 @@ class @JSExercise
       line4Expected = '}'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, check if variable has name truthy and truthy value, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name truthy and truthy value, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
         return TAPi18n.__ 'Error on line 2, write condition using variable truthy, do you have space after if?'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, print \'hello truthy\' with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print \'hello truthy\' with console.log(), check if the statement ends with semicolon'
 
       if line4 != line4Expected
         return TAPi18n.__ 'Error on line 4, close if condition with }'
@@ -861,13 +877,13 @@ class @JSExercise
       line4Expected = '}'
 
       if !(line1 is 'var falsey;' or line1Expected.test(line1))
-        return TAPi18n.__ 'Error on line 1, check if variable has name falsey and falsey value, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name falsey and falsey value, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
         return TAPi18n.__ 'Error on line 2, write condition using variable falsey, do you have space after if?'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, print \'hello falsey\' with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print \'hello falsey\' with console.log(), check if the statement ends with semicolon'
 
       if line4 != line4Expected
         return TAPi18n.__ 'Error on line 4, close if condition with }'
@@ -891,13 +907,13 @@ class @JSExercise
       line4Expected = '}'
 
       if !(line1 is 'var falsey;' or line1Expected.test(line1))
-        return TAPi18n.__ 'Error on line 1, check if variable has name falsey and falsey value, check spaces before and after assignment operator, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, check if variable has name falsey and falsey value, check spaces before and after assignment operator, check if the statement ends with semicolon'
 
       if !line2Expected.test(line2)
         return TAPi18n.__ 'Error on line 2, write condition using variable falsey, do you have space after if?'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, print \'hello falsey\' with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print \'hello falsey\' with console.log(), check if the statement ends with semicolon'
 
       if line4 != line4Expected
         return TAPi18n.__ 'Error on line 4, close if condition with }'
@@ -928,7 +944,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 1, check if you have space after for keyword (for (..) {)'
 
       if line2 != line2Expected
-        return TAPi18n.__ 'Error on line 2, print value of variable i with console.log, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, print value of variable i with console.log, check if the statement ends with semicolon'
 
       if line3 != line3Expected
         return TAPi18n.__ 'Error on line 3, close if condition with }'
@@ -962,7 +978,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 1, check if you have space after for keyword (for (..) {)'
 
       if line2 != line2Expected
-        return TAPi18n.__ 'Error on line 2, print value of variable i with console.log, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, print value of variable i with console.log, check if the statement ends with semicolon'
 
       if line3 != line3Expected
         return TAPi18n.__ 'Error on line 3, close if condition with }'
@@ -999,7 +1015,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 1, check if you have space after for keyword (for (..) {)'
 
       if line2 != line2Expected
-        return TAPi18n.__ 'Error on line 2, print value of variable i with console.log, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, print value of variable i with console.log, check if the statement ends with semicolon'
 
       if line3 != line3Expected
         return TAPi18n.__ 'Error on line 3, close if condition with }'
@@ -1036,7 +1052,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 1, check if you have space after for keyword (for (..) {)'
 
       if line2 != line2Expected
-        return TAPi18n.__ 'Error on line 2, print value of variable i with console.log, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, print value of variable i with console.log, check if the statement ends with semicolon'
 
       if line3 != line3Expected
         return TAPi18n.__ 'Error on line 3, close if condition with }'
@@ -1060,7 +1076,7 @@ class @JSExercise
       line4Expected = '}'
 
       if !line1Expected.test(line1)
-        return TAPi18n.__ 'Error on line 1, read assignment for line 1 and try again. Do you have space and comma between array items? Are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 1, read assignment for line 1 and try again. Do you have space and comma between array items? check if the statement ends with semicolon'
 
       unless /var i/.test(line2)
         return TAPi18n.__ 'Error on line 2, iteration variable does not have name i'
@@ -1075,7 +1091,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 2, bad for loop. Read assignment for line 2 and try again.'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, print items from array bands with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print items from array bands with console.log(), check if the statement ends with semicolon'
 
       if line4 != line4Expected
         return TAPi18n.__ 'Error on line 4, close if condition with }'
@@ -1115,16 +1131,16 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 1, check if your code is according to conventions'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, read assignment for line 2 and try again, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, read assignment for line 2 and try again, check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, read assignment for line 3 and try again, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, read assignment for line 3 and try again, check if the statement ends with semicolon'
 
       if line4 != line4Expected
         return TAPi18n.__ 'Error on line 4, close if condition with }'
 
       if !line5Expected.test(line5)
-        return TAPi18n.__ 'Error on line 5, read assignment for line 5 and try again, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 5, read assignment for line 5 and try again, check if the statement ends with semicolon'
 
       success = true
 
@@ -1147,13 +1163,13 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 1, define function with name multiply and parameters a and b'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, return a * b from function multiply, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, return a * b from function multiply, check if the statement ends with semicolon'
 
       if line3 != line3Expected
         return TAPi18n.__ 'Error on line 3, close if condition with }'
 
       if !line4Expected.test(line4)
-        return TAPi18n.__ 'Error on line 4, read assignment for line 4 and try again, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, read assignment for line 4 and try again, check if the statement ends with semicolon'
 
       success = true
 
@@ -1193,10 +1209,10 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 1, check if your code is according to conventions'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, define for loop, check if your code is according to conventions, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, define for loop, check if your code is according to conventions, check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 3, print item from array with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 3, print item from array with console.log(), check if the statement ends with semicolon'
 
       if line4 != line4Expected
         return TAPi18n.__ 'Error on line 4, close loop with }'
@@ -1205,7 +1221,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 5, close function with }'
 
       if !line6Expected.test(line6)
-        return TAPi18n.__ 'Error on line 6, call function printArray with parameter [5, 10, 15], are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 6, call function printArray with parameter [5, 10, 15], check if the statement ends with semicolon'
 
       success = true
 
@@ -1264,7 +1280,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 4, check if method has name <i>accelerate</i>'
 
       if !line5Expected.test(line5)
-        return TAPi18n.__ 'Error on line 5, are you sure you are increasing speed property? Are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 5, are you sure you are increasing speed property? check if the statement ends with semicolon'
 
       if !line6Expected.test(line6)
         return TAPi18n.__ 'Error on line 6, close <i>accelerate</i> method with },'
@@ -1273,22 +1289,22 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 7, check if method has name <i>toString</i>'
 
       if !line8Expected.test(line8)
-        return TAPi18n.__ 'Error on line 8, read what <i>toString</i> should return and try again, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 8, read what <i>toString</i> should return and try again, check if the statement ends with semicolon'
 
       if !line9Expected.test(line9)
         return TAPi18n.__ 'Error on line 9, close <i>toString</i> method with }'
 
       if !line10Expected.test(line10)
-        return TAPi18n.__ 'Error on line 10, close object with };, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 10, close object with };, check if the statement ends with semicolon'
 
       if !line11Expected.test(line11)
-        return TAPi18n.__ 'Error on line 11, read assignment for line 11 and try again, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 11, read assignment for line 11 and try again, check if the statement ends with semicolon'
 
       if !line12Expected.test(line12)
-        return TAPi18n.__ 'Error on line 12, read assignment for line 12 and try again, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 12, read assignment for line 12 and try again, check if the statement ends with semicolon'
 
       if !line13Expected.test(line13)
-        return TAPi18n.__ 'Error on line 13, read assignment for line 13 and try again, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 13, read assignment for line 13 and try again, check if the statement ends with semicolon'
 
       success = true
 
@@ -1317,13 +1333,13 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 3, close object with };'
 
       if !line4Expected.test(line4)
-        return TAPi18n.__ 'Error on line 4, read assignment for line 4 and try again, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, read assignment for line 4 and try again, check if the statement ends with semicolon'
 
       if !line5Expected.test(line5)
-        return TAPi18n.__ 'Error on line 5, read assignment for line 5 and try again, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 5, read assignment for line 5 and try again, check if the statement ends with semicolon'
 
       if !line6Expected.test(line6)
-        return TAPi18n.__ 'Error on line 6, read assignment for line 6 and try again, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 6, read assignment for line 6 and try again, check if the statement ends with semicolon'
 
       success = true
 
@@ -1361,7 +1377,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 3, define method with name <i>bark</i>'
 
       if !line4Expected.test(line4)
-        return TAPi18n.__ 'Error on line 4, print "wof wof" with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, print "wof wof" with console.log(), check if the statement ends with semicolon'
 
       if !line5Expected.test(line5)
         return TAPi18n.__ 'Error on line 5, close method with }'
@@ -1373,7 +1389,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 7, print name of the dog with console.log()'
 
       if !line8Expected.test(line8)
-        return TAPi18n.__ 'Error on line 8, call method bark(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 8, call method bark(), check if the statement ends with semicolon'
 
       success = true
 
@@ -1407,13 +1423,13 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 1, check if function has name <i>Dog</i>. Check if it\'s written according to conventions.'
 
       if !line2Expected.test(line2)
-        return TAPi18n.__ 'Error on line 2, check if property has name <i>name</i> and its value is parameter <i>name</i>, are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 2, check if property has name <i>name</i> and its value is parameter <i>name</i>, check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
         return TAPi18n.__ 'Error on line 3, define method with name <i>bark</i>'
 
       if !line4Expected.test(line4)
-        return TAPi18n.__ 'Error on line 4, print "wof wof" with console.log(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 4, print "wof wof" with console.log(), check if the statement ends with semicolon'
 
       if !line5Expected.test(line5)
         return TAPi18n.__ 'Error on line 5, close method with };'
@@ -1428,7 +1444,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 8, print name of the dog with console.log()'
 
       if !line9Expected.test(line9)
-        return TAPi18n.__ 'Error on line 9, call method bark(), are you missing semicolon?'
+        return TAPi18n.__ 'Error on line 9, call method bark(), check if the statement ends with semicolon'
 
       success = true
 
