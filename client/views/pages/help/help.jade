@@ -10,6 +10,7 @@ template(name="help")
               |({{getExerciseTitle this.lesson exerciseId}})
           if isUnread this._id
             span.pull-right.red (unread)
+        small {{formatDate timestamp}}
         if message
           pre.unstyled {{message}}
         if lessonCode
