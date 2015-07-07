@@ -14,7 +14,7 @@ processForm = (form) ->
   else
     data.capacity = 0
   console.log(data)
-  data.description = Template.instance().$('#summernote-description').code()
+  data.description = Template.instance().$('#study-group-description-textarea').code()
 
   route = Router.current()
   if route.route.getName() is 'studyGroup' and route.params._id
@@ -39,7 +39,7 @@ Template.studyGroupFormModal.onCreated ->
   @subscribe('curriculums')
 
 Template.studyGroupFormModal.onRendered ->
-  @$('#summernote-description').summernote().code(@data.studyGroup.description)
+  @$('#study-group-description-textarea').summernote().code(@data.studyGroup?.description)
 
 Template.studyGroupFormModal.helpers
   curriculums: ->

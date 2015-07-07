@@ -1,0 +1,10 @@
+template(name="homeworks")
+  h1 Homeworks
+  p
+    +openHomeworkFormModalBtn
+  each homeworks
+    +homeworkListItem
+  else
+    p No homeworks.
+
+  +homeworkFormModal

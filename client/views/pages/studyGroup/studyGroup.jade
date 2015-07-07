@@ -2,6 +2,8 @@ template(name="studyGroup")
   h1 Study group - {{studyGroup.title}}
     if canEdit
       a.btn.btn-default(href="#" data-target="#study-group-modal" data-toggle="modal") Edit
+      |&nbsp;
+      +openHomeworkFormModalBtn
 
   .row
     .col-sm-8
@@ -19,16 +21,18 @@ template(name="studyGroup")
             |(free {{freeSpotsCount}})
         if description
           pre.unstyled-pre {{{description}}}
-        if curriculumId
-          p
+        p
+          if curriculumId
             a.btn.btn-primary.toggle-curriculum(href="#")
               if shownCurriculum
                 |Hide curriculum
               else
                 |Show curriculum
-          if shownCurriculum
-            pre.unstyled-pre {{linkify curriculum.text}}
-          br
+          if homeworkIds
+            a.btn.btn-primary(href="{{pathFor 'studyGroupHomework' studyGroupId=_id homeworkId=firstHomeworkId username=username}}") Show homework
+        if shownCurriculum
+          pre.unstyled-pre {{linkify curriculum.text}}
+        br
       p
         a.btn.btn-default(href="{{pathFor 'studyGroups'}}") &larr; All study groups
       hr
@@ -82,3 +86,4 @@ template(name="studyGroup")
         |No students, yet.
 
   +studyGroupFormModal
+  +homeworkFormModal

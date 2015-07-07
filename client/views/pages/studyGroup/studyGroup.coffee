@@ -41,6 +41,8 @@ Template.studyGroup.helpers
     StudyGroupCurriculums.findOne(studyGroup?.curriculumId)
   shownCurriculum: ->
     return Template.instance().shownCurriculum.get()
+  firstHomeworkId: ->
+    @homeworkIds?[0]
 
 Template.studyGroup.events
   'click [data-target="#study-group-modal"]': (evt) ->

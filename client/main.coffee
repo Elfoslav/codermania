@@ -103,3 +103,9 @@ Template.registerHelper 'isOnline', (userId) ->
 
 Template.registerHelper 'equals', (param1, param2) ->
   return param1 is param2
+
+Template.registerHelper 'debug', (param, paramName) ->
+  paramName = paramName || ''
+  console.log """
+    DEBUG #{paramName}: #{param}
+  """

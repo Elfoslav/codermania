@@ -96,6 +96,11 @@
 @UserCSSLessons = new Mongo.Collection 'userCSSLessons'
 @UserProgrammingChallengeLessons = new Mongo.Collection 'userProgrammingChallengeLessons'
 
+#title: String
+#description: String
+#timestamp: Number
+@Homework = new Mongo.Collection 'homework'
+
 #{
 #  title: String
 #  topics: String
@@ -105,14 +110,19 @@
 #  userId: String
 #  userIds: [ String ]
 #  curriculumId: String
+#  homeworkIds: [ String ]
 #}
 @StudyGroups = new Mongo.Collection 'studyGroups'
 
 StudyGroups.helpers
   isAMember: (userId) ->
     @userIds?.indexOf(userId) != -1
-  messages: () ->
+  messages: ->
     StudyGroupMessages.find({ studyGroupId: @_id }, { sort: { timestamp: 1 } })
+  homeworks: ->
+    if @homeworkIds
+      return Homeworks.find({ _id: { $in: @homeworkIds }})
+    return []
 
 #studyGroupId: String
 #text: String
@@ -131,7 +141,6 @@ StudyGroups.helpers
 @StudyGroupCurriculums = new Mongo.Collection 'studyGroupCurriculums'
 
 @Slides = new Mongo.Collection('slides')
-
 
 # {
 #  type: String (html,js)

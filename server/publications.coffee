@@ -343,3 +343,19 @@ Meteor.publish 'userSettings', ->
   Meteor.users.find { _id: @userId },
     fields:
       settings: 1
+
+Meteor.publish 'homework', (query, options) ->
+  query = query || {}
+  options = options || {}
+  check query,
+    _id: Match.Optional String
+    studyGroupId: Match.Optional String
+  check options,
+    limit: Match.Optional Number
+
+  if query._id
+    return Homework.findOne(query._id)
+  if query.studyGroupId
+    studyGroup = StudyGroups.findOne(query.studyGroupId)
+    return Homework.find({ _id: { $in: studyGroup.homeworkIds }})
+  Homework.find(query, options)

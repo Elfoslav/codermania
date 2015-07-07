@@ -14,13 +14,30 @@ template(name="studentProfile")
       a(href="{{pathFor 'messages' lang=lang username=student.username}}")
         span.glyphicon.glyphicon-envelope
 
-  if showCreateStudyGroupBtn
-    +createStudyGroupBtn
-
-  if studyGroups.count
-    h2 Study groups
-    each studyGroups
-      +studyGroupListItem
+  .row
+    .col-sm-4
+      h2 Study groups
+      if showCreateStudyGroupBtn
+        +createStudyGroupBtn
+      each studyGroups
+        +studyGroupListItem
+      else
+        p You haven't joined any study group.
+        p
+          a.btn.btn-default(href="{{pathFor 'studyGroups'}}") Check out study groups
+    .col-sm-4
+      h2 Homeworks
+      if isInRole 'teacher' 'all'
+        p
+          +openHomeworkFormModalBtn
+        p
+          a(href="{{pathFor 'homeworks'}}") See all homeworks.
+      each homeworks
+        +homeworkListItem
+      else
+        p There are no homeworks for you, yet. Join a
+          a(href="{{pathFor 'studyGroups'}}") study group
+          |to get homeworks.
 
   .row
     .col-sm-4
@@ -54,7 +71,10 @@ template(name="studentProfile")
 
     .col-sm-4
       h3 HTML lessons
+      p Coming soon.
     .col-sm-4
       h3 CSS lessons
+      p Coming soon.
 
   +studyGroupFormModal
+  +homeworkFormModal

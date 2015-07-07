@@ -293,3 +293,33 @@ Meteor.methods
       App.sendEmailAboutMessage
         sender: sender
         receiver: receiver
+
+  createHomework: (data, studyGroupId) ->
+    check data,
+      title: String
+      description: String
+    console.log 'studyGroupId', studyGroupId
+    check studyGroupId, Match.Optional String
+
+    existingHomework = Homework.findOne { title: data.title }
+    if existingHomework
+      throw new Meteor.Error '', "Homework with title #{data.title} already exists, try to change title."
+
+    homeworkId = Homework.insert data
+    if studyGroupId
+      StudyGroups.update studyGroupId,
+        { $push: { homeworkIds: homeworkId } }
+
+  updateHomework: (data, studyGroupId) ->
+    check data,
+      _id: String
+      title: String
+      description: String
+    check studyGroupId, Match.Optional String
+
+    existingHomework = Homework.findOne { title: data.title }
+    if existingHomework
+      throw new Meteor.Error '', "Homework with title #{data.title} already exists, try to change title."
+
+    Homework.update data._id,
+      $set: data

@@ -1,0 +1,25 @@
+template(name="homeworkFormModal")
+  #homework-form-modal.modal.fade.in(aria-hidden='false', role='dialog', tabindex='-1')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(data-dismiss='modal', type='button')
+            span(aria-hidden='true') &times;
+            span.sr-only Close
+          h4.modal-title Create/Edit homework
+        .modal-body
+          form#homework-form
+            .row
+              .col-sm-6
+                .form-group
+                  label Homework title *:
+                  input.form-control(type='text' value='' name='title')
+            input.invisible(type='submit' value='Submit' name='_submit')
+          .form-group
+            label Description:
+            #homework-description-textarea
+        .modal-footer
+          button.btn.btn-default(data-dismiss='modal', type='button') Close
+          button#homework-form-submit-btn.btn.btn-primary(type='button') Submit
+
+  +curriculumFormModal
