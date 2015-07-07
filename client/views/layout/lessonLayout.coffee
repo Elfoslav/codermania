@@ -264,9 +264,6 @@ Template.lessonLayout.events
 
         Session.set('lessonSuccess', true)
         $('.output-error-text').addClass('hidden');
-      else if result != false
-        $('.output-error-text').removeClass('hidden').html(TAPi18n.__('Error') + ':\n' + result)
-
 
     isExerciseTab = $('.nav-tabs-theory-assignment .active a').attr('href') == '#exercise'
     if isExerciseTab and !codeError
@@ -303,8 +300,10 @@ Template.lessonLayout.events
 
         Session.set('exerciseSuccess', true)
         $('.output-error-text').addClass('hidden');
-      else if result != false
-        $('.output-error-text').removeClass('hidden').html(TAPi18n.__('Error') + ':\n' + result)
+
+    if result != false
+      result += '.<br/><br/>Check if your code is written according to conventions.'
+      $('.output-error-text').removeClass('hidden').html(TAPi18n.__('Error') + ':\n' + result)
 
 
   'click .next-exercise': (e, tpl) ->
