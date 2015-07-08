@@ -294,7 +294,7 @@ class @JSLesson
       line1 = $.trim(lines[0])
       line2 = $.trim(lines[1])
 
-      line1Expected = /var fruits = \[\s{0,1}'apple', 'orange', 'banana'\s{0,1}\];/
+      line1Expected = /var fruits = \[\s{0,1}["']apple["'], ["']orange["'], ["']banana["']\s{0,1}\];/
       line2Expected = 'console.log(fruits[1]);'
 
       if !line1Expected.test(line1)

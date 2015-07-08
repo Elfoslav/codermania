@@ -19,3 +19,20 @@ Template.studentProfile.helpers
   studentExercise: ->
     lesson = Template.parentData(1)
     Template.parentData(2).student.lessons?[lesson.id]?.exercises?[@id]
+  isTeacher: ->
+    Roles.userIsInRole(@student?._id, ['teacher'], 'all')
+
+Template.studentProfile.events
+  'click .add-teacher-role': (evt, tpl) ->
+    evt.preventDefault()
+    Meteor.call 'addTeacherRole', @student.username, (err, result) ->
+      if err
+        bootbox.alert(err.reason)
+        console.log err
+
+  'click .remove-teacher-role': (evt, tpl) ->
+    evt.preventDefault()
+    Meteor.call 'removeTeacherRole', @student.username, (err, result) ->
+      if err
+        bootbox.alert(err.reason)
+        console.log err

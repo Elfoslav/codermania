@@ -323,3 +323,19 @@ Meteor.methods
 
     Homework.update data._id,
       $set: data
+
+  addTeacherRole: (username) ->
+    check username, String
+    unless Roles.userIsInRole(@userId, ['teacher'], 'all')
+      throw new Meteor.Error(403, 'Unauthorized')
+    user = Meteor.users.findOne({username: username})
+    throw new Meteor.Error '', "User with username #{username} not found" unless user
+    Roles.addUsersToRoles(user._id, ['teacher'], 'all')
+
+  removeTeacherRole: (username) ->
+    check username, String
+    unless Roles.userIsInRole(@userId, ['admin'], 'all')
+      throw new Meteor.Error(403, 'Unauthorized')
+    user = Meteor.users.findOne({username: username})
+    throw new Meteor.Error '', "User with username #{username} not found" unless user
+    Roles.removeUsersFromRoles(user._id, 'teacher', 'all')

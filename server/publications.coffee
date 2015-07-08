@@ -199,6 +199,11 @@ Meteor.publish 'needHelp', (needHelpId, solved) ->
   if solved isnt undefined
     qry['solved'] = solved
 
+  lastThreeMonths = new Date()
+  lastThreeMonths.setMonth(lastThreeMonths.getMonth() - 3)
+  qry.timestamp =
+    $gt: lastThreeMonths.getTime()
+
   needHelpCoursor = NeedHelp.find(qry)
   userIds = []
   usersOpts =
@@ -216,6 +221,17 @@ Meteor.publish 'needHelp', (needHelpId, solved) ->
     NeedHelpComments.find { needHelpId: needHelpId }
     Meteor.users.find { _id: { $in: userIds }}, usersOpts
   ]
+
+Meteor.publish 'needHelpCount', ->
+  lastThreeMonths = new Date()
+  lastThreeMonths.setMonth(lastThreeMonths.getMonth() - 3)
+  needHelpCursor = NeedHelp.find
+    solved: false
+    timestamp:
+      $gt: lastThreeMonths.getTime()
+
+  Counts.publish(this, 'needHelpCount', needHelpCursor)
+  @ready()
 
 Meteor.publish 'needHelpForLessonAndUser', (lessonId, username) ->
   needHelpCoursor = NeedHelp.find({ lessonId: lessonId, username: username, solved: false })

@@ -174,7 +174,7 @@ setSuccessMsg = (lessonPoints, lesson, user) ->
   totalPoints = user?.points
   unless Meteor.user()?.lessons?[lesson.id]?.pointsAdded
     totalPoints += lessonPoints
-  if totalPoints
+  if totalPoints and Meteor.user()?.username == Router.current().params.username
     if Lesson.isProgrammingChallengeLesson()
       Session.set 'successMsg',
         """
@@ -193,7 +193,7 @@ setExerciseSuccessMsg = (lesson, exercise) ->
   totalPoints = Meteor.user()?.points
   unless Meteor.user()?.lessons?[lesson.id]?.exercises?[exercise.id]?.pointsAdded
     totalPoints += 2
-  if totalPoints
+  if totalPoints and Meteor.user()?.username == Router.current().params.username
     Session.set 'successMsg',
       """
       #{TAPi18n.__('Congratluations! You have earned <b>2</b> points!')}
@@ -264,9 +264,6 @@ Template.lessonLayout.events
 
         Session.set('lessonSuccess', true)
         $('.output-error-text').addClass('hidden');
-      else if result != false
-        $('.output-error-text').removeClass('hidden').html(TAPi18n.__('Error') + ':\n' + result)
-
 
     isExerciseTab = $('.nav-tabs-theory-assignment .active a').attr('href') == '#exercise'
     if isExerciseTab and !codeError
@@ -291,7 +288,7 @@ Template.lessonLayout.events
       exerciseToSave.id = exercise.id
       exerciseToSave.success = (if result == true then true else false)
       exerciseToSave.code = code
-      if userId
+      if userId and App.getCurrentUsername() == Meteor.user()?.username
         Meteor.call 'saveUserJSExercise', userId, lessonToSave, exerciseToSave, (err, result) ->
           console.log(err) if err
           console.log('result', result)
@@ -303,8 +300,10 @@ Template.lessonLayout.events
 
         Session.set('exerciseSuccess', true)
         $('.output-error-text').addClass('hidden');
-      else if result != false
-        $('.output-error-text').removeClass('hidden').html(TAPi18n.__('Error') + ':\n' + result)
+
+    if typeof result is 'string'
+      result += '.<br/><br/>Check if your code is written according to conventions.'
+      $('.output-error-text').removeClass('hidden').html(TAPi18n.__('Error') + ':\n' + result)
 
 
   'click .next-exercise': (e, tpl) ->

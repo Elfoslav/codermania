@@ -13,6 +13,13 @@ template(name="studentProfile")
     if isInRole 'teacher' 'all'
       a(href="{{pathFor 'messages' lang=lang username=student.username}}")
         span.glyphicon.glyphicon-envelope
+      unless isTeacher
+        |&nbsp;
+        a.btn.btn-primary.add-teacher-role(href="#") Add teacher role
+      else
+        if isInRole 'admin' 'all'
+          |&nbsp;
+          a.btn.btn-primary.remove-teacher-role(href="#") Remove teacher role
 
   .row
     .col-sm-4

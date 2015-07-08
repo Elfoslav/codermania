@@ -16,6 +16,7 @@ template(name="helpDetail")
         a.btn.btn-default.mark-need-help-unsolved(href="#") Mark as unsolved
       else
         a.btn.btn-default.mark-need-help-solved(href="#") Mark as solved
+  small {{formatDate needHelp.timestamp}}
   if needHelp.message
     pre.unstyled {{needHelp.message}}
   if needHelp.lessonCode
