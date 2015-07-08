@@ -174,7 +174,7 @@ setSuccessMsg = (lessonPoints, lesson, user) ->
   totalPoints = user?.points
   unless Meteor.user()?.lessons?[lesson.id]?.pointsAdded
     totalPoints += lessonPoints
-  if totalPoints
+  if totalPoints and Meteor.user()?.username == Router.current().params.username
     if Lesson.isProgrammingChallengeLesson()
       Session.set 'successMsg',
         """
@@ -193,7 +193,7 @@ setExerciseSuccessMsg = (lesson, exercise) ->
   totalPoints = Meteor.user()?.points
   unless Meteor.user()?.lessons?[lesson.id]?.exercises?[exercise.id]?.pointsAdded
     totalPoints += 2
-  if totalPoints
+  if totalPoints and Meteor.user()?.username == Router.current().params.username
     Session.set 'successMsg',
       """
       #{TAPi18n.__('Congratluations! You have earned <b>2</b> points!')}
@@ -288,7 +288,7 @@ Template.lessonLayout.events
       exerciseToSave.id = exercise.id
       exerciseToSave.success = (if result == true then true else false)
       exerciseToSave.code = code
-      if userId
+      if userId and App.getCurrentUsername() == Meteor.user()?.username
         Meteor.call 'saveUserJSExercise', userId, lessonToSave, exerciseToSave, (err, result) ->
           console.log(err) if err
           console.log('result', result)

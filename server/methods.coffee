@@ -10,7 +10,7 @@ Meteor.methods
       success: Boolean
 
     user = Meteor.users.findOne({ username: username })
-    unless user?._id == @userId or Roles.userIsInRole(@userId, 'teacher', 'all')
+    unless user?._id == @userId
       throw new Meteor.Error(401, 'Access denied')
 
     lessonPoints = Lesson.getLessonPoints(lesson.number, lesson.type)
@@ -64,7 +64,6 @@ Meteor.methods
           qry["lessons.#{lesson.id}.pointsAdded"] = true
         else
           lesson.pointsAdded = true
-        console.log 'lesson after points added: ', user.points
 
         if lesson.type is 'programming-challenge'
           elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
@@ -132,7 +131,7 @@ Meteor.methods
       success: Boolean
     })
 
-    unless userId == @userId or Roles.userIsInRole(@userId, 'teacher', 'all')
+    unless userId == @userId
       throw new Meteor.Error(401, 'Access denied')
 
     points = 2 #get 2 points for each exercise
@@ -145,16 +144,13 @@ Meteor.methods
     userExercise = user?.lessons?[lesson.id]?.exercises?[exercise.id]
     exercise.pointsAdded = userExercise?.pointsAdded
 
-    #add points before updating user
-    console.log('userExercise: ', userExercise)
     if exercise.success
       if (userExercise is undefined) or !userExercise.pointsAdded
         Meteor.users.update(userId, {
           $inc: { points: points }
         })
         exercise.pointsAdded = true
-        console.log 'lesson after points added: ', Meteor.users.findOne(userId).points
-      console.log "updating need help for exercise: #{exercise.id} and user #{user.username}"
+        console.log 'lesson exercise points added: ', Meteor.users.findOne(userId).points
       NeedHelp.update { exerciseId: exercise.id, username: user.username },
         $set: { solved: true }
 
@@ -163,7 +159,6 @@ Meteor.methods
 
     qry = {}
     qry["lessons.#{lesson.id}.exercises.#{exercise.id}"] = exercise
-    console.log 'qry', qry
     Meteor.users.update(userId, {
       $set: qry
     })
