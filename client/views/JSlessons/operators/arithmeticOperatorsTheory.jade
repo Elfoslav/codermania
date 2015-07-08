@@ -63,3 +63,31 @@ template(name="arithmeticOperatorsTheory")
   p x++ (post-increment) means "remember the original value, then increment the variable; the value of the expression is the original value".
   p ++x (pre-increment) means "increment the variable; the value of the expression is the final value".
   p The same applies to x--; and --x with decrement;
+
+  p Another example of post-increment:
+  +codeInText
+    |var number = 12;
+    br
+    |//Value of number is printed with console.log()
+    br
+    |//Then it's incremented
+    br
+    |console.log(number++);
+    br
+    |//value of number after increment is 13
+    br
+    |console.log(number);
+
+  p Another example of pre-increment:
+  +codeInText
+    |var number = 12;
+    br
+    |//Value of number is incremented
+    br
+    |//Then it's printed with console.log()
+    br
+    |console.log(++number);
+    br
+    |//value of number after increment is 13
+    br
+    |console.log(number);
