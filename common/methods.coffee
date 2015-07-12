@@ -297,32 +297,40 @@ Meteor.methods
   createHomework: (data, studyGroupId) ->
     check data,
       title: String
+      type: String
       description: String
-    console.log 'studyGroupId', studyGroupId
     check studyGroupId, Match.Optional String
 
-    existingHomework = Homework.findOne { title: data.title }
-    if existingHomework
-      throw new Meteor.Error '', "Homework with title #{data.title} already exists, try to change title."
+    unless Roles.userIsInRole(@userId, [ 'teacher' ], 'all')
+      throw new Meteor.Error(403, 'Unauthorized')
 
+    data.timestamp = Date.now()
     homeworkId = Homework.insert data
+
     if studyGroupId
       StudyGroups.update studyGroupId,
         { $push: { homeworkIds: homeworkId } }
 
-  updateHomework: (data, studyGroupId) ->
+  updateHomework: (data) ->
     check data,
       _id: String
       title: String
+      type: String
       description: String
-    check studyGroupId, Match.Optional String
 
-    existingHomework = Homework.findOne { title: data.title }
-    if existingHomework
-      throw new Meteor.Error '', "Homework with title #{data.title} already exists, try to change title."
+    unless Roles.userIsInRole(@userId, [ 'teacher' ], 'all')
+      throw new Meteor.Error(403, 'Unauthorized')
 
+    data.updatedAt = Date.now()
+    data.updatedBy = @userId
     Homework.update data._id,
       $set: data
+
+  deleteHomework: (id) ->
+    check id, String
+    unless Roles.userIsInRole(@userId, [ 'admin' ], 'all')
+      throw new Meteor.Error(403, 'Unauthorized')
+    Homework.remove id
 
   addTeacherRole: (username) ->
     check username, String

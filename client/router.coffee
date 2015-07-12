@@ -277,30 +277,6 @@ Router.route '/:lang?/user/settings',
   onAfterAction: ->
     App.setPageTitle('User settings')
 
-Router.route '/:lang?/homeworks/',
-  name: 'homeworks'
-  waitOn: ->
-    [
-      Meteor.subscribe('homeworks')
-    ]
-  data: ->
-    homeworks: Homeworks.find()
-  onAfterAction: ->
-    App.setPageTitle('Homeworks')
-
-Router.route '/:lang?/homeworks/:_id',
-  name: 'homework'
-  waitOn: ->
-    [
-      Meteor.subscribe('homeworks', @params._id)
-    ]
-  data: ->
-    homework: Homeworks.findOne(@params._id)
-  onAfterAction: ->
-    hw = Homeworks.findOne(@params._id)
-    if hw
-      App.setPageTitle(hw.title)
-
 Router.route '/:lang?/study-groups',
   name: 'studyGroups'
   waitOn: ->
@@ -322,16 +298,17 @@ Router.route '/:lang?/study-groups/:_id',
     studyGroup: StudyGroups.findOne(@params._id)
     studyGroups: StudyGroups.find({}, { sort: { timestamp: 1 }})
 
-Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username',
+Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?',
   name: 'studyGroupHomework'
   waitOn: ->
     [
+      Meteor.subscribe('studyGroup', @params.studyGroupId)
       Meteor.subscribe('homework', { studyGroupId: @params.studyGroupId })
     ]
   data: ->
     homeworkList: Homework.find()
     homework: Homework.findOne @params.homeworkId
-    studyGroupId: @params.studyGroupId
+    studyGroup: StudyGroups.findOne @params.studyGroupId
   onAfterAction: ->
     App.setPageTitle('Study group homework')
 

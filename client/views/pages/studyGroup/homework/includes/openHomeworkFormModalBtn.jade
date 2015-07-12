@@ -1,0 +1,5 @@
+template(name="openHomeworkFormModalBtn")
+  if equals type 'edit'
+    a.btn.btn-default.edit-homework-btn(href="#" data-target="#homework-form-modal" data-toggle="modal") Edit
+  else
+    a.btn.btn-primary.create-homework-btn(href="#" data-target="#homework-form-modal" data-toggle="modal") Create homework

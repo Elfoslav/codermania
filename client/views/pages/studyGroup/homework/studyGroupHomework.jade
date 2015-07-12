@@ -1,0 +1,22 @@
+template(name="studyGroupHomework")
+  h1 Homework {{homework.title}}
+    if isInRole 'teacher' 'all'
+      +openHomeworkFormModalBtn(type="edit")
+      |&nbsp;
+      +openHomeworkFormModalBtn
+  each studyGroup.homework
+    p
+      a(href="{{pathFor 'studyGroupHomework' studyGroupId=../studyGroup._id homeworkId=this._id username=username}}") {{_id}} {{../studyGroup._id}} {{title}}
+  .row
+    .col-sm-4
+      pre.unstyled-pre {{{homework.description}}}
+      p
+        a.btn.btn-default(href="{{pathFor 'studyGroup' lang=lang _id=studyGroup._id}}") &larr; Study group
+    .col-sm-4
+      h2 HTML editor
+    .col-sm-4
+      h2 Result
+      p ...
+
+  with homework
+    +homeworkFormModal

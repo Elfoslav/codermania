@@ -1,7 +1,0 @@
-template(name="studyGroupHomework")
-  h1 Homework {{homework.title}}
-    +openHomeworkFormModalBtn
-  p
-    a.btn.btn-default(href="{{pathFor 'studyGroup' lang=lang _id=studyGroupId}}") &larr; Study group
-
-  +homeworkFormModal

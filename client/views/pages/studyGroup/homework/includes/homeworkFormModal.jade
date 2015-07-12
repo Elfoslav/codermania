@@ -1,5 +1,5 @@
 template(name="homeworkFormModal")
-  #homework-form-modal.modal.fade.in(aria-hidden='false', role='dialog', tabindex='-1')
+  #homework-form-modal.modal.fade(aria-hidden='false', role='dialog', tabindex='-1')
     .modal-dialog
       .modal-content
         .modal-header
@@ -12,11 +12,16 @@ template(name="homeworkFormModal")
             .row
               .col-sm-6
                 .form-group
-                  label Homework title *:
-                  input.form-control(type='text' value='' name='title')
+                  label Title *:
+                  input.form-control(type='text' name='title' value="{{title}}")
+              .col-sm-6
+                .form-group
+                  label Type *:
+                  input.form-control(type='text' name='type' value="{{type}}" placeholder="HTML or CSS or anything else")
+            input.invisible(type="text" name="_id" value="{{_id}}")
             input.invisible(type='submit' value='Submit' name='_submit')
           .form-group
-            label Description:
+            label Description *:
             #homework-description-textarea
         .modal-footer
           button.btn.btn-default(data-dismiss='modal', type='button') Close

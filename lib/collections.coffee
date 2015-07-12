@@ -98,8 +98,24 @@
 
 #title: String
 #description: String
+#type: String - HTML|CSS|JavaScrit|Web|whatever...
 #timestamp: Number
+#updatedAt: Number (timestamp)
+#updatedBy: String (userId)
 @Homework = new Mongo.Collection 'homework'
+
+#homeworkId: String
+#studentId: String
+#code: String
+#timestamp: Number
+#comments: [
+#  {
+#    userId: String
+#    message: String
+#    timestamp: Number
+#  }
+#]
+@studentHomework = new Mongo.Collection 'studentHomework'
 
 #{
 #  title: String
@@ -119,9 +135,10 @@ StudyGroups.helpers
     @userIds?.indexOf(userId) != -1
   messages: ->
     StudyGroupMessages.find({ studyGroupId: @_id }, { sort: { timestamp: 1 } })
-  homeworks: ->
+  homework: ->
+    console.log 'homeworkIds: ', @homeworkIds
     if @homeworkIds
-      return Homeworks.find({ _id: { $in: @homeworkIds }})
+      return Homework.find({ _id: { $in: @homeworkIds }})
     return []
 
 #studyGroupId: String
