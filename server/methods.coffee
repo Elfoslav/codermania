@@ -232,19 +232,19 @@ Meteor.methods
       html: msg + '<br>' + code + '<br>' + url
 
   unreadMessagesCount: ->
-    user = Meteor.users.findOne(@userId)
+    receiver = Meteor.users.findOne(@userId)
 
     Messages.find({
-      receiverUsername: user?.username
+      receiverId: receiver?._id
       isRead: false
     }).count()
 
   markMessagesAsRead: (senderUsername) ->
     check(senderUsername, String)
     throw new Meteor.Error(401, 'Unauthorized!') unless @userId
-    console.log 'markMessagesAsRead: ', senderUsername
+    sender = Meteor.users.findOne({username: senderUsername})
     Messages.update({
-      senderUsername: senderUsername
+      senderId: sender?._id
       receiverId: @userId
     }, {
       $set:

@@ -139,26 +139,22 @@ Meteor.publish 'unreadMessagesCount', ->
   user = Meteor.users.findOne(@userId)
 
   messages = Messages.find({
-    receiverUsername: user?.username
+    receiverId: user?._id
     isRead: false
   })
 
   Counts.publish(this, 'unreadMessagesCount', messages)
   @ready()
 
-Meteor.publish('messages', (options) ->
+Meteor.publish 'messages', (options) ->
   check(options, {
     senderUsername: String
     receiverUsername: String
   })
-  user = Meteor.users.findOne({
-    $or: [
-      { username: options.senderUsername }
-      { username: options.receiverUsername }
-    ]
-  })
+  sender = Meteor.users.findOne({ username: options.senderUsername })
+  receiver = Meteor.users.findOne({ username: options.receiverUsername })
 
-  unless user
+  if !sender or !receiver
     @ready()
     return []
 
@@ -166,22 +162,21 @@ Meteor.publish('messages', (options) ->
     $or: [
       {
         $and: [
-          { senderUsername: options.senderUsername }
-          { receiverUsername: options.receiverUsername }
+          { senderId: sender._id }
+          { receiverId: receiver._id }
         ]
       }
       {
         $and: [
-          { senderUsername: options.receiverUsername }
-          { receiverUsername: options.senderUsername }
+          { senderId: receiver._id }
+          { receiverId: sender._id }
         ]
       }
     ]
   }, {
     sort: { timestamp: -1 }
-    limit: 50
+    limit: 55
   })
-)
 
 Meteor.publish 'slides', (lang) ->
   Slides.find({ lang: lang })
