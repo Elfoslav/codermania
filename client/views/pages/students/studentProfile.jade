@@ -33,18 +33,22 @@ template(name="studentProfile")
         p
           a.btn.btn-default(href="{{pathFor 'studyGroups'}}") Check out study groups
     .col-sm-4
-      h2 Homeworks
-      if isInRole 'teacher' 'all'
-        p
-          +openHomeworkFormModalBtn
-        p
-          a(href="{{pathFor 'homeworks'}}") See all homeworks.
-      each homeworks
-        +homeworkListItem
+      h2 Homework
+      if studentHomework.count
+        ul.list-unstyled
+          each studentHomework
+            li
+              if canSeeUserExercises
+                a(href="{{pathFor 'studyGroupHomework' studyGroupId=studyGroupId homeworkId=homeworkId username=../student.username}}")
+                  |{{title}}
+              else
+                span {{title}}
+              if success
+                span.glyphicon.glyphicon-ok.green
       else
-        p There are no homeworks for you, yet. Join a
+        p There is no homework for you, yet. Join a
           a(href="{{pathFor 'studyGroups'}}") study group
-          |to get homeworks.
+          |to get a homework.
 
   .row
     .col-sm-4

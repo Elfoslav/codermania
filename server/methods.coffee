@@ -346,6 +346,9 @@ Meteor.methods
       text: String
     check studyGroupId, Match.Optional String
 
+    if !Roles.userIsInRole(@userId, 'teacher', 'all')
+      throw new Meteor.Error(401, 'Unauthorized!')
+
     data.createdBy = @userId
     data.timestamp = Date.now()
 
@@ -358,3 +361,85 @@ Meteor.methods
       curriculumId = StudyGroupCurriculums.insert(data)
       if studyGroupId
         StudyGroups.update studyGroupId, { $set: { curriculumId: curriculumId }}
+
+  saveStudentHomework: (data) ->
+    check data,
+      studyGroupId: String
+      homeworkId: String
+      code: String
+    unless @userId
+      throw new Meteor.Error(401, 'To perform this action, you have to be logged in')
+
+    homework = Homework.findOne data.homeworkId
+    data.title = homework?.title
+    data.userId = @userId
+    data.timestamp = Date.now()
+
+    existingHomework = StudentHomework.findOne
+      userId: @userId
+      homeworkId: data.homeworkId
+    if existingHomework
+      StudentHomework.update
+        userId: @userId
+        homeworkId: data.homeworkId
+      ,
+        $set:
+          title: data.title
+          code: data.code
+          updatedAt: Date.now()
+    else
+      StudentHomework.insert data
+
+  submitStudentHomework: (data) ->
+    check data,
+      studyGroupId: String
+      homeworkId: String
+      code: String
+    unless @userId
+      throw new Meteor.Error(401, 'To perform this action, you have to be logged in')
+
+    Meteor.call 'saveStudentHomework', data
+
+    homework = Homework.findOne data.homeworkId
+    teachers = Meteor.users.find
+      'roles.all': 'teacher'
+    teachers.forEach (teacher) =>
+      console.log 'submitting homework to teacher: ', teacher.username
+      #don't send message if current user is teacher
+      unless Roles.userIsInRole(@userId, 'teacher', 'all')
+        App.insertMessage
+          senderId: @userId
+          senderUsername: Meteor.user()?.username
+          receiverId: teacher._id
+          receiverUsername: teacher.username
+          text: """
+            (auto generated message) I have submitted homework called #{homework?.title}:
+            #{Meteor.absoluteUrl()}study-groups/#{data.studyGroupId}/homework/#{data.homeworkId}/#{Meteor.user().username}
+          """
+  markHomeworkAsCorrect: (data) ->
+    check data,
+      homeworkId: String
+      username: String
+    unless Roles.userIsInRole @userId, 'teacher', 'all'
+      throw new Meteor.Error 401, 'Unauthorized'
+    user = Meteor.users.findOne { username: data.username }
+    StudentHomework.update
+      homeworkId: data.homeworkId
+      userId: user?._id
+    ,
+      $set:
+        success: true
+
+  markHomeworkAsIncorrect: (data) ->
+    check data,
+      homeworkId: String
+      username: String
+    unless Roles.userIsInRole @userId, 'teacher', 'all'
+      throw new Meteor.Error 401, 'Unauthorized'
+    user = Meteor.users.findOne { username: data.username }
+    StudentHomework.update
+      homeworkId: data.homeworkId
+      userId: user?._id
+    ,
+      $set:
+        success: false

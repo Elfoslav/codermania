@@ -41,6 +41,8 @@ class @App
       receiverUsername: String
       text: String
       needHelpId: Match.Optional String
+    if opts.senderUsername == opts.receiverUsername
+      throw new Meteor.Error('', 'Sender username is equal to receiver username. User cannot send message to himself.')
     Messages.insert
       senderId: opts.senderId
       senderUsername: opts.senderUsername

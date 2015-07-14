@@ -1,0 +1,16 @@
+.breadcrumb>li+li:before {color: rgba(204, 204, 204, 1); content: "\003E\00a0";}
+.breadcrumb {
+  background-color: #222;
+  color: #fff;
+  li {
+    &.active a {
+      color: #fff;
+    }
+  }
+  a {
+    color: #9d9d9d;
+    &:hover {
+      color: #fff;
+    }
+  }
+}

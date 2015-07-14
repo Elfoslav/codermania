@@ -9,6 +9,7 @@ body
   +generalGroupLinkButton
 
 template(name="layout")
+  +BootstrapAlerts
   #container
     +navbar
     .container
@@ -22,3 +23,7 @@ template(name="layout")
       +yield
       +appUpdatePrompt
     +footer
+
+template(name="notFound")
+  h1 Page not found
+  p We are sorry, but the page you are looking for does not exist or has been moved somewhere else.

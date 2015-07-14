@@ -241,8 +241,6 @@ Meteor.publish 'needHelpForLessonAndUser', (lessonId, username) ->
 Meteor.publish 'userStudyGroups', (username) ->
   user = Meteor.users.findOne({ username: username })
   loggedInUser = Meteor.users.findOne @userId
-  console.log 'user: ', user
-  console.log 'username == loggedInUser?.username', username == loggedInUser?.username
   return this.ready() if !user
   if username == loggedInUser?.username
     #created or joined groups
@@ -370,3 +368,14 @@ Meteor.publish 'homework', (query, options) ->
     studyGroup = StudyGroups.findOne(query.studyGroupId)
     return Homework.find({ _id: { $in: studyGroup.homeworkIds }})
   Homework.find(query, options)
+
+Meteor.publish 'studentHomework', (query, username) ->
+  check query,
+    homeworkId: Match.Optional String
+  check username, String
+  user = Meteor.users.findOne { username: username }
+  unless user
+    Logger.log "studentHomework publication: Student with username #{username} not found", "warning"
+    return @ready()
+  query.userId = user._id
+  StudentHomework.find query

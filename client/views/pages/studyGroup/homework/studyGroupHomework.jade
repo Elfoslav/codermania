@@ -1,19 +1,36 @@
 template(name="studyGroupHomework")
+  ul.breadcrumb
+    each studyGroup.homework
+      li(class="{{#if isCurrent}}active{{/if}}")
+        a(href="{{pathFor 'studyGroupHomework' studyGroupId=../studyGroup._id homeworkId=this._id username=username}}") {{title}}
   h1 Homework {{homework.title}}
+    if studentHomework.success
+      span.glyphicon.glyphicon-ok.green
     if isInRole 'teacher' 'all'
       +openHomeworkFormModalBtn(type="edit")
       |&nbsp;
-      +openHomeworkFormModalBtn
-  each studyGroup.homework
-    p
-      a(href="{{pathFor 'studyGroupHomework' studyGroupId=../studyGroup._id homeworkId=this._id username=username}}") {{_id}} {{../studyGroup._id}} {{title}}
+      if studentHomework.success
+        button.btn.btn-danger.mark-as-incorrect(type="button") Mark as incorrect
+      else
+        button.btn.btn-primary.mark-as-correct(type="button") Mark as correct
   .row
-    .col-sm-4
+    .col-sm-3
+      h2 Assignment
       pre.unstyled-pre {{{homework.description}}}
       p
         a.btn.btn-default(href="{{pathFor 'studyGroup' lang=lang _id=studyGroup._id}}") &larr; Study group
-    .col-sm-4
+    .col-sm-5
       h2 HTML editor
+      #editor-wrapper
+        +sharejsAce(docid=document onRender=editorConfig onConnect=setMode id="html-editor")
+        if showSaveAndSubmitButtons
+          .row
+            .col-sm-6.no-padding-right
+              button.btn.btn-default.btn-block.done-btn.no-bottom-right-radius.save-and-run {{_"Save & Run"}}
+            .col-sm-6.no-padding-left
+              button.btn.btn-primary.btn-block.done-btn.no-bottom-left-radius.submit-to-teacher {{_"Submit to teacher"}}
+        else
+          button.btn.btn-primary.btn-block.done-btn.run-the-code Run the code
     .col-sm-4
       h2 Result
       p ...

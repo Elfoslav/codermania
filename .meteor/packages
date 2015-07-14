@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-mizzao:bootstrap-3
 coffeescript
 mquandalle:jade
 less
@@ -41,3 +40,4 @@ reactive-var
 dburles:collection-helpers
 summernote:standalone
 natestrauser:font-awesome
+bojicas:bootstrap-alerts

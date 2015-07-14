@@ -104,10 +104,14 @@
 #updatedBy: String (userId)
 @Homework = new Mongo.Collection 'homework'
 
+#studyGroupId: String
 #homeworkId: String
-#studentId: String
+#userId: String
+#title: String - store homework title so we don't need to make joins
 #code: String
+#success: Optional Boolean
 #timestamp: Number
+#updatedAt: Optional Number
 #comments: [
 #  {
 #    userId: String
@@ -115,7 +119,7 @@
 #    timestamp: Number
 #  }
 #]
-@studentHomework = new Mongo.Collection 'studentHomework'
+@StudentHomework = new Mongo.Collection 'studentHomework'
 
 #{
 #  title: String
@@ -136,10 +140,12 @@ StudyGroups.helpers
   messages: ->
     StudyGroupMessages.find({ studyGroupId: @_id }, { sort: { timestamp: 1 } })
   homework: ->
-    console.log 'homeworkIds: ', @homeworkIds
+    homeworkArr = []
     if @homeworkIds
-      return Homework.find({ _id: { $in: @homeworkIds }})
-    return []
+      #homeworks sorted according to position in homeworkIds
+      @homeworkIds.forEach (homeworkId) ->
+        homeworkArr.push Homework.findOne({ _id: homeworkId })
+    return homeworkArr
 
 #studyGroupId: String
 #text: String

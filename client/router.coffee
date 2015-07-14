@@ -262,9 +262,15 @@ Router.route '/:lang?/students/:username/',
     [
       Meteor.subscribe('student', @params.username)
       Meteor.subscribe('userStudyGroups', @params.username)
+      Meteor.subscribe('studentHomework', {}, @params.username)
     ]
   data: ->
-    student: Meteor.users.findOne({ username: @params.username })
+    student = Meteor.users.findOne({ username: @params.username })
+    if @ready() and !student
+      @render 'notFound'
+
+    student: student
+    studentHomework: StudentHomework.find()
   onAfterAction: ->
     App.setPageTitle(@params.username)
 
@@ -295,7 +301,10 @@ Router.route '/:lang?/study-groups/:_id',
     studyGroup = StudyGroups.findOne(@params._id)
     App.setPageTitle("#{studyGroup?.title} - study group")
   data: ->
-    studyGroup: StudyGroups.findOne(@params._id)
+    studyGroup = StudyGroups.findOne(@params._id)
+    if @ready() and !studyGroup
+      @render 'notFound'
+    studyGroup: studyGroup
     studyGroups: StudyGroups.find({}, { sort: { timestamp: 1 }})
 
 Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?',
@@ -304,13 +313,19 @@ Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?
     [
       Meteor.subscribe('studyGroup', @params.studyGroupId)
       Meteor.subscribe('homework', { studyGroupId: @params.studyGroupId })
+      Meteor.subscribe('studentHomework', { homeworkId: @params.homeworkId }, @params.username || '')
     ]
   data: ->
+    homework = Homework.findOne @params.homeworkId
+    if @ready() and !homework
+      @render 'notFound'
     homeworkList: Homework.find()
-    homework: Homework.findOne @params.homeworkId
+    homework: homework
+    studentHomework: StudentHomework.findOne()
     studyGroup: StudyGroups.findOne @params.studyGroupId
   onAfterAction: ->
-    App.setPageTitle('Study group homework')
+    hw = Homework.findOne @params.homeworkId
+    App.setPageTitle(hw?.title)
 
 Router.route '/:lang?/messages/:username?',
   name: 'messages'
@@ -515,6 +530,8 @@ Router.route '/:lang?/',
   onAfterAction: ->
     App.setPageTitle('Learn to code')
   data: ->
+    if @params.lang && (@params.lang != 'sk' or @params.lang != 'en')
+      @render 'notFound'
     homepageStudyGroups: StudyGroups.find({}, { sort: { timestamp: 1 }})
 
 Router.onBeforeAction ->
@@ -529,3 +546,4 @@ Router.onAfterAction ->
 Router.configure
   layoutTemplate: 'layout'
   trackPageView: true
+  notFoundTemplate: "notFound"
