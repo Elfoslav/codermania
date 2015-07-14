@@ -17,14 +17,16 @@ Accounts.onCreateUser (options, user) ->
     }
 
   elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
-  console.log user
   unless Messages.findOne({ receiverId: user._id })
-    App.insertMessage
-      senderId: elfoslav._id
-      senderUsername: elfoslav.username
-      receiverId: user._id
-      receiverUsername: user.username
-      text: App.getWelcomeMessage()
-    user.welcomeMessageSent = true
+    if Messages.findOne({ receiverUsername: user.username })
+      Logger.log "Welcome message for user #{user.username} with id #{user._id} already exists", 'error'
+    else
+      App.insertMessage
+        senderId: elfoslav._id
+        senderUsername: elfoslav.username
+        receiverId: user._id
+        receiverUsername: user.username
+        text: App.getWelcomeMessage()
+      user.welcomeMessageSent = true
 
   return user
