@@ -298,6 +298,7 @@ Meteor.methods
     check data,
       title: String
       type: String
+      points: Number
       description: String
     check studyGroupId, Match.Optional String
 
@@ -316,6 +317,7 @@ Meteor.methods
       _id: String
       title: String
       type: String
+      points: Number
       description: String
 
     unless Roles.userIsInRole(@userId, [ 'teacher' ], 'all')

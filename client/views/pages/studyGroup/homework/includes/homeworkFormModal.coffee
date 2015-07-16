@@ -1,5 +1,6 @@
 processForm = (form) ->
   data = $(form).serializeJSON()
+  data.points = parseInt(data.points) || 0
   data.description = $('#homework-description-textarea').summernote().code()
   if Router.current().route.getName() == 'studyGroup'
     studyGroupId = Router.current().params._id

@@ -92,6 +92,9 @@ Template.registerHelper 'trimEmail', (val) ->
 Template.registerHelper 'linkify', (text) ->
   return new Spacebars.SafeString linkify(text || '')
 
+Template.registerHelper 'escape', (text) ->
+  return new Spacebars.SafeString text || ''
+
 Template.registerHelper 'formatDate', (timestamp) ->
   date = new Date(timestamp)
   date.toDateString() + ' ' + date.toLocaleTimeString()

@@ -18,6 +18,12 @@ template(name="homeworkFormModal")
                 .form-group
                   label Type *:
                   input.form-control(type='text' name='type' value="{{type}}" placeholder="HTML or CSS or anything else")
+            .row
+              .col-sm-6
+                .form-group
+                  label Points:
+                  input.form-control(type='number' name='points' value="{{points}}")
+              .col-sm-6
             input.invisible(type="text" name="_id" value="{{_id}}")
             input.invisible(type='submit' value='Submit' name='_submit')
           .form-group

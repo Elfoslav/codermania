@@ -71,7 +71,7 @@ template(name="main")
         .col-sm-4
           h3
             a(href="{{pathFor 'studyGroup' _id=_id}}") {{title}}
-          pre.unstyled-pre {{linkify description}}
+          pre.unstyled-pre {{escape description}}
     br
     .row
       .col-sm-4.col-sm-offset-4

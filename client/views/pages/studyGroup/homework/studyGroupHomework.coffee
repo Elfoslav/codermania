@@ -1,3 +1,18 @@
+evaluate = (code) ->
+  newIframe = document.getElementById('homework-iframe') || document.createElement('iframe')
+  newIframe.frameBorder = 0
+  newIframe.id = 'homework-iframe'
+  newIframe.src = 'data:text/html;charset=utf-8,' + encodeURI(code)
+  homeworkResult = document.getElementById('homework-result')
+  if homeworkResult.childNodes[0]
+    homeworkResult.removeChild newIframe
+  homeworkResult.appendChild(newIframe)
+  newIframe.width = '100%'
+  newIframe.height = '300'
+  #newIframe.contentWindow.document.open('text/htmlreplace')
+  #newIframe.contentWindow.document.write(code)
+  #newIframe.contentWindow.document.close()
+
 Template.studyGroupHomework.helpers
   editorConfig: ->
     return (editor) ->
@@ -54,6 +69,7 @@ Template.studyGroupHomework.events
       studyGroupId: tpl.data.studyGroup?._id
       homeworkId: tpl.data.homework?._id
       code: ace.edit('html-editor').getValue()
+    evaluate(data.code)
     Meteor.call 'saveStudentHomework', data, (err, result) ->
       if err
         bootbox.alert err.reason
@@ -66,6 +82,7 @@ Template.studyGroupHomework.events
       studyGroupId: tpl.data.studyGroup?._id
       homeworkId: tpl.data.homework?._id
       code: ace.edit('html-editor').getValue()
+    evaluate(data.code)
     Meteor.call 'submitStudentHomework', data, (err, result) ->
       if err
         bootbox.alert err.reason
@@ -75,3 +92,4 @@ Template.studyGroupHomework.events
   'click .run-the-code': (evt, tpl) ->
     evt.preventDefault()
     console.log 'Run the code'
+    evaluate(ace.edit('html-editor').getValue())

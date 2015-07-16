@@ -13,6 +13,9 @@ template(name="studyGroupHomework")
         button.btn.btn-danger.mark-as-incorrect(type="button") Mark as incorrect
       else
         button.btn.btn-primary.mark-as-correct(type="button") Mark as correct
+  if homework.points
+    p
+      small Correct solution is for {{homework.points}} points.
   .row
     .col-sm-3
       h2 Assignment
@@ -33,7 +36,7 @@ template(name="studyGroupHomework")
           button.btn.btn-primary.btn-block.done-btn.run-the-code Run the code
     .col-sm-4
       h2 Result
-      p ...
+      #homework-result
 
   with homework
     +homeworkFormModal

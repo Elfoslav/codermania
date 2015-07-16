@@ -423,12 +423,20 @@ Meteor.methods
     unless Roles.userIsInRole @userId, 'teacher', 'all'
       throw new Meteor.Error 401, 'Unauthorized'
     user = Meteor.users.findOne { username: data.username }
+    studentHw = StudentHomework.findOne { homeworkId: data.homeworkId, userId: user?._id }
+    homework = Homework.findOne data.homeworkId
+    setData =
+      success: true
+    if !studentHw?.pointsAdded and homework?.points
+      #get points to the user for homework
+      Meteor.users.update user._id,
+        $inc: { points: homework.points }
+      setData.pointsAdded = true
     StudentHomework.update
       homeworkId: data.homeworkId
       userId: user?._id
     ,
-      $set:
-        success: true
+      $set: setData
 
   markHomeworkAsIncorrect: (data) ->
     check data,
