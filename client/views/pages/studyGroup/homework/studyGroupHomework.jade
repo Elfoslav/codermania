@@ -21,6 +21,17 @@ template(name="studyGroupHomework")
       small Submitted {{formatDate studentHomework.timestamp}}.
         if studentHomework.updatedAt
           |Updated {{formatDate studentHomework.updatedAt}}.
+  unless equals username currentUser.username
+    .alert.alert-warning.alert-dismissable(role="alert") You are in
+      a(href="{{pathFor 'studentProfile' username=username}}") {{username}}'s
+      |homework.
+      button.close(type="button" data-dismiss="alert" aria-label="Close")
+        span(aria-hidden="true") &times;
+      if currentUser
+        a(href="{{pathFor 'studyGroupHomework' studyGroupId=studyGroup._id homeworkId=homework._id username=currentUser.username}}")
+          |Go to your homework.
+      else
+        |Please log in, so you can do the homework.
   .row
     .col-sm-3
       h2 Assignment

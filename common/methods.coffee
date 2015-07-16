@@ -353,6 +353,7 @@ Meteor.methods
   saveStudentHomeworkComment: (data) ->
     check data,
       message: String
+      sendEmail: Boolean
       studentHomeworkId: String
     unless @userId
       throw new Meteor.Error 401, 'Unauthorized! You have to be logged in to perform this action.'

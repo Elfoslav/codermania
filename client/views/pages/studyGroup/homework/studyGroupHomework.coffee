@@ -121,9 +121,11 @@ Template.studyGroupHomework.events
     evaluate(ace.edit('html-editor').getValue())
   'submit .comment-form': (evt, tpl) ->
     evt.preventDefault()
+    form = evt.target
     textarea = $('#homework-comments-textarea')
     data =
       message: textarea.code()
+      sendEmail: form.sendEmail.checked
       studentHomeworkId: tpl.data.studentHomework?._id
     Meteor.call 'saveStudentHomeworkComment', data, (err) ->
       if err
@@ -131,3 +133,4 @@ Template.studyGroupHomework.events
         console.log err
       else
         textarea.code('Write a comment')
+        form.reset()

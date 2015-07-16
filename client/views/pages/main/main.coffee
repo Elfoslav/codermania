@@ -13,9 +13,6 @@ Template.main.helpers
         console.log('#{TAPi18n.__('Welcome to CoderMania')}');
         console.log('#{TAPi18n.__('You will learn to code here')}');
       """)
-  showWebDevSchool: ->
-    showUntil = new Date(2015, 6, 22)
-    return showUntil > Date.now()
 
 Template.main.events(
   'click .sign-up-btn': (e) ->
