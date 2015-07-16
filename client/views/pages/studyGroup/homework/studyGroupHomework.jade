@@ -51,12 +51,13 @@ template(name="studyGroupHomework")
             unless isRead
               |(unread)
             |:
-          pre.unstyled {{formatMessage message}}
+          pre.unstyled {{escape message}}
         else
           p No comments, yet.
+        //comments-textarea cannot be inside form
+        .form-group
+          #homework-comments-textarea Write a comment
         form.comment-form
-          .form-group
-            textarea.form-control(name="text" placeholder="{{_'Write a comment'}}" rows="5")
           unless isHomeworkUser
             .checkbox
               label

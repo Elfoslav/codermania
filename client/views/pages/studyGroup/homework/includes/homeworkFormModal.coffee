@@ -25,10 +25,11 @@ processForm = (form) ->
         $('#homework-form-modal').modal('hide')
 
 Template.homeworkFormModal.onRendered ->
+  summernote = @$('#homework-description-textarea').summernote()
+  if @data?.homework?.description
+    summernote.code(@data.homework?.description)
   if @data?.description
-    @$('#homework-description-textarea').summernote().code(@data.homework?.description)
-  if @data?.description
-    @$('#homework-description-textarea').summernote().code(@data?.description)
+    summernote.code(@data?.description)
 
 Template.homeworkFormModal.events
   'submit #homework-form': (evt, tpl) ->

@@ -356,6 +356,9 @@ Meteor.methods
       studentHomeworkId: String
     unless @userId
       throw new Meteor.Error 401, 'Unauthorized! You have to be logged in to perform this action.'
+    #Empty message in Firefox is <br>
+    if !data.message or data.message == '<br>'
+      throw new Meteor.Error 500, 'Message cannot be empty, write something.'
     studentHw = StudentHomework.findOne data.studentHomeworkId
     data.userId = @userId
     data.username = Meteor.user().username

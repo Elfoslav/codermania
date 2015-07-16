@@ -10,6 +10,23 @@ evaluate = (code) ->
     homeworkResult.removeChild homeworkResult.childNodes[0]
   homeworkResult.appendChild(newIframe)
 
+initSummernoteEditor = ->
+  #summernote docs: http://summernote.org/#/deep-dive
+  $('#homework-comments-textarea').summernote
+    height: 150
+    toolbar: [
+      #['style', ['style']], // no style button
+      ['style', ['bold', 'italic', 'underline', 'clear']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['insert', ['picture', 'link']],
+      ['help', ['help']]
+      ['fullscreen', ['fullscreen']]
+      ['codeview', ['codeview']]
+    ]
+
+Template.studyGroupHomework.onRendered ->
+  initSummernoteEditor()
+
 Template.studyGroupHomework.helpers
   editorConfig: ->
     return (editor) ->
@@ -79,6 +96,9 @@ Template.studyGroupHomework.events
         console.log err
       else
         Alerts.set('Successfuly saved', 'success')
+        setTimeout ->
+          initSummernoteEditor()
+        , 100
   'click .submit-to-teacher': (evt, tpl) ->
     evt.preventDefault()
     data =
@@ -92,19 +112,22 @@ Template.studyGroupHomework.events
         console.log err
       else
         Alerts.set('Successfuly submitted', 'success')
+        setTimeout ->
+          initSummernoteEditor()
+        , 100
   'click .run-the-code': (evt, tpl) ->
     evt.preventDefault()
     console.log 'Run the code'
     evaluate(ace.edit('html-editor').getValue())
   'submit .comment-form': (evt, tpl) ->
     evt.preventDefault()
-    form = evt.target
+    textarea = $('#homework-comments-textarea')
     data =
-      message: form.text.value
+      message: textarea.code()
       studentHomeworkId: tpl.data.studentHomework?._id
     Meteor.call 'saveStudentHomeworkComment', data, (err) ->
       if err
         bootbox.alert err.reason
         console.log err
       else
-        form.text.value = ''
+        textarea.code('Write a comment')
