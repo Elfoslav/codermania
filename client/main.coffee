@@ -95,6 +95,11 @@ Template.registerHelper 'linkify', (text) ->
 Template.registerHelper 'escape', (text) ->
   return new Spacebars.SafeString text || ''
 
+Template.registerHelper 'formatMessage', (message) ->
+  message = message.replace(/\r?\n/g, '<br/>')
+  message = linkify(message)
+  new Spacebars.SafeString(message)
+
 Template.registerHelper 'formatDate', (timestamp) ->
   date = new Date(timestamp)
   date.toDateString() + ' ' + date.toLocaleTimeString()

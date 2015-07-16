@@ -112,14 +112,15 @@
 #success: Optional Boolean
 #timestamp: Number
 #updatedAt: Optional Number
-#comments: [
-#  {
-#    userId: String
-#    message: String
-#    timestamp: Number
-#  }
-#]
 @StudentHomework = new Mongo.Collection 'studentHomework'
+
+#userId: String
+#username: String
+#studentHomeworkId: String
+#message: String
+#timestamp: Number
+#isRead: Boolean
+@StudentHomeworkComments = new Mongo.Collection 'studentHomeworkComments'
 
 #{
 #  title: String

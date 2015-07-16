@@ -309,6 +309,12 @@ Router.route '/:lang?/study-groups/:_id',
 
 Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?',
   name: 'studyGroupHomework'
+  onBeforeAction: ->
+    if @data().studentHomework?._id
+      query =
+        studentHomeworkId: @data().studentHomework._id
+      Meteor.subscribe 'studentHomeworkComments', query
+    @next()
   waitOn: ->
     [
       Meteor.subscribe('studyGroup', @params.studyGroupId)
@@ -322,6 +328,7 @@ Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?
     homeworkList: Homework.find()
     homework: homework
     studentHomework: StudentHomework.findOne()
+    studentHomeworkComments: StudentHomeworkComments.find()
     studyGroup: StudyGroups.findOne @params.studyGroupId
   onAfterAction: ->
     hw = Homework.findOne @params.homeworkId

@@ -424,6 +424,8 @@ Meteor.methods
       throw new Meteor.Error 401, 'Unauthorized'
     user = Meteor.users.findOne { username: data.username }
     studentHw = StudentHomework.findOne { homeworkId: data.homeworkId, userId: user?._id }
+    unless studentHw
+      throw new Meteor.Error 500, "Student's homework does not exist, it's not submitted yet."
     homework = Homework.findOne data.homeworkId
     setData =
       success: true

@@ -379,3 +379,8 @@ Meteor.publish 'studentHomework', (query, username) ->
     return @ready()
   query.userId = user._id
   StudentHomework.find query
+
+Meteor.publish 'studentHomeworkComments', (query) ->
+  check query,
+    studentHomeworkId: String
+  StudentHomeworkComments.find query

@@ -16,6 +16,11 @@ template(name="studyGroupHomework")
   if homework.points
     p
       small Correct solution is for {{homework.points}} points.
+  if studentHomework
+    p
+      small Submitted {{formatDate studentHomework.timestamp}}.
+        if studentHomework.updatedAt
+          |Updated {{formatDate studentHomework.updatedAt}}.
   .row
     .col-sm-3
       h2 Assignment
@@ -34,9 +39,35 @@ template(name="studyGroupHomework")
               button.btn.btn-primary.btn-block.done-btn.no-bottom-left-radius.submit-to-teacher {{_"Submit to teacher"}}
         else
           button.btn.btn-primary.btn-block.done-btn.run-the-code Run the code
+      if studentHomework
+        hr
+        each studentHomeworkComments
+          |{{makeReadComment}}
+          p
+            a(href="{{pathFor 'studentProfile' lang=lang username=this.username}}") {{this.username}}
+            if isOnline this.userId
+              +onlineDot
+            |{{formatDate timestamp}}
+            unless isRead
+              |(unread)
+            |:
+          pre.unstyled {{formatMessage message}}
+        else
+          p No comments, yet.
+        form.comment-form
+          .form-group
+            textarea.form-control(name="text" placeholder="{{_'Write a comment'}}" rows="5")
+          unless isHomeworkUser
+            .checkbox
+              label
+                input(type="checkbox" name="sendEmail")
+                |Send e-mail about new message to {{trimEmail username}}
+          .form-group
+            button.btn.btn-primary(type="submit") {{_'Submit comment'}}
     .col-sm-4
       h2 Result
-      #homework-result
+      #homework-result &larr; Run the code in the editor.
+
 
   with homework
     +homeworkFormModal

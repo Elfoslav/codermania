@@ -277,7 +277,7 @@ Meteor.methods
       message: String
     })
 
-    throw new Meteor.Error(401, 'Unauthorized!') unless @userId
+    throw new Meteor.Error(401, 'Unauthorized! You have to be logged in to perform this action.') unless @userId
 
     sender = Meteor.users.findOne(Meteor.userId())
     receiver = Meteor.users.findOne({ username: options.username })
@@ -349,3 +349,25 @@ Meteor.methods
     user = Meteor.users.findOne({username: username})
     throw new Meteor.Error '', "User with username #{username} not found" unless user
     Roles.removeUsersFromRoles(user._id, 'teacher', 'all')
+
+  saveStudentHomeworkComment: (data) ->
+    check data,
+      message: String
+      studentHomeworkId: String
+    unless @userId
+      throw new Meteor.Error 401, 'Unauthorized! You have to be logged in to perform this action.'
+    studentHw = StudentHomework.findOne data.studentHomeworkId
+    data.userId = @userId
+    data.username = Meteor.user().username
+    data.timestamp = Date.now()
+    data.isRead = @userId == studentHw.userId
+    StudentHomeworkComments.insert data
+
+  makeReadStudentHomeworkComments: (studentHomeworkId) ->
+    check studentHomeworkId, String
+    studentHw = StudentHomework.findOne studentHomeworkId
+    if studentHw.userId is @userId
+      StudentHomeworkComments.update { studentHomeworkId: studentHomeworkId },
+        $set: { isRead: true }
+      ,
+        multi: true

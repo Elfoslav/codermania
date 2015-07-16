@@ -12,10 +12,6 @@ Template.helpDetail.onRendered ->
     this.renderedCounter++
 
 Template.helpDetail.helpers
-  formatMessage: (message) ->
-    message = message.replace(/\r?\n/g, '<br/>')
-    message = linkify(message)
-    new Spacebars.SafeString(message)
   getAssignmentTemplate: ->
     needHelp = NeedHelp.findOne()
     lesson = JSLessonsList._collection.findOne { id: needHelp.lessonId }

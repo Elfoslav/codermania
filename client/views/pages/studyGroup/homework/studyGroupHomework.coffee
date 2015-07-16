@@ -1,17 +1,14 @@
 evaluate = (code) ->
   newIframe = document.getElementById('homework-iframe') || document.createElement('iframe')
   newIframe.frameBorder = 0
+  newIframe.width = '100%'
+  newIframe.height = '300'
   newIframe.id = 'homework-iframe'
   newIframe.src = 'data:text/html;charset=utf-8,' + encodeURI(code)
   homeworkResult = document.getElementById('homework-result')
   if homeworkResult.childNodes[0]
-    homeworkResult.removeChild newIframe
+    homeworkResult.removeChild homeworkResult.childNodes[0]
   homeworkResult.appendChild(newIframe)
-  newIframe.width = '100%'
-  newIframe.height = '300'
-  #newIframe.contentWindow.document.open('text/htmlreplace')
-  #newIframe.contentWindow.document.write(code)
-  #newIframe.contentWindow.document.close()
 
 Template.studyGroupHomework.helpers
   editorConfig: ->
@@ -43,6 +40,12 @@ Template.studyGroupHomework.helpers
     Router.current().params.homeworkId is @_id
   showSaveAndSubmitButtons: ->
     !@studentHomework?.success and Router.current().params.username == Meteor.user()?.username
+  isHomeworkUser: ->
+    @studentHomework?.userId == Meteor.userId()
+  makeReadComment: ->
+    studentHw = StudentHomework.findOne @studentHomeworkId
+    if !@isRead and studentHw?.userId == Meteor.userId()
+      Meteor.call 'makeReadStudentHomeworkComments', @studentHomeworkId
 
 Template.studyGroupHomework.events
   'click .mark-as-correct': (evt, tpl) ->
@@ -93,3 +96,15 @@ Template.studyGroupHomework.events
     evt.preventDefault()
     console.log 'Run the code'
     evaluate(ace.edit('html-editor').getValue())
+  'submit .comment-form': (evt, tpl) ->
+    evt.preventDefault()
+    form = evt.target
+    data =
+      message: form.text.value
+      studentHomeworkId: tpl.data.studentHomework?._id
+    Meteor.call 'saveStudentHomeworkComment', data, (err) ->
+      if err
+        bootbox.alert err.reason
+        console.log err
+      else
+        form.text.value = ''
