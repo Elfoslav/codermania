@@ -47,12 +47,12 @@ template(name="navbar")
           if currentUser
             li
               a(href="{{pathFor 'messages' lang=lang}}")
-                if unreadMessagesCount
+                if unreadNotificationsAndMessagesCount
                   span.red.glyphicon.glyphicon-envelope
                   |&nbsp;
-                  span.red {{unreadMessagesCount}}
+                  span.red {{unreadNotificationsAndMessagesCount}}
                 else
                   span.glyphicon.glyphicon-envelope
                   |&nbsp;
-                  span {{unreadMessagesCount}}
+                  span {{unreadNotificationsAndMessagesCount}}
           |{{> loginButtons}}

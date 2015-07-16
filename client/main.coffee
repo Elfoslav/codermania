@@ -12,6 +12,7 @@ Meteor.startup ->
   Meteor.subscribe 'needHelpCount'
   Meteor.subscribe 'unreadMessagesCount'
   Meteor.subscribe 'unreadStudyGroupMessagesCount'
+  Meteor.subscribe 'notificationsCount'
 
 Accounts.ui.config
   passwordSignupFields: 'USERNAME_AND_EMAIL'
@@ -79,6 +80,12 @@ Template.registerHelper 'loggedInUserUsername', ->
 
 Template.registerHelper 'unreadMessagesCount', ->
   Counts.get('unreadMessagesCount')
+
+Template.registerHelper 'notificationsCount', ->
+  Counts.get('notificationsCount')
+
+Template.registerHelper 'unreadNotificationsAndMessagesCount', ->
+  Counts.get('unreadMessagesCount') + Counts.get('notificationsCount')
 
 Template.registerHelper 'isMessagesPage', ->
   Router.current().route.getName() is 'messages'

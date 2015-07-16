@@ -57,5 +57,5 @@ class @StudyGroup
           you have unread messages in your study groups. Read them on:
           <a href=\"http://www.codermania.com/study-groups\">http://www.codermania.com/study-groups</a>
           <br/><br/>
-          #{App.getEmailFooter()}
+          #{App.getEmailFooter({ showUnsubscribe: true })}
         """

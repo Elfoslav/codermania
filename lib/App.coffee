@@ -33,6 +33,16 @@ class @App
       readBy: { $nin: [ userId ]}
     .count()
 
+  ###
+  #@params {
+  #  studyGroupId: String
+  #  homeworkId: String
+  #  username: String
+  #}
+  ###
+  @getStudyGroupHomeworkUrl: (params) ->
+    "#{Meteor.absoluteUrl()}study-groups/#{params.studyGroupId}/homework/#{params.homeworkId}/#{params.username}"
+
   @insertMessage: (opts) ->
     check opts,
       senderId: String
@@ -61,23 +71,27 @@ class @App
       If you have any questions, you can write me here.
     """
 
-  @getEmailFooter: ->
-    """
-    <p>
-      Watch CoderMania on social networks:
-      <a href=\"https://www.facebook.com/codermania\">Facebook</a>
-      ,
-      <a href=\"https://twitter.com/codermania_com\">Twitter</a>
-    </p>
-    <p>
-      Support CoderMania on Patreon:
-      <a href=\"https://www.patreon.com/elfoslav\">https://www.patreon.com/elfoslav</a>
-    </p>
-    <p>
-      You can unsubscribe or modify your e-mail settings here:
-      <a href=\"http://www.codermania.com/user/settings\">http://www.codermania.com/user/settings</a>
-    </p>
-    """
+  @getEmailFooter: (opts) ->
+    msg = "
+      <p>
+        Watch CoderMania on social networks:
+        <a href=\"https://www.facebook.com/codermania\">Facebook</a>
+        ,
+        <a href=\"https://twitter.com/codermania_com\">Twitter</a>
+      </p>
+      <p>
+        Support CoderMania on Patreon:
+        <a href=\"https://www.patreon.com/elfoslav\">https://www.patreon.com/elfoslav</a>
+      </p>
+    "
+    if opts.showUnsubscribe
+      msg += "
+        <p>
+          You can unsubscribe or modify your e-mail settings here:
+          <a href=\"http://www.codermania.com/user/settings\">http://www.codermania.com/user/settings</a>
+        </p>
+      "
+    return msg
 
   @sendEmailAboutMessage: (opts) ->
     throw new Error('Cannot call from the client') unless Meteor.isServer
@@ -90,15 +104,36 @@ class @App
         #{sender.username} has sent you a message on CoderMania.
         Go to <a href='#{messagesUrl}'>#{messagesUrl}</a> to see the message.
       </p>
+      <br>
+      #{@getEmailFooter({ showUnsubscribe: false })}
     """
 
-    console.log 'sending message from ', sender?.emails?[0]?.address
-    console.log 'sending message to', receiver?.emails?[0]?.address
-    console.log 'msg: ', msg
     Email.send
       from: sender?.emails?[0]?.address
       to: receiver?.emails?[0]?.address
       subject: "#{sender.username} has sent you a message on CoderMania"
+      html: msg
+
+  @sendEmailAboutHomeworkComment: (opts) ->
+    throw new Error('Cannot call from the client') unless Meteor.isServer
+    sender = opts.sender
+    receiver = opts.receiver
+    msg = """
+      <p>
+        Hi #{receiver.username},<br><br>
+        #{sender.username} commented your homework on CoderMania.
+      </p>
+      <p>
+        Go to <a href='#{opts.homeworkUrl}'>#{opts.homeworkUrl}</a> to see the message.
+      </p>
+      <br>
+      #{@getEmailFooter({ showUnsubscribe: false })}
+    """
+
+    Email.send
+      from: sender?.emails?[0]?.address
+      to: receiver?.emails?[0]?.address
+      subject: "#{sender.username} commented your homework on CoderMania"
       html: msg
 
   @evaluateOperator: (val1, operator, val2) ->

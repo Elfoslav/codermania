@@ -23,6 +23,12 @@ initSummernoteEditor = ->
       ['fullscreen', ['fullscreen']]
       ['codeview', ['codeview']]
     ]
+    onFocus: (evt) ->
+      if $(@).code() == 'Write a comment'
+        $(@).code('')
+    onBlur: (evt) ->
+      if !$(@).code()
+        $(@).code('Write a comment')
 
 Template.studyGroupHomework.onRendered ->
   initSummernoteEditor()
@@ -60,9 +66,7 @@ Template.studyGroupHomework.helpers
   isHomeworkUser: ->
     @studentHomework?.userId == Meteor.userId()
   makeReadComment: ->
-    studentHw = StudentHomework.findOne @studentHomeworkId
-    if !@isRead and studentHw?.userId == Meteor.userId()
-      Meteor.call 'makeReadStudentHomeworkComments', @studentHomeworkId
+    Meteor.call 'makeReadStudentHomeworkComments', @studentHomeworkId
 
 Template.studyGroupHomework.events
   'click .mark-as-correct': (evt, tpl) ->
@@ -125,8 +129,9 @@ Template.studyGroupHomework.events
     textarea = $('#homework-comments-textarea')
     data =
       message: textarea.code()
-      sendEmail: form.sendEmail.checked
       studentHomeworkId: tpl.data.studentHomework?._id
+    if form.sendEmail
+      data.sendEmail = form.sendEmail.checked
     Meteor.call 'saveStudentHomeworkComment', data, (err) ->
       if err
         bootbox.alert err.reason

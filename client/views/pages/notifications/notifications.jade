@@ -1,0 +1,12 @@
+template(name="notifications")
+  h1.no-margin-top
+    a(href="{{pathFor 'messages'}}") {{_'Messages'}} ({{unreadMessagesCount}})
+    ||
+    |Notifications ({{unreadNotificationsAndMessagesCount}})
+  each notifications
+    p
+      small {{formatDate timestamp}}:
+      br
+      |{{escape text}}
+  else
+    |No notifications.

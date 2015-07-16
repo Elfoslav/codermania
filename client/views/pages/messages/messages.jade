@@ -1,5 +1,8 @@
 template(name="messages")
-  h1.no-margin-top {{_'Messages'}}
+  h1.no-margin-top
+    |{{_'Messages'}} ({{unreadMessagesCount}})
+    ||
+    a(href="{{pathFor 'notifications'}}") Notifications ({{notificationsCount}})
 
   .row#messages
     .col-sm-4

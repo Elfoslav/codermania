@@ -164,6 +164,15 @@ StudyGroups.helpers
 #timestamp: Number
 @StudyGroupCurriculums = new Mongo.Collection 'studyGroupCurriculums'
 
+#userId: String - user who created/caused the notification
+#text: String
+#type: String - Homework|Need help
+#sourceId: String - id of the (re)source from which the notification comes
+#userIds: [ String ] - users for whose the notification is
+#isReadBy: [ String ] - list of user ids who read the notification
+#timestamp: Number
+@AppNotifications = new Mongo.Collection 'appNotifications'
+
 @Slides = new Mongo.Collection('slides')
 
 # {

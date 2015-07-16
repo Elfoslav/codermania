@@ -334,6 +334,15 @@ Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?
     hw = Homework.findOne @params.homeworkId
     App.setPageTitle(hw?.title)
 
+Router.route '/:lang?/notifications',
+  name: 'notifications'
+  waitOn: ->
+    Meteor.subscribe 'notifications'
+  data: ->
+    notifications: AppNotifications.find()
+  onAfterAction: ->
+    App.setPageTitle("Notifications")
+
 Router.route '/:lang?/messages/:username?',
   name: 'messages'
   onBeforeAction: ->

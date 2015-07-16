@@ -253,6 +253,19 @@ Meteor.methods
       multi: true
     })
 
+  makeReadStudentHomeworkComments: (studentHomeworkId) ->
+    check studentHomeworkId, String
+    studentHw = StudentHomework.findOne studentHomeworkId
+    AppNotifications.update { sourceId: studentHw._id },
+      $addToSet: { isReadBy: @userId }
+    ,
+      multi: true
+    if studentHw.userId is @userId
+      StudentHomeworkComments.update { studentHomeworkId: studentHomeworkId },
+        $set: { isRead: true }
+      ,
+        multi: true
+
   getNeedHelpCommentsCounter: (needHelpId) ->
     if needHelpId
       return NeedHelpComments.find

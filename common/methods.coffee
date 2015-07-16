@@ -353,7 +353,7 @@ Meteor.methods
   saveStudentHomeworkComment: (data) ->
     check data,
       message: String
-      sendEmail: Boolean
+      sendEmail: Match.Optional Boolean
       studentHomeworkId: String
     unless @userId
       throw new Meteor.Error 401, 'Unauthorized! You have to be logged in to perform this action.'
@@ -367,11 +367,42 @@ Meteor.methods
     data.isRead = @userId == studentHw.userId
     StudentHomeworkComments.insert data
 
-  makeReadStudentHomeworkComments: (studentHomeworkId) ->
-    check studentHomeworkId, String
-    studentHw = StudentHomework.findOne studentHomeworkId
-    if studentHw.userId is @userId
-      StudentHomeworkComments.update { studentHomeworkId: studentHomeworkId },
-        $set: { isRead: true }
-      ,
-        multi: true
+    @unblock()
+    comments = StudentHomeworkComments.find { studentHomeworkId: data.studentHomeworkId }
+    userIds = []
+    sender = Meteor.user()
+    receiver = Meteor.users.findOne(studentHw.userId)
+    homeworkUrl = App.getStudyGroupHomeworkUrl
+      studyGroupId: studentHw.studyGroupId
+      homeworkId: studentHw.homeworkId
+      username: receiver.username
+    comments.forEach (comment) ->
+      if userIds.indexOf(comment.userId) == -1
+        userIds.push comment.userId
+    teachers = Meteor.users.find { 'roles.all': 'teacher' }
+    teachers.forEach (teacher) ->
+      if userIds.indexOf(teacher._id) == -1
+        userIds.push teacher._id
+    AppNotifications.insert
+      userId: @userId
+      userIds: userIds
+      sourceId: studentHw._id
+      type: 'Homework'
+      isReadBy: [ @userId ]
+      timestamp: Date.now()
+      text: "
+        User
+        <a href='#{Meteor.absoluteUrl()}students/#{Meteor.user()?.username}'>#{Meteor.user()?.username}</a>
+        commented homework
+        <a href='#{homeworkUrl}'>#{studentHw.title}</a>.
+      "
+    if data.sendEmail and Meteor.isServer
+      App.sendEmailAboutHomeworkComment
+        sender: sender
+        receiver: receiver
+        homeworkUrl: homeworkUrl
+
+  markNotificationAsRead: (id) ->
+    check id, String
+    AppNotifications.update id,
+      $addToSet: { isReadBy: @userId }

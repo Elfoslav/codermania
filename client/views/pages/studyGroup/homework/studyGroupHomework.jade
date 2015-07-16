@@ -34,12 +34,12 @@ template(name="studyGroupHomework")
         |Please log in, so you can do the homework.
   .row
     .col-sm-3
-      h2 Assignment
+      h2.no-margin-top Assignment
       pre.unstyled-pre {{{homework.description}}}
       p
         a.btn.btn-default(href="{{pathFor 'studyGroup' lang=lang _id=studyGroup._id}}") &larr; Study group
     .col-sm-5
-      h2 HTML editor
+      h2.no-margin-top HTML editor
       #editor-wrapper
         +sharejsAce(docid=document onRender=editorConfig onConnect=setMode id="html-editor")
         if showSaveAndSubmitButtons
@@ -77,7 +77,7 @@ template(name="studyGroupHomework")
           .form-group
             button.btn.btn-primary(type="submit") {{_'Submit comment'}}
     .col-sm-4
-      h2 Result
+      h2.no-margin-top Result
       #homework-result &larr; Run the code in the editor.
 
 

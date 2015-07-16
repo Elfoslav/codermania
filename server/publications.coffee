@@ -384,3 +384,18 @@ Meteor.publish 'studentHomeworkComments', (query) ->
   check query,
     studentHomeworkId: String
   StudentHomeworkComments.find query
+
+Meteor.publish 'notifications', ->
+  user = Meteor.users.findOne @userId
+  AppNotifications.find
+    userIds: { $in: [ user?._id ] }
+    isReadBy: { $nin: [ user?._id ] }
+
+Meteor.publish 'notificationsCount', ->
+  user = Meteor.users.findOne @userId
+  notifications = AppNotifications.find
+    userIds: { $in: [ user?._id ] }
+    isReadBy: { $nin: [ user?._id ] }
+
+  Counts.publish(this, 'notificationsCount', notifications)
+  @ready()
