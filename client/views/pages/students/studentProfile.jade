@@ -10,6 +10,7 @@ template(name="studentProfile")
     if student.status.online
       +onlineDot
     |{{trimEmail student.username}}
+    sup {{student.points}} pts
     if isInRole 'teacher' 'all'
       a(href="{{pathFor 'messages' lang=lang username=student.username}}")
         span.glyphicon.glyphicon-envelope
