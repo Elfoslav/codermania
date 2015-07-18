@@ -26,8 +26,18 @@ class @ProgrammingChallengeLessonsList
       title: TAPi18n.__ 'Symmetric star triangle'
       slug: 'symmetric-star-triangle'
       template: 'symmetricStarTriangle'
+    ,
+      id: '1f'
+      title: TAPi18n.__ 'Star triangle 5'
+      slug: 'star-triangle5'
+      template: 'starTriangle5'
+    ,
+      id: '1g'
+      title: TAPi18n.__ 'Fizz Buzz'
+      slug: 'fizz-buzz'
+      template: 'fizzBuzz'
     ]
-    #last id 1e
+    #last id 1g
 
   @getLesson: (number) ->
     ProgrammingChallengeLessonsList.getLessons()[number - 1]

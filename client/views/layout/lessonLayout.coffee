@@ -1,6 +1,6 @@
 window.onscroll = (e) ->
   #only for tablet & desktop
-  if window.innerWidth > 767
+  if window.innerWidth > 767 and Router.current().route.getName() != 'lessonProgrammingChallenge'
     offsetTop = $('.nav-tabs-theory-assignment').offset()?.top
     $el = $('#editor-wrapper, #result-wrapper')
     $editorWrapper = $('#editor-wrapper')
