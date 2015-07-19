@@ -1,4 +1,6 @@
 template(name="studyGroupHomework")
+  p
+    +openHomeworkFormModalBtn
   ul.breadcrumb
     each studyGroup.homework
       li(class="{{#if isCurrent}}active{{/if}}")

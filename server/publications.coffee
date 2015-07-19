@@ -353,7 +353,7 @@ Meteor.publish 'userSettings', ->
     fields:
       settings: 1
 
-Meteor.publish 'homework', (query, options) ->
+Meteor.reactivePublish 'homework', (query, options) ->
   query = query || {}
   options = options || {}
   check query,
@@ -365,7 +365,7 @@ Meteor.publish 'homework', (query, options) ->
   if query._id
     return Homework.findOne(query._id)
   if query.studyGroupId
-    studyGroup = StudyGroups.findOne(query.studyGroupId)
+    studyGroup = StudyGroups.findOne(query.studyGroupId, { reactive: true })
     return Homework.find({ _id: { $in: studyGroup.homeworkIds }})
   Homework.find(query, options)
 
