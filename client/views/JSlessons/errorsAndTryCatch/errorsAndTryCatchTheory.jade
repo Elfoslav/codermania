@@ -45,7 +45,7 @@ template(name="errorsAndTryCatchTheory")
     |add(5, 'bad parameter');
 
   h3 Try/Catch
-  p We can catch errors in block <b>try</b>:
+  p We can watch for errors in block <b>try</b> and catch errors in block <b>catch</b>:
   +codeInText
     |try {
     br
@@ -60,8 +60,15 @@ template(name="errorsAndTryCatchTheory")
     |&#09;console.log(err.message);
     br
     |}
+  p The <b>try</b> statement lets you test a block of code for errors.
+  p The <b>catch</b> statement lets you handle the error.
+  p The <b>throw</b> statement lets you create custom errors.
+  p If we don't want program to end up with an error, we need to catch the error.
+    |If we catch the error, we are able to inform user what's wrong.
+    |The <b>catch</b> statement takes one parameter which is an instance of a thrown error.
+    |<b>Error</b> object has a property <i>message</i> which usually describes the cause of the error.
 
-  p We can catch errors that are thrown from function:
+  p We can catch errors that are thrown from a function:
   +codeInText
     |function add(a, b) {
     br
@@ -93,3 +100,7 @@ template(name="errorsAndTryCatchTheory")
     |&#09;console.log(err.message);
     br
     |}
+
+  p
+    span.glyphicon.glyphicon-info-sign
+    |Errors in other programming languages are also called <i>exceptions</i>.
