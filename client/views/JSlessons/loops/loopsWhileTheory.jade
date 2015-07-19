@@ -12,9 +12,9 @@ template(name="loopsWhileTheory")
     |&#09;i++;
     br
     |}
-  p {{{_'Be careful! If you forget to increment variable <i>i</i> inside <b>while</b> loop, you will get infinite loop because 0 is always lower than 10'}}}.
+  p {{{_'Be careful! If you forget to increment variable <i>i</i> inside <b>while</b> loop, you will get infinite loop because 0 is always less than 10'}}}.
 
-  p {{_'While loop above does exactly the same as this for loop'}}:
+  p <b>While</b> loop above does exactly the same as this for loop:
   +codeInText
     |for (var i = 0; i &lt; 10; i++) {
     br
@@ -71,9 +71,7 @@ template(name="loopsWhileTheory")
     br
     |&#09;console.log('{{_'This runs at least once'}}');
     br
-    |}
-    br
-    |while (i &lt; 3);
+    |} while (i &lt; 3);
     br
     |console.log('end');
 
@@ -90,12 +88,10 @@ template(name="loopsWhileTheory")
     |{{{_'We forgot to increment value of <i>i</i> inside while loop'}}}.
     |{{{_'The loop will never end because the condition <i>i &lt; 10</i> (<i>0 &lt; 10</i>) is always true'}}}.
   p
-    b {{_'Warning'}}: {{_'Do not run this code because your browser will freeze'}}.
-  +codeInText
-    |var i = 0;
-    br
-    |while (i &lt; 10) {
-    br
-    |&#09;console.log(i);
-    br
-    |}
+    b.red {{_'Warning'}}: {{_'Do not run this code because your browser will freeze'}}.
+  p
+    pre.code-in-text
+      |var i = 0;
+      |while (i &lt; 10) {
+      |&#09;console.log(i);
+      |}
