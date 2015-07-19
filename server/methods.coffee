@@ -56,6 +56,19 @@ Meteor.methods
 
     #add points before updating user
     if lesson.success
+      if lesson.type is 'programming-challenge'
+        elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
+        username = user.username.replace(' ', '%20')
+        if user._id != elfoslav._id
+          App.insertMessage
+            senderId: user._id
+            senderUsername: user.username
+            receiverId: elfoslav._id
+            receiverUsername: elfoslav.username
+            text: """
+              I have finished programming challenge lesson
+              #{Meteor.absoluteUrl()}programming-challenge/lesson/#{lesson.id}/#{lesson.slug}/#{username}
+            """
       if (userLesson is undefined) or !userLesson?.pointsAdded
         Meteor.users.update(user._id, {
           $inc: { points: lessonPoints }
@@ -64,20 +77,6 @@ Meteor.methods
           qry["lessons.#{lesson.id}.pointsAdded"] = true
         else
           lesson.pointsAdded = true
-
-        if lesson.type is 'programming-challenge'
-          elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
-          username = user.username.replace(' ', '%20')
-          if user._id != elfoslav._id
-            App.insertMessage
-              senderId: user._id
-              senderUsername: user.username
-              receiverId: elfoslav._id
-              receiverUsername: elfoslav.username
-              text: """
-                I have finished programming challenge lesson
-                #{Meteor.absoluteUrl()}programming-challenge/lesson/#{lesson.id}/#{lesson.slug}/#{username}
-              """
       needHelpSolved = true
 
     needHelpQry =
