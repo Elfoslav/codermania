@@ -39,7 +39,7 @@ template(name="loopsTheory")
     br
     |}
   p {{{_'So you can see that <i>i</i> is 0 in the first iteration and it increases up to 10'}}}.
-    |{{{_'You can change value of <i>i</i> variable or change condition'}}}.
+    |{{{_'You can change the value of <i>i</i> variable or change the condition'}}}.
     |{{_'Play with the loop a bit'}}.
 
   p {{_'Notice that loop runs 11 times and then the code after loop runs'}}:
@@ -112,13 +112,12 @@ template(name="loopsTheory")
     |{{{_'So <i>i</i> will have values 5, 6, 7,'}}}...
     |{{{_'And the loop will never end because the condition <i>i &gt; 1</i> is always true'}}}.
   p
-    b {{_'Warning'}}: {{_'Do not run this code because your browser will freeze'}}.
-  +codeInText
-    |for (var i = 5; i &gt; 1; i++) {
-    br
-    |&#09;console.log(i);
-    br
-    |}
+    b.red {{_'Warning'}}: {{_'Do not run this code because your browser will freeze'}}.
+  p
+    pre.code-in-text
+      |for (var i = 5; i &gt; 1; i++) {
+      |&#09;console.log(i);
+      |}
 
   h2 {{_'Conventions'}}
   +codeInText
