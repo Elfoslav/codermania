@@ -3,7 +3,11 @@ template(name="studyGroup")
     if canEdit
       a.btn.btn-default(href="#" data-target="#study-group-modal" data-toggle="modal") Edit
       |&nbsp;
-      +openHomeworkFormModalBtn
+      if studyGroup.homeworkIds
+        a.btn.btn-primary(href="{{pathFor 'studyGroupHomeworkSort' studyGroupId=studyGroup._id}}")
+          |Sort homework
+      else
+        +openHomeworkFormModalBtn
 
   .row
     .col-sm-8

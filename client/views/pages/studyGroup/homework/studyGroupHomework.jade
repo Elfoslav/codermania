@@ -1,6 +1,10 @@
 template(name="studyGroupHomework")
   if isInRole 'teacher' 'all'
     p
+      if studyGroup.homeworkIds
+        a.btn.btn-primary(href="{{pathFor 'studyGroupHomeworkSort' studyGroupId=studyGroup._id}}")
+          |Sort homework
+        |&nbsp;
       +openHomeworkFormModalBtn
   ul.breadcrumb
     each studyGroup.homework

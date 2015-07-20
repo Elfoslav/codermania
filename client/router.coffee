@@ -307,6 +307,23 @@ Router.route '/:lang?/study-groups/:_id',
     studyGroup: studyGroup
     studyGroups: StudyGroups.find({}, { sort: { timestamp: 1 }})
 
+Router.route '/:lang?/study-groups/:studyGroupId/sort-homework',
+  name: 'studyGroupHomeworkSort'
+  waitOn: ->
+    [
+      Meteor.subscribe('studyGroup', @params.studyGroupId)
+      Meteor.subscribe('homework', { studyGroupId: @params.studyGroupId })
+    ]
+  data: ->
+    studyGroup = StudyGroups.findOne @params.studyGroupId
+    if @ready() and !studyGroup
+      @render 'notFound'
+    if @ready() and !Roles.userIsInRole(Meteor.userId(), 'teacher', 'all')
+      @render 'notFound'
+    studyGroup: StudyGroups.findOne @params.studyGroupId
+  onAfterAction: ->
+    App.setPageTitle('Sort homework')
+
 Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?',
   name: 'studyGroupHomework'
   onBeforeAction: ->
@@ -328,7 +345,6 @@ Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?
       @render 'notFound'
     if @ready() and !homework
       @render 'notFound'
-    homeworkList: Homework.find()
     homework: homework
     studentHomework: StudentHomework.findOne({ homeworkId: @params.homeworkId })
     studentHomeworkComments: StudentHomeworkComments.find()

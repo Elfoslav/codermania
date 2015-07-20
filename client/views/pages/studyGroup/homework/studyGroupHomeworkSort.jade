@@ -1,0 +1,10 @@
+template(name="studyGroupHomeworkSort")
+  h1 Sort homework
+  .row
+    .col-sm-6
+      ol.homework-list
+        each studyGroup.homework
+          li(id=_id style="background-color: #eee; border-bottom: 1px solid #ccc; cursor: pointer;")
+            a(href="{{pathFor 'studyGroupHomework' studyGroupId=../studyGroup._id homeworkId=_id}}") {{type}}: {{title}}
+      p
+        a.btn.btn-default(href="{{pathFor 'studyGroup' _id=studyGroup._id}}") &larr; Study group

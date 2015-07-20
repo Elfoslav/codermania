@@ -465,3 +465,13 @@ Meteor.methods
     ,
       $set:
         success: false
+
+  sortStudyGroupHomework: (studyGroupId, homeworkIds) ->
+    check studyGroupId, String
+    check homeworkIds, Array
+    unless Roles.userIsInRole @userId, 'teacher', 'all'
+      throw new Meteor.Error 401, 'Unauthorized'
+    if homeworkIds.length < 2
+      throw new Meteor.Error 500, 'Cannot sort homework array with less than 2 items.'
+    StudyGroups.update studyGroupId,
+      $set: { homeworkIds: homeworkIds }

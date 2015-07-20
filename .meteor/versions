@@ -70,6 +70,7 @@ mongo-livedata@1.0.8
 mquandalle:jade@0.4.3
 mquandalle:jade-compiler@0.4.3
 mrt:facebook-sdk@0.0.44
+mrt:jquery-ui-sortable@1.10.3
 msavin:jetsetter@1.0.18
 natestrauser:font-awesome@4.3.0
 npm-bcrypt@0.7.8_2
