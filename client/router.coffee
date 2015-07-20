@@ -319,15 +319,18 @@ Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?
     [
       Meteor.subscribe('studyGroup', @params.studyGroupId)
       Meteor.subscribe('homework', { studyGroupId: @params.studyGroupId })
-      Meteor.subscribe('studentHomework', { homeworkId: @params.homeworkId }, @params.username || '')
+      Meteor.subscribe('studentHomework', { }, @params.username || '')
     ]
   data: ->
     homework = Homework.findOne @params.homeworkId
+    user = Meteor.users.findOne({ username: @params.username })
+    if @ready() and (user?.username != @params.username)
+      @render 'notFound'
     if @ready() and !homework
       @render 'notFound'
     homeworkList: Homework.find()
     homework: homework
-    studentHomework: StudentHomework.findOne()
+    studentHomework: StudentHomework.findOne({ homeworkId: @params.homeworkId })
     studentHomeworkComments: StudentHomeworkComments.find()
     studyGroup: StudyGroups.findOne @params.studyGroupId
   onAfterAction: ->

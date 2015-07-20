@@ -1,10 +1,13 @@
 template(name="studyGroupHomework")
-  p
-    +openHomeworkFormModalBtn
+  if isInRole 'teacher' 'all'
+    p
+      +openHomeworkFormModalBtn
   ul.breadcrumb
     each studyGroup.homework
       li(class="{{#if isCurrent}}active{{/if}}")
         a(href="{{pathFor 'studyGroupHomework' studyGroupId=../studyGroup._id homeworkId=this._id username=username}}") {{title}}
+        if isCorrect
+          span.glyphicon.glyphicon-ok.green
   h1 Homework {{homework.title}}
     if studentHomework.success
       span.glyphicon.glyphicon-ok.green
@@ -16,9 +19,10 @@ template(name="studyGroupHomework")
           button.btn.btn-danger.mark-as-incorrect(type="button") Mark as incorrect
         else
           button.btn.btn-primary.mark-as-correct(type="button") Mark as correct
-  if homework.points
-    p
-      small Correct solution is for {{homework.points}} points.
+  p
+    small {{homework.type}} homework.
+      if homework.points
+        |Correct solution is for {{homework.points}} points.
   if studentHomework
     p
       small Submitted {{formatDate studentHomework.timestamp}}.
@@ -64,9 +68,10 @@ template(name="studyGroupHomework")
         else
           button.btn.btn-primary.btn-block.done-btn.run-the-code Run the code
       unless studentHomework
-        hr
-        p If you need help, just save the homework, then the comment form will show up and
-          |write a comment what you need help with.
+        if showSaveAndSubmitButtons
+          hr
+          p If you need help, just save the homework, then the comment form will show up and
+            |write a comment what you need help with.
       if studentHomework
         hr
         each studentHomeworkComments

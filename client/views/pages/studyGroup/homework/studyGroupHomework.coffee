@@ -1,10 +1,14 @@
 evaluate = (code) ->
   newIframe = document.getElementById('homework-iframe') || document.createElement('iframe')
+  code = code.replace(/(<\/head>)/, "<base target=\"_parent\" />$1")
   newIframe.frameBorder = 0
   newIframe.width = '100%'
   newIframe.height = '300'
+  newIframe.allowfullscreen = true
+  newIframe.name = 'homework-result-iframe'
   newIframe.id = 'homework-iframe'
-  newIframe.src = 'data:text/html;charset=utf-8,' + encodeURI(code)
+  newIframe.srcdoc = code #srcdoc does not have problem with content origin policy
+  #newIframe.src = 'data:text/html;charset=utf-8,' + encodeURI(code)
   homeworkResult = document.getElementById('homework-result')
   if homeworkResult.childNodes[0]
     homeworkResult.removeChild homeworkResult.childNodes[0]
@@ -35,6 +39,8 @@ Template.studyGroupHomework.onRendered ->
 
 Template.studyGroupHomework.helpers
   editorConfig: ->
+    hw = Template.instance().data.homework
+    studentHomework = Template.instance().data.studentHomework
     return (editor) ->
       editor.setTheme('ace/theme/monokai')
       editor.getSession().setMode('ace/mode/html')
@@ -42,8 +48,6 @@ Template.studyGroupHomework.helpers
       editor.getSession().setUseWrapMode(true)
       editor.getSession().setTabSize(2);
 
-      hw = Homework.findOne Router.current().params.homeworkId
-      studentHomework = StudentHomework.findOne()
       if studentHomework
         editor.setValue studentHomework.code
       else
@@ -67,6 +71,8 @@ Template.studyGroupHomework.helpers
     @studentHomework?.userId == Meteor.userId()
   makeReadComment: ->
     Meteor.call 'makeReadStudentHomeworkComments', @studentHomeworkId
+  isCorrect: ->
+    StudentHomework.findOne({ homeworkId: @_id })?.success
 
 Template.studyGroupHomework.events
   'click .mark-as-correct': (evt, tpl) ->
@@ -121,7 +127,6 @@ Template.studyGroupHomework.events
         , 100
   'click .run-the-code': (evt, tpl) ->
     evt.preventDefault()
-    console.log 'Run the code'
     evaluate(ace.edit('html-editor').getValue())
   'submit .comment-form': (evt, tpl) ->
     evt.preventDefault()
