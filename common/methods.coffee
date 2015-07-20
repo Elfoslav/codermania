@@ -305,6 +305,11 @@ Meteor.methods
     unless Roles.userIsInRole(@userId, [ 'teacher' ], 'all')
       throw new Meteor.Error(403, 'Unauthorized')
 
+    unless data.title
+      throw new Meteor.Error(500, 'Title cannot be empty.')
+    unless data.type
+      throw new Meteor.Error(500, 'Type cannot be empty.')
+
     data.timestamp = Date.now()
     homeworkId = Homework.insert data
 
@@ -322,6 +327,11 @@ Meteor.methods
 
     unless Roles.userIsInRole(@userId, [ 'teacher' ], 'all')
       throw new Meteor.Error(403, 'Unauthorized')
+
+    unless data.title
+      throw new Meteor.Error(500, 'Title cannot be empty.')
+    unless data.type
+      throw new Meteor.Error(500, 'Type cannot be empty.')
 
     data.updatedAt = Date.now()
     data.updatedBy = @userId
