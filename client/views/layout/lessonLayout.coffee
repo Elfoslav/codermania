@@ -238,6 +238,7 @@ Template.lessonLayout.events
       username = App.getCurrentUsername()
       lessonToSave = {}
       lessonToSave.type = Lesson.getType()
+      lessonToSave.title = lesson.title
       lessonToSave.number = parseInt lessonNum
       lessonToSave.id = lesson.id
       lessonToSave.code = code

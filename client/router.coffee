@@ -170,6 +170,10 @@ Router.route '/:lang?/programming-challenge/lesson/:_id/:slug/:username?',
     lesson = ProgrammingChallengeLessonsList._collection.findOne({ id: @params._id })
     if lesson
       App.setPageTitle(lesson.title)
+    #TODO refactor, it's not good to call the method each time when
+    #there are notifications but I can't find better solution right now (@elfoslav)
+    if Counts.get('notificationsCount') > 0
+      Meteor.call 'markNotificationAsReadBySource', 'programming-challenge' + lesson.id
   data: ->
     lessonType: 'programming-challenge'
 

@@ -404,7 +404,7 @@ Meteor.methods
         User
         <a href='#{Meteor.absoluteUrl()}students/#{Meteor.user()?.username}'>#{Meteor.user()?.username}</a>
         commented homework
-        <a href='#{homeworkUrl}'>#{studentHw.title}</a>.
+        <a class='notification-source-link' href='#{homeworkUrl}'>#{studentHw.title}</a>.
       "
     if data.sendEmail and Meteor.isServer
       App.sendEmailAboutHomeworkComment
@@ -414,5 +414,24 @@ Meteor.methods
 
   markNotificationAsRead: (id) ->
     check id, String
-    AppNotifications.update id,
+    unless @userId
+      throw new Meteor.Error 401, 'Unauthorized! You have to be logged in to perform this action.'
+    query =
+      _id: id
+      userIds:
+        $in: [ @userId ]
+    AppNotifications.update query,
       $addToSet: { isReadBy: @userId }
+
+  markNotificationAsReadBySource: (sourceId) ->
+    check sourceId, String
+    unless @userId
+      throw new Meteor.Error 401, 'Unauthorized! You have to be logged in to perform this action.'
+    query =
+      sourceId: sourceId
+      userIds:
+        $in: [ @userId ]
+    AppNotifications.update query,
+      $addToSet: { isReadBy: @userId }
+    ,
+      multi: true

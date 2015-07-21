@@ -390,6 +390,8 @@ Meteor.publish 'notifications', ->
   AppNotifications.find
     userIds: { $in: [ user?._id ] }
     isReadBy: { $nin: [ user?._id ] }
+  ,
+    limit: 100
 
 Meteor.publish 'notificationsCount', ->
   user = Meteor.users.findOne @userId

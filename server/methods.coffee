@@ -4,6 +4,7 @@ Meteor.methods
     check lesson,
       id: String
       type: String #javascript|html|css|programming-challenge
+      title: String
       slug: String
       number: Number
       code: String
@@ -57,9 +58,34 @@ Meteor.methods
     #add points before updating user
     if lesson.success
       if lesson.type is 'programming-challenge'
-        elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
         username = user.username.replace(' ', '%20')
+        programmingChallengeUrl = "#{Meteor.absoluteUrl()}programming-challenge/lesson/#{lesson.id}/#{lesson.slug}/#{username}"
+        elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
         if user._id != elfoslav._id
+          userIds = []
+          teachers = Meteor.users.find { 'roles.all': 'teacher' }
+          teachers.forEach (teacher) ->
+            if userIds.indexOf(teacher._id) == -1
+              userIds.push teacher._id
+          AppNotifications.insert
+            userId: @userId
+            userIds: userIds
+            sourceId: lesson.type + lesson.id
+            type: 'Programming challenge'
+            isReadBy: [ @userId ]
+            timestamp: Date.now()
+            text: "
+              User
+              <a href='#{Meteor.absoluteUrl()}students/#{Meteor.user()?.username}'>#{Meteor.user()?.username}</a>
+              finished programming challenge
+              <a class='notification-source-link' href='#{programmingChallengeUrl}'>#{lesson.title}</a>.
+            "
+      if (userLesson is undefined) or !userLesson?.pointsAdded
+        Meteor.users.update(user._id, {
+          $inc: { points: lessonPoints }
+        })
+        #send message only for the first correct submission
+        if user._id != elfoslav._id and lesson.type is 'programming-challenge'
           App.insertMessage
             senderId: user._id
             senderUsername: user.username
@@ -67,12 +93,8 @@ Meteor.methods
             receiverUsername: elfoslav.username
             text: """
               I have finished programming challenge lesson
-              #{Meteor.absoluteUrl()}programming-challenge/lesson/#{lesson.id}/#{lesson.slug}/#{username}
+              #{programmingChallengeUrl}
             """
-      if (userLesson is undefined) or !userLesson?.pointsAdded
-        Meteor.users.update(user._id, {
-          $inc: { points: lessonPoints }
-        })
         if lesson.type is 'javascript'
           qry["lessons.#{lesson.id}.pointsAdded"] = true
         else
