@@ -67,6 +67,7 @@ Template.studyGroupHomework.helpers
   isCurrent: ->
     Router.current().params.homeworkId is @_id
   showSaveAndSubmitButtons: ->
+    return false unless Meteor.user()
     !@studentHomework?.success and Router.current().params.username == Meteor.user()?.username
   isHomeworkUser: ->
     @studentHomework?.userId == Meteor.userId()
