@@ -59,52 +59,56 @@ template(name="studyGroupHomework")
       <p><a class="btn btn-primary" href="https://www.patreon.com/elfoslav">Patreon support</a></p>
       p
         a.btn.btn-default(href="{{pathFor 'studyGroup' lang=lang _id=studyGroup._id}}") &larr; Study group
-    .col-sm-5
-      h2.no-margin-top HTML editor
-      #editor-wrapper
-        +sharejsAce(docid=document onRender=editorConfig onConnect=setMode id="html-editor")
-        if showSaveAndSubmitButtons
-          .row
-            .col-sm-6.no-padding-right
-              button.btn.btn-default.btn-block.done-btn.no-bottom-right-radius.save-and-run {{_"Save & Run"}}
-            .col-sm-6.no-padding-left
-              button.btn.btn-primary.btn-block.done-btn.no-bottom-left-radius.submit-to-teacher {{_"Submit to teacher"}}
-        else
-          button.btn.btn-primary.btn-block.done-btn.run-the-code Run the code
-      unless studentHomework
-        if showSaveAndSubmitButtons
-          hr
-          p If you need help, just save the homework, then the comment form will show up and
-            |write a comment what you need help with.
-      if studentHomework
-        hr
-        each studentHomeworkComments
-          |{{makeReadComment}}
-          p
-            a(href="{{pathFor 'studentProfile' lang=lang username=this.username}}") {{this.username}}
-            if isOnline this.userId
-              +onlineDot
-            |{{formatDate timestamp}}
-            unless isRead
-              |(unread)
-            |:
-          pre.unstyled {{escape message}}
-        else
-          p No comments, yet.
-        //comments-textarea cannot be inside form
-        .form-group
-          #homework-comments-textarea Write a comment
-        form.comment-form
-          unless isHomeworkUser
-            .checkbox
-              label
-                input(type="checkbox" name="sendEmail")
-                |Send e-mail about new message to {{trimEmail username}}
-          .form-group
-            button.btn.btn-primary(type="submit") {{_'Submit comment'}}
-    .col-sm-4
-      h2.no-margin-top Result
-      #homework-result &larr; Run the code in the editor.
+    #fullscreen-homework
+      .col-sm-5
+        h2.no-margin-top HTML editor
+        #editor-wrapper
+          +sharejsAce(docid=document onRender=editorConfig onConnect=setMode id="html-editor")
+          if showSaveAndSubmitButtons
+            .row
+              .col-sm-6.no-padding-right
+                button.btn.btn-default.btn-block.done-btn.no-bottom-right-radius.save-and-run {{_"Save & Run"}}
+              .col-sm-6.no-padding-left
+                button.btn.btn-primary.btn-block.done-btn.no-bottom-left-radius.submit-to-teacher {{_"Submit to teacher"}}
+          else
+            button.btn.btn-primary.btn-block.done-btn.run-the-code Run the code
+        unless studentHomework
+          if showSaveAndSubmitButtons
+            hr
+            p If you need help, just save the homework, then the comment form will show up and
+              |write a comment what you need help with.
+        #homework-comments
+          if studentHomework
+            hr
+            each studentHomeworkComments
+              |{{makeReadComment}}
+              p
+                a(href="{{pathFor 'studentProfile' lang=lang username=this.username}}") {{this.username}}
+                if isOnline this.userId
+                  +onlineDot
+                |{{formatDate timestamp}}
+                unless isRead
+                  |(unread)
+                |:
+              pre.unstyled {{escape message}}
+            else
+              p No comments, yet.
+            //comments-textarea cannot be inside form
+            .form-group
+              #homework-comments-textarea Write a comment
+            form.comment-form
+              unless isHomeworkUser
+                .checkbox
+                  label
+                    input(type="checkbox" name="sendEmail")
+                    |Send e-mail about new message to {{trimEmail username}}
+              .form-group
+                button.btn.btn-primary(type="submit") {{_'Submit comment'}}
+      .col-sm-4
+        h2.no-margin-top Result
+        #homework-result &larr; Run the code in the editor.
+        p
+          a.btn.btn-default.enter-fullscreen-btn(href="#") Enter fullscreen
 
 
   with homework

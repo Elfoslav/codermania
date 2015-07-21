@@ -4,7 +4,8 @@ evaluate = (code) ->
   newIframe.frameBorder = 0
   newIframe.width = '100%'
   newIframe.height = '300'
-  newIframe.allowfullscreen = true
+  newIframe.allowfullscreen = 'true'
+  newIframe.webkitallowfullscreen = 'true'
   newIframe.name = 'homework-result-iframe'
   newIframe.id = 'homework-iframe'
   newIframe.srcdoc = code #srcdoc does not have problem with content origin policy
@@ -144,3 +145,19 @@ Template.studyGroupHomework.events
       else
         textarea.code('Write a comment')
         form.reset()
+  'click .enter-fullscreen-btn': (evt, tpl) ->
+    evt.preventDefault()
+    fullscreenHw = document.getElementById('fullscreen-homework')
+    if BigScreen.enabled
+      BigScreen.toggle fullscreenHw, ->
+        console.log('fulllscreen enabled')
+        $(fullscreenHw).addClass('fullscreen-enabled')
+        $(fullscreenHw).find('.col-sm-4').removeClass('col-sm-4').addClass('col-sm-7')
+        tpl.$('#homework-comments').addClass('hidden')
+        $('.enter-fullscreen-btn').text('Exit fullscreen')
+      , ->
+        console.log('leaving fullscreen')
+        $(fullscreenHw).removeClass('fullscreen-enabled')
+        $(fullscreenHw).find('.col-sm-7').removeClass('col-sm-7').addClass('col-sm-4')
+        tpl.$('#homework-comments').removeClass('hidden')
+        $('.enter-fullscreen-btn').text('Enter fullscreen')

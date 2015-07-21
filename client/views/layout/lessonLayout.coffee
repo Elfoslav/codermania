@@ -1,27 +1,28 @@
 window.onscroll = (e) ->
   #only for tablet & desktop
-  if window.innerWidth > 767 and Router.current().route.getName() != 'lessonProgrammingChallenge'
-    offsetTop = $('.nav-tabs-theory-assignment').offset()?.top
-    $el = $('#editor-wrapper, #result-wrapper')
+  if window.innerWidth > 767 and Router.current().route.getName() != 'lessonProgrammingChallenge' and
+    Router.current().route.getName() != 'studyGroupHomework'
+      offsetTop = $('.nav-tabs-theory-assignment').offset()?.top
+      $el = $('#editor-wrapper, #result-wrapper')
+      $editorWrapper = $('#editor-wrapper')
+      $resultWrapper = $('#result-wrapper')
+      if window.pageYOffset > offsetTop
+        $el.addClass('fixed-top')
+        $editorWrapper.width($editorWrapper.parent().width())
+        $resultWrapper.width($resultWrapper.parent().width())
+      else
+        $el.removeClass('fixed-top')
+        $editorWrapper.width($editorWrapper.parent().width())
+        $resultWrapper.width($resultWrapper.parent().width())
+
+window.addEventListener 'resize', ->
+  if Router.current().route.getName() != 'studyGroupHomework'
     $editorWrapper = $('#editor-wrapper')
     $resultWrapper = $('#result-wrapper')
-    if window.pageYOffset > offsetTop
-      $el.addClass('fixed-top')
-      $editorWrapper.width($editorWrapper.parent().width())
-      $resultWrapper.width($resultWrapper.parent().width())
-    else
-      $el.removeClass('fixed-top')
-      $editorWrapper.width($editorWrapper.parent().width())
-      $resultWrapper.width($resultWrapper.parent().width())
+    $editorWrapper.width($editorWrapper.parent().width())
+    $resultWrapper.width($resultWrapper.parent().width())
 
-window.addEventListener('resize', ->
-  $editorWrapper = $('#editor-wrapper')
-  $resultWrapper = $('#result-wrapper')
-  $editorWrapper.width($editorWrapper.parent().width())
-  $resultWrapper.width($resultWrapper.parent().width())
-)
-
-document.write = () ->
+document.write = ->
   output = '';
   i = 0
   while i < arguments.length
