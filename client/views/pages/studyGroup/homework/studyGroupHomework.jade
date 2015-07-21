@@ -32,6 +32,10 @@ template(name="studyGroupHomework")
       small Submitted {{formatDate studentHomework.timestamp}}.
         if studentHomework.updatedAt
           |Updated {{formatDate studentHomework.updatedAt}}.
+  unless isCurrentUserInGroup
+    .alert.alert-danger You have to join 
+      a(href="{{pathFor 'studyGroup' lang=lang _id=studyGroup._id}}") this group
+      |to do this homework.
   if currentUser
     unless equals username currentUser.username
       .alert.alert-warning.alert-dismissable(role="alert") You are in

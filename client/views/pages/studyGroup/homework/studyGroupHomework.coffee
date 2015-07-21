@@ -69,6 +69,8 @@ Template.studyGroupHomework.helpers
   showSaveAndSubmitButtons: ->
     return false unless Meteor.user()
     !@studentHomework?.success and Router.current().params.username == Meteor.user()?.username
+  isCurrentUserInGroup: ->
+    @studyGroup?.userIds?.indexOf(Meteor.userId()) != -1
   isHomeworkUser: ->
     @studentHomework?.userId == Meteor.userId()
   makeReadComment: ->
