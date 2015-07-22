@@ -17,7 +17,7 @@ template(name="studyGroupHomework")
       span.glyphicon.glyphicon-ok.green
     if isInRole 'teacher' 'all'
       +openHomeworkFormModalBtn(type="edit")
-      if studentHomework
+      if canMarkAsCorrect
         |&nbsp;
         if studentHomework.success
           button.btn.btn-danger.mark-as-incorrect(type="button") Mark as incorrect
@@ -33,7 +33,7 @@ template(name="studyGroupHomework")
         if studentHomework.updatedAt
           |Updated {{formatDate studentHomework.updatedAt}}.
   unless isCurrentUserInGroup
-    .alert.alert-danger You have to join 
+    .alert.alert-danger You have to join
       a(href="{{pathFor 'studyGroup' lang=lang _id=studyGroup._id}}") this group
       |to do this homework.
   if currentUser

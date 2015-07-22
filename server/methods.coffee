@@ -54,13 +54,14 @@ Meteor.methods
     else
       throw new Meteor.Error 'Unknown lesson type', 'Unknown lesson type: ' + lesson.type
 
-
-    #add points before updating user
-    if lesson.success
-      if lesson.type is 'programming-challenge'
-        username = user.username.replace(' ', '%20')
-        programmingChallengeUrl = "#{Meteor.absoluteUrl()}programming-challenge/lesson/#{lesson.id}/#{lesson.slug}/#{username}"
-        elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
+    #variable used in catch to rollback possibly added user points
+    pointsAdded = false
+    try
+      username = user.username.replace(' ', '%20')
+      programmingChallengeUrl = "#{Meteor.absoluteUrl()}programming-challenge/lesson/#{lesson.id}/#{lesson.slug}/#{username}"
+      elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
+      #add points before updating user
+      if lesson.success
         if user._id != elfoslav._id
           userIds = []
           teachers = Meteor.users.find { 'roles.all': 'teacher' }
@@ -80,65 +81,94 @@ Meteor.methods
               finished programming challenge
               <a class='notification-source-link' href='#{programmingChallengeUrl}'>#{lesson.title}</a>.
             "
-      if (userLesson is undefined) or !userLesson?.pointsAdded
-        Meteor.users.update(user._id, {
-          $inc: { points: lessonPoints }
-        })
-        #send message only for the first correct submission
-        if user._id != elfoslav._id and lesson.type is 'programming-challenge'
-          App.insertMessage
-            senderId: user._id
-            senderUsername: user.username
-            receiverId: elfoslav._id
-            receiverUsername: elfoslav.username
-            text: """
-              I have finished programming challenge lesson
-              #{programmingChallengeUrl}
-            """
-        if lesson.type is 'javascript'
-          qry["lessons.#{lesson.id}.pointsAdded"] = true
-        else
-          lesson.pointsAdded = true
-      needHelpSolved = true
 
-    needHelpQry =
-      lessonId: lesson.id
-      username: user.username
-      exerciseId: null
-    #there was not lesson type for javascript need help
-    unless lesson.type is 'javascript'
-      needHelpQry.type = lesson.type
-    NeedHelp.update needHelpQry,
-      $set:
-        lessonCode: lesson.code
-        solved: needHelpSolved
+        if (userLesson is undefined) or !userLesson?.pointsAdded
+          Meteor.users.update(user._id, {
+            $inc: { points: lessonPoints }
+          })
+          #send message only for the first correct submission
+          if user._id != elfoslav._id and lesson.type is 'programming-challenge'
+            App.insertMessage
+              senderId: user._id
+              senderUsername: user.username
+              receiverId: elfoslav._id
+              receiverUsername: elfoslav.username
+              text: """
+                I have finished programming challenge lesson
+                #{programmingChallengeUrl}
+              """
+          pointsAdded = true
+          if lesson.type is 'javascript'
+            qry["lessons.#{lesson.id}.pointsAdded"] = true
+          else
+            lesson.pointsAdded = true
+        needHelpSolved = true
 
-    if user._id == @userId
-      qry["lastLesson"] = lesson
-    Meteor.users.update(user._id, {
-      $set: qry
-    })
+      needHelpQry =
+        lessonId: lesson.id
+        username: user.username
+        exerciseId: null
+      #there was not lesson type for javascript need help
+      unless lesson.type is 'javascript'
+        needHelpQry.type = lesson.type
+      NeedHelp.update needHelpQry,
+        $set:
+          lessonCode: lesson.code
+          solved: needHelpSolved
 
-    if lesson.type is 'html'
-      return UserHTMLLessons.upsert
-        userId: @userId
-        id: lesson.id
-      ,
-        $set: lesson
+      if user._id == @userId
+        qry["lastLesson"] = lesson
+      Meteor.users.update(user._id, {
+        $set: qry
+      })
 
-    if lesson.type is 'css'
-      return UserCSSLessons.upsert
-        userId: @userId
-        id: lesson.id
-      ,
-        $set: lesson
+      if lesson.type is 'html'
+        return UserHTMLLessons.upsert
+          userId: @userId
+          id: lesson.id
+        ,
+          $set: lesson
 
-    if lesson.type is 'programming-challenge'
-      return UserProgrammingChallengeLessons.upsert
-        userId: @userId
-        id: lesson.id
-      ,
-        $set: lesson
+      if lesson.type is 'css'
+        return UserCSSLessons.upsert
+          userId: @userId
+          id: lesson.id
+        ,
+          $set: lesson
+
+      if lesson.type is 'programming-challenge'
+        UserProgrammingChallengeLessons.upsert
+          userId: @userId
+          id: lesson.id
+        ,
+          $set: lesson
+
+        if lesson.success and user._id != elfoslav._id
+          userIds = []
+          teachers = Meteor.users.find { 'roles.all': 'teacher' }
+          teachers.forEach (teacher) ->
+            if userIds.indexOf(teacher._id) == -1
+              userIds.push teacher._id
+          AppNotifications.insert
+            userId: @userId
+            userIds: userIds
+            sourceId: lesson.type + lesson.id
+            type: 'Programming challenge'
+            isReadBy: [ @userId ]
+            timestamp: Date.now()
+            text: "
+              User
+              <a href='#{Meteor.absoluteUrl()}students/#{Meteor.user()?.username}'>#{Meteor.user()?.username}</a>
+              finished programming challenge
+              <a class='notification-source-link' href='#{programmingChallengeUrl}'>#{lesson.title}</a>.
+            "
+    catch err
+      @unblock()
+      Logger.log err.message, 'error', 'saveUserLesson method'
+      if pointsAdded
+        Meteor.users.update user._id,
+          $dec: { points: lessonPoints }
+      throw new Meteor.Error '', err.message
 
   saveUserJSExercise: (userId, lesson, exercise) ->
     check(userId, String)
@@ -439,8 +469,8 @@ Meteor.methods
       'roles.all': 'teacher'
     teachers.forEach (teacher) =>
       console.log 'submitting homework to teacher: ', teacher.username
-      #don't send message if current user is teacher
-      unless Roles.userIsInRole(@userId, 'teacher', 'all')
+      #send a message only if user has student role. Student can have teacher role
+      if Roles.userIsInRole(@userId, 'student', 'all') and teacher._id != @userId
         App.insertMessage
           senderId: @userId
           senderUsername: Meteor.user()?.username

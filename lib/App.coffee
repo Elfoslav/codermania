@@ -93,6 +93,13 @@ class @App
       "
     return msg
 
+  @getClientErrorMessage: (err) ->
+    """Something went wrong, please try again.
+    If you see this message again, please contact CoderMania admin: <b>tomas@codermania.com</b>
+    and tell him what does not work. Thanks.
+    <br><br>
+    Error: #{err.reason}"""
+
   @sendEmailAboutMessage: (opts) ->
     throw new Error('Cannot call from the client') unless Meteor.isServer
     sender = opts.sender

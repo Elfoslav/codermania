@@ -77,6 +77,9 @@ Template.studyGroupHomework.helpers
     Meteor.call 'makeReadStudentHomeworkComments', @studentHomeworkId
   isCorrect: ->
     StudentHomework.findOne({ homeworkId: @_id })?.success
+  canMarkAsCorrect: ->
+    (@studentHomework and Meteor.user()?.username is 'elfoslav') or
+      (@studentHomework and Meteor.userId() != @studentHomework.userId)
 
 Template.studyGroupHomework.events
   'click .mark-as-correct': (evt, tpl) ->

@@ -245,27 +245,29 @@ Template.lessonLayout.events
       lessonToSave.slug = lesson.slug
       lessonToSave.success = (if result == true then true else false)
       if Meteor.user() and Meteor.user()?.username is username
-        Meteor.call 'saveUserLesson', username, lessonToSave, (err, result) ->
-          console.log(err) if err
-          console.log('result', result)
+        $('.done-btn').text('Evaluating... please wait for a second').attr('disabled', true)
+        Meteor.call 'saveUserLesson', username, lessonToSave, (err, pointsAdded) ->
+          if err
+            bootbox.alert App.getClientErrorMessage(err)
+            console.log(err)
+          else
+            $('.done-btn').text('Submit').attr('disabled', false)
+            if result == true
+              lessonPoints = Lesson.getLessonPoints(Session.get('lessonNumber'), Lesson.getType())
+              user = Meteor.user()
 
-      if result == true
-        lessonPoints = Lesson.getLessonPoints(Session.get('lessonNumber'), Lesson.getType())
-        user = Meteor.user()
+              if user
+                setSuccessMsg(lessonPoints, lesson, user)
+              else
+                Session.set 'successMsg',
+                  """
+                  #{TAPi18n.__('Congratluations! You can continue to the next lesson') + '.'}
+                  #{TAPi18n.__('But your progress is not saved because you are not logged in') + '.'}
+                  #{TAPi18n.__('We recommend you to create an account and log in') + '.'}
+                  """
 
-        if user
-          setSuccessMsg(lessonPoints, lesson, user)
-        else
-          Session.set('successMsg',
-            """
-            #{TAPi18n.__('Congratluations! You can continue to the next lesson') + '.'}
-            #{TAPi18n.__('But your progress is not saved because you are not logged in') + '.'}
-            #{TAPi18n.__('We recommend you to create an account and log in') + '.'}
-            """
-          )
-
-        Session.set('lessonSuccess', true)
-        $('.output-error-text').addClass('hidden');
+              Session.set('lessonSuccess', true)
+              $('.output-error-text').addClass('hidden');
 
     isExerciseTab = $('.nav-tabs-theory-assignment .active a').attr('href') == '#exercise'
     if isExerciseTab and !codeError

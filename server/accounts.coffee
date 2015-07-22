@@ -19,7 +19,7 @@ Accounts.onCreateUser (options, user) ->
   elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
   unless Messages.findOne({ receiverId: user._id })
     if Messages.findOne({ receiverUsername: user.username })
-      Logger.log "Welcome message for user #{user.username} with id #{user._id} already exists", 'error'
+      Logger.log "Welcome message for user #{user.username} with id #{user._id} already exists", 'warning'
     else
       App.insertMessage
         senderId: elfoslav._id
