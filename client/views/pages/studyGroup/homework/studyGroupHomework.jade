@@ -24,7 +24,9 @@ template(name="studyGroupHomework")
         else
           button.btn.btn-primary.mark-as-correct(type="button") Mark as correct
   p
-    small {{homework.type}} homework.
+    small
+      a(href="{{pathFor 'studyGroup' _id=studyGroup._id}}") {{studyGroup.title}}
+      |{{homework.type}} homework.
       if homework.points
         |Correct solution is for {{homework.points}} points.
   if studentHomework
