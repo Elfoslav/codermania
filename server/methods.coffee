@@ -176,13 +176,11 @@ Meteor.methods
     userExercise = user?.lessons?[lesson.id]?.exercises?[exercise.id]
     exercise.pointsAdded = userExercise?.pointsAdded
 
+    shouldAddPoints = false
     if exercise.success
       if (userExercise is undefined) or !userExercise.pointsAdded
-        Meteor.users.update(userId, {
-          $inc: { points: points }
-        })
+        shouldAddPoints = true
         exercise.pointsAdded = true
-        console.log 'lesson exercise points added: ', Meteor.users.findOne(userId).points
       NeedHelp.update { exerciseId: exercise.id, username: user.username },
         $set: { solved: true }
 
@@ -194,6 +192,10 @@ Meteor.methods
     Meteor.users.update(userId, {
       $set: qry
     })
+    if shouldAddPoints
+      Meteor.users.update(userId, {
+        $inc: { points: points }
+      })
 
   askForHelp: (lesson, message) ->
     unless @userId
