@@ -425,6 +425,7 @@ Meteor.methods
     homework = Homework.findOne data.homeworkId
     data.title = homework?.title
     data.userId = @userId
+    data.points = homework.points
     data.timestamp = Date.now()
 
     existingHomework = StudentHomework.findOne

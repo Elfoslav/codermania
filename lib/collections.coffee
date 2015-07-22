@@ -104,6 +104,7 @@
 #title: String
 #description: String
 #type: String - HTML|CSS|JavaScrit|Web|whatever...
+#points: Number
 #timestamp: Number
 #updatedAt: Number (timestamp)
 #updatedBy: String (userId)
