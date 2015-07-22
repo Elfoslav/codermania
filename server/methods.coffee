@@ -198,6 +198,9 @@ Meteor.methods
       })
 
   askForHelp: (lesson, message) ->
+    check lesson.url, String
+    check lesson.type, String
+    check lesson.code, String
     unless @userId
       throw new Meteor.Error('Not authorized')
 
@@ -221,6 +224,8 @@ Meteor.methods
         lessonId: lesson.id
         exerciseId: lesson.exerciseId
         lessonCode: lesson.code
+        lessonType: lesson.type
+        lessonUrl: lesson.url
         userId: @userId
         username: user.username
         message: message

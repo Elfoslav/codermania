@@ -11,6 +11,7 @@ Template.needHelp.events
         slug: lesson.slug
         username: Meteor.user()?.username
 
+      lesson.type = Lesson.getType()
       lesson.code = Editor.getValue()
       $btn.attr('disabled', true)
       $btn.text(TAPi18n.__('Sending...'))
