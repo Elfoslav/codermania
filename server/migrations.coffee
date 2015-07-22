@@ -1,37 +1,25 @@
 Meteor.startup ->
   Migrations = new Mongo.Collection('migrations')
 
-  migration1Name = 'send welcome message'
+  migration1Name = 'fix user points'
   unless Migrations.findOne { name: migration1Name }
-    elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
-    users = Meteor.users.find
-      $or: [
-        { points: { $exists: false } }
-        { points: { $lt: 200 } }
-      ]
-      welcomeMessageSent: { $ne: true }
-    console.log 'sending welcome message to ' + users.count() + ' users.'
+    Logger.log "Info: starting migration fix user points at #{new Date()}", 'info'
+    users = Meteor.users.find()
     users.forEach (user) ->
-      userMsg = Messages.findOne
-        $or: [
-          { senderId: user._id }
-          { receiverId: user._id }
-        ]
-      #send only if user does not have messages yet
-      unless userMsg
-        App.insertMessage
-          senderId: elfoslav._id
-          senderUsername: elfoslav.username
-          receiverId: user._id
-          receiverUsername: user.username
-          text: App.getWelcomeMessage()
-        Meteor.users.update user._id,
-          $set:
-            welcomeMessageSent: true
-        App.sendEmailAboutMessage
-          sender: elfoslav
-          receiver: user
-        Logger.log('sending welcome message to ' + user.username)
+      userPoints = 0
+      for jsLessonId, jsLesson of user.lessons
+        if jsLesson.success
+          userPoints += jsLesson.points
+        if jsLesson.exercises
+          for jsLessonExerciseId, jsLessonExercise of jsLesson.exercises
+            if jsLessonExercise.success
+              userPoints += jsLessonExercise.points
+      UserProgrammingChallengeLessons.find({ userId: user._id }).forEach (challenge) ->
+        if challenge.success
+          userPoints += challenge.points
+      Meteor.users.update user._id,
+        $set: { points: userPoints }
 
     Migrations.insert
       name: migration1Name
+    Logger.log "Info: ending migration fix user points at #{new Date()}", 'info'

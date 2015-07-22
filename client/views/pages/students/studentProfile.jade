@@ -50,6 +50,21 @@ template(name="studentProfile")
         p There is no homework for you, yet. Join a
           a(href="{{pathFor 'studyGroups'}}") study group
           |to get a homework.
+    .col-sm-4
+      h2 Programming Challenges
+      if programmingChallenges.count
+        ul.list-unstyled
+          each programmingChallenges
+            li
+              if canSeeUserExercises
+                a(href="{{pathFor 'lessonProgrammingChallenge' _id=id slug=slug username=../student.username}}")
+                  |{{title}}
+              else
+                span {{title}}
+              if success
+                span.glyphicon.glyphicon-ok.green
+      else
+        p Nothing found.
 
   .row
     .col-sm-4
@@ -80,6 +95,8 @@ template(name="studentProfile")
                         span.glyphicon.glyphicon-ok.green
                       else
                         span.glyphicon.glyphicon-remove.red
+      else
+        p Nothing found.
 
     .col-sm-4
       h3 HTML lessons

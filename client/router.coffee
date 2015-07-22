@@ -267,6 +267,7 @@ Router.route '/:lang?/students/:username/',
       Meteor.subscribe('student', @params.username)
       Meteor.subscribe('userStudyGroups', @params.username)
       Meteor.subscribe('studentHomework', {}, @params.username)
+      Meteor.subscribe('userProgrammingChallengeLessons', { username: @params.username })
     ]
   data: ->
     student = Meteor.users.findOne({ username: @params.username })
@@ -275,6 +276,7 @@ Router.route '/:lang?/students/:username/',
 
     student: student
     studentHomework: StudentHomework.find()
+    programmingChallenges: UserProgrammingChallengeLessons.find()
   onAfterAction: ->
     App.setPageTitle(@params.username)
 
