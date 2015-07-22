@@ -62,26 +62,6 @@ Meteor.methods
       elfoslav = Meteor.users.findOne({ username: 'elfoslav' })
       #add points before updating user
       if lesson.success
-        if user._id != elfoslav._id
-          userIds = []
-          teachers = Meteor.users.find { 'roles.all': 'teacher' }
-          teachers.forEach (teacher) ->
-            if userIds.indexOf(teacher._id) == -1
-              userIds.push teacher._id
-          AppNotifications.insert
-            userId: @userId
-            userIds: userIds
-            sourceId: lesson.type + lesson.id
-            type: 'Programming challenge'
-            isReadBy: [ @userId ]
-            timestamp: Date.now()
-            text: "
-              User
-              <a href='#{Meteor.absoluteUrl()}students/#{Meteor.user()?.username}'>#{Meteor.user()?.username}</a>
-              finished programming challenge
-              <a class='notification-source-link' href='#{programmingChallengeUrl}'>#{lesson.title}</a>.
-            "
-
         if (userLesson is undefined) or !userLesson?.pointsAdded
           Meteor.users.update(user._id, {
             $inc: { points: lessonPoints }
@@ -102,6 +82,7 @@ Meteor.methods
             qry["lessons.#{lesson.id}.pointsAdded"] = true
           else
             lesson.pointsAdded = true
+
         needHelpSolved = true
 
       needHelpQry =
