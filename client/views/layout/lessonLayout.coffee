@@ -277,7 +277,6 @@ Template.lessonLayout.events
         exercise: lesson.exercises[Session.get('exerciseId')]
         code: code
       )
-      console.log result
 
       ###
       # Save exercise always if user is logged in
@@ -294,8 +293,9 @@ Template.lessonLayout.events
       exerciseToSave.code = code
       if userId and App.getCurrentUsername() == Meteor.user()?.username
         Meteor.call 'saveUserJSExercise', userId, lessonToSave, exerciseToSave, (err, result) ->
-          console.log(err) if err
-          console.log('result', result)
+          if err
+            console.log(err)
+            bootbox.alert App.getClientErrorMessage(err)
 
       if result == true
         user = Meteor.user()
