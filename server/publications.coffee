@@ -195,7 +195,7 @@ Meteor.publish 'needHelp', (needHelpId, solved) ->
     qry['solved'] = solved
 
   lastThreeMonths = new Date()
-  lastThreeMonths.setMonth(lastThreeMonths.getMonth() - 3)
+  lastThreeMonths.setMonth(lastThreeMonths.getMonth() - 2)
   qry.timestamp =
     $gt: lastThreeMonths.getTime()
 
