@@ -34,6 +34,10 @@ initSummernoteEditor = ->
     onBlur: (evt) ->
       if !$(@).code()
         $(@).code('Write a comment')
+    onPaste: (evt) ->
+      e.preventDefault()
+      bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+      document.execCommand('insertText', false, bufferText)
 
 Template.studyGroupHomework.onRendered ->
   initSummernoteEditor()
