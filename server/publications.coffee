@@ -71,12 +71,15 @@ Meteor.reactivePublish 'sendersList', ->
 
     user.unreadMsgCount = unreadMsgCount
     user.msgTimestamp = firstMsg?.timestamp
-    if msgCount
+    now = new Date()
+    aFewDaysAgo = new Date()
+    aFewDaysAgo.setDate(now.getDate() - 14)
+    console.log 'timestamp: ', user.msgTimestamp
+    if msgCount and user.msgTimestamp > aFewDaysAgo
       self.added('sendersList', user._id, user)
       #self.changed is required for reactive changes
       self.changed('sendersList', user._id, user)
     return user
-  @ready()
 
 Meteor.publish 'student', (username) ->
   check(username, String)
