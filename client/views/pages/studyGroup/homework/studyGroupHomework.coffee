@@ -16,13 +16,16 @@ evaluate = (code) ->
   homeworkResult.appendChild(newIframe)
 
 initTextEditor = ->
-  #editor docs: https://www.froala.com/wysiwyg-editor/docs/
-  $editor = $('#homework-comments-textarea').editable
-    inlineMode: false
-    buttons: [
-      'bold', 'italic', 'underline', 'formatBlock', 'insertOrderedList',
-      'insertUnorderedList', 'outdent', 'indent', 'undo', 'redo', 'html'
+  #editor docs: http://www.tinymce.com
+  editor = tinymce.init
+    selector: '#homework-comments-textarea'
+    plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save contextmenu directionality",
+        "template paste textpattern imagetools"
     ]
+    toolbar: "undo redo | bold italic | bullist numlist outdent indent | link image | preview fullpage"
 
 Template.studyGroupHomework.onRendered ->
   initTextEditor()
@@ -127,9 +130,9 @@ Template.studyGroupHomework.events
   'submit .comment-form': (evt, tpl) ->
     evt.preventDefault()
     form = evt.target
-    $textarea = $('#homework-comments-textarea')
+    editor = tinyMCE.get()[0]
     data =
-      message: $textarea.editable('getHTML')
+      message: editor.getContent()
       studentHomeworkId: tpl.data.studentHomework?._id
     if form.sendEmail
       data.sendEmail = form.sendEmail.checked
@@ -138,7 +141,7 @@ Template.studyGroupHomework.events
         bootbox.alert err.reason
         console.log err
       else
-        $textarea.editable('setHTML', '')
+        editor.setContent('')
         form.reset()
   'click .enter-fullscreen-btn': (evt, tpl) ->
     evt.preventDefault()
