@@ -5,6 +5,8 @@ template(name="studyGroupHomework")
         a.btn.btn-primary(href="{{pathFor 'studyGroupHomeworkSort' studyGroupId=studyGroup._id}}")
           |Sort homework
         |&nbsp;
+        a.btn.btn-primary(href="{{pathFor 'homework'}}") Manage homework
+        |&nbsp;
       +openHomeworkFormModalBtn
   ul.breadcrumb
     each studyGroup.homework

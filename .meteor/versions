@@ -19,6 +19,7 @@ cfs:http-methods@0.0.29
 check@1.0.5
 coffeescript@1.0.6
 dburles:collection-helpers@1.0.3
+dburles:mongo-collection-instances@0.3.4
 ddp@1.1.0
 deps@1.0.7
 edgee:meteor-server-deps@0.1.2
@@ -44,6 +45,7 @@ iron:url@1.0.9
 joshowens:shareit@0.3.1
 jquery@1.11.3_2
 json@1.0.3
+lai:collection-extensions@0.1.4
 launch-screen@1.0.2
 lepozepo:reactive-publish@0.1.7
 less@1.0.14
@@ -92,6 +94,7 @@ reload@1.1.3
 retry@1.0.3
 reywood:iron-router-ga@0.6.0
 routepolicy@1.0.5
+rubaxa:sortable@1.2.0
 sanjo:jasmine@0.14.0
 sanjo:karma@1.5.1
 sanjo:long-running-child-process@1.0.3

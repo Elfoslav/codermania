@@ -358,6 +358,7 @@ Meteor.reactivePublish 'homework', (query, options) ->
   options = options || {}
   check query,
     _id: Match.Optional String
+    userId: Match.Optional String
     studyGroupId: Match.Optional String
   check options,
     limit: Match.Optional Number

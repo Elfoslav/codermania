@@ -512,7 +512,16 @@ Meteor.methods
     check homeworkIds, Array
     unless Roles.userIsInRole @userId, 'teacher', 'all'
       throw new Meteor.Error 401, 'Unauthorized'
-    if homeworkIds.length < 2
-      throw new Meteor.Error 500, 'Cannot sort homework array with less than 2 items.'
+    if homeworkIds.indexOf(null) != -1
+      throw new Meteor.Error 500, 'Unable to set homework with ID null'
     StudyGroups.update studyGroupId,
       $set: { homeworkIds: homeworkIds }
+
+  removeHomeworkFromTheGroup: (data) ->
+    check data,
+      studyGroupId: String
+      homeworkId: Match.Optional String
+    unless Roles.userIsInRole @userId, 'teacher', 'all'
+      throw new Meteor.Error 401, 'Unauthorized'
+    StudyGroups.update data.studyGroupId,
+      $pull: { homeworkIds: data.homeworkId }

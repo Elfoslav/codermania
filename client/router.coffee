@@ -359,6 +359,21 @@ Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?
     hw = Homework.findOne @params.homeworkId
     App.setPageTitle(hw?.title)
 
+Router.route '/:lang?/homework',
+  name: 'homework'
+  waitOn: ->
+    [
+      Meteor.subscribe('homework')
+      Meteor.subscribe('studyGroups')
+    ]
+  data: ->
+    if @ready() and !Roles.userIsInRole(Meteor.userId(), 'teacher', 'all')
+      @render 'notFound'
+    homework: Homework.find()
+    studyGroups: StudyGroups.find()
+  onAfterAction: ->
+    App.setPageTitle('Homework')
+
 Router.route '/:lang?/notifications',
   name: 'notifications'
   waitOn: ->

@@ -310,6 +310,7 @@ Meteor.methods
     unless data.type
       throw new Meteor.Error(500, 'Type cannot be empty.')
 
+    data.userId = @userId
     data.timestamp = Date.now()
     homeworkId = Homework.insert data
 

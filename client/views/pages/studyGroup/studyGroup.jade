@@ -1,13 +1,15 @@
 template(name="studyGroup")
+  p
+    if studyGroup.homeworkIds
+      a.btn.btn-primary(href="{{pathFor 'studyGroupHomeworkSort' studyGroupId=studyGroup._id}}")
+        |Sort homework
+    else
+      +openHomeworkFormModalBtn
+    |&nbsp;
+    a.btn.btn-primary(href="{{pathFor 'homework'}}") Manage homework
   h1 Study group - {{studyGroup.title}}
     if canEdit
       a.btn.btn-default(href="#" data-target="#study-group-modal" data-toggle="modal") Edit
-      |&nbsp;
-      if studyGroup.homeworkIds
-        a.btn.btn-primary(href="{{pathFor 'studyGroupHomeworkSort' studyGroupId=studyGroup._id}}")
-          |Sort homework
-      else
-        +openHomeworkFormModalBtn
 
   .row
     .col-sm-8

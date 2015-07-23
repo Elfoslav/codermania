@@ -1,0 +1,28 @@
+template(name="homework")
+  .row
+    .col-sm-6
+      h1 Homework
+    .col-sm-6
+      h2 Study Groups
+  .row
+    .col-sm-6
+      p Drag & drop homework into a study group.
+      if homework.count
+        ol#homework-list.sortable-list
+          each homework
+            li(data-id=_id) {{type}}: {{title}}
+      else
+        p No data.
+    .col-sm-6
+      p Drag & drop homework to sort it in a study group.
+      if studyGroups.count
+        ul#study-group-list.sortable-list
+          each studyGroups
+            li(style="background-color: #ddd")
+              a.margin-bottom-5(href="{{pathFor 'studyGroup' _id=_id}}"){{title}}
+              ol.sortable-list.study-group-homework-list(id=_id)
+                each this.homework
+                  li(data-id=_id) {{type}}:
+                    a(href="{{pathFor 'studyGroupHomework' studyGroupId=../_id homeworkId=_id}}") {{title}}
+                    a.pull-right.remove-homework-from-the-group(href="#" data-study-group-id="{{../_id}}" title="Remove from the group")
+                      span.glyphicon.glyphicon-remove.red
