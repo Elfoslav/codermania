@@ -100,6 +100,7 @@ sanjo:karma@1.5.1
 sanjo:long-running-child-process@1.0.3
 sanjo:meteor-files-helpers@1.1.0_6
 sanjo:meteor-version@1.0.0
+sergeyt:typeahead@0.11.1_3
 service-configuration@1.0.4
 session@1.1.0
 sewdn:highlightjs@8.4.0_2

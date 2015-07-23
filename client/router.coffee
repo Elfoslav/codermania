@@ -397,7 +397,6 @@ Router.route '/:lang?/messages/:username?',
         senderUsername: Meteor.user()?.username
       }).wait()
     @subscribe('sendersList').wait()
-    @subscribe('usernames', '')
   data: ->
     return {
       messages:
@@ -422,9 +421,11 @@ Router.route '/:lang?/messages/:username?',
         })
     }
   onAfterAction: ->
-    if @params.username
+    if @params?.username
       Meteor.call('markMessagesAsRead', @params.username) if Meteor.userId()
       App.setPageTitle("#{@params.username} messages")
+      #we also set username in template, just for sure ;-)
+      $('.message-form .typeahead').val(@params.username)
     else
       App.setPageTitle("Messages")
 

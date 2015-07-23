@@ -270,6 +270,30 @@ Meteor.methods
       subject: subject
       html: msg + '<br>' + code + '<br>' + url
 
+  sendMessage: (options) ->
+    check(options, {
+      username: String #receiver's username
+      sendEmail: Boolean
+      message: String
+    })
+
+    throw new Meteor.Error(401, 'Unauthorized! You have to be logged in to perform this action.') unless @userId
+
+    sender = Meteor.users.findOne(Meteor.userId())
+    receiver = Meteor.users.findOne({ username: options.username })
+    App.insertMessage
+      senderId: Meteor.userId()
+      senderUsername: sender.username
+      receiverId: receiver._id
+      receiverUsername: receiver.username
+      text: options.message
+
+    if options.sendEmail and Meteor.isServer
+      @unblock()
+      App.sendEmailAboutMessage
+        sender: sender
+        receiver: receiver
+
   unreadMessagesCount: ->
     receiver = Meteor.users.findOne(@userId)
 
@@ -525,3 +549,14 @@ Meteor.methods
       throw new Meteor.Error 401, 'Unauthorized'
     StudyGroups.update data.studyGroupId,
       $pull: { homeworkIds: data.homeworkId }
+
+  searchUsernames: (query, options) ->
+    options = options or {}
+    # guard against client-side DOS: hard limit to 50
+    if options.limit
+      options.limit = Math.min(50, Math.abs(options.limit))
+    else
+      options.limit = 50
+    # TODO fix regexp to support multiple tokens
+    regex = new RegExp('^' + query)
+    Meteor.users.find({ username: $regex: regex }, options).fetch()

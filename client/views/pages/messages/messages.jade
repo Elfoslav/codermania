@@ -8,12 +8,11 @@ template(name="messages")
     .col-sm-4
       form.message-form
         .form-group
-          select.form-control.usernames-select(name="usernames")
-            option(value="") {{_'Select username'}}...
-            each usernames
-              option(value=this selected=selectedUsername)= this
+          input.form-control.typeahead(name="username" type="text" placeholder="Type username"
+            autocomplete="off" spellcheck="off"
+            data-source="searchUsernames")
         .form-group
-          textarea.message.form-control(rows="5" placeholder="{{_'write a message'}}")
+          textarea.form-control(rows="5" name="message" placeholder="{{_'write a message'}}")
         .checkbox
           label
             input(type="checkbox" name="sendEmail")
