@@ -74,7 +74,6 @@ Meteor.reactivePublish 'sendersList', ->
     now = new Date()
     aFewDaysAgo = new Date()
     aFewDaysAgo.setDate(now.getDate() - 14)
-    console.log 'timestamp: ', user.msgTimestamp
     if msgCount and user.msgTimestamp > aFewDaysAgo
       self.added('sendersList', user._id, user)
       #self.changed is required for reactive changes
