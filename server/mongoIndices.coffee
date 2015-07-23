@@ -29,6 +29,11 @@ Meteor.startup ->
     isRead: 1
 
   NeedHelp._ensureIndex
+    lessonId: 1
+    username: 1
+    solved: 1
+
+  NeedHelp._ensureIndex
     solved: 1
 
   NeedHelp._ensureIndex
