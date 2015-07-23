@@ -19,7 +19,7 @@ template(name="homework")
         ul#study-group-list.sortable-list
           each studyGroups
             li(style="background-color: #ddd")
-              a.margin-bottom-5(href="{{pathFor 'studyGroup' _id=_id}}"){{title}}
+              a.margin-bottom-5(href="{{pathFor 'studyGroup' _id=_id}}") {{title}}
               ol.sortable-list.study-group-homework-list(id=_id)
                 each this.homework
                   li(data-id=_id) {{type}}:

@@ -15,32 +15,17 @@ evaluate = (code) ->
     homeworkResult.removeChild homeworkResult.childNodes[0]
   homeworkResult.appendChild(newIframe)
 
-initSummernoteEditor = ->
-  #summernote docs: http://summernote.org/#/deep-dive
-  $('#homework-comments-textarea').summernote
-    height: 150
-    toolbar: [
-      #['style', ['style']], // no style button
-      ['style', ['bold', 'italic', 'underline', 'clear']],
-      ['para', ['ul', 'ol', 'paragraph']],
-      ['insert', ['picture', 'link']],
-      ['help', ['help']]
-      ['fullscreen', ['fullscreen']]
-      ['codeview', ['codeview']]
+initTextEditor = ->
+  #editor docs: https://www.froala.com/wysiwyg-editor/docs/
+  $editor = $('#homework-comments-textarea').editable
+    inlineMode: false
+    buttons: [
+      'bold', 'italic', 'underline', 'formatBlock', 'insertOrderedList',
+      'insertUnorderedList', 'outdent', 'indent', 'undo', 'redo', 'html'
     ]
-    onFocus: (evt) ->
-      if $(@).code() == 'Write a comment'
-        $(@).code('')
-    onBlur: (evt) ->
-      if !$(@).code()
-        $(@).code('Write a comment')
-    onPaste: (evt) ->
-      e.preventDefault()
-      bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-      document.execCommand('insertText', false, bufferText)
 
 Template.studyGroupHomework.onRendered ->
-  initSummernoteEditor()
+  initTextEditor()
 
 Template.studyGroupHomework.helpers
   editorConfig: ->
@@ -118,7 +103,7 @@ Template.studyGroupHomework.events
       else
         Alerts.set('Successfuly saved', 'success')
         setTimeout ->
-          initSummernoteEditor()
+          initTextEditor()
         , 100
   'click .submit-to-teacher': (evt, tpl) ->
     evt.preventDefault()
@@ -134,7 +119,7 @@ Template.studyGroupHomework.events
       else
         bootbox.alert('Successfuly submitted. Your teacher will review your homework soon.')
         setTimeout ->
-          initSummernoteEditor()
+          initTextEditor()
         , 100
   'click .run-the-code': (evt, tpl) ->
     evt.preventDefault()
@@ -142,9 +127,9 @@ Template.studyGroupHomework.events
   'submit .comment-form': (evt, tpl) ->
     evt.preventDefault()
     form = evt.target
-    textarea = $('#homework-comments-textarea')
+    $textarea = $('#homework-comments-textarea')
     data =
-      message: textarea.code()
+      message: $textarea.editable('getHTML')
       studentHomeworkId: tpl.data.studentHomework?._id
     if form.sendEmail
       data.sendEmail = form.sendEmail.checked
@@ -153,7 +138,7 @@ Template.studyGroupHomework.events
         bootbox.alert err.reason
         console.log err
       else
-        textarea.code('Write a comment')
+        $textarea.editable('setHTML', '')
         form.reset()
   'click .enter-fullscreen-btn': (evt, tpl) ->
     evt.preventDefault()
