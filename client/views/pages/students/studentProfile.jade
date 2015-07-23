@@ -58,9 +58,9 @@ template(name="studentProfile")
             li
               if canSeeUserExercises
                 a(href="{{pathFor 'lessonProgrammingChallenge' _id=id slug=slug username=../student.username}}")
-                  |{{title}}
+                  |{{programmingChallengeTitle}}
               else
-                span {{title}}
+                span {{programmingChallengeTitle}}
               if success
                 span.glyphicon.glyphicon-ok.green
       else

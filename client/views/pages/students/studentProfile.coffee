@@ -21,6 +21,8 @@ Template.studentProfile.helpers
     Template.parentData(2).student.lessons?[lesson.id]?.exercises?[@id]
   isTeacher: ->
     Roles.userIsInRole(@student?._id, ['teacher'], 'all')
+  programmingChallengeTitle: ->
+    ProgrammingChallengeLessonsList._collection.findOne({ id: @id })?.title
 
 Template.studentProfile.events
   'click .add-teacher-role': (evt, tpl) ->
