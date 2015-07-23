@@ -32,6 +32,7 @@ Template.homework.onRendered ->
 Template.homework.events
   'click .remove-homework-from-the-group': (evt, tpl) ->
     evt.preventDefault()
+    return false unless confirm('Are you sure you want to delete the homework?')
     #tpl.parentData(1) somehow does not work, we need to get id from the data attr
     studyGroupId = evt.currentTarget.getAttribute('data-study-group-id')
     Meteor.call 'removeHomeworkFromTheGroup', { studyGroupId: studyGroupId, homeworkId: @_id }, (err) ->
