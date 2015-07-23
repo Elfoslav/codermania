@@ -219,7 +219,7 @@ Meteor.publish 'needHelp', (needHelpId, solved) ->
 
 Meteor.publish 'needHelpCount', ->
   lastThreeMonths = new Date()
-  lastThreeMonths.setMonth(lastThreeMonths.getMonth() - 3)
+  lastThreeMonths.setMonth(lastThreeMonths.getMonth() - 2)
   needHelpCursor = NeedHelp.find
     solved: false
     timestamp:
