@@ -128,7 +128,7 @@ Template.studyGroupHomework.events
         bootbox.alert err.reason
         console.log err
       else
-        Alerts.set('Successfuly submitted', 'success')
+        bootbox.alert('Successfuly submitted. Your teacher will review your homework soon.')
         setTimeout ->
           initSummernoteEditor()
         , 100
