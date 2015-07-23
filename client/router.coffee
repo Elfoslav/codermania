@@ -392,6 +392,8 @@ Router.route '/:lang?/messages/:username?',
     @next()
   subscriptions: ->
     if @params.username and Meteor.user()?.username
+      @subscribe('student', Meteor.user()?.username).wait()
+      @subscribe('student', @params?.username).wait()
       @subscribe('messages', {
         receiverUsername: @params.username
         senderUsername: Meteor.user()?.username
