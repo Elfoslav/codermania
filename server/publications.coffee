@@ -33,7 +33,14 @@ Meteor.publish 'studentsCount', ->
   Counts.publish(this, 'studentsCount', students)
   @ready()
 
-Meteor.reactivePublish 'sendersList', ->
+Meteor.publish 'sendersList', ->
+  aFewDaysAgo = new Date()
+  aFewDaysAgo = aFewDaysAgo.setDate(aFewDaysAgo.getDate() - 14)
+  SendersList.find { receiverId: @userId, lastMsgTimestamp: { $gt: aFewDaysAgo } },
+    sort: { lastMsgTimestamp: -1 }
+
+#TODO remove after successful migration on production
+Meteor.reactivePublish 'sendersListOld', ->
   user = Meteor.users.findOne(@userId)
   throw new Meteor.Error(401, 'Not authorized') unless user
 

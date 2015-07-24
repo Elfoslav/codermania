@@ -47,3 +47,8 @@ Meteor.startup ->
 
   AppNotifications._ensureIndex
     sourceId: 1
+
+  SendersList._ensureIndex
+    senderId: 1
+  SendersList._ensureIndex
+    receiverId: 1
