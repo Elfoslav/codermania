@@ -1,5 +1,19 @@
 #general functionality
 class @App
+  @initTextEditor: (selector) ->
+    #editor docs: http://www.tinymce.com
+    #destroy the old one editor, in order to get new working
+    tinymce.get()?[0]?.destroy()
+    editor = tinymce.init
+      selector: selector
+      plugins: [
+          "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+          "visualblocks visualchars code fullscreen",
+          "insertdatetime media nonbreaking save contextmenu directionality",
+          "template paste textpattern imagetools"
+      ]
+      toolbar: "undo redo | bold italic | bullist numlist outdent indent | link image | preview fullpage"
+
   @getCurrentUserId: ->
     Router.current().params.userId || Meteor.userId() || undefined
 

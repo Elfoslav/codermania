@@ -358,6 +358,9 @@ Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?
   onAfterAction: ->
     hw = Homework.findOne @params.homeworkId
     App.setPageTitle(hw?.title)
+    Meteor.setTimeout ->
+      App.initTextEditor('#homework-comments-textarea')
+    , 100
 
 Router.route '/:lang?/homework',
   name: 'homework'

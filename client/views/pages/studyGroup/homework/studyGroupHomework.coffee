@@ -15,21 +15,6 @@ evaluate = (code) ->
     homeworkResult.removeChild homeworkResult.childNodes[0]
   homeworkResult.appendChild(newIframe)
 
-initTextEditor = ->
-  #editor docs: http://www.tinymce.com
-  editor = tinymce.init
-    selector: '#homework-comments-textarea'
-    plugins: [
-        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-        "visualblocks visualchars code fullscreen",
-        "insertdatetime media nonbreaking save contextmenu directionality",
-        "template paste textpattern imagetools"
-    ]
-    toolbar: "undo redo | bold italic | bullist numlist outdent indent | link image | preview fullpage"
-
-Template.studyGroupHomework.onRendered ->
-  initTextEditor()
-
 Template.studyGroupHomework.helpers
   editorConfig: ->
     hw = Template.instance().data.homework
@@ -106,7 +91,7 @@ Template.studyGroupHomework.events
       else
         Alerts.set('Successfuly saved', 'success')
         setTimeout ->
-          initTextEditor()
+          App.initTextEditor('#homework-comments-textarea')
         , 100
   'click .submit-to-teacher': (evt, tpl) ->
     evt.preventDefault()
@@ -122,7 +107,7 @@ Template.studyGroupHomework.events
       else
         bootbox.alert('Successfuly submitted. Your teacher will review your homework soon.')
         setTimeout ->
-          initTextEditor()
+          App.initTextEditor('#homework-comments-textarea')
         , 100
   'click .run-the-code': (evt, tpl) ->
     evt.preventDefault()
