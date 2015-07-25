@@ -173,7 +173,9 @@ Template.lessonLayout.helpers
 
 setSuccessMsg = (lessonPoints, lesson, user) ->
   totalPoints = user?.points
-  unless Meteor.user()?.lessons?[lesson.id]?.pointsAdded
+  pointsAdded = Meteor.user()?.lessons?[lesson.id]?.pointsAdded
+  $('.output-error-text').addClass('hidden')
+  unless pointsAdded
     totalPoints += lessonPoints
   if totalPoints and Meteor.user()?.username == Router.current().params.username
     if Lesson.isProgrammingChallengeLesson()
@@ -181,6 +183,8 @@ setSuccessMsg = (lessonPoints, lesson, user) ->
         """
         Congratulations! The output seems to be correct.
         """
+    else if pointsAdded
+      Session.set('successMsg', TAPi18n.__('Correct!'))
     else
       Session.set 'successMsg',
         """
@@ -214,19 +218,20 @@ Template.lessonLayout.events
       Editor.evaluate() if Lesson.isJSLesson() or Lesson.isProgrammingChallengeLesson()
       if Lesson.isHTMLLesson() or Lesson.isCSSLesson()
         $('.output').html(code)
+      $('.output-error-text').addClass('hidden');
     catch e
       if LessonsList.getCurrentLesson().id != '1x'
         codeError = true
       $('.output').html('Error: ' + e.message)
+      Session.set('lessonSuccess', false)
+      Session.set('exerciseSuccess', false)
 
     lesson = LessonsList.getLesson(Session.get('lessonNumber'))
     lessonNum = Session.get('lessonNumber')
 
     isAssignmentTab = $('.nav-tabs-theory-assignment .active a').attr('href') == '#assignment'
-
-    #check exercise only if assignment tab is active
     if isAssignmentTab and !codeError
-
+      Session.set('exerciseSuccess', false)
       result = Lesson.checkAssignment
         lessonNumber: lessonNum
         lesson: lesson
@@ -245,38 +250,44 @@ Template.lessonLayout.events
       lessonToSave.slug = lesson.slug
       lessonToSave.success = (if result == true then true else false)
       if Meteor.user() and Meteor.user()?.username is username
+        Session.set('exerciseSuccess', false)
         $('.done-btn').text('Evaluating... please wait for a second').attr('disabled', true)
         Meteor.call 'saveUserLesson', username, lessonToSave, (err, pointsAdded) ->
+          $('.done-btn').text('Submit').attr('disabled', false)
           if err
             bootbox.alert App.getClientErrorMessage(err)
             console.log(err)
           else
-            $('.done-btn').text('Submit').attr('disabled', false)
             if result == true
               lessonPoints = Lesson.getLessonPoints(Session.get('lessonNumber'), Lesson.getType())
               user = Meteor.user()
+              setSuccessMsg(lessonPoints, lesson, user)
 
               if user
                 setSuccessMsg(lessonPoints, lesson, user)
-              else
-                Session.set 'successMsg',
-                  """
-                  #{TAPi18n.__('Congratulations! You can continue to the next lesson') + '.'}
-                  #{TAPi18n.__('But your progress is not saved because you are not logged in') + '.'}
-                  #{TAPi18n.__('We recommend you to create an account and log in') + '.'}
-                  """
 
               Session.set('lessonSuccess', true)
               $('.output-error-text').addClass('hidden');
+      else if lessonToSave.success
+        Session.set 'successMsg',
+          """
+          #{TAPi18n.__('Congratulations! You can continue to the next lesson') + '.'}
+          #{TAPi18n.__('But your progress is not saved because you are not logged in') + '.'}
+          #{TAPi18n.__('We recommend you to create an account and log in') + '.'}
+          """
+        Session.set('lessonSuccess', true)
+        $('.output-error-text').addClass('hidden')
+      else if !lessonToSave.success
+        Session.set('lessonSuccess', false)
 
     isExerciseTab = $('.nav-tabs-theory-assignment .active a').attr('href') == '#exercise'
     if isExerciseTab and !codeError
-      result = JSExercise.checkExercise(
+      Session.set('lessonSuccess', false)
+      result = JSExercise.checkExercise
         lessonNumber: lessonNum
         lesson: lesson
         exercise: lesson.exercises[Session.get('exerciseId')]
         code: code
-      )
 
       ###
       # Save exercise always if user is logged in
@@ -299,16 +310,19 @@ Template.lessonLayout.events
 
       if result == true
         user = Meteor.user()
-
         setExerciseSuccessMsg(lesson, exercise)
-
         Session.set('exerciseSuccess', true)
-        $('.output-error-text').addClass('hidden');
+        $('.output-error-text').addClass('hidden')
 
     if typeof result is 'string'
+      Session.set('lessonSuccess', false)
+      Session.set('exerciseSuccess', false)
       result += '.<br/><br/>Check if your code is written according to conventions.'
       $('.output-error-text').removeClass('hidden').html(TAPi18n.__('Error') + ':\n' + result)
-
+    isTheoryTab = $('.nav-tabs-theory-assignment .active a').attr('href') == '#theory'
+    if isTheoryTab
+      Session.set('lessonSuccess', false)
+      Session.set('exerciseSuccess', false)
 
   'click .next-exercise': (e, tpl) ->
     e.preventDefault()
