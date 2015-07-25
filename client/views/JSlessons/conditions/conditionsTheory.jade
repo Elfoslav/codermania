@@ -130,5 +130,48 @@ template(name="conditionsTheory")
     |&#09;//condition code
     br
     |}
+  p <b>Else</b> and <b>else if</b> blocks:
+  +codeInText
+    |//{{_'bad'}} - {{_'missing space before and after else'}}
+    br
+    |if (someValue) {
+    br
+    |&#09;//condition code
+    br
+    |}else{
+    br
+    |&#09;//condition code
+    br
+    |}
+    br
+    br
+    |if (someValue) {
+    br
+    |&#09;//condition code
+    br
+    |//{{_'bad'}} - {{_'missing space after if'}}
+    br
+    |} else if(someOtherValue) {
+    br
+    |&#09;//condition code
+    br
+    |}
+    br
+    br
+    |//{{_'good'}}
+    br
+    |if (someValue) {
+    br
+    |&#09;//condition code
+    br
+    |} else if (someOtherValue) {
+    br
+    |&#09;//condition code
+    br
+    |} else {
+    br
+    |&#09;//condition code
+    br
+    |}
 
   +conventionsNote
