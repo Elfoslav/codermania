@@ -13,10 +13,20 @@ Template.helpDetail.onRendered ->
 
 Template.helpDetail.helpers
   getAssignmentTemplate: ->
-    needHelp = NeedHelp.findOne()
-    lesson = JSLessonsList._collection.findOne { id: needHelp.lessonId }
+    needHelp = Template.instance().data?.needHelp
+    lesson = needHelp.lesson
     lessonTemplateName = (lesson.template || lesson.title.toLowerCase()) + 'Assignment'
     return needHelp.exerciseId || lessonTemplateName
+  getRouteName: ->
+    needHelp = Template.instance().data?.needHelp
+    if needHelp.lessonType is 'programming-challenge'
+      return 'lessonProgrammingChallenge'
+    else if needHelp.lessonType is 'html'
+      return 'lessonHTML'
+    else if needHelp.lessonType is 'css'
+      return 'lessonCSS'
+    else
+      return 'lessonJS'
   isUnreadByUser: (needHelpUserId) ->
     NeedHelpComments.findOne
       _id: @_id

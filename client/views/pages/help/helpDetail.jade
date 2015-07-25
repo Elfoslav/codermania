@@ -4,14 +4,9 @@ template(name="helpDetail")
     if isOnline needHelp.userId
       +onlineDot
     |with
-    if equals needHelp.lessonType 'programming-challenge'
-      a(href="{{pathFor 'lessonProgrammingChallenge' lang=lang _id=needHelp.lesson.id slug=needHelp.lesson.slug username=needHelp.user.username}}") {{needHelp.lesson.title}}
-        if needHelp.exerciseId
-          |({{getExerciseTitle needHelp.lesson needHelp.exerciseId}})
-    else
-      a(href="{{pathFor 'lessonJS' lang=lang _id=needHelp.lesson.id slug=needHelp.lesson.slug username=needHelp.user.username hash=needHelp.exerciseId}}") {{needHelp.lesson.title}}
-        if needHelp.exerciseId
-          |({{getExerciseTitle needHelp.lesson needHelp.exerciseId}})
+    a(href="{{pathFor getRouteName lang=lang _id=needHelp.lesson.id slug=needHelp.lesson.slug username=needHelp.user.username hash=needHelp.exerciseId}}") {{needHelp.lesson.title}}
+      if needHelp.exerciseId
+        |({{getExerciseTitle needHelp.lesson needHelp.exerciseId}})
     if needHelp.solved
       small
         span.glyphicon.glyphicon-ok.green
@@ -30,10 +25,7 @@ template(name="helpDetail")
   +Template.dynamic template=getAssignmentTemplate
   p
     a.btn.btn-default(href="{{pathFor 'help' lang=lang}}") &larr; Back to list
-    if equals needHelp.lessonType 'programming-challenge'
-      a.btn.btn-primary(href="{{pathFor 'lessonProgrammingChallenge' lang=lang _id=needHelp.lesson.id slug=needHelp.lesson.slug username=needHelp.user.username}}") Go to lesson
-    else
-      a.btn.btn-primary(href="{{pathFor 'lessonJS' lang=lang _id=needHelp.lesson.id slug=needHelp.lesson.slug username=needHelp.user.username hash=needHelp.exerciseId}}") Go to lesson
+    a.btn.btn-primary(href="{{pathFor getRouteName lang=lang _id=needHelp.lesson.id slug=needHelp.lesson.slug username=needHelp.user.username hash=needHelp.exerciseId}}") Go to lesson
   hr
   each needHelp.comments
     |{{makeCommentRead ../needHelp._id ../needHelp.userId}}

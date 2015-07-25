@@ -11,10 +11,15 @@
 @NeedHelp = new Mongo.Collection 'needHelp',
   transform: (doc) ->
     if Meteor.isClient
-      if !doc.lessonType
-        doc.lesson = JSLessonsList._collection.findOne { id: doc.lessonId }
+      doc.lesson = { title: 'unknown' }
       if doc.lessonType is 'programming-challenge'
         doc.lesson = ProgrammingChallengeLessonsList._collection.findOne { id: doc.lessonId }
+      else if doc.lessonType is 'html'
+        doc.lesson = HTMLLessonsList._collection.findOne { id: doc.lessonId }
+      else if doc.lessonType is 'css'
+        doc.lesson = CSSLessonsList._collection.findOne { id: doc.lessonId }
+      else
+        doc.lesson = JSLessonsList._collection.findOne { id: doc.lessonId }
 
     doc.comments = NeedHelpComments.find({ needHelpId: doc._id }, { sort: { timestamp: 1 } })
     doc.user = Meteor.users.findOne doc.userId
