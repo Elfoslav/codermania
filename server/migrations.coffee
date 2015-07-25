@@ -31,6 +31,7 @@ Meteor.startup ->
       fields:
         _id: 1
         username: 1
+      reactive: false
 
     users.forEach (currentUser) ->
       list = Meteor.users.find({
@@ -39,18 +40,19 @@ Meteor.startup ->
         fields:
           _id: 1
           username: 1
+        reactive: false
       }).fetch().map (user) ->
         unreadMsgsCount = Messages.find({
           senderId: user._id
           receiverId: currentUser._id
           isRead: false
-        }).count()
+        }, { reactive: false }).count()
 
         msgCount = Messages.find({
           senderId: user._id
           receiverId: currentUser._id
         }, {
-          reactive: true
+          reactive: false
         }).count()
 
         firstMsg = Messages.findOne
@@ -61,22 +63,26 @@ Meteor.startup ->
             timestamp: 1
           sort:
             timestamp: -1
+          reactive: false
 
         user.unreadMsgsCount = unreadMsgsCount
         user.msgTimestamp = firstMsg?.timestamp
         if firstMsg
-          existingSendersList = SendersList.findOne({ senderId: user._id, receiverId: currentUser._id })
+          existingSendersList = SendersList.findOne
+            senderId: user._id, receiverId: currentUser._id
+          ,
+            reactive: false
           if existingSendersList
             SendersList.update { senderId: user._id, receiverId: currentUser._id },
               $set:
-                lastMsgTimestamp: Date.now()
+                lastMsgTimestamp: user.msgTimestamp
               $inc: { unreadMsgsCount: 1 }
           else
             SendersList.insert
               senderId: user._id
               senderUsername: user.username
               receiverId: currentUser._id
-              lastMsgTimestamp: Date.now()
+              lastMsgTimestamp: user.msgTimestamp
               unreadMsgsCount: unreadMsgsCount
 
         return user
