@@ -179,12 +179,12 @@ setSuccessMsg = (lessonPoints, lesson, user) ->
     if Lesson.isProgrammingChallengeLesson()
       Session.set 'successMsg',
         """
-        Congratluations! The output seems to be correct.
+        Congratulations! The output seems to be correct.
         """
     else
       Session.set 'successMsg',
         """
-        #{TAPi18n.__('Congratluations! You have earned <b>%s</b> points!', lessonPoints)}
+        #{TAPi18n.__('Congratulations! You have earned <b>%s</b> points!', lessonPoints)}
         #{TAPi18n.__('You have %s points in total', totalPoints)}.
         """
   else
@@ -197,7 +197,7 @@ setExerciseSuccessMsg = (lesson, exercise) ->
   if totalPoints and Meteor.user()?.username == Router.current().params.username
     Session.set 'successMsg',
       """
-      #{TAPi18n.__('Congratluations! You have earned <b>2</b> points!')}
+      #{TAPi18n.__('Congratulations! You have earned <b>2</b> points!')}
       #{TAPi18n.__('You have %s points in total', totalPoints)}.
       #{TAPi18n.__('Do another exercise or go to assignment')}.
       """
@@ -261,7 +261,7 @@ Template.lessonLayout.events
               else
                 Session.set 'successMsg',
                   """
-                  #{TAPi18n.__('Congratluations! You can continue to the next lesson') + '.'}
+                  #{TAPi18n.__('Congratulations! You can continue to the next lesson') + '.'}
                   #{TAPi18n.__('But your progress is not saved because you are not logged in') + '.'}
                   #{TAPi18n.__('We recommend you to create an account and log in') + '.'}
                   """

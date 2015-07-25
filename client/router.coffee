@@ -401,9 +401,10 @@ Router.route '/:lang?/messages/:username?',
         receiverUsername: @params.username
         senderUsername: Meteor.user()?.username
       }).wait()
-    @subscribe('sendersList').wait()
+    @subscribe('sendersList', Meteor.userId()).wait()
   data: ->
     return {
+      sendersList: SendersList.find({}, sort: { lastMsgTimestamp: -1 })
       messages:
         Messages.find({
           $or: [

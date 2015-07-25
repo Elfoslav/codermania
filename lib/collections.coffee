@@ -43,7 +43,12 @@
 #isRead
 @Messages = new Mongo.Collection('messages')
 
-#READ ONLY - senders list for messages
+#senders list for messages
+#senderId: String
+#senderUsername: String
+#receiverId: String
+#lastMsgTimestamp: Number
+#unreadMsgsCount: Number
 @SendersList = new Mongo.Collection('sendersList')
 
 # Meteor.users

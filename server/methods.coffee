@@ -279,14 +279,29 @@ Meteor.methods
 
     throw new Meteor.Error(401, 'Unauthorized! You have to be logged in to perform this action.') unless @userId
 
-    sender = Meteor.users.findOne(Meteor.userId())
+    sender = Meteor.users.findOne(@userId)
     receiver = Meteor.users.findOne({ username: options.username })
     App.insertMessage
-      senderId: Meteor.userId()
+      senderId: @userId
       senderUsername: sender.username
       receiverId: receiver._id
       receiverUsername: receiver.username
       text: options.message
+
+    existingSendersList = SendersList.findOne({ senderId: @userId, receiverId: receiver._id })
+    if existingSendersList
+      SendersList.update { senderId: @userId, receiverId: receiver._id },
+        $set:
+          lastMsgTimestamp: Date.now()
+          senderUsername: sender.username #just in case
+        $inc: { unreadMsgsCount: 1 }
+    else
+      SendersList.insert
+        senderId: sender._id
+        senderUsername: sender.username
+        receiverId: receive._id
+        lastMsgTimestamp: Date.now()
+        unreadMsgsCount: 1
 
     if options.sendEmail and Meteor.isServer
       @unblock()
@@ -306,15 +321,15 @@ Meteor.methods
     check(senderUsername, String)
     throw new Meteor.Error(401, 'Unauthorized!') unless @userId
     sender = Meteor.users.findOne({username: senderUsername})
-    Messages.update({
-      senderId: sender?._id
-      receiverId: @userId
-    }, {
+    Messages.update { senderId: sender?._id, receiverId: @userId },
       $set:
         isRead: true
-    }, {
+    ,
       multi: true
-    })
+
+    SendersList.update { senderId: sender?._id, receiverId: @userId },
+      $set:
+        unreadMsgsCount: 0
 
   makeReadStudentHomeworkComments: (studentHomeworkId) ->
     check studentHomeworkId, String
