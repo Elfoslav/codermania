@@ -351,6 +351,7 @@ Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?
       @render 'notFound'
     if @ready() and !homework
       @render 'notFound'
+    routeUsername: @params.username
     homework: homework
     studentHomework: StudentHomework.findOne({ homeworkId: @params.homeworkId })
     studentHomeworkComments: StudentHomeworkComments.find()
