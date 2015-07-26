@@ -11,6 +11,8 @@ template(name="studentProfile")
       +onlineDot
     |{{trimEmail student.username}}
     sup {{student.points}} pts
+    if isCurrentUser
+      a.btn.btn-default(href="{{pathFor 'studentProfileEdit'}}") Edit profile
     if isInRole 'teacher' 'all'
       a(href="{{pathFor 'messages' lang=lang username=student.username}}")
         span.glyphicon.glyphicon-envelope
@@ -22,9 +24,26 @@ template(name="studentProfile")
           |&nbsp;
           a.btn.btn-primary.remove-teacher-role(href="#") Remove teacher role
 
+  if student.profile
+    .row
+      if student.profile.about
+        .col-sm-4
+          h3 About me
+          pre.unstyled {{linkify student.profile.about}}
+      if student.profile.whyIWantToLearnToCode
+        .col-sm-4
+          h3 Why I want to learn to code
+          pre.unstyled {{student.profile.whyIWantToLearnToCode}}
+      if student.profile.githubURL
+        .col-sm-4
+          h3 My Github
+          p
+            span.fa.fa-github
+            a(href="{{student.profile.githubURL}}") {{student.profile.githubURL}}
+
   .row
     .col-sm-4
-      h2 Study groups
+      h3 Study groups
       if showCreateStudyGroupBtn
         +createStudyGroupBtn
       each studyGroups
@@ -34,7 +53,7 @@ template(name="studentProfile")
         p
           a.btn.btn-default(href="{{pathFor 'studyGroups'}}") Check out study groups
     .col-sm-4
-      h2 Homework
+      h3 Homework
       if studentHomework.count
         ul.list-unstyled
           each studentHomework
@@ -51,7 +70,7 @@ template(name="studentProfile")
           a(href="{{pathFor 'studyGroups'}}") study group
           |to get a homework.
     .col-sm-4
-      h2 Programming Challenges
+      h3 Programming Challenges
       if programmingChallenges.count
         ul.list-unstyled
           each programmingChallenges

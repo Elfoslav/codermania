@@ -2,6 +2,8 @@ Template.studentProfile.helpers
   canSeeUserExercises: ->
     Roles.userIsInRole(Meteor.userId(), 'teacher', 'all') or
       Meteor.user()?.username is Router.current().params.username
+  isCurrentUser: ->
+    Meteor.user()?.username is Router.current().params.username
   studyGroups: ->
     user = Meteor.users.findOne({ username: Router.current().params.username })
     StudyGroups.find({ userIds: { $in: [ user?._id ] }}, { sort: { timestamp: 1 } })

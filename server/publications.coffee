@@ -95,6 +95,12 @@ Meteor.publish 'student', (username) ->
       services: 0
       settings: 0
 
+Meteor.publish 'studentProfile', ->
+  Meteor.users.find { _id: @userId },
+    fields:
+      services: 0
+      settings: 0
+
 Meteor.publish 'studentLessonData', (username) ->
   check(username, String)
   Meteor.users.find { username: username },

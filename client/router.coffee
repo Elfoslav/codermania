@@ -280,6 +280,21 @@ Router.route '/:lang?/students/:username/',
   onAfterAction: ->
     App.setPageTitle(@params.username)
 
+Router.route '/:lang?/edit-profile',
+  name: 'studentProfileEdit'
+  waitOn: ->
+    [
+      Meteor.subscribe('studentProfile')
+    ]
+  data: ->
+    student = Meteor.users.findOne(Meteor.userId())
+    if @ready() and !student
+      @render 'notFound'
+
+    student: student
+  onAfterAction: ->
+    App.setPageTitle('Edit your profile')
+
 Router.route '/:lang?/user/settings',
   name: 'userSettings'
   waitOn: ->
