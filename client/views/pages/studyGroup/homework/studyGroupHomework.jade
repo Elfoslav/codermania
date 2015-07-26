@@ -123,13 +123,12 @@ template(name="studyGroupHomework")
                     |Send e-mail about new message to {{trimEmail username}}
               .form-group
                 button.btn.btn-primary(type="submit") {{_'Submit comment'}}
-      .col-sm-4
+      .col-sm-4.col-result
         h2.no-margin-top Result
+          a.enter-fullscreen-btn(href="#" title="Enter fullscreen")
+            span.glyphicon.glyphicon-fullscreen
         #homework-result
           p &larr; Run the code in the editor.
-        p
-          a.btn.btn-default.enter-fullscreen-btn(href="#") Enter fullscreen
-
 
   with homework
     +homeworkFormModal
