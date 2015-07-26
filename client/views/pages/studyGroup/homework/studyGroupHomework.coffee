@@ -23,7 +23,7 @@ Template.studyGroupHomework.helpers
       editor.setTheme('ace/theme/monokai')
       editor.getSession().setMode('ace/mode/html')
       editor.setShowPrintMargin(false)
-      editor.getSession().setUseWrapMode(true)
+      editor.getSession().setUseWrapMode(false)
       editor.getSession().setTabSize(2);
 
       if studentHomework
@@ -138,9 +138,26 @@ Template.studyGroupHomework.events
         $(fullscreenHw).find('.col-sm-4').removeClass('col-sm-4').addClass('col-sm-7')
         tpl.$('#homework-comments').addClass('hidden')
         $('.enter-fullscreen-btn').text('Exit fullscreen')
+        tpl.$('.toggle-editor').addClass('hidden')
       , ->
         console.log('leaving fullscreen')
         $(fullscreenHw).removeClass('fullscreen-enabled')
         $(fullscreenHw).find('.col-sm-7').removeClass('col-sm-7').addClass('col-sm-4')
         tpl.$('#homework-comments').removeClass('hidden')
         $('.enter-fullscreen-btn').text('Enter fullscreen')
+        tpl.$('.toggle-editor').removeClass('hidden')
+  'click .toggle-editor': (evt, tpl) ->
+    evt.preventDefault()
+    $colEditor = tpl.$('#fullscreen-homework .col-editor')
+    if $colEditor.hasClass('col-sm-5')
+      #enlarge editor
+      tpl.$('.assignment').addClass('hidden')
+      $colEditor.removeClass('col-sm-5').addClass('col-sm-8').addClass('enlarged-editor')
+      $('.toggle-editor .glyphicon').removeClass('.glyphicon-resize-full')
+        .addClass('.glyphicon-resize-small')
+    else
+      #diminish editor
+      tpl.$('.assignment').removeClass('hidden')
+      $colEditor.removeClass('col-sm-8').addClass('col-sm-5').removeClass('enlarged-editor')
+      $('.toggle-editor .glyphicon').removeClass('.glyphicon-resize-small')
+        .addClass('.glyphicon-resize-full')

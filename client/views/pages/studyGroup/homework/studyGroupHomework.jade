@@ -61,7 +61,7 @@ template(name="studyGroupHomework")
       span.glyphicon.glyphicon-info-sign
       |Please sign in, so you can do the homework.
   .row
-    .col-sm-3
+    .col-sm-3.assignment
       h2.no-margin-top Assignment
       pre.unstyled-pre {{{homework.description}}}
       h3 Please support CoderMania
@@ -77,8 +77,10 @@ template(name="studyGroupHomework")
       p
         a.btn.btn-default(href="{{pathFor 'studyGroup' lang=lang _id=studyGroup._id}}") &larr; Study group
     #fullscreen-homework
-      .col-sm-5
+      .col-sm-5.col-editor
         h2.no-margin-top HTML editor
+          a.toggle-editor(href="#" title="Click me ;-)")
+            span.glyphicon.glyphicon-resize-full
         #editor-wrapper
           +sharejsAce(docid=document onRender=editorConfig onConnect=setMode id="html-editor")
           if showSaveAndSubmitButtons
