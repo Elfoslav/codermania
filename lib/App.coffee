@@ -77,6 +77,21 @@ class @App
       isRead: false
       needHelpId: opts.needHelpId
 
+    existingSendersList = SendersList.findOne({ senderId: opts.senderId, receiverId: opts.receiverId })
+    if existingSendersList
+      SendersList.update { senderId: opts.senderId, receiverId: opts.receiverId },
+        $set:
+          lastMsgTimestamp: Date.now()
+          senderUsername: opts.senderUsername #just in case
+        $inc: { unreadMsgsCount: 1 }
+    else
+      SendersList.insert
+        senderId: opts.senderId
+        senderUsername: opts.senderUsername
+        receiverId: opts.receiverId
+        lastMsgTimestamp: Date.now()
+        unreadMsgsCount: 1
+
   @getWelcomeMessage: ->
     return """
       Hello, welcome to CoderMania! I would like to hear from you:\n

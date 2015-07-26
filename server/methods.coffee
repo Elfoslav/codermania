@@ -288,21 +288,6 @@ Meteor.methods
       receiverUsername: receiver.username
       text: options.message
 
-    existingSendersList = SendersList.findOne({ senderId: @userId, receiverId: receiver._id })
-    if existingSendersList
-      SendersList.update { senderId: @userId, receiverId: receiver._id },
-        $set:
-          lastMsgTimestamp: Date.now()
-          senderUsername: sender.username #just in case
-        $inc: { unreadMsgsCount: 1 }
-    else
-      SendersList.insert
-        senderId: sender._id
-        senderUsername: sender.username
-        receiverId: receive._id
-        lastMsgTimestamp: Date.now()
-        unreadMsgsCount: 1
-
     if options.sendEmail and Meteor.isServer
       @unblock()
       App.sendEmailAboutMessage
