@@ -5,7 +5,7 @@ Template.studentProfileEdit.onRendered ->
       ['para', ['ul', 'ol']]
       ['link', ['link', 'picture']]
     ]
-  if @data?.student.profile.about
+  if @data?.student?.profile?.about
     summernote.code(@data.stutent.profile.about)
 
 Template.studentProfileEdit.events

@@ -16,8 +16,9 @@ template(name="studentProfileEdit")
             label About me:
             textarea.form-control#about-me(name="about" rows="6" placeholder="Write something about you...") {{about}}
       .row
-        .form-group
-          input.btn.btn-primary(type="submit" value="Save")
+        .col-sm-4
+          .form-group
+            input.btn.btn-primary(type="submit" value="Save")
 
-        hr
-        a.btn.btn-default(href="{{pathFor 'studentProfile' username=username}}") &larr; Back to my profile
+      hr
+      a.btn.btn-default(href="{{pathFor 'studentProfile' username=username}}") &larr; Back to my profile
