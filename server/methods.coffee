@@ -125,18 +125,10 @@ Meteor.methods
           $set: lesson
 
         if lesson.success and user._id != elfoslav._id
-          userIds = []
-          teachers = Meteor.users.find { 'roles.all': 'teacher' }
-          teachers.forEach (teacher) ->
-            if userIds.indexOf(teacher._id) == -1
-              userIds.push teacher._id
-          AppNotifications.insert
+          App.notifyTeachers
             userId: @userId
-            userIds: userIds
             sourceId: lesson.type + lesson.id
             type: 'Programming challenge'
-            isReadBy: [ @userId ]
-            timestamp: Date.now()
             text: "
               User
               <a href='#{Meteor.absoluteUrl()}students/#{Meteor.user()?.username}'>#{Meteor.user()?.username}</a>
@@ -478,21 +470,19 @@ Meteor.methods
     Meteor.call 'saveStudentHomework', data
 
     homework = Homework.findOne data.homeworkId
-    teachers = Meteor.users.find
-      'roles.all': 'teacher'
-    teachers.forEach (teacher) =>
-      console.log 'submitting homework to teacher: ', teacher.username
-      #send a message only if user has student role. Student can have teacher role
-      if Roles.userIsInRole(@userId, 'student', 'all') and teacher._id != @userId
-        App.insertMessage
-          senderId: @userId
-          senderUsername: Meteor.user()?.username
-          receiverId: teacher._id
-          receiverUsername: teacher.username
-          text: """
-            (auto generated message) I have submitted homework called #{homework?.title}:
-            #{Meteor.absoluteUrl()}study-groups/#{data.studyGroupId}/homework/#{data.homeworkId}/#{Meteor.user().username}
-          """
+    App.notifyTeachers
+      userId: @userId
+      sourceId: data.homeworkId
+      type: 'Homework'
+      text: "
+        User
+        <a href='#{Meteor.absoluteUrl()}students/#{Meteor.user()?.username}'>#{Meteor.user()?.username}</a>
+        finished homework
+        <a class='notification-source-link'
+          href='#{Meteor.absoluteUrl()}study-groups/#{data.studyGroupId}/homework/#{data.homeworkId}/#{Meteor.user()?.username}'>
+            #{homework.title}.
+        </a>
+      "
   markHomeworkAsCorrect: (data) ->
     check data,
       homeworkId: String

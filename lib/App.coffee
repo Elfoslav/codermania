@@ -93,6 +93,52 @@ class @App
         lastMsgTimestamp: Date.now()
         unreadMsgsCount: 1
 
+  @insertNotification: (data) ->
+    unless data.userIds?.length > 1
+      userIds = []
+      teachers = Meteor.users.find { 'roles.all': 'teacher' }
+      teachers.forEach (teacher) ->
+        if userIds.indexOf(teacher._id) == -1
+          userIds.push teacher._id
+    existing = AppNotifications.findOne
+      userId: data.userId
+      sourceId: data.sourceId
+    if existing
+      AppNotifications.update
+        userId: data.userId
+        sourceId: data.sourceId
+      ,
+        $set:
+          userIds: data.userIds || userIds
+          type: data.type
+          isReadBy: data.isReadBy || []
+          timestamp: data.timestamp || Date.now()
+          text: data.text
+    else
+      AppNotifications.insert
+        userId: data.userId
+        userIds: data.userIds || userIds
+        sourceId: data.sourceId
+        type: data.type
+        isReadBy: data.isReadBy || []
+        timestamp: data.timestamp || Date.now()
+        text: data.text
+
+  @notifyTeachers: (data) ->
+    throw new Meteor.Error 500, 'notifyTeachers can only be called from the server' unless Meteor.isServer
+    teachers = Meteor.users.find
+      'roles.all': 'teacher'
+    teachers.forEach (teacher) =>
+      console.log 'submitting homework to teacher: ', teacher.username
+      #send a message only if user has student role. Student can have teacher role
+      if Roles.userIsInRole(data.userId, 'student', 'all') and teacher._id != @userId
+        if data.userId != teacher._id
+          App.insertNotification
+            userId: data.userId
+            sourceId: data.sourceId
+            type: data.type
+            text: data.text
+
   @getWelcomeMessage: ->
     return """
       Hello, welcome to CoderMania! I would like to hear from you:\n

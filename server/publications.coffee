@@ -407,6 +407,16 @@ Meteor.publish 'notifications', ->
     userIds: { $in: [ user?._id ] }
     isReadBy: { $nin: [ user?._id ] }
   ,
+    sort: { timestamp: -1 }
+    limit: 100
+
+Meteor.publish 'readNotifications', ->
+  user = Meteor.users.findOne @userId
+  AppNotifications.find
+    userIds: { $in: [ user?._id ] }
+    isReadBy: { $in: [ user?._id ] }
+  ,
+    sort: { timestamp: -1 }
     limit: 100
 
 Meteor.publish 'notificationsCount', ->

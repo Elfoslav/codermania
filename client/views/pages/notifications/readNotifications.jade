@@ -1,0 +1,11 @@
+template(name="readNotifications")
+  +notificationsHeader
+  p
+    a.btn.btn-default(href="{{pathFor 'notifications'}}") Show unread notifications
+  each notifications
+    +notificationsListItem
+  else
+    p No read notifications.
+  hr
+  p
+    a.btn.btn-default(href="{{pathFor 'notifications'}}") Show unread notifications
