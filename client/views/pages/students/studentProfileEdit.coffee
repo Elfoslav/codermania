@@ -1,3 +1,13 @@
+Template.studentProfileEdit.onRendered ->
+  summernote = @$('#about-me').summernote
+    toolbar: [
+      ['style', ['bold', 'italic', 'underline', 'clear']]
+      ['para', ['ul', 'ol']]
+      ['link', ['link', 'picture']]
+    ]
+  if @data?.student.profile.about
+    summernote.code(@data.stutent.profile.about)
+
 Template.studentProfileEdit.events
   'submit .profile-form': (evt, tpl) ->
     evt.preventDefault()

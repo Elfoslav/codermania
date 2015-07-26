@@ -29,7 +29,7 @@ template(name="studentProfile")
       if student.profile.about
         .col-sm-4
           h3 About me
-          pre.unstyled {{linkify student.profile.about}}
+          pre.unstyled {{escape student.profile.about}}
       if student.profile.whyIWantToLearnToCode
         .col-sm-4
           h3 Why I want to learn to code
