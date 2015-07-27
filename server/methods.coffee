@@ -435,12 +435,14 @@ Meteor.methods
       studyGroupId: String
       homeworkId: String
       code: String
+      submittedAt: Match.Optional Number
     unless @userId
       throw new Meteor.Error(401, 'To perform this action, you have to be logged in')
 
     homework = Homework.findOne data.homeworkId
     data.title = homework?.title
     data.userId = @userId
+    data.username = Meteor.user().username
     data.points = homework.points
     data.timestamp = Date.now()
 
@@ -455,7 +457,9 @@ Meteor.methods
         $set:
           title: data.title
           code: data.code
+          username: data.username
           updatedAt: Date.now()
+          submittedAt: data.submittedAt
     else
       StudentHomework.insert data
 
@@ -467,6 +471,7 @@ Meteor.methods
     unless @userId
       throw new Meteor.Error(401, 'To perform this action, you have to be logged in')
 
+    data.submittedAt = Date.now()
     Meteor.call 'saveStudentHomework', data
 
     homework = Homework.findOne data.homeworkId

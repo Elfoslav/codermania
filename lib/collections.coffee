@@ -123,6 +123,7 @@
 #studyGroupId: String
 #homeworkId: String
 #userId: String
+#username: String
 #title: String - store homework title so we don't need to make joins
 #code: String
 #success: Optional Boolean

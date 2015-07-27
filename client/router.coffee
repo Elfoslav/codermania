@@ -374,6 +374,31 @@ Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?
       App.initTextEditor('#homework-comments-textarea')
     , 100
 
+Router.route '/:lang?/study-groups/:studyGroupId/student-homework-list',
+  name: 'studentHomeworkList'
+  waitOn: ->
+    [
+      Meteor.subscribe('studyGroup', @params.studyGroupId)
+      Meteor.subscribe 'studentHomework',
+        studyGroupId: @params.studyGroupId
+        submittedAt: { $gt: 1 } #all submitted
+      ,
+        ''
+      ,
+        sort: { submittedAt: -1 }
+        limit: 100
+    ]
+  data: ->
+    studyGroup: StudyGroups.findOne @params.studyGroupId
+    studentHomeworkList: StudentHomework.find({}, { sort: { submittedAt: -1 }})
+  onAfterAction: ->
+    studyGroup = StudyGroups.findOne @params.studyGroupId
+    if @ready() and !studyGroup
+      @render 'notFound'
+    if @ready() and !Roles.userIsInRole(Meteor.userId(), 'teacher', 'all')
+      @render 'notFound'
+    App.setPageTitle('Student homework list')
+
 Router.route '/:lang?/homework',
   name: 'homework'
   waitOn: ->

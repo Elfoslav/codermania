@@ -2,6 +2,9 @@ template(name="studyGroupHomework")
   if isInRole 'teacher' 'all'
     p
       if studyGroup.homeworkIds
+        a.btn.btn-primary(href="{{pathFor 'studentHomeworkList' studyGroupId=studyGroup._id}}")
+          |Show student homework list
+        |&nbsp;
         a.btn.btn-primary(href="{{pathFor 'studyGroupHomeworkSort' studyGroupId=studyGroup._id}}")
           |Sort homework
         |&nbsp;
@@ -33,9 +36,13 @@ template(name="studyGroupHomework")
         |Correct solution is for {{homework.points}} points.
   if studentHomework
     p
-      small Submitted {{formatDate studentHomework.timestamp}}.
+      small
         if studentHomework.updatedAt
           |Updated {{formatDate studentHomework.updatedAt}}.
+        else
+          |Saved {{formatDate studentHomework.timestamp}}.
+        if studentHomework.submittedAt
+          |Submitted {{formatDate studentHomework.submittedAt}}.
   if currentUser
     unless isCurrentUserInGroup
       .alert.alert-danger You have to join

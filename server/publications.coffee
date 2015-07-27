@@ -385,16 +385,21 @@ Meteor.reactivePublish 'homework', (query, options) ->
     return Homework.find({ _id: { $in: studyGroup.homeworkIds }})
   Homework.find(query, options)
 
-Meteor.publish 'studentHomework', (query, username) ->
+Meteor.publish 'studentHomework', (query, username, options) ->
   check query,
     homeworkId: Match.Optional String
-  check username, String
-  user = Meteor.users.findOne { username: username }
-  unless user
-    Logger.log "studentHomework publication: Student with username #{username} not found", "warning"
-    return @ready()
-  query.userId = user._id
-  StudentHomework.find query
+    studyGroupId: Match.Optional String
+    submittedAt: Match.Optional Object
+  check username, Match.Optional String
+  query = query || {}
+  options = options || {}
+  if username
+    user = Meteor.users.findOne { username: username }
+    unless user
+      Logger.log "studentHomework publication: Student with username #{username} not found", "warning"
+      return @ready()
+    query.userId = user._id
+  StudentHomework.find query, options
 
 Meteor.publish 'studentHomeworkComments', (query) ->
   check query,

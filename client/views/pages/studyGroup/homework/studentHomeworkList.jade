@@ -1,0 +1,13 @@
+template(name="studentHomeworkList")
+  h1.no-margin-top Student homework
+  each studentHomeworkList
+    p
+      small Submitted {{formatDate updatedAt}}.
+      a(href="{{pathFor 'studyGroupHomework' studyGroupId=studyGroupId homeworkId=homeworkId username=this.username}}")
+        |{{title}}
+      |from
+      a(href="{{pathFor 'studentProfile' username=this.username}}") {{this.username}}
+      if success
+        span.glyphicon.glyphicon-ok-sign.green
+  else
+    p No submitted homework.
