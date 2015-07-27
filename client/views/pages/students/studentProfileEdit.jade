@@ -1,20 +1,20 @@
 template(name="studentProfileEdit")
   h1 Edit profile
-  with student.profile
+  with student
     form.profile-form
       .row
         .col-sm-4
           .form-group
             label My Github URL:
-            input.form-control(type='text' name='githubURL' value="{{githubURL}}"
+            input.form-control(type='text' name='githubURL' value="{{profile.githubURL}}"
               placeholder="https://www.github.com/yourUsername")
           .form-group
             label Why I want to learn to code:
-            textarea.form-control(name="whyIWantToLearnToCode" rows="5" placeholder="Why you decided to learn to code?") {{whyIWantToLearnToCode}}
+            textarea.form-control(name="whyIWantToLearnToCode" rows="5" placeholder="Why you decided to learn to code?") {{profile.whyIWantToLearnToCode}}
         .col-sm-6
           .form-group
             label About me:
-            textarea.form-control#about-me(name="about" rows="6" placeholder="Write something about you...") {{about}}
+            textarea.form-control#about-me(name="about" rows="6" placeholder="Write something about you...") {{profile.about}}
       .row
         .col-sm-4
           .form-group
