@@ -8,12 +8,15 @@ class @App
       editor = tinymce.init
         selector: selector
         plugins: [
-            "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+            "advlist autolink lists link image charmap preview hr anchor pagebreak",
             "visualblocks visualchars code fullscreen",
-            "insertdatetime media nonbreaking save contextmenu directionality",
-            "template paste textpattern imagetools"
+            "nonbreaking save directionality",
+            "paste textpattern"
         ]
-        toolbar: "undo redo | bold italic | bullist numlist outdent indent | link image | preview fullpage"
+        style_formats: [
+          { title: 'Code', block: 'pre' }
+        ]
+        toolbar1: "styleselect | bold italic | bullist numlist outdent indent | link image | preview fullpage"
 
   @getCurrentUserId: ->
     Router.current().params.userId || Meteor.userId() || undefined
