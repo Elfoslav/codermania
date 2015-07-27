@@ -1,5 +1,8 @@
 template(name="readNotifications")
-  +notificationsHeader
+  h1.no-margin-top
+    a(href="{{pathFor 'messages'}}") {{_'Messages'}} ({{unreadMessagesCount}})
+    ||
+    |Read Notifications ({{notifications.count}})
   p
     a.btn.btn-default(href="{{pathFor 'notifications'}}") Show unread notifications
   each notifications
