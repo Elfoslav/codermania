@@ -135,10 +135,14 @@ Template.studyGroupHomework.events
   'click .enter-fullscreen-btn': (evt, tpl) ->
     evt.preventDefault()
     fullscreenHw = document.getElementById('fullscreen-homework')
+    isEditorEnlarged = false
     if BigScreen.enabled
       BigScreen.toggle fullscreenHw, ->
         console.log('fulllscreen enabled')
         $(fullscreenHw).addClass('fullscreen-enabled')
+        if $(fullscreenHw).hasClass('enlarged-editor')
+          $(fullscreenHw).removeClass('enlarged-editor')
+          isEditorEnlarged = true
         tpl.$('.col-editor').addClass('hidden')
         tpl.$('.col-result').removeClass('col-sm-4')
         tpl.$('.col-result .glyphicon-fullscreen')
@@ -148,6 +152,8 @@ Template.studyGroupHomework.events
       , ->
         console.log('leaving fullscreen')
         $(fullscreenHw).removeClass('fullscreen-enabled')
+        if isEditorEnlarged
+          $(fullscreenHw).addClass('enlarged-editor')
         tpl.$('.col-editor').removeClass('hidden')
         tpl.$('.col-result').addClass('col-sm-4')
         tpl.$('.col-result .glyphicon-resize-small')
@@ -162,6 +168,7 @@ Template.studyGroupHomework.events
       tpl.$('.assignment').addClass('hidden')
       $colEditor.removeClass('col-sm-5').addClass('col-sm-8')
       tpl.$('#fullscreen-homework').addClass('enlarged-editor')
+      ace.edit('html-editor').resize()
       $('.toggle-editor .glyphicon').removeClass('glyphicon-resize-full')
         .addClass('glyphicon-resize-small')
     else
@@ -169,5 +176,6 @@ Template.studyGroupHomework.events
       tpl.$('.assignment').removeClass('hidden')
       $colEditor.removeClass('col-sm-8').addClass('col-sm-5')
       tpl.$('#fullscreen-homework').removeClass('enlarged-editor')
+      ace.edit('html-editor').resize()
       $('.toggle-editor .glyphicon').removeClass('glyphicon-resize-small')
         .addClass('glyphicon-resize-full')
