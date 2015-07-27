@@ -365,7 +365,7 @@ Router.route '/:lang?/study-groups/:studyGroupId/homework/:homeworkId/:username?
     routeUsername: @params.username
     homework: homework
     studentHomework: StudentHomework.findOne({ homeworkId: @params.homeworkId })
-    studentHomeworkComments: StudentHomeworkComments.find()
+    studentHomeworkComments: StudentHomeworkComments.find({}, { sort: { timestamp: 1 } })
     studyGroup: StudyGroups.findOne @params.studyGroupId
   onAfterAction: ->
     hw = Homework.findOne @params.homeworkId
