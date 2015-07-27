@@ -399,3 +399,14 @@ Meteor.methods
         $in: [ @userId ]
     AppNotifications.update query,
       $addToSet: { isReadBy: @userId }
+
+  markNotificationAsReadBySource: (sourceId) ->
+    check sourceId, String
+    unless @userId
+      throw new Meteor.Error 401, 'Unauthorized! You have to be logged in to perform this action.'
+    query =
+      sourceId: sourceId
+      userIds:
+        $in: [ @userId ]
+    AppNotifications.update query,
+      $addToSet: { isReadBy: @userId }

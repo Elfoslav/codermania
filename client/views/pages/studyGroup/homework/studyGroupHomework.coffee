@@ -58,6 +58,10 @@ Template.studyGroupHomework.helpers
     (@studentHomework and Meteor.user()?.username is 'elfoslav') or
       (@studentHomework and Meteor.userId() != @studentHomework.userId)
 
+Template.studyGroupHomework.onRendered ->
+  if Counts.get('notificationsCount')
+    Meteor.call 'markNotificationAsReadBySource', @data.studentHomework.sourceId
+
 Template.studyGroupHomework.events
   'click .mark-as-correct': (evt, tpl) ->
     evt.preventDefault()
