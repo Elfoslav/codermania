@@ -50,17 +50,17 @@ Template.studyGroupHomework.helpers
     @studyGroup?.userIds?.indexOf(Meteor.userId()) != -1
   isHomeworkUser: ->
     @studentHomework?.userId == Meteor.userId()
+  isReadComment: ->
+    studentHw = StudentHomework.findOne @studentHomeworkId
+    return @isReadBy.indexOf(studentHw.userId) != -1
   makeReadComment: ->
-    Meteor.call 'makeReadStudentHomeworkComments', @studentHomeworkId
+    if @isReadBy.indexOf(Meteor.userId()) is -1
+      Meteor.call 'makeReadStudentHomeworkComments', @studentHomeworkId
   isCorrect: ->
     StudentHomework.findOne({ homeworkId: @_id })?.success
   canMarkAsCorrect: ->
     (@studentHomework and Meteor.user()?.username is 'elfoslav') or
       (@studentHomework and Meteor.userId() != @studentHomework.userId)
-
-Template.studyGroupHomework.onRendered ->
-  if Counts.get('notificationsCount')
-    Meteor.call 'markNotificationAsReadBySource', @data.studentHomework.sourceId
 
 Template.studyGroupHomework.events
   'click .mark-as-correct': (evt, tpl) ->

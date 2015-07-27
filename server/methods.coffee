@@ -311,15 +311,11 @@ Meteor.methods
   makeReadStudentHomeworkComments: (studentHomeworkId) ->
     check studentHomeworkId, String
     studentHw = StudentHomework.findOne studentHomeworkId
-    AppNotifications.update { sourceId: studentHw._id },
+    Meteor.call 'markNotificationAsReadBySource', studentHomeworkId
+    StudentHomeworkComments.update { studentHomeworkId: studentHomeworkId },
       $addToSet: { isReadBy: @userId }
     ,
       multi: true
-    if studentHw.userId is @userId
-      StudentHomeworkComments.update { studentHomeworkId: studentHomeworkId },
-        $set: { isRead: true }
-      ,
-        multi: true
 
   getNeedHelpCommentsCounter: (needHelpId) ->
     if needHelpId
@@ -555,3 +551,27 @@ Meteor.methods
     # TODO fix regexp to support multiple tokens
     regex = new RegExp('^' + query)
     Meteor.users.find({ username: $regex: regex }, options).fetch()
+
+  markNotificationAsRead: (id) ->
+    check id, String
+    unless @userId
+      throw new Meteor.Error 401, 'Unauthorized! You have to be logged in to perform this action.'
+    query =
+      _id: id
+      userIds:
+        $in: [ @userId ]
+    AppNotifications.update query,
+      $addToSet: { isReadBy: @userId }
+
+  markNotificationAsReadBySource: (sourceId) ->
+    check sourceId, String
+    unless @userId
+      throw new Meteor.Error 401, 'Unauthorized! You have to be logged in to perform this action.'
+    query =
+      sourceId: sourceId
+      userIds:
+        $in: [ @userId ]
+    AppNotifications.update query,
+      $addToSet: { isReadBy: @userId }
+    ,
+      multi: true

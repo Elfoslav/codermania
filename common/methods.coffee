@@ -351,7 +351,7 @@ Meteor.methods
     data.userId = @userId
     data.username = Meteor.user().username
     data.timestamp = Date.now()
-    data.isRead = @userId == studentHw.userId
+    data.isReadBy = if (@userId == studentHw.userId) then [ @userId ] else []
     StudentHomeworkComments.insert data
 
     @unblock()
@@ -388,25 +388,3 @@ Meteor.methods
         sender: sender
         receiver: receiver
         homeworkUrl: homeworkUrl
-
-  markNotificationAsRead: (id) ->
-    check id, String
-    unless @userId
-      throw new Meteor.Error 401, 'Unauthorized! You have to be logged in to perform this action.'
-    query =
-      _id: id
-      userIds:
-        $in: [ @userId ]
-    AppNotifications.update query,
-      $addToSet: { isReadBy: @userId }
-
-  markNotificationAsReadBySource: (sourceId) ->
-    check sourceId, String
-    unless @userId
-      throw new Meteor.Error 401, 'Unauthorized! You have to be logged in to perform this action.'
-    query =
-      sourceId: sourceId
-      userIds:
-        $in: [ @userId ]
-    AppNotifications.update query,
-      $addToSet: { isReadBy: @userId }

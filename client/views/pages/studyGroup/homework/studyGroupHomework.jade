@@ -113,7 +113,7 @@ template(name="studyGroupHomework")
                 if isOnline this.userId
                   +onlineDot
                 |{{formatDate timestamp}}
-                unless isRead
+                unless isReadComment
                   |(unread)
                 |:
               pre.unstyled {{escape message}}
