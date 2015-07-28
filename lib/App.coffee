@@ -14,7 +14,9 @@ class @App
             "paste textpattern"
         ]
         style_formats: [
-          { title: 'Code', block: 'pre' }
+          { title: 'small', inline: 'small' }
+          { title: 'code', inline: 'code' }
+          { title: 'pre', block: 'pre' }
         ]
         toolbar1: "styleselect | bold italic | bullist numlist outdent indent | link image | preview fullpage"
 

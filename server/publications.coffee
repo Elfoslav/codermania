@@ -391,19 +391,36 @@ Meteor.publish 'studentHomework', (query, username, options) ->
     studyGroupId: Match.Optional String
     submittedAt: Match.Optional Object
   check username, Match.Optional String
+  check options, Match.Optional Object
+  #data only for logged in user
+  return @ready() unless @userId
+
   query = query || {}
   options = options || {}
-  if username
-    user = Meteor.users.findOne { username: username }
-    unless user
-      Logger.log "studentHomework publication: Student with username #{username} not found", "warning"
-      return @ready()
-    query.userId = user._id
+  options.limit = 200
+  user = Meteor.users.findOne { username: username }
+  query.userId = user?._id
+  StudentHomework.find query, options
+
+Meteor.publish 'studentHomeworkList', (query, options) ->
+  check query,
+    homeworkId: Match.Optional String
+    studyGroupId: Match.Optional String
+    submittedAt: Match.Optional Object
+  check options, Match.Optional Object
+  #data only for logged in user
+  return @ready() unless @userId
+
+  query = query || {}
+  options = options || {}
+  options.limit = 200
   StudentHomework.find query, options
 
 Meteor.publish 'studentHomeworkComments', (query) ->
   check query,
     studentHomeworkId: String
+  #data only for logged in user
+  return @ready() unless @userId
   StudentHomeworkComments.find query
 
 Meteor.publish 'notifications', ->

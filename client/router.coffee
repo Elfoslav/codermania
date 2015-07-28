@@ -379,11 +379,9 @@ Router.route '/:lang?/study-groups/:studyGroupId/student-homework-list',
   waitOn: ->
     [
       Meteor.subscribe('studyGroup', @params.studyGroupId)
-      Meteor.subscribe 'studentHomework',
+      Meteor.subscribe 'studentHomeworkList',
         studyGroupId: @params.studyGroupId
         submittedAt: { $gt: 1 } #all submitted
-      ,
-        ''
       ,
         sort: { submittedAt: -1 }
         limit: 100
