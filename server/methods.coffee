@@ -124,7 +124,8 @@ Meteor.methods
         ,
           $set: lesson
 
-        if lesson.success and user._id != elfoslav._id
+        #send only if points were not added - if the user sends it for the second and more times
+        if lesson.success and user._id != elfoslav._id and !pointsAdded
           App.notifyTeachers
             userId: @userId
             sourceId: lesson.type + lesson.id
