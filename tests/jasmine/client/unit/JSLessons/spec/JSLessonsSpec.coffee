@@ -739,4 +739,18 @@ describe "JSLesson.checkAssignment", ->
           )
           expect(result).toBe(true)
 
+        it "should return true for correct code 2", ->
+          code = """
+            var boat = 'Titanic';
+            var obstruction = 'glacier';
+            if ((boat == \"Titanic\") && (obstruction === 'glacier')) {
+              throw new Error('Captain, we have a problem!');
+            }
+          """
+          result = JSLesson.checkAssignment(
+            lesson: lesson
+            code: code
+          )
+          expect(result).toBe(true)
+
     , 2000)

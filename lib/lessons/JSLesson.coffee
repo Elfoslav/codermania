@@ -615,7 +615,7 @@ class @JSLesson
 
       line1Expected = /var boat = ["']Titanic["'];/
       line2Expected = /var obstruction = ["']glacier["'];/
-      line3Expected = /if \(boat ={2,3} ["']Titanic["'] && obstruction ={2,3} ["']glacier["']\)/
+      line3Expected = /if \(\({0,1}boat ={2,3} ["']Titanic["']\){0,1} && \({0,1}obstruction ={2,3} ["']glacier["']\){0,1}\)/
       line4Expected = /throw new Error\(["']Captain, we have a problem!["']\);/
       line5Expected = /}/
 
