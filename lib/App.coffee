@@ -15,8 +15,8 @@ class @App
         ]
         style_formats: [
           { title: 'small', inline: 'small' }
-          { title: 'code', inline: 'code' }
-          { title: 'pre', block: 'pre' }
+          { title: 'Inline code', inline: 'code' }
+          { title: 'Block of code', block: 'pre' }
         ]
         toolbar1: "styleselect | bold italic | bullist numlist outdent indent | link image | preview fullpage"
 
