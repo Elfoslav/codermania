@@ -207,7 +207,7 @@ Meteor.methods
       msg = """
         <p>
           Hi,<br><br>
-          #{currentUser.username} has posted a message in study group.
+          #{currentUser.username} has posted a message in #{studyGroup.title} study group.
           Go to <a href='#{studyGroupUrl}'>#{studyGroupUrl}</a> to see the message.
         </p>
         <p>If you don't want to receive these e-mails, leave the study group.</p>
