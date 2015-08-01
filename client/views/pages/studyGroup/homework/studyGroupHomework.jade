@@ -114,8 +114,8 @@ template(name="studyGroupHomework")
         unless studentHomework
           if showSaveAndSubmitButtons
             hr
-            p If you need help, just save the homework, then the comment form will show up and
-              |write a comment what you need help with.
+            p If you need help, just submit the homework, then a comment form will show up and
+              |you can write a comment what you need help with.
         #homework-comments.chat
           if studentHomework
             hr
@@ -142,7 +142,9 @@ template(name="studyGroupHomework")
                     input(type="checkbox" name="sendEmail")
                     |Send e-mail about new message to {{trimEmail username}}
               .form-group
-                button.btn.btn-primary(type="submit") {{_'Submit comment'}}
+                button.btn.btn-primary(type="submit") {{_'Submit'}}
+                button.btn.btn-default.preview-comment(type="button") Preview the comment
+          pre.unstyled#comment-preview
       .col-sm-4.col-result
         h2.no-margin-top Result
           a.enter-fullscreen-btn(href="#" title="Enter fullscreen")

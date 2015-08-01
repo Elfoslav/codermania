@@ -124,8 +124,12 @@ Template.studyGroupHomework.events
     evt.preventDefault()
     form = evt.target
     editor = tinyMCE.get()[0]
+    comment = editor.getContent()
+    editor.setContent('')
+    form.reset()
+    tpl.$('#comment-preview').html('')
     data =
-      message: editor.getContent()
+      message: comment
       studentHomeworkId: tpl.data.studentHomework?._id
     if form.sendEmail
       data.sendEmail = form.sendEmail.checked
@@ -133,9 +137,7 @@ Template.studyGroupHomework.events
       if err
         bootbox.alert err.reason
         console.log err
-      else
-        editor.setContent('')
-        form.reset()
+        editor.setContent(comment)
   'click .enter-fullscreen-btn': (evt, tpl) ->
     evt.preventDefault()
     fullscreenHw = document.getElementById('fullscreen-homework')
@@ -185,3 +187,8 @@ Template.studyGroupHomework.events
         .addClass('glyphicon-resize-full')
   'click .save-homework-alert .btn': (evt, tpl) ->
     localStorage.hideSaveHomeworkAlert = true
+  'click .preview-comment': (evt, tpl) ->
+    tpl.$('#comment-preview').html(tinyMCE.get()[0]?.getContent())
+    $('html, body').animate({
+      scrollTop: tpl.$("#comment-preview").offset().top
+    }, 300);
