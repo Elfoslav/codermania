@@ -43,6 +43,19 @@ template(name="studyGroupHomework")
           |Saved {{formatDate studentHomework.timestamp}}.
         if studentHomework.submittedAt
           |Submitted {{formatDate studentHomework.submittedAt}}.
+  if showSaveHomeworkAlert
+    .alert.alert-warning.alert-dismissable.save-homework-alert(role="alert")
+      button.close(type="button" data-dismiss="alert" aria-label="Close")
+        span(aria-hidden="true") &times;
+      p
+        span.glyphicon.glyphicon-info-sign
+        |Press "Save & Run" button if you just want to save & run the code. Press "Submit to teacher"
+        |button if you want to submit the homework to a teacher. If a teacher tells you that something
+        |is wrong with your homework, fix it and press the "Submit to teacher" button again so
+        |teacher can see that the homework is ready for review.
+      br
+      button.btn.btn-primary(type="button" data-dismiss="alert" aria-label="Close")
+        |I understand, don't show this message again
   if currentUser
     unless isCurrentUserInGroup
       .alert.alert-danger You have to join

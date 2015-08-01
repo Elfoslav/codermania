@@ -61,6 +61,10 @@ Template.studyGroupHomework.helpers
   canMarkAsCorrect: ->
     (@studentHomework and Meteor.user()?.username is 'elfoslav') or
       (@studentHomework and Meteor.userId() != @studentHomework.userId)
+  showSaveHomeworkAlert: ->
+    Meteor.userId() and @studyGroup?.userIds?.indexOf(Meteor.userId()) != -1 and
+      !localStorage.hideSaveHomeworkAlert and
+      Router.current().params.username == Meteor.user()?.username
 
 Template.studyGroupHomework.events
   'click .mark-as-correct': (evt, tpl) ->
@@ -179,3 +183,5 @@ Template.studyGroupHomework.events
       ace.edit('html-editor').resize()
       $('.toggle-editor .glyphicon').removeClass('glyphicon-resize-small')
         .addClass('glyphicon-resize-full')
+  'click .save-homework-alert .btn': (evt, tpl) ->
+    localStorage.hideSaveHomeworkAlert = true
