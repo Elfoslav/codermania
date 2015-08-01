@@ -188,7 +188,9 @@ Template.studyGroupHomework.events
   'click .save-homework-alert .btn': (evt, tpl) ->
     localStorage.hideSaveHomeworkAlert = true
   'click .preview-comment': (evt, tpl) ->
+    previewContent = tpl.$('#comment-preview').html()
     tpl.$('#comment-preview').html(tinyMCE.get()[0]?.getContent())
-    $('html, body').animate({
-      scrollTop: tpl.$("#comment-preview").offset().top
-    }, 300);
+    unless previewContent
+      $('html, body').animate({
+        scrollTop: tpl.$("#preview-comment-scroll-here").offset().top
+      }, 300)
