@@ -542,7 +542,7 @@ class @JSExercise
       line4 = $.trim(lines[3])
 
       line1Expected = /var bands = \[ {0,1}['"]Metallica['"], ["']Iron Maiden["'] {0,1}\];/
-      line2Expected = /bands\.push\('AC\/DC'\);/
+      line2Expected = /bands\.push\(["']AC\/DC["']\);/
       line3Expected = 'console.log(bands[0]);'
       line4Expected = 'console.log(bands[2]);'
 

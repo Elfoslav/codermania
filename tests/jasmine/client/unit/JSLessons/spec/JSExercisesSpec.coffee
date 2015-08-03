@@ -435,6 +435,20 @@ describe "JSExercises.checkExercise", ->
           )
           expect(result).toBe(true)
 
+        it "should return true for Exercise 2 correct code", ->
+          code = """
+            var bands = [ 'Metallica', 'Iron Maiden' ];
+            bands.push(\"AC/DC\");
+            console.log(bands[0]);
+            console.log(bands[2]);
+          """
+          result = JSExercise.checkExercise(
+            lesson: lesson
+            exercise: lesson.exercises['1le2']
+            code: code
+          )
+          expect(result).toBe(true)
+
         it "should return true for Exercise 3 correct code", ->
           code = """
             var numbers = [ 5, 8, 3.3 ];
