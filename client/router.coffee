@@ -307,7 +307,10 @@ Router.route '/:lang?/study-groups',
   onAfterAction: ->
     App.setPageTitle("Study groups")
   data: ->
-    studyGroups: StudyGroups.find({}, { sort: { timestamp: 1 }})
+    studyGroups = StudyGroups.find().fetch()
+    studyGroups = _.sortBy studyGroups, (item) ->
+      item.userIds?.length
+    studyGroups: studyGroups
 
 Router.route '/:lang?/study-groups/:_id',
   name: 'studyGroup'
