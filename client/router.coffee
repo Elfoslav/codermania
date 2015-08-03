@@ -642,7 +642,7 @@ Router.route '/:lang?/',
   data: ->
     if @params.lang && (@params.lang != 'sk' or @params.lang != 'en')
       @render 'notFound'
-    homepageStudyGroups: StudyGroups.find({}, { sort: { timestamp: 1 }})
+    homepageStudyGroups: StudyGroups.find({ title: { $ne: 'general' }}, { sort: { timestamp: 1 }})
 
 Router.onBeforeAction ->
   if @params.lang

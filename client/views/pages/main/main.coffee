@@ -13,6 +13,10 @@ Template.main.helpers
         console.log('#{TAPi18n.__('Welcome to CoderMania')}');
         console.log('#{TAPi18n.__('You will learn to code here')}');
       """)
+  shortenStr: (str) ->
+    trimmed = str?.substr(0, 320)
+    trimmed = trimmed.substr(0, Math.min(trimmed.length, trimmed.lastIndexOf(" ")))
+    new Spacebars.SafeString(trimmed + '...')
 
 Template.main.events(
   'click .sign-up-btn': (e) ->

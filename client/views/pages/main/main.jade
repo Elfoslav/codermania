@@ -67,10 +67,12 @@ template(name="main")
     h2 Join study groups
     .row
       each homepageStudyGroups
-        .col-sm-4
+        .col-sm-3
           h3
             a(href="{{pathFor 'studyGroup' _id=_id}}") {{title}}
-          pre.unstyled-pre {{escape description}}
+          pre.unstyled-pre {{shortenStr description}}
+          p
+            a(href="{{pathFor 'studyGroup' _id=_id}}") Learn more &raquo;
     br
     .row
       .col-sm-4.col-sm-offset-4

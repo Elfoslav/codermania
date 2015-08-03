@@ -321,9 +321,16 @@ Meteor.publish 'summerWebDevSchoolStudyGroups', (lang) ->
     ]
 
 Meteor.publish 'homepageStudyGroups', ->
-  StudyGroups.find { isPublic: true },
-    sort: { timestamp: 1 }
-    limit: 3
+  StudyGroups.find
+    $or: [
+      { title: 'JavaScript' }
+      { title: 'HTML' }
+      { title: 'CSS' }
+      { title: 'Meteor.js' }
+    ]
+    isPublic: true
+  ,
+    limit: 4
 
 Meteor.publish 'unreadStudyGroupMessagesCount', (studyGroupId) ->
   check studyGroupId, Match.Optional String
