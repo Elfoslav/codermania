@@ -5,7 +5,7 @@ processForm = (form) ->
     title: form.title.value
     topics: form.topics.value
     capacity: form.capacity.value
-    curriculumId: form.curriculumId.value
+    curriculumId: form.curriculumId?.value
     isPublic: form.isPublic.checked
   if isNaN data.capacity
     return bootbox.alert 'Capacity must be a number'
