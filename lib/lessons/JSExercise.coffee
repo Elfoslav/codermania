@@ -588,7 +588,7 @@ class @JSExercise
 
       line1Expected = /var fruit = ['"]banana['"];/
       line2Expected = /if \( {0,1}fruit ={2,3} ['"]banana['"] {0,1}\) {/
-      line3Expected = "console.log('variable fruit has value banana');"
+      line3Expected = /console\.log\(['"]variable fruit has value banana['"]\);/
       line4Expected = '}'
 
       if !line1Expected.test(line1)
@@ -597,11 +597,24 @@ class @JSExercise
       if !line2Expected.test(line2)
         return TAPi18n.__ 'Error on line 2, write condition which compares variable fruit with value \'banana\', do you have space after if?'
 
-      if line3 != line3Expected
+      if !line3Expected.test(line3)
         return TAPi18n.__ 'Error on line 3, print \'variable fruit has value banana\' with console.log(), check if the statement ends with semicolon'
 
       if line4 != line4Expected
         return TAPi18n.__ 'Error on line 4, close if condition with }'
+
+      #line 1
+      if CodeChecker.hasIndentation(lines[0], 1)
+        return TAPi18n.__ 'Error on line 1, this line should not have indentation!'
+      #line 2
+      if CodeChecker.hasIndentation(lines[1], 1)
+        return TAPi18n.__ 'Error on line 2, this line should not have indentation!'
+      #line 3
+      unless CodeChecker.hasIndentation(lines[2])
+        return TAPi18n.__ 'Error on line 3, you are missing indentation - tabulator or 2 spaces'
+      #line 4
+      if CodeChecker.hasIndentation(lines[3], 1)
+        return TAPi18n.__ 'Error on line 4, this line should not have indentation!'
 
       success = true
 
@@ -650,6 +663,25 @@ class @JSExercise
 
       if line6 != line6Expected
         return TAPi18n.__ 'Error on line 6, close if condition with }'
+
+      #line 1
+      if CodeChecker.hasIndentation(lines[0], 1)
+        return TAPi18n.__ 'Error on line 1, this line should not have indentation!'
+      #line 2
+      if CodeChecker.hasIndentation(lines[1], 1)
+        return TAPi18n.__ 'Error on line 2, this line should not have indentation!'
+      #line 3
+      unless CodeChecker.hasIndentation(lines[2])
+        return TAPi18n.__ 'Error on line 3, you are missing indentation - tabulator or 2 spaces'
+      #line 4
+      if CodeChecker.hasIndentation(lines[3], 1)
+        return TAPi18n.__ 'Error on line 4, this line should not have indentation!'
+      #line 5
+      unless CodeChecker.hasIndentation(lines[4])
+        return TAPi18n.__ 'Error on line 5, you are missing indentation - tabulator or 2 spaces'
+      #line 6
+      if CodeChecker.hasIndentation(lines[5], 1)
+        return TAPi18n.__ 'Error on line 6, this line should not have indentation!'
 
       success = true
 

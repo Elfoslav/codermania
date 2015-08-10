@@ -1,10 +1,13 @@
 class @CodeChecker
+  #returns true if @str is indented by @spaces spaces
   @hasIndentation: (str, spaces) ->
-    spaces = spaces || 2
+    unless spaces is 0
+      spaces = spaces || 2
+    i = spaces
     #replace tabs with two spaces
     str = str.replace(/\t/g, '  ')
-    hasIndentation = true
-    while spaces > 0 and hasIndentation
-      hasIndentation = str?[spaces - 1] == ' '
-      spaces--
-    return hasIndentation and spaces is 0
+    hasIndentation = spaces > 0
+    while i and hasIndentation
+      hasIndentation = str?[i - 1] == ' '
+      i--
+    return hasIndentation and i is 0
