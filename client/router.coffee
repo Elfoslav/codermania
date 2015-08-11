@@ -420,7 +420,7 @@ Router.route '/:lang?/notifications',
   waitOn: ->
     Meteor.subscribe 'notifications'
   data: ->
-    notifications: AppNotifications.find({}, { sort: { timestamp: -1 }})
+    notifications: AppNotifications.find({}, { sort: { timestamp: 1 }})
   onAfterAction: ->
     App.setPageTitle("Notifications")
 
