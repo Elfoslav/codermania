@@ -381,7 +381,7 @@ class @JSExercise
         return TAPi18n.__ 'Error on line 2, check if variable has name "number2" and value 100, check if the statement ends with semicolon'
 
       if !line3Expected.test(line3)
-        return TAPi18n.__ 'Error on line 2, check if variable has name "result" and value number1 + number2, check if the statement ends with semicolon'
+        return TAPi18n.__ 'Error on line 3, check if variable has name "result" and value number1 + number2, check if the statement ends with semicolon'
 
       if line4 != line4Expected
         return TAPi18n.__ 'Error on line 4, print variable result with console.log(), check if the statement ends with semicolon'
