@@ -45,7 +45,7 @@ Router.route '/:lang?/javascript/lesson/:_id/:slug/:username?',
       @subscribe 'student', @params.username, ->
         lessons = JSLessonsList.getLessons()
         #lesson result depends on user so set lesson again on ready subscription
-        Lesson.setLesson(Session.get('lessonNumber'), lessons, ace.edit('editor'))
+        Lesson.setLesson(Session.get('lessonNumber'), lessons, Editor.getEditor())
   onAfterAction: ->
     lessons = JSLessonsList.getLessons()
     lesson = JSLessonsList._collection.findOne({ id: @params._id })
@@ -62,7 +62,7 @@ Router.route '/:lang?/javascript/lesson/:_id/:slug/:username?',
       $('.output').html("&larr; #{TAPi18n.__('Press submit')}")
       $('.output-error-text').addClass('hidden');
       Meteor.setTimeout ->
-        Lesson.setLesson(Session.get('lessonNumber'), lessons, ace.edit('editor'))
+        Lesson.setLesson(Session.get('lessonNumber'), lessons, Editor.getEditor())
       , 100
   data: ->
     lessonType: 'javascript'
@@ -95,7 +95,7 @@ Router.route '/:lang?/html/lesson/:_id/:slug/:username?',
         lessons = HTMLLessonsList.getLessons()
         console.log 'userHtmlLessons num:', Session.get('lessonNumber')
         #lesson result depends on user so set lesson again on ready subscription
-        Lesson.setLesson(Session.get('lessonNumber'), lessons, ace.edit('editor'))
+        Lesson.setLesson(Session.get('lessonNumber'), lessons, Editor.getEditor())
   onAfterAction: ->
     lesson = HTMLLessonsList._collection.findOne({ id: @params._id })
     if lesson
@@ -132,7 +132,7 @@ Router.route '/:lang?/css/lesson/:_id/:slug/:username?',
       @subscribe 'userCSSLessons', { username: @params.username, lessonId: @params._id }, ->
         lessons = CSSLessonsList.getLessons()
         #lesson result depends on user so set lesson again on ready subscription
-        Lesson.setLesson(Session.get('lessonNumber'), lessons, ace.edit('editor'))
+        Lesson.setLesson(Session.get('lessonNumber'), lessons, Editor.getEditor())
   onAfterAction: ->
     lesson = CSSLessonsList._collection.findOne({ id: @params._id })
     if lesson
@@ -165,7 +165,7 @@ Router.route '/:lang?/programming-challenge/lesson/:_id/:slug/:username?',
       , ->
         lessons = ProgrammingChallengeLessonsList.getLessons()
         #lesson result depends on user so set lesson again on ready subscription
-        Lesson.setLesson(Session.get('lessonNumber'), lessons, ace.edit('editor'))
+        Lesson.setLesson(Session.get('lessonNumber'), lessons, Editor.getEditor())
   onAfterAction: ->
     lesson = ProgrammingChallengeLessonsList._collection.findOne({ id: @params._id })
     if lesson

@@ -40,7 +40,7 @@ loadCode = (href) ->
   if (href == '#assignment' or href == 'assignment') and
     Session.get('assignmentCodeLoaded') != currentLesson.id
       lessons = LessonsList.getLessons()
-      Lesson.initAssignment(Session.get('lessonNumber'), lessons, ace.edit('editor'))
+      Lesson.initAssignment(Session.get('lessonNumber'), lessons, Editor.getEditor())
       Session.set('assignmentCodeLoaded', currentLesson.id)
       Session.set('exerciseCodeLoaded', null)
       Session.set('exerciseSuccess', false)
@@ -52,7 +52,7 @@ loadCode = (href) ->
   if (href == '#exercise' or href == 'exercise') and
     Session.get('exerciseCodeLoaded') != exercise?.id and
     exercise
-      Lesson.initExercise(currentLesson, exercise, ace.edit('editor'))
+      Lesson.initExercise(currentLesson, exercise, Editor.getEditor())
       Session.set('exerciseCodeLoaded', exercise?.id)
       Session.set('assignmentCodeLoaded', null)
       Session.set('lessonSuccess', false)
@@ -60,7 +60,10 @@ loadCode = (href) ->
 Template.lessonLayout.onRendered (tpl) ->
   Editor.highlightOutput()
   lessons = LessonsList.getLessons()
-  Lesson.setLesson(Session.get('lessonNumber'), lessons, editor = ace.edit('editor'))
+  Tracker.autorun(=>
+    if Editor.isLoaded()
+      Lesson.setLesson(Session.get('lessonNumber'), lessons, editor = Editor.getEditor())
+  )
   if window.scrollY > 280
     $('html, body').animate({
       scrollTop: $("#lesson-title").offset().top

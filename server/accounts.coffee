@@ -1,5 +1,5 @@
 Accounts.config
-  sendVerificationEmail: true
+  sendVerificationEmail: false
   loginExpirationInDays: null
 
 Accounts.onCreateUser (options, user) ->
@@ -20,7 +20,7 @@ Accounts.onCreateUser (options, user) ->
   unless Messages.findOne({ receiverId: user._id })
     if Messages.findOne({ receiverUsername: user.username })
       Logger.log "Welcome message for user #{user.username} with id #{user._id} already exists", 'warning'
-    else
+    else if elfoslav
       App.insertMessage
         senderId: elfoslav._id
         senderUsername: elfoslav.username

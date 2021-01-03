@@ -14,6 +14,6 @@ Template.exerciseAccordion.events(
     Session.set 'exerciseId', @id
     currentLesson = LessonsList.getLesson(Session.get('lessonNumber'))
     exercise = currentLesson.exercises?[@id]
-    Lesson.initExercise(currentLesson, exercise, ace.edit('editor'))
+    Lesson.initExercise(currentLesson, exercise, AceEditor.instance('ace-editor'))
     Session.set('exerciseSuccess', false)
 )

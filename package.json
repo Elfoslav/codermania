@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@babel/runtime": "^7.12.5",
+    "bcrypt": "^5.0.0",
+    "mongodb": "^3.6.3",
+    "phantomjs": "^2.1.7"
+  }
+}

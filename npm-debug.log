@@ -1,0 +1,19 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/mac/.meteor/packages/meteor-tool/.1.1.3.1gldne9.4104++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/bin/node',
+1 verbose cli   '/Users/mac/.meteor/packages/meteor-tool/.1.1.3.1gldne9.4104++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.36
+4 error install Couldn't read dependencies
+5 error package.json ENOENT, open '/Users/mac/projects/web/meteor/codermania/package.json'
+5 error package.json This is most likely not a problem with npm itself.
+5 error package.json npm can't find a package.json file in your current directory.
+6 error System Darwin 18.7.0
+7 error command "/Users/mac/.meteor/packages/meteor-tool/.1.1.3.1gldne9.4104++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/bin/node" "/Users/mac/.meteor/packages/meteor-tool/.1.1.3.1gldne9.4104++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/bin/npm" "install"
+8 error cwd /Users/mac/projects/web/meteor/codermania
+9 error node -v v0.10.36
+10 error npm -v 1.4.28
+11 error path /Users/mac/projects/web/meteor/codermania/package.json
+12 error code ENOPACKAGEJSON
+13 error errno 34
+14 verbose exit [ 34, true ]

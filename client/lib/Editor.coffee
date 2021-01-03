@@ -1,6 +1,10 @@
 class @Editor
-  @getEditor: ->
-    ace.edit('editor')
+  @getEditor: =>
+    @editor = AceEditor.instance('ace-editor')
+    if @editor.loaded then @editor else @editor
+
+  @isLoaded: =>
+    if @editor then @editor.loaded else @editor
 
   @getValue: ->
     Editor.getEditor().getValue()
@@ -9,12 +13,13 @@ class @Editor
     hljs.highlightBlock($('.output')[0])
 
   @setValue: (val) ->
-    editor = ace.edit('editor')
+    editor = @getEditor()
+    console.log('setting editor value: ', val)
     editor.setValue(val)
     editor.selection.clearSelection()
 
   @evaluate: ->
-    editor = ace.edit('editor')
+    editor = @getEditor()
     $('.output').text('')
     code = editor.getValue()
     code = code.replace(/console.log/g, 'document.write');
