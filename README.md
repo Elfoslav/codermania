@@ -1,4 +1,4 @@
-#[CoderMania](http://www.codermania.com)
+# [CoderMania](http://www.codermania.com)
 
 ##Getting started
 
@@ -37,7 +37,7 @@ only if you want to fix a bug.
 If you have local MongoDB installed, you can run this project with `run.sh` script: `./run.sh`.
 Otherwise run app with `meteor --settings settings.json`
 
-###CoffeeScript
+### CoffeeScript
 
 If you don't know [CoffeeScript](http://coffeescript.org/),
 you can use [js2.coffee](http://js2.coffee/) to translate
@@ -47,7 +47,7 @@ JS to Coffee and Coffee to JS. See my workflow: https://youtu.be/ghYWuUaD3rc
 
 I don't know what is the best for feature requests. [Trello](https://trello.com/b/h3c4Il6k/codermania) or [Github issues](https://github.com/Elfoslav/codermania/issues)?
 
-###Tests
+### Tests
 
 If you develop new exercises, you should cover them by tests. Tests are located in:
 
@@ -55,6 +55,6 @@ If you develop new exercises, you should cover them by tests. Tests are located 
 
 You can inspire yourself by existing tests.
 
-##License
+## License
 
 Note that CoderMania is distributed under the [MIT License](http://opensource.org/licenses/MIT).
