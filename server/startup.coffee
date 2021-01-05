@@ -1,5 +1,6 @@
 Meteor.startup ->
-  process.env.MAIL_URL = Meteor.settings.env.MAIL_URL
+  if Meteor.settings.env
+    process.env.MAIL_URL = Meteor.settings.env.MAIL_URL
 
   ###############
   # Slides
